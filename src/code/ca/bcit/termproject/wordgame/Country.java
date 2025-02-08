@@ -11,8 +11,8 @@ public class Country
 
     public Country(final String name, final String capitalCityName, final String[] facts)
     {
-        validateString(name);
-        validateString(capitalCityName);
+//        validateString(name);
+//        validateString(capitalCityName);
         validateStringArray(facts);
 
         this.name = name;

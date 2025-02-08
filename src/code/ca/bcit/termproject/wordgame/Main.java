@@ -1,4 +1,4 @@
-package ca.bcit.termproject;
+package ca.bcit.termproject.wordgame;
 
 import java.util.Scanner;
 

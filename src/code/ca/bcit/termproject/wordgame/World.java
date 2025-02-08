@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class World
 {
     private static final int FACTS_LENGTH = 3;
-    private static final int ALPHABET_LENGTH = 26;
+    private static final int ALPHABET_LENGTH = 26 + 'a';
     private static final int FIRST_INDEX = 0;
     private static final int SECOND_INDEX = 1;
     private static final int THIRD_INDEX = 2;
@@ -16,25 +16,28 @@ public class World
 
     private HashMap<String, Country> world;
 
-    public World() {
-        int index;
-
+    public World() throws FileNotFoundException
+    {
         world = new HashMap<>();
-        char fileIndex = 'a';
-        index = 0;
+        char fileIndex;
 
-        for (int i = 0; i < ALPHABET_LENGTH; i++)
+        for (fileIndex = 'a'; fileIndex < ALPHABET_LENGTH; fileIndex++)
         {
+            if (fileIndex == 'w')
+            {
+                fileIndex += 2;
+            }
+            
             final String fileName;
             final Scanner fileScanner;
 
-            fileName = "\\res\\" + fileIndex + ".txt";
-            fileScanner = new Scanner(fileName);
-            fileScanner.useDelimiter(";|\\n");
+            fileName = "src\\res\\" + fileIndex + ".txt";
+            fileScanner = new Scanner(new File(fileName));
+            fileScanner.useDelimiter(":|\\n");
+            
+            
 
-            fileIndex++;
-
-            while (fileScanner.hasNextLine())
+            while (fileScanner.hasNext())
             {
                 final String name;
                 final String capitalCityName;
@@ -42,13 +45,14 @@ public class World
                 final Country currentCountry;
 
                 facts = new String[FACTS_LENGTH];
-
                 name = fileScanner.next();
+                
                 capitalCityName = fileScanner.next();
                 facts[FIRST_INDEX] = fileScanner.nextLine();
                 facts[SECOND_INDEX] = fileScanner.nextLine();
                 facts[THIRD_INDEX] = fileScanner.nextLine();
-
+                fileScanner.nextLine();
+                
                 currentCountry = new Country(name, capitalCityName, facts);
                 world.put(name, currentCountry);
             }

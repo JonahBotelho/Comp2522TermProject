@@ -2,13 +2,16 @@ package ca.bcit.termproject.wordgame;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.HashMap;
 
 public class WordGame
 {
     private static final int QUESTIONS_PER_GAME = 10;
     private static final int NOTHING = 0;
 
-    public static void main(String[] args)
+    public static void main(final String[] args)
     {
         final Random ran;
         final Scanner scan;
