@@ -8,6 +8,11 @@ public class WordGame
     private static final int QUESTIONS_PER_GAME = 10;
     private static final int NOTHING = 0;
 
+    private static int gamesPlayed;
+    private static int correctOnFirstAttempt;
+    private static int correctOnSecondAttempt;
+    private static int incorrectOnSecondAttempt;
+
     public static void main(final String[] args) throws FileNotFoundException
     {
         final World world;
@@ -16,11 +21,6 @@ public class WordGame
         final Random ran;
         final Scanner scan;
         String choice;
-
-        int gamesPlayed;
-        int correctOnFirstAttempt;
-        int correctOnSecondAttempt;
-        int incorrectOnSecondAttempt;
 
         world = new World();
         worldHashMap = world.getWorld();
@@ -74,8 +74,6 @@ public class WordGame
 
                         break;
                 }
-
-
             }
             System.out.print("Do you want to play again? (yes/no): ");
             choice = scan.nextLine();
@@ -87,7 +85,9 @@ public class WordGame
                 choice = scan.nextLine();
             }
         }
+
         System.out.println("\nThank you for playing!");
+
     }
 
     private static void evaluateUserInput(final String answer)
@@ -107,6 +107,5 @@ public class WordGame
             System.out.println("Incorrect!");
             System.out.printf("The correct answer is: %s\n", answer);
         }
-
     }
 }
