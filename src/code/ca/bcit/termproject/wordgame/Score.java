@@ -72,11 +72,18 @@ public class Score
     {
         validateString(scoreFile);
         validateScore(score);
-
+        
+        File file;
+        file = new File(scoreFile);
+        if (!file.exists())
+        {
+            file.createNewFile();
+        }
         final FileWriter writer;
         writer = new FileWriter(scoreFile, true);
 
         writer.write(score.toString());
+        writer.write("\n");
         writer.close();
     }
 
@@ -109,6 +116,7 @@ public class Score
             }
 
             scores.add(new Score(currentTime,scoreValues[0], scoreValues[1], scoreValues[2], scoreValues[3]));
+            scan.nextLine();
             scan.nextLine();
         }
 
@@ -173,5 +181,11 @@ public class Score
     public final int getScore()
     {
         return this.score;
+    }
+    
+    
+    public final double getAverageScore()
+    {
+        return (double) this.getScore() / this.getGamesPlayed();
     }
 }

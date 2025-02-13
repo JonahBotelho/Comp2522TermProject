@@ -3,6 +3,7 @@ package ca.bcit.termproject;
 import ca.bcit.termproject.wordgame.WordGame;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -16,7 +17,7 @@ public class Main
      *
      * @param args unused.
      */
-    public static void main(String[] args) throws FileNotFoundException
+    public static void main(String[] args) throws IOException
     {
         Scanner scan;
         String input;

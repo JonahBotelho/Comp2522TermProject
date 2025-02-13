@@ -1,6 +1,8 @@
 package ca.bcit.termproject.wordgame;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class WordGame
@@ -13,8 +15,9 @@ public class WordGame
     private static int correctOnSecondAttempt;
     private static int incorrectOnSecondAttempt;
 
-    public static void main(final String[] args) throws FileNotFoundException
+    public static void main(final String[] args) throws IOException
     {
+        final String file;
         final World world;
         final HashMap<String, Country> worldHashMap;
         final List<Map.Entry<String, Country>> worldList;
@@ -22,13 +25,14 @@ public class WordGame
         final Scanner scan;
         String choice;
 
+        file = "score.txt";
         world = new World();
         worldHashMap = world.getWorld();
         worldList = new ArrayList<>(worldHashMap.entrySet());
         ran = new Random();
         scan = new Scanner(System.in);
         choice = "yes";
-
+        
         gamesPlayed = NOTHING;
         correctOnFirstAttempt = NOTHING;
         correctOnSecondAttempt = NOTHING;
@@ -74,7 +78,10 @@ public class WordGame
 
                         break;
                 }
+                System.out.println("___________________________________________");
             }
+            
+            gamesPlayed++;
             System.out.print("Do you want to play again? (yes/no): ");
             choice = scan.nextLine();
 
@@ -86,6 +93,37 @@ public class WordGame
             }
         }
 
+        Score score = new Score(LocalDateTime.now(),
+                                gamesPlayed,
+                                correctOnFirstAttempt,
+                                correctOnSecondAttempt,
+                                incorrectOnSecondAttempt);
+        
+        List<Score> scores = Score.readScoresFromFile(file);
+
+        Score highScore;
+        highScore = new Score(LocalDateTime.now(), 100, NOTHING, NOTHING, NOTHING);
+        for (Score currentScore : scores)
+        {
+            if (currentScore.getAverageScore() > highScore.getAverageScore())
+            {
+                highScore = currentScore;
+            }
+        }
+
+        if (score.getAverageScore() > highScore.getAverageScore())
+        {
+            System.out.println("You have a new high score of " + score.getAverageScore() + " points per game.");
+            System.out.println("The previous high score was " + highScore.getAverageScore() + " points per game.");
+        }
+        else {
+            System.out.println("Your score of " + score.getAverageScore() + " points per game was not a high score.");
+        }
+        Score.appendScoreToFile(score, file);
+        
+        System.out.println("");
+        System.out.println(score.toString());
+        System.out.println("");
         System.out.println("\nThank you for playing!");
 
     }
@@ -93,7 +131,7 @@ public class WordGame
     private static void evaluateUserInput(final String answer)
     {
         final Scanner scan;
-        final String input;
+        String input;
 
         scan = new Scanner(System.in);
         input = scan.nextLine();
@@ -101,11 +139,24 @@ public class WordGame
         if (input.equalsIgnoreCase(answer))
         {
             System.out.printf("%s is Correct!\n", input);
+            correctOnFirstAttempt++;
         }
         else
         {
             System.out.println("Incorrect!");
-            System.out.printf("The correct answer is: %s\n", answer);
+            System.out.print("Try again: ");
+            input = scan.nextLine();
+            if (input.equalsIgnoreCase(answer))
+            {
+                System.out.printf("%s is Correct!\n", input);
+                correctOnSecondAttempt++;
+            }
+            else
+            {
+                System.out.println("Incorrect!");
+                System.out.printf("The correct answer is: %s\n", answer);
+                incorrectOnSecondAttempt++;
+            }
         }
     }
 }
