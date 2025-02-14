@@ -15,15 +15,15 @@ import java.util.Scanner;
  */
 public class Score
 {
-    private static final int NOTHING = 0;
-    private static final int MIN_YEAR = 2000;
-    private static final int MAX_YEAR = 2100;
-    private static final int POINTS_FOR_FIRST_ATTEMPT = 2;
-    private static final int POINTS_FOR_SECOND_ATTEMPT = 1;
-    private static final int LINES_PER_SCORE_OBJECT = 4;
-    private static final int WORDS_PER_SCORE_FIRST_LINE = 2;
-    private static final int FIRST_INDEX_OF_DATE_IN_SCORE_LINE = 15;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final int NOTHING                            = 0;
+    private static final int MIN_YEAR                           = 2000;
+    private static final int MAX_YEAR                           = 2100;
+    private static final int POINTS_FOR_FIRST_ATTEMPT           = 2;
+    private static final int POINTS_FOR_SECOND_ATTEMPT          = 1;
+    private static final int LINES_PER_SCORE_OBJECT             = 4;
+    private static final int WORDS_PER_SCORE_FIRST_LINE         = 2;
+    private static final int FIRST_INDEX_OF_DATE_IN_SCORE_LINE  = 15;
+    private static final DateTimeFormatter formatter            = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private final LocalDateTime currentTime;
     private final int gamesPlayed;
