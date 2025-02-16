@@ -35,11 +35,11 @@ public class Score
     /**
      * Constructs a Score object with given game statistics.
      *
-     * @param currentTime The timestamp when the score was recorded.
-     * @param gamesPlayed The total number of games played.
-     * @param correctOnFirstAttempt The number of correct answers on the first attempt.
-     * @param correctOnSecondAttempt The number of correct answers on the second attempt.
-     * @param incorrectOnSecondAttempt The number of incorrect answers on the second attempt.
+     * @param currentTime               The timestamp when the score was recorded.
+     * @param gamesPlayed               The total number of games played.
+     * @param correctOnFirstAttempt     The number of correct answers on the first attempt.
+     * @param correctOnSecondAttempt    The number of correct answers on the second attempt.
+     * @param incorrectOnSecondAttempt  The number of incorrect answers on the second attempt.
      */
     public Score(final LocalDateTime currentTime,
                  final int gamesPlayed,
@@ -47,20 +47,20 @@ public class Score
                  final int correctOnSecondAttempt,
                  final int incorrectOnSecondAttempt)
     {
-        //TODO validate time
+        validateCurrentTime(currentTime);
         validateIntegers(gamesPlayed);
         validateIntegers(correctOnFirstAttempt);
         validateIntegers(correctOnSecondAttempt);
         validateIntegers(incorrectOnSecondAttempt);
 
-        this.currentTime = currentTime;
-        this.gamesPlayed = gamesPlayed;
-        this.correctOnFirstAttempt = correctOnFirstAttempt;
-        this.correctOnSecondAttempt = correctOnSecondAttempt;
-        this.incorrectOnSecondAttempt = incorrectOnSecondAttempt;
+        this.currentTime                = currentTime;
+        this.gamesPlayed                = gamesPlayed;
+        this.correctOnFirstAttempt      = correctOnFirstAttempt;
+        this.correctOnSecondAttempt     = correctOnSecondAttempt;
+        this.incorrectOnSecondAttempt   = incorrectOnSecondAttempt;
 
         this.score = correctOnFirstAttempt * POINTS_FOR_FIRST_ATTEMPT +
-                correctOnSecondAttempt * POINTS_FOR_SECOND_ATTEMPT;
+                     correctOnSecondAttempt * POINTS_FOR_SECOND_ATTEMPT;
     }
 
     /**
@@ -68,7 +68,7 @@ public class Score
      *
      * @param currentTime the LocalDateTime to validate.
      */
-    private static final void validateCurrentTime(final LocalDateTime currentTime)
+    private static void validateCurrentTime(final LocalDateTime currentTime)
     {
         if (currentTime == null)
         {
@@ -86,7 +86,7 @@ public class Score
      *
      * @param integer The integer to validate.
      */
-    private static final void validateIntegers(final int integer)
+    private static void validateIntegers(final int integer)
     {
         if (integer < NOTHING)
         {
@@ -99,7 +99,7 @@ public class Score
      *
      * @param s The string to validate.
      */
-    private static final void validateString(final String s)
+    private static void validateString(final String s)
     {
         if (s == null || s.isBlank())
         {
@@ -112,7 +112,7 @@ public class Score
      *
      * @param score The Score object to validate.
      */
-    private static final void validateScore(final Score score)
+    private static void validateScore(final Score score)
     {
         if (score == null)
         {
@@ -167,7 +167,7 @@ public class Score
         final List<Score> scores;
 
         scan = new Scanner(file);
-        scores = new ArrayList<Score>();
+        scores = new ArrayList<>();
 
         while (scan.hasNext())
         {
