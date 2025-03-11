@@ -1,9 +1,11 @@
 package ca.bcit.termproject.wordgame;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Represents a collection of countries, where each country is stored in a
@@ -15,11 +17,17 @@ import java.util.HashMap;
  */
 public class World
 {
-    private static final int FACTS_LENGTH       = 3;
-    private static final int ALPHABET_LENGTH    = 26 + 'a';
-    private static final int FIRST_INDEX        = 0;
-    private static final int SECOND_INDEX       = 1;
-    private static final int THIRD_INDEX        = 2;
+    private static final int FILE_READER_START   = 1;
+    private static final int FACTS_LENGTH        = 3;
+    private static final int ALPHABET_LENGTH     = 26 + 'a';
+    private static final int FIRST_INDEX         = 0;
+    private static final int SECOND_INDEX        = 1;
+    private static final int THIRD_INDEX         = 2;
+    private static final int OFFSET_AT_START     = 2;
+    private static final int SKIP_W              = 2;
+    private static final int FIRST_FACT_OFFSET   = 1;
+    private static final int SECOND_FACT_OFFSET  = 2;
+    private static final int THIRD_FACT_OFFSET   = 3;
 
     private final HashMap<String, Country> world;
 
@@ -27,56 +35,49 @@ public class World
      * Constructs a World object by reading country data from text files and
      * storing it in a HashMap.
      */
-    public World() throws FileNotFoundException
+    public World() throws IOException
     {
         world = new HashMap<>();
-        char fileIndex;
 
-        // Loop through letters 'a' to 'z' to load country data
-        for (fileIndex = 'a'; fileIndex < ALPHABET_LENGTH; fileIndex++)
+        for (char fileIndex = 'a'; fileIndex < ALPHABET_LENGTH; fileIndex++)
         {
-            // Skip the letter 'w'
             if (fileIndex == 'w')
             {
-                fileIndex += 2;
+                fileIndex += SKIP_W;
             }
 
             final String fileName;
-            final Scanner fileScanner;
+            final Path filePath;
 
-            // Construct the file path for each letter-based file
-            fileName = "src\\res\\" + fileIndex + ".txt";
-            fileScanner = new Scanner(new File(fileName));
-            fileScanner.useDelimiter("[:\\n]");
+            fileName = "src/res/" + fileIndex + ".txt";
+            filePath = Paths.get(fileName);
 
-            // Read the country data from the file
-            while (fileScanner.hasNext())
+            if (Files.exists(filePath))
             {
-                final String countryAndCapitalLine;
-                final String[] countryAndCapitalString;
-                final String name;
-                final String capitalCityName;
-                final String[] facts;
-                final Country currentCountry;
+                final List<String> lines;
+                lines = Files.readAllLines(filePath);
 
-                facts = new String[FACTS_LENGTH];
+                for (int i = FILE_READER_START; i < lines.size(); i += FACTS_LENGTH + OFFSET_AT_START)
+                {
+                    final String[] countryAndCapitalString;
+                    final String name;
+                    final String capitalCityName;
+                    final String[] facts;
+                    final Country currentCountry;
 
-                // Skip the first line of (empty)
-                fileScanner.nextLine();
+                    countryAndCapitalString = lines.get(i).split(":");
+                    name = countryAndCapitalString[FIRST_INDEX];
+                    capitalCityName = countryAndCapitalString[SECOND_INDEX];
 
-                // Read country data
-                countryAndCapitalLine = fileScanner.nextLine();
-                countryAndCapitalString = countryAndCapitalLine.split(":");
+                    facts = new String[FACTS_LENGTH];
+                    facts[FIRST_INDEX] = lines.get(i + FIRST_FACT_OFFSET);
+                    facts[SECOND_INDEX] = lines.get(i + SECOND_FACT_OFFSET);
+                    facts[THIRD_INDEX] = lines.get(i + THIRD_FACT_OFFSET);
 
-                name = countryAndCapitalString[FIRST_INDEX];
-                capitalCityName = countryAndCapitalString[SECOND_INDEX];
+                    currentCountry = new Country(name, capitalCityName, facts);
 
-                facts[FIRST_INDEX] = fileScanner.nextLine();
-                facts[SECOND_INDEX] = fileScanner.nextLine();
-                facts[THIRD_INDEX] = fileScanner.nextLine();
-
-                currentCountry = new Country(name, capitalCityName, facts);
-                world.put(name, currentCountry);
+                    world.put(name, currentCountry);
+                }
             }
         }
     }
