@@ -26,6 +26,7 @@ public class WordGame
     private static final int QUESTION_TYPE_TWO   = 1;
     private static final int QUESTION_TYPE_THREE = 2;
     private static final int FACTS_PER_COUNTRY   = 3;
+    private static final int TYPES_OF_QUESTIONS  = 3;
 
     private static int gamesPlayed;
     private static int correctOnFirstAttempt;
@@ -65,7 +66,7 @@ public class WordGame
                 final int countryIndex;
                 final Country currentCountry;
 
-                questionType = ran.nextInt(3);
+                questionType = ran.nextInt(TYPES_OF_QUESTIONS);
                 countryIndex = ran.nextInt(worldList.size());
                 currentCountry = worldList.get(countryIndex).getValue();
 
