@@ -157,20 +157,21 @@ public class Score
     {
         validateString(scoreFile);
 
-        File file;
-        file = new File(scoreFile);
-        if (!file.exists())
+        final Path filePath;
+        final List<Score> scores;
+        final List<String> lines;
+
+        filePath = Path.of(scoreFile);
+        if (Files.notExists(filePath))
         {
-            file.createNewFile();
+            Files.createFile(filePath);
         }
 
-        final Scanner scan;
-        final List<Score> scores;
+        lines = Files.readAllLines(filePath);
 
-        scan = new Scanner(file);
         scores = new ArrayList<>();
 
-        while (scan.hasNext())
+        for (int i = 0; i < lines.size(); i += 7)
         {
             final String currentTimeLine;
             final LocalDateTime currentTime;
@@ -180,17 +181,15 @@ public class Score
             scoreLines = new String[LINES_PER_SCORE_OBJECT][WORDS_PER_SCORE_FIRST_LINE];
             scoreValues = new int[LINES_PER_SCORE_OBJECT];
 
-            currentTimeLine = scan.nextLine().substring(FIRST_INDEX_OF_DATE_IN_SCORE_LINE);
+            currentTimeLine = lines.get(i).substring(FIRST_INDEX_OF_DATE_IN_SCORE_LINE);
             currentTime = LocalDateTime.parse(currentTimeLine, formatter);
-            for (int i = 0; i < LINES_PER_SCORE_OBJECT; i++)
+            for (int j = 0; j < LINES_PER_SCORE_OBJECT; j++)
             {
-                scoreLines[i] = scan.nextLine().split(":");
-                scoreValues[i] = Integer.parseInt(scoreLines[i][1].trim());
+                scoreLines[j] = lines.get(i + j + 1).split(":");
+                scoreValues[j] = Integer.parseInt(scoreLines[j][1].trim());
             }
 
             scores.add(new Score(currentTime,scoreValues[0], scoreValues[1], scoreValues[2], scoreValues[3]));
-            scan.nextLine();
-            scan.nextLine();
         }
 
         return scores;
