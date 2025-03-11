@@ -3,11 +3,15 @@ package ca.bcit.termproject.wordgame;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Represents a player's score in the word game.
@@ -132,18 +136,15 @@ public class Score
         validateString(scoreFile);
         validateScore(score);
 
-        File file;
-        file = new File(scoreFile);
-        if (!file.exists())
-        {
-            file.createNewFile();
-        }
-        final FileWriter writer;
-        writer = new FileWriter(scoreFile, true);
+        Path filePath;
+        filePath = Paths.get(scoreFile);
 
-        writer.write(score.toString());
-        writer.write("\n");
-        writer.close();
+        if (Files.notExists(filePath))
+        {
+            Files.createFile(filePath);
+        }
+
+        Files.writeString(filePath, score.toString() + System.lineSeparator(), StandardOpenOption.APPEND);
     }
 
     /**
