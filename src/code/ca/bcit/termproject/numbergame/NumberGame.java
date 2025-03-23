@@ -23,18 +23,19 @@ import java.text.DecimalFormat;
  */
 public final class NumberGame extends Application implements RandomNumberGenerator
 {
-    private static final int NUMBER_OF_SQUARES  = 20;
-    private static final int NOTHING            = 0;
-    private static final int WINDOW_HEIGHT      = 400;
-    private static final int WINDOW_WIDTH       = 400;
-    private static final int MAX_RANDOM_NUM     = 1000;
-    private static final int MIN_RANDOM_NUM     = 1;
-    private static final int NUMBER_OF_COLUMNS  = 5;
-    private static final int BUTTON_SIZE        = 60;
-    private static final int GRID_HEIGHT_GAP    = 10;
-    private static final int GRID_WIDTH_GAP     = 10;
-    private static final int ROOT_PADDING       = 20;
-    private static final int VBOX_SPACING       = 10;
+    private static final int NUMBER_OF_SQUARES    = 20;
+    private static final int NOTHING              = 0;
+    private static final int WINDOW_HEIGHT        = 400;
+    private static final int WINDOW_WIDTH         = 400;
+    private static final int MAX_RANDOM_NUM       = 1000;
+    private static final int MIN_RANDOM_NUM       = 1;
+    private static final int NUMBER_OF_COLUMNS    = 5;
+    private static final int BUTTON_SIZE          = 60;
+    private static final int GRID_HEIGHT_GAP      = 10;
+    private static final int GRID_WIDTH_GAP       = 10;
+    private static final int ROOT_PADDING         = 20;
+    private static final int VBOX_SPACING         = 10;
+    private static final int RANDOM_NUMBER_OFFSET = 1;
 
     private final int[] grid = new int[NUMBER_OF_SQUARES]; // Stores the numbers placed in the grid
     private int currentNumber;
@@ -281,6 +282,6 @@ public final class NumberGame extends Application implements RandomNumberGenerat
         final Random random;
         random = new Random();
 
-        return random.nextInt((max - min) + 1) + min;
+        return random.nextInt((max - min) + RANDOM_NUMBER_OFFSET) + min;
     }
 }
