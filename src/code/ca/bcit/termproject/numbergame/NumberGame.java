@@ -37,13 +37,12 @@ public final class NumberGame extends Application implements RandomNumberGenerat
     private static final int VBOX_SPACING         = 10;
     private static final int RANDOM_NUMBER_OFFSET = 1;
 
-    private final int[] grid = new int[NUMBER_OF_SQUARES]; // Stores the numbers placed in the grid
+    private final int[] grid = new int[NUMBER_OF_SQUARES];
     private int currentNumber;
-    private final Random random = new Random(); // Random number generator
-    private final Button[] buttons = new Button[NUMBER_OF_SQUARES]; // Buttons for the grid
-    private Label statusLabel; // Label to show the current number
-    private int gamesPlayed = NOTHING; // Track the number of games played
-    private int successfulPlacements = NOTHING; // Track successful placements across games
+    private final Button[] buttons = new Button[NUMBER_OF_SQUARES];
+    private Label statusLabel;
+    private int gamesPlayed = NOTHING;
+    private int successfulPlacements = NOTHING;
 
     @Override
     public void start(final Stage primaryStage)
@@ -155,7 +154,7 @@ public final class NumberGame extends Application implements RandomNumberGenerat
      *
      * @return True if the numbers are in ascending order, false otherwise.
      */
-    private final boolean isAscendingOrder()
+    private boolean isAscendingOrder()
     {
         int prev;
         prev = NOTHING;
@@ -180,7 +179,7 @@ public final class NumberGame extends Application implements RandomNumberGenerat
     /**
      * Show a game over alert and offer the user the option to retry or quit.
      */
-    private final void showGameOverAlert()
+    private void showGameOverAlert()
     {
         final InformationAlert alert;
         final ButtonType retryButton;
@@ -217,7 +216,7 @@ public final class NumberGame extends Application implements RandomNumberGenerat
     /**
      * Show the final score when the user quits the game.
      */
-    private final void showFinalScore()
+    private void showFinalScore()
     {
         final DecimalFormat averagePlacementsFormat;
         final StringBuilder contextText;
@@ -248,7 +247,7 @@ public final class NumberGame extends Application implements RandomNumberGenerat
      * @param title   The title of the alert.
      * @param message The message to display.
      */
-    private final void showAlert(final String title, final String message)
+    private void showAlert(final String title, final String message)
     {
         final WarningAlert alert;
 
