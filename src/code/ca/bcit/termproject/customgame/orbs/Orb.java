@@ -5,14 +5,19 @@ import javafx.scene.shape.Circle;
 
 /**
  * Represents an orb in the game. This is an abstract class that serves as the base for different types of orbs.
- * Each orb has a position, size, color, and speed. The orb moves downward at its specified speed.
- *
- * @author Jonah Botelho
+ * Each orb has a position, size, color, and speed components for both horizontal and vertical movement.
  */
 public abstract class Orb extends Circle
 {
-    /** The speed at which the orb moves downward. */
-    private final double speed;
+    /**
+     * The horizontal speed component of the orb.
+     */
+    private final double speedX;
+
+    /**
+     * The vertical speed component of the orb.
+     */
+    private final double speedY;
 
     /**
      * Constructs a new Orb at the specified coordinates with the given properties.
@@ -21,19 +26,22 @@ public abstract class Orb extends Circle
      * @param y      The y-coordinate of the orb's initial position.
      * @param radius The radius of the orb.
      * @param color  The color of the orb.
-     * @param speed  The speed at which the orb moves downward.
+     * @param speedX The horizontal speed component of the orb.
+     * @param speedY The vertical speed component of the orb.
      */
-    public Orb(final double x, final double y, final double radius, final Color color, final double speed)
+    public Orb(final double x, final double y, final double radius, final Color color, final double speedX, final double speedY)
     {
         super(x, y, radius, color);
-        this.speed = speed;
+        this.speedX = speedX;
+        this.speedY = speedY;
     }
 
     /**
-     * Updates the position of the orb, moving it downward based on its speed.
+     * Updates the position of the orb based on its speed components.
      */
     public void update()
     {
-        setCenterY(getCenterY() + speed);
+        setCenterX(getCenterX() + speedX);
+        setCenterY(getCenterY() + speedY);
     }
 }
