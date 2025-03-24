@@ -16,7 +16,7 @@ public class Player extends Rectangle
     private boolean movingUp = false;
     private boolean movingDown = false;
 
-    private double speed = 3;  // Movement speed of the player
+    private final double speed = 3;  // Movement speed of the player
 
     /**
      * Constructs a Player object at the specified position with the given size.
@@ -25,7 +25,7 @@ public class Player extends Rectangle
      * @param y    The y-coordinate of the player.
      * @param size The width and height of the player.
      */
-    public Player(double x, double y, double size)
+    public Player(final double x, final double y, final double size)
     {
         super(x, y, size, size);
         setFill(Color.BLACK);
