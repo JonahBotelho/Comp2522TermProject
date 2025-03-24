@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import java.util.Random;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -25,6 +26,8 @@ import java.util.Iterator;
 public class MainGame extends Application
 {
     private static final int NOTHING                        = 0;
+    private static final String POINTS_NAME                 = "Score"; // what those food/points things are called
+    private static final int START_SCORE                    = 100;
     public static final int WINDOW_WIDTH                    = 800;
     public static final int WINDOW_HEIGHT                   = 600;
     public static final int PLAYER_SIZE                     = 30;
@@ -39,7 +42,12 @@ public class MainGame extends Application
     private static final int SCORE_LABEL_X                  = 10;
     private static final int SCORE_LABEL_Y                  = 10;
     private static final String SCORE_LABEL_FONT_NAME       = "Arial";
-    private static final String SCORE_LABEL_INITIAL_TEXT    = "Score: 0";
+    private static final String SCORE_LABEL_INITIAL_TEXT    = POINTS_NAME + ": " + START_SCORE;
+    private static final int SCORE_DECREASE_RANDOM_MIN      = 1;
+    private static final int SCORE_DECREASE_RANDOM_MAX      = 1000;
+    private static final int SCORE_DECREASE_PROBABILITY     = 5; // percent
+    private static final int RANDOM_NUMBER_OFFSET           = 1;
+    private static final int MINIMUM_SCORE_TO_SURVIVE       = 1;
 
     private final Pane root = new Pane();
     private Player player;
@@ -56,10 +64,13 @@ public class MainGame extends Application
     @Override
     public void start(final Stage primaryStage)
     {
-        final Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+        final Scene scene;
+        scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+
         primaryStage.setTitle("Bullet Hell Game");
         primaryStage.setScene(scene);
         primaryStage.show();
+
 
         setupGame();
         startGameLoop();
@@ -73,7 +84,7 @@ public class MainGame extends Application
     {
         player = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
         cannon = new Cannon(CANNON_X, CANNON_Y);
-        score = NOTHING;
+        score = START_SCORE;
 
         scoreLabel = new Label(SCORE_LABEL_INITIAL_TEXT);
         scoreLabel.setFont(new Font(SCORE_LABEL_FONT_NAME, SCORE_LABEL_FONT_SIZE));
@@ -97,6 +108,7 @@ public class MainGame extends Application
                 player.update();
                 updateOrbs();
                 checkCollisions();
+                checkScore();
             }
         };
         gameLoop.start();
@@ -164,10 +176,12 @@ public class MainGame extends Application
      */
     private void checkCollisions()
     {
-        final Iterator<Orb> iterator = cannon.getOrbs().iterator();
+        final Iterator<Orb> iterator;
+        iterator = cannon.getOrbs().iterator();
         while (iterator.hasNext())
         {
-            final Orb orb = iterator.next();
+            final Orb orb;
+            orb = iterator.next();
             if (player.getBoundsInParent().intersects(orb.getBoundsInParent()))
             {
                 if (orb instanceof RedOrb)
@@ -187,7 +201,7 @@ public class MainGame extends Application
                     root.getChildren().remove(orb);
                 }
 
-                scoreLabel.setText("Score: " + score);
+                updateScore();
             }
         }
     }
@@ -240,6 +254,49 @@ public class MainGame extends Application
         });
     }
 
+    private void checkScore()
+    {
+        if (score < MINIMUM_SCORE_TO_SURVIVE)
+        {
+            gameOver("You have no score left!"); //TODO food is placeholder, fix
+        }
+        else {
+            if (getRandomNumber(SCORE_DECREASE_RANDOM_MIN, SCORE_DECREASE_RANDOM_MAX) < SCORE_DECREASE_PROBABILITY)
+            {
+                score--;
+                updateScore();
+            }
+        }
+    }
+
+    /**
+     * Updates the score label with the player's
+     */
+    private void updateScore()
+    {
+        scoreLabel.setText("Score: " + score);
+    }
+
+    /**
+     * Generates a number between two given numbers (inclusive)
+     *
+     * @param min minimum number to be generated
+     * @param max maximum number to be generated
+     * @return generated number
+     */
+    private static int getRandomNumber(final int min, final int max)
+    {
+        final Random random;
+        final int generatedNumber;
+
+        random = new Random();
+        generatedNumber = random.nextInt((max - min) + RANDOM_NUMBER_OFFSET) + min;
+
+        return generatedNumber;
+    }
+
+
+
     /**
      * The main entry point for the application.
      *
@@ -249,4 +306,5 @@ public class MainGame extends Application
     {
         launch(args);
     }
+
 }

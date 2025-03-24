@@ -20,7 +20,7 @@ Unit requirements
     12. concurrency
 
 TODO
-    Add hunger attrition systems
+    [75%] Add hunger attrition systems
     Add levels & win condition
     [COMPLETE] Add score file
 

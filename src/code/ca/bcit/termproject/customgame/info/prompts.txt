@@ -27,5 +27,7 @@
 
 6. Used AI to create a "game over" popup, asking the user if they wanted to play again.
 
+7. Added food calculation by hand
+
 
 
