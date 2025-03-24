@@ -18,31 +18,45 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Iterator;
 
+/**
+ * The MainGame class is the entry point for the Bullet Hell game.
+ * It initializes the game window, handles game logic, and manages user input.
+ */
 public class MainGame extends Application
 {
-    private static final int NOTHING            = 0;
-    public static final int WINDOW_WIDTH        = 800;
-    public static final int WINDOW_HEIGHT       = 600;
-    public static final int PLAYER_SIZE         = 30;
-    public static final int ORB_SIZE            = 20;
-    public static final int CANNON_X            = WINDOW_WIDTH / 2;
-    public static final int CANNON_Y            = 50;
-    private static final int BLUE_ORB_POINTS    = 1;
-    private static final int GREEN_ORB_POINTS   = 3;
+    private static final int NOTHING                        = 0;
+    public static final int WINDOW_WIDTH                    = 800;
+    public static final int WINDOW_HEIGHT                   = 600;
+    public static final int PLAYER_SIZE                     = 30;
+    public static final int ORB_SIZE                        = 20;
+    public static final int CANNON_X                        = WINDOW_WIDTH / 2;
+    public static final int CANNON_Y                        = 50;
+    private static final int PLAYER_START_X                 =  WINDOW_WIDTH / 2;
+    private static final int PLAYER_START_Y                 = WINDOW_HEIGHT - 50;
+    private static final int BLUE_ORB_POINTS                = 1;
+    private static final int GREEN_ORB_POINTS               = 3;
+    private static final int SCORE_LABEL_FONT_SIZE          = 20;
+    private static final int SCORE_LABEL_X                  = 10;
+    private static final int SCORE_LABEL_Y                  = 10;
+    private static final String SCORE_LABEL_FONT_NAME       = "Arial";
+    private static final String SCORE_LABEL_INITIAL_TEXT    = "Score: 0";
 
-    private Pane root;
+    private final Pane root = new Pane();
     private Player player;
     private Cannon cannon;
     private Label scoreLabel;
     private int score;
     private AnimationTimer gameLoop;
 
+    /**
+     * Starts the JavaFX application and initializes the game window.
+     *
+     * @param primaryStage The primary stage for the application.
+     */
     @Override
-    public void start(Stage primaryStage)
+    public void start(final Stage primaryStage)
     {
-        root = new Pane();
-        Scene scene;
-        scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+        final Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         primaryStage.setTitle("Bullet Hell Game");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -52,26 +66,32 @@ public class MainGame extends Application
         setupKeyHandlers(scene);
     }
 
+    /**
+     * Initializes the game by setting up the player, cannon, and score label.
+     */
     private void setupGame()
     {
-        player = new Player(WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50, PLAYER_SIZE);
+        player = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
         cannon = new Cannon(CANNON_X, CANNON_Y);
-        score = 0;
+        score = NOTHING;
 
-        scoreLabel = new Label("Score: 0");
-        scoreLabel.setFont(new Font("Arial", 20));
-        scoreLabel.setLayoutX(10); // Position in the top-left corner
-        scoreLabel.setLayoutY(10);
+        scoreLabel = new Label(SCORE_LABEL_INITIAL_TEXT);
+        scoreLabel.setFont(new Font(SCORE_LABEL_FONT_NAME, SCORE_LABEL_FONT_SIZE));
+        scoreLabel.setLayoutX(SCORE_LABEL_X); // Position in the top-left corner
+        scoreLabel.setLayoutY(SCORE_LABEL_Y);
 
         root.getChildren().addAll(player, scoreLabel);
     }
 
+    /**
+     * Starts the game loop, which updates the game state continuously.
+     */
     private void startGameLoop()
     {
         gameLoop = new AnimationTimer()
         {
             @Override
-            public void handle(long now)
+            public void handle(final long now)
             {
                 cannon.shootOrb(root);
                 player.update();
@@ -82,15 +102,23 @@ public class MainGame extends Application
         gameLoop.start();
     }
 
+    /**
+     * Updates the position of all orbs in the game.
+     */
     private void updateOrbs()
     {
-        for (Orb orb : cannon.getOrbs())
+        for (final Orb orb : cannon.getOrbs())
         {
             orb.update();
         }
     }
 
-    private void setupKeyHandlers(Scene scene)
+    /**
+     * Sets up key handlers for player movement.
+     *
+     * @param scene The scene to which the key handlers are attached.
+     */
+    private void setupKeyHandlers(final Scene scene)
     {
         scene.setOnKeyPressed(event ->
         {
@@ -131,12 +159,15 @@ public class MainGame extends Application
         });
     }
 
+    /**
+     * Checks for collisions between the player and orbs.
+     */
     private void checkCollisions()
     {
-        Iterator<Orb> iterator = cannon.getOrbs().iterator();
+        final Iterator<Orb> iterator = cannon.getOrbs().iterator();
         while (iterator.hasNext())
         {
-            Orb orb = iterator.next();
+            final Orb orb = iterator.next();
             if (player.getBoundsInParent().intersects(orb.getBoundsInParent()))
             {
                 if (orb instanceof RedOrb)
@@ -161,10 +192,15 @@ public class MainGame extends Application
         }
     }
 
+    /**
+     * Handles the game-over logic, including displaying an alert and restarting or exiting the game.
+     *
+     * @param message The game-over message to display.
+     */
     private void gameOver(final String message)
     {
-        final int[] highScore;
-        highScore = new int[1]; // TODO make this not terrible
+        final MutableInteger highScore;
+        highScore = new MutableInteger(NOTHING);
         gameLoop.stop();
 
         Platform.runLater(() ->
@@ -172,25 +208,20 @@ public class MainGame extends Application
             try
             {
                 Score.addScore(score);
-                highScore[0] = Score.getHighScore();
-            }
-            catch (IOException e)
+                highScore.setValue( Score.getHighScore());
+            } catch (IOException e)
             {
                 throw new RuntimeException(e);
             }
 
-            final Alert gameOverAlert;
-            final ButtonType playAgain;
-            final ButtonType quit;
-
-            gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
-            playAgain = new ButtonType("Play Again");
-            quit = new ButtonType("Quit");
+            final Alert gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
+            final ButtonType playAgain = new ButtonType("Play Again");
+            final ButtonType quit = new ButtonType("Quit");
 
             gameOverAlert.setTitle("Game Over");
             gameOverAlert.setContentText(message +
                     "\nFinal Score: " + score +
-                    "\nHigh Score: " + highScore[0]);
+                    "\nHigh Score: " + highScore.getValue());
             gameOverAlert.getButtonTypes().setAll(playAgain, quit);
 
             gameOverAlert.showAndWait().ifPresent(response ->
@@ -201,16 +232,20 @@ public class MainGame extends Application
                     setupGame();
                     gameLoop.start();
                 }
-                else {
+                else
+                {
                     System.exit(NOTHING);
                 }
             });
-
-
         });
     }
 
-    public static void main(String[] args)
+    /**
+     * The main entry point for the application.
+     *
+     * @param args Command-line arguments (unused).
+     */
+    public static void main(final String[] args)
     {
         launch(args);
     }
