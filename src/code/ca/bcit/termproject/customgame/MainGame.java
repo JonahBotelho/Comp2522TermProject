@@ -6,9 +6,11 @@ import ca.bcit.termproject.customgame.orbs.Orb;
 import ca.bcit.termproject.customgame.orbs.RedOrb;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -17,20 +19,22 @@ import java.util.Iterator;
 
 public class MainGame extends Application
 {
-    public static final int WINDOW_WIDTH = 800;
-    public static final int WINDOW_HEIGHT = 600;
-    public static final int PLAYER_SIZE = 30;
-    public static final int ORB_SIZE = 20;
-    public static final int CANNON_X = WINDOW_WIDTH / 2;
-    public static final int CANNON_Y = 50;
-    private static final int BLUE_ORB_POINTS = 1;
-    private static final int GREEN_ORB_POINTS = 3;
+    private static final int NOTHING            = 0;
+    public static final int WINDOW_WIDTH        = 800;
+    public static final int WINDOW_HEIGHT       = 600;
+    public static final int PLAYER_SIZE         = 30;
+    public static final int ORB_SIZE            = 20;
+    public static final int CANNON_X            = WINDOW_WIDTH / 2;
+    public static final int CANNON_Y            = 50;
+    private static final int BLUE_ORB_POINTS    = 1;
+    private static final int GREEN_ORB_POINTS   = 3;
 
     private Pane root;
     private Player player;
     private Cannon cannon;
     private Label scoreLabel;
-    private int score = 0;
+    private int score;
+    private AnimationTimer gameLoop;
 
     @Override
     public void start(Stage primaryStage)
@@ -51,8 +55,8 @@ public class MainGame extends Application
     {
         player = new Player(WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50, PLAYER_SIZE);
         cannon = new Cannon(CANNON_X, CANNON_Y);
+        score = 0;
 
-        // Initialize the score label
         scoreLabel = new Label("Score: 0");
         scoreLabel.setFont(new Font("Arial", 20));
         scoreLabel.setLayoutX(10); // Position in the top-left corner
@@ -63,7 +67,7 @@ public class MainGame extends Application
 
     private void startGameLoop()
     {
-        AnimationTimer gameLoop = new AnimationTimer()
+        gameLoop = new AnimationTimer()
         {
             @Override
             public void handle(long now)
@@ -158,8 +162,38 @@ public class MainGame extends Application
 
     private void gameOver(final String message)
     {
-        System.out.println(message);
-        System.exit(0);
+        gameLoop.stop();
+
+        Platform.runLater(() ->
+        {
+            final Alert gameOverAlert;
+            final ButtonType playAgain;
+            final ButtonType quit;
+
+            gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
+            playAgain = new ButtonType("Play Again");
+            quit = new ButtonType("Quit");
+
+            gameOverAlert.setTitle("Game Over");
+            gameOverAlert.setContentText(message +
+                    "\nFinal Score: " + score);
+            gameOverAlert.getButtonTypes().setAll(playAgain, quit);
+
+            gameOverAlert.showAndWait().ifPresent(response ->
+            {
+                if (response == playAgain)
+                {
+                    root.getChildren().clear();
+                    setupGame();
+                    gameLoop.start();
+                }
+                else {
+                    System.exit(NOTHING);
+                }
+            });
+
+
+        });
     }
 
     public static void main(String[] args)
