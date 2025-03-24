@@ -1,0 +1,27 @@
+1.  "write a game in javaFX.
+    Similar to the bullet hell genre.
+    A cannon object at the top shoots balls of different colours (red, green blue) towards the bottom, at random angles
+    The player controls an object, and must use arrow keys to move around and collide with the balls, absorbing them.
+    If the player collides with a red ball, they lose. If a player collides with a green or blue ball, it disappears.
+
+    Use as many classes as necessary for this.
+    Include at least:
+    - MainGame.java (game logic)
+    - Orb.java (class representing the orb, and different characteristics. Could be abstract, and have several sub classes for different coloured orbs if you believe it best)
+    - UI components.java (for setting up and adding all UI components)
+
+    Use best practices. Declare constants as magic numbers, and split declaration and assignemnts of variables"
+
+    I used this prompt with deepseek first to strong foundation of my game, then spent time fixing issues that I found,
+    such as Cannon.java not extending any JavaFX object, preventing it from being added to the root.
+
+2.  I was getting a runtime error everytime the player touched a green or blue ball, so I posted it to the AI
+    The issue was related to removing items from a list while it was being iterated over, and I generated code to fix that.
+
+3.  From fixing that, it caused an issue where each orb would stop moving after being touched by the player, because they were not
+    correctly removed from the root. I prompted it to fix this issue, and after a few attempts, and changes by myself the issue was fixed
+
+4.
+
+
+
