@@ -26,7 +26,8 @@ import java.util.Iterator;
 public class MainGame extends Application
 {
     private static final int NOTHING                        = 0;
-    private static final String POINTS_NAME                 = "Score"; // what those food/points things are called
+    private static final String POINTS_NAME                 = "Score"; //TODO think of better name
+    private static final String GAME_NAME                   = "I'll think of something"; //TODO think of name
     private static final int START_SCORE                    = 100;
     public static final int WINDOW_WIDTH                    = 800;
     public static final int WINDOW_HEIGHT                   = 600;
@@ -71,6 +72,7 @@ public class MainGame extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        showWelcomeMessage();
 
         setupGame();
         startGameLoop();
@@ -295,7 +297,39 @@ public class MainGame extends Application
         return generatedNumber;
     }
 
+    /**
+     * Display a welcome message for the player when they enter the game.
+     */
+    private void showWelcomeMessage()
+    {
+        final Alert welcomeMessage;
+        final ButtonType playButton;
+        final StringBuilder contentTextBuilder;
+        final String contextTextString;
 
+        welcomeMessage = new Alert(Alert.AlertType.INFORMATION);
+        playButton = new ButtonType("Play");
+        contentTextBuilder = new StringBuilder();
+
+        contentTextBuilder.append("Welcome to ")
+                .append(GAME_NAME)
+                .append("!")
+                .append("\n\t1. Use arrow keys for movement")
+                .append("\n\t2. Catching blue orbs gains you 1 point")
+                .append("\n\t3. Catching green orbs gains you 3 points")
+                .append("\n\t4. Catching red orbs will make you lose")
+                .append("\n\t5. Your score will naturally decrease over time")
+                .append("\n\t6. If it reaches 0, you will lose")
+                .append("\nGood luck!");
+        contextTextString = contentTextBuilder.toString();
+
+        welcomeMessage.getButtonTypes().setAll(playButton);
+        welcomeMessage.setTitle("Welcome to " + GAME_NAME);
+        welcomeMessage.setHeaderText("How to play");
+        welcomeMessage.setContentText(contextTextString);
+
+        welcomeMessage.showAndWait();
+    }
 
     /**
      * The main entry point for the application.
