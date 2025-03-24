@@ -27,7 +27,7 @@ public class Score
             "termproject",
             "customgame",
             "data",
-            "customGameScore.txt"
+            "score.txt"
     );
 
     /**
