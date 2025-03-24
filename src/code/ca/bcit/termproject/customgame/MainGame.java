@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 public class MainGame extends Application
@@ -162,10 +163,22 @@ public class MainGame extends Application
 
     private void gameOver(final String message)
     {
+        final int[] highScore;
+        highScore = new int[1]; // TODO make this not terrible
         gameLoop.stop();
 
         Platform.runLater(() ->
         {
+            try
+            {
+                Score.addScore(score);
+                highScore[0] = Score.getHighScore();
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException(e);
+            }
+
             final Alert gameOverAlert;
             final ButtonType playAgain;
             final ButtonType quit;
@@ -176,7 +189,8 @@ public class MainGame extends Application
 
             gameOverAlert.setTitle("Game Over");
             gameOverAlert.setContentText(message +
-                    "\nFinal Score: " + score);
+                    "\nFinal Score: " + score +
+                    "\nHigh Score: " + highScore[0]);
             gameOverAlert.getButtonTypes().setAll(playAgain, quit);
 
             gameOverAlert.showAndWait().ifPresent(response ->
