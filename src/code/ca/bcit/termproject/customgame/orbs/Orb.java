@@ -7,7 +7,7 @@ import javafx.scene.shape.Circle;
  * Represents an orb in the game. This is an abstract class that serves as the base for different types of orbs.
  * Each orb has a position, size, color, and speed components for both horizontal and vertical movement.
  */
-public abstract class Orb extends Circle
+public abstract class Orb extends Circle implements Updatable
 {
     private static final double SPEED_MODIFIER = 1.5; //higher = slower
 
@@ -24,7 +24,12 @@ public abstract class Orb extends Circle
      * @param speedX The horizontal speed component of the orb.
      * @param speedY The vertical speed component of the orb.
      */
-    public Orb(final double x, final double y, final double radius, final Color color, final double speedX, final double speedY)
+    public Orb(final double x,
+               final double y,
+               final double radius,
+               final Color color,
+               final double speedX,
+               final double speedY)
     {
         super(x, y, radius, color);
         this.speedX = speedX / SPEED_MODIFIER;
