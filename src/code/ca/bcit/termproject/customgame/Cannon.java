@@ -16,27 +16,10 @@ import java.util.Random;
  */
 public class Cannon
 {
-    /**
-     * The probability of shooting an orb in each frame (as a percentage).
-     * Lower = less frequent.
-     */
     private static final int ORB_SHOOT_PROBABILITY = 1;
-
-    /**
-     * The minimum angle (in degrees) at which an orb can be shot.
-     */
     private static final double MIN_ANGLE = -45; // 45 degrees to the left
-
-    /**
-     * The maximum angle (in degrees) at which an orb can be shot.
-     */
     private static final double MAX_ANGLE = 45; // 45 degrees to the right
-
-    /**
-     * The speed at which the orbs move.
-     */
     private static final double ORB_SPEED = 3;
-
     private final double x;
     private final double y;
     private final List<Orb> orbs;
