@@ -3,12 +3,13 @@ package ca.bcit.termproject.customgame;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.util.BitSet;
-
 public class Player extends Rectangle
 {
     private boolean movingLeft = false;
     private boolean movingRight = false;
+    private boolean movingUp = false;
+    private boolean movingDown = false;
+
     private double speed = 3;
 
     public Player(double x, double y, double size)
@@ -27,16 +28,35 @@ public class Player extends Rectangle
         {
             setX(getX() + speed);
         }
+        if (movingUp && getY() > 0)
+        {
+            setY(getY() - speed);
+        }
+        if (movingDown && getY() < MainGame.WINDOW_HEIGHT - getHeight())
+        {
+            setY(getY() + speed);
+        }
     }
 
-    public void setLeft(boolean movingLeft)
+    public void setLeft(final boolean movingLeft)
     {
         this.movingLeft = movingLeft;
     }
 
-    public void setRight(boolean movingRight)
+    public void setRight(final boolean movingRight)
     {
         this.movingRight = movingRight;
     }
+
+    public void setUp(final boolean movingUp)
+    {
+        this.movingUp = movingUp;
+    }
+
+    public void setDown(final boolean movingDown)
+    {
+        this.movingDown = movingDown;
+    }
+
 
 }

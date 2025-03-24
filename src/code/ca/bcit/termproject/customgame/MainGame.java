@@ -13,15 +13,6 @@ import javafx.stage.Stage;
 
 import java.util.Iterator;
 
-import javafx.animation.AnimationTimer;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-
-import java.util.Iterator;
-
 public class MainGame extends Application
 {
     public static final int WINDOW_WIDTH = 800;
@@ -93,6 +84,15 @@ public class MainGame extends Application
             {
                 player.setRight(true);
             }
+
+            if (event.getCode() == KeyCode.UP)
+            {
+                player.setUp(true);
+            }
+            else if (event.getCode() == KeyCode.DOWN)
+            {
+                player.setDown(true);
+            }
         });
 
         scene.setOnKeyReleased(event ->
@@ -104,6 +104,15 @@ public class MainGame extends Application
             else if (event.getCode() == KeyCode.RIGHT)
             {
                 player.setRight(false);
+            }
+
+            if (event.getCode() == KeyCode.UP)
+            {
+                player.setUp(false);
+            }
+            else if (event.getCode() == KeyCode.DOWN)
+            {
+                player.setDown(false);
             }
         });
     }
