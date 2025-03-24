@@ -21,7 +21,11 @@
 3.  From fixing that, it caused an issue where each orb would stop moving after being touched by the player, because they were not
     correctly removed from the root. I prompted it to fix this issue, and after a few attempts, and changes by myself the issue was fixed
 
-4.
+4. Enabled user to move up and down my hand
+
+5. Used AI to add score counter, adjusted myself to fix a few styling errors
+
+6. Used AI to create a "game over" popup, asking the user if they wanted to play again.
 
 
 
