@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 import java.util.Random;
 
 import java.io.IOException;
@@ -25,30 +26,30 @@ import java.util.Iterator;
  */
 public class MainGame extends Application
 {
-    private static final int NOTHING                        = 0;
-    private static final String POINTS_NAME                 = "Score"; //TODO think of better name
-    private static final String GAME_NAME                   = "I'll think of something"; //TODO think of name
-    private static final int START_SCORE                    = 100;
-    public static final int WINDOW_WIDTH                    = 800;
-    public static final int WINDOW_HEIGHT                   = 600;
-    public static final int PLAYER_SIZE                     = 30;
-    public static final int ORB_SIZE                        = 20;
-    public static final int CANNON_X                        = WINDOW_WIDTH / 2;
-    public static final int CANNON_Y                        = 50;
-    private static final int PLAYER_START_X                 =  WINDOW_WIDTH / 2;
-    private static final int PLAYER_START_Y                 = WINDOW_HEIGHT - 50;
-    private static final int BLUE_ORB_POINTS                = 1;
-    private static final int GREEN_ORB_POINTS               = 3;
-    private static final int SCORE_LABEL_FONT_SIZE          = 20;
-    private static final int SCORE_LABEL_X                  = 10;
-    private static final int SCORE_LABEL_Y                  = 10;
-    private static final String SCORE_LABEL_FONT_NAME       = "Arial";
-    private static final String SCORE_LABEL_INITIAL_TEXT    = POINTS_NAME + ": " + START_SCORE;
-    private static final int SCORE_DECREASE_RANDOM_MIN      = 1;
-    private static final int SCORE_DECREASE_RANDOM_MAX      = 1000;
-    private static final int SCORE_DECREASE_PROBABILITY     = 5; // percent
-    private static final int RANDOM_NUMBER_OFFSET           = 1;
-    private static final int MINIMUM_SCORE_TO_SURVIVE       = 1;
+    private static final int NOTHING = 0;
+    private static final String POINTS_NAME = "Score"; //TODO think of better name
+    private static final String GAME_NAME = "I'll think of something"; //TODO think of name
+    private static final int START_SCORE = 100;
+    public static final int WINDOW_WIDTH = 800;
+    public static final int WINDOW_HEIGHT = 600;
+    public static final int PLAYER_SIZE = 30;
+    public static final int ORB_SIZE = 20;
+    public static final int CANNON_X = WINDOW_WIDTH / 2;
+    public static final int CANNON_Y = 50;
+    private static final int PLAYER_START_X = WINDOW_WIDTH / 2;
+    private static final int PLAYER_START_Y = WINDOW_HEIGHT - 50;
+    private static final int BLUE_ORB_POINTS = 1;
+    private static final int GREEN_ORB_POINTS = 3;
+    private static final int SCORE_LABEL_FONT_SIZE = 20;
+    private static final int SCORE_LABEL_X = 10;
+    private static final int SCORE_LABEL_Y = 10;
+    private static final String SCORE_LABEL_FONT_NAME = "Arial";
+    private static final String SCORE_LABEL_INITIAL_TEXT = POINTS_NAME + ": " + START_SCORE;
+    private static final int SCORE_DECREASE_RANDOM_MIN = 1;
+    private static final int SCORE_DECREASE_RANDOM_MAX = 1000;
+    private static final int SCORE_DECREASE_PROBABILITY = 5; // percent
+    private static final int RANDOM_NUMBER_OFFSET = 1;
+    private static final int MINIMUM_SCORE_TO_SURVIVE = 1;
 
     private final Pane root = new Pane();
     private Player player;
@@ -121,10 +122,7 @@ public class MainGame extends Application
      */
     private void updateOrbs()
     {
-        for (final Orb orb : cannon.getOrbs())
-        {
-            orb.update();
-        }
+        cannon.getOrbs().forEach(Orb::update);
     }
 
     /**
@@ -193,16 +191,13 @@ public class MainGame extends Application
                 else if (orb instanceof GreenOrb)
                 {
                     score += GREEN_ORB_POINTS;
-                    iterator.remove();
-                    root.getChildren().remove(orb);
                 }
                 else if (orb instanceof BlueOrb)
                 {
                     score += BLUE_ORB_POINTS;
-                    iterator.remove();
-                    root.getChildren().remove(orb);
                 }
-
+                iterator.remove();
+                root.getChildren().remove(orb);
                 updateScore();
             }
         }
@@ -224,7 +219,7 @@ public class MainGame extends Application
             try
             {
                 Score.addScore(score);
-                highScore.setValue( Score.getHighScore());
+                highScore.setValue(Score.getHighScore());
             } catch (IOException e)
             {
                 throw new RuntimeException(e);
@@ -260,9 +255,12 @@ public class MainGame extends Application
     {
         if (score < MINIMUM_SCORE_TO_SURVIVE)
         {
-            gameOver("You have no score left!"); //TODO food is placeholder, fix
+            gameOver("You have no " +
+                    POINTS_NAME.toLowerCase() +
+                    " left!");
         }
-        else {
+        else
+        {
             if (getRandomNumber(SCORE_DECREASE_RANDOM_MIN, SCORE_DECREASE_RANDOM_MAX) < SCORE_DECREASE_PROBABILITY)
             {
                 score--;
