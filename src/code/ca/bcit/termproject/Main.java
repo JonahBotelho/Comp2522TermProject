@@ -1,5 +1,6 @@
 package ca.bcit.termproject;
 
+import ca.bcit.termproject.numbergame.NumberGame;
 import ca.bcit.termproject.wordgame.WordGame;
 
 import java.io.FileNotFoundException;
@@ -19,7 +20,7 @@ public class Main
      */
     public static void main(String[] args) throws IOException
     {
-        Scanner scan;
+        final Scanner scan;
         String input;
 
         scan = new Scanner(System.in);
@@ -48,7 +49,7 @@ public class Main
                     WordGame.main(new String[0]);
                     break;
                 case "N", "n":
-
+                    NumberGame.main(new String[0]);
                     break;
                 case "M", "m":
 
