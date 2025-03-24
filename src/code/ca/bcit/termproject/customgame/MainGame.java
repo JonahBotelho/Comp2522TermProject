@@ -220,7 +220,8 @@ public class MainGame extends Application
             {
                 Score.addScore(score);
                 highScore.setValue(Score.getHighScore());
-            } catch (IOException e)
+            }
+            catch (IOException e)
             {
                 throw new RuntimeException(e);
             }

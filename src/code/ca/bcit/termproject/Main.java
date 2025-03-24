@@ -2,6 +2,7 @@ package ca.bcit.termproject;
 
 import ca.bcit.termproject.numbergame.NumberGame;
 import ca.bcit.termproject.wordgame.WordGame;
+import ca.bcit.termproject.customgame.MainGame;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class Main
                     NumberGame.main(new String[0]);
                     break;
                 case "M", "m":
-
+                    MainGame.main(new String[0]);
                     break;
             }
 
