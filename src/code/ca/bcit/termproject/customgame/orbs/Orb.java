@@ -9,14 +9,9 @@ import javafx.scene.shape.Circle;
  */
 public abstract class Orb extends Circle
 {
-    /**
-     * The horizontal speed component of the orb.
-     */
-    private final double speedX;
+    private static final double SPEED_MODIFIER = 1.5; //higher = slower
 
-    /**
-     * The vertical speed component of the orb.
-     */
+    private final double speedX;
     private final double speedY;
 
     /**
@@ -32,8 +27,8 @@ public abstract class Orb extends Circle
     public Orb(final double x, final double y, final double radius, final Color color, final double speedX, final double speedY)
     {
         super(x, y, radius, color);
-        this.speedX = speedX;
-        this.speedY = speedY;
+        this.speedX = speedX / SPEED_MODIFIER;
+        this.speedY = speedY / SPEED_MODIFIER;
     }
 
     /**
