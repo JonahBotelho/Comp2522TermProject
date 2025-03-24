@@ -68,8 +68,6 @@ public final class NumberGame extends Application implements RandomNumberGenerat
 
         generateNextNumber();
 
-
-
         scene = new Scene(root, WINDOW_HEIGHT, WINDOW_WIDTH);
 
         primaryStage.setTitle("Number Game");
@@ -138,7 +136,6 @@ public final class NumberGame extends Application implements RandomNumberGenerat
         buttons[index].setText(String.valueOf(currentNumber));
         successfulPlacements++;
 
-        // checks if the player lost
         if (!isAscendingOrder())
         {
             gamesPlayed++;
@@ -193,18 +190,15 @@ public final class NumberGame extends Application implements RandomNumberGenerat
         alert.setContentText("Impossible to place the next number. Try again?");
         alert.getButtonTypes().setAll(retryButton, quitButton);
 
-        // Handle user response
         alert.showAndWait().ifPresent(response ->
         {
             if (response == retryButton)
             {
-                // Reset the game
                 resetGrid();
                 generateNextNumber();
             }
             else
             {
-                // Quit the game and return to the main menu
                 showFinalScore();
                 final Stage stage;
                 stage = (Stage) statusLabel.getScene().getWindow();
