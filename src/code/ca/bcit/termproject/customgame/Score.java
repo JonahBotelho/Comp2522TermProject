@@ -19,7 +19,16 @@ import java.util.OptionalInt;
 public class Score
 {
     private static final int NOTHING = 0;
-    private final static Path filePath = Paths.get("src", "customGameScore.txt");
+    private final static Path filePath = Paths.get(
+            "src",
+            "code",
+            "ca",
+            "bcit",
+            "termproject",
+            "customgame",
+            "data",
+            "customGameScore.txt"
+    );
 
     /**
      * Adds a score to the score file. If the file does not exist, it will be created.
