@@ -14,6 +14,8 @@ import java.util.Scanner;
  */
 public class Main
 {
+    private static final int NOTHING = 0;
+    
     /**
      * Drives the program.
      *
@@ -47,13 +49,13 @@ public class Main
             switch (input)
             {
                 case "W", "w":
-                    WordGame.main(new String[0]);
+                    WordGame.main(new String[NOTHING]);
                     break;
                 case "N", "n":
-                    NumberGame.main(new String[0]);
+                    NumberGame.main(new String[NOTHING]);
                     break;
                 case "M", "m":
-                    MainGame.main(new String[0]);
+                    MainGame.main(new String[NOTHING]);
                     break;
             }
 
