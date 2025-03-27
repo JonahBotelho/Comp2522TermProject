@@ -4,7 +4,7 @@ package ca.bcit.termproject.customgame;
  * Class designed to hold an integer value, allowing for it to be changed without
  * the object being reassigned.
  */
-public class MutableInteger
+public final class MutableInteger
 {
     private int value;
 

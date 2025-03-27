@@ -16,7 +16,7 @@ import java.util.OptionalInt;
  * @author Jonah Botelho
  * @version 1.0
  */
-public class Score
+public final class Score
 {
     private static final int NOTHING    = 0;
     private final static Path filePath  = Paths.get(

@@ -14,7 +14,7 @@ import java.util.Random;
  * Represents a cannon that shoots orbs at random angles. The cannon is positioned at the top of the screen
  * and shoots orbs downward at varying angles.
  */
-public class Cannon
+public final class Cannon
 {
     // Orb Shooting Configuration
     private static final int ORB_SHOOT_PROBABILITY = 1;

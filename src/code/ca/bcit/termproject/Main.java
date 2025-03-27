@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Jonah Botelho
  * @version 1.0
  */
-public class Main
+public final class Main
 {
     private static final int NOTHING = 0;
     

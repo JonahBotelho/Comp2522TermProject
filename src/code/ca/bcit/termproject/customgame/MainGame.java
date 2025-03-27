@@ -24,13 +24,13 @@ import java.util.Iterator;
  * The MainGame class is the entry point for the Bullet Hell game.
  * It initializes the game window, handles game logic, and manages user input.
  */
-public class MainGame extends Application
+public final class MainGame extends Application
 {
     // Game Configuration
-    public static final String GAME_NAME           = "I'll think of something";  // TODO: think of name
-    public static final int WINDOW_WIDTH          = 800;
-    public static final int WINDOW_HEIGHT         = 600;
-    private static final int NOTHING               = 0;
+    public static final String GAME_NAME            = "I'll think of something";  // TODO: think of name
+    public static final int WINDOW_WIDTH            = 800;
+    public static final int WINDOW_HEIGHT           = 600;
+    private static final int NOTHING                = 0;
 
     // Player Configuration
     public static final int PLAYER_SIZE            = 30;
@@ -395,5 +395,4 @@ public class MainGame extends Application
     {
         launch(args);
     }
-
 }

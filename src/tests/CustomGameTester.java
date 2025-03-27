@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CustomGameTester
+public final class CustomGameTester
 {
     private MainGame game;
     private Player player;

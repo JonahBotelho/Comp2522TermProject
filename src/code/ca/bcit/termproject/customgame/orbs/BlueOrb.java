@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 /**
  * Represents a blue orb in the game. Blue orbs are harmless and disappear when collided with by the player.
  */
-public class BlueOrb extends Orb
+public final class BlueOrb extends Orb
 {
     /**
      * The color of the blue orb.
