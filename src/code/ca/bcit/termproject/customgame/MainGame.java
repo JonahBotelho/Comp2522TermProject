@@ -30,10 +30,10 @@ public class MainGame extends Application
     private static final String POINTS_NAME = "Score"; //TODO think of better name
     private static final String GAME_NAME = "I'll think of something"; //TODO think of name
     private static final int START_SCORE = 100;
-    private static final int WINDOW_WIDTH = 800;
+    public static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 600;
     private static final int PLAYER_SIZE = 30;
-    private static final int ORB_SIZE = 20;
+    public static final int ORB_SIZE = 20;
     private static final int CANNON_X = WINDOW_WIDTH / 2;
     private static final int CANNON_Y = 50;
     private static final int PLAYER_START_X = WINDOW_WIDTH / 2;
@@ -337,66 +337,6 @@ public class MainGame extends Application
     public int getScore()
     {
         return score;
-    }
-
-    /**
-     * Returns the width of the game window.
-     *
-     * @return the window width in pixels
-     */
-    public static int getWindowWidth()
-    {
-        return WINDOW_WIDTH;
-    }
-
-    /**
-     * Returns the height of the game window.
-     *
-     * @return the window height in pixels
-     */
-    public static int getWindowHeight()
-    {
-        return WINDOW_HEIGHT;
-    }
-
-    /**
-     * Returns the size (both width and height) of the player character.
-     *
-     * @return the player size in pixels
-     */
-    public static int getPlayerSize()
-    {
-        return PLAYER_SIZE;
-    }
-
-    /**
-     * Returns the size (both width and height) of the orbs.
-     *
-     * @return the orb size in pixels
-     */
-    public static int getOrbSize()
-    {
-        return ORB_SIZE;
-    }
-
-    /**
-     * Returns the x-coordinate of the cannon's position.
-     *
-     * @return the cannon's x-position in pixels
-     */
-    public static int getCannonX()
-    {
-        return CANNON_X;
-    }
-
-    /**
-     * Returns the y-coordinate of the cannon's position.
-     *
-     * @return the cannon's y-position in pixels
-     */
-    public static int getCannonY()
-    {
-        return CANNON_Y;
     }
 
     /**
