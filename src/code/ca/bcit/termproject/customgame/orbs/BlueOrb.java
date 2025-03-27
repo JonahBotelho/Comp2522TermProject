@@ -21,8 +21,12 @@ public class BlueOrb extends Orb
      * @param speedX The horizontal speed component of the blue orb.
      * @param speedY The vertical speed component of the blue orb.
      */
-    public BlueOrb(final double x, final double y, final double speedX, final double speedY)
+    public BlueOrb(final double x,
+                   final double y,
+                   final double speedX,
+                   final double speedY,
+                   final double speedModifier)
     {
-        super(x, y, MainGame.ORB_SIZE, BLUE_ORB_COLOR, speedX, speedY);
+        super(x, y, MainGame.ORB_SIZE, BLUE_ORB_COLOR, speedX, speedY, speedModifier);
     }
 }

@@ -21,8 +21,12 @@ public class RedOrb extends Orb
      * @param speedX The horizontal speed component of the red orb.
      * @param speedY The vertical speed component of the red orb.
      */
-    public RedOrb(final double x, final double y, final double speedX, final double speedY)
+    public RedOrb(final double x,
+                  final double y,
+                  final double speedX,
+                  final double speedY,
+                  final double speedModifier)
     {
-        super(x, y, MainGame.ORB_SIZE, RED_ORB_COLOR, speedX, speedY);
+        super(x, y, MainGame.ORB_SIZE, RED_ORB_COLOR, speedX, speedY, speedModifier);
     }
 }

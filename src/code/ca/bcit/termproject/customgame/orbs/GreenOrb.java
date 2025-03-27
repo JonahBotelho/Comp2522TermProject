@@ -21,8 +21,12 @@ public class GreenOrb extends Orb
      * @param speedX The horizontal speed component of the green orb.
      * @param speedY The vertical speed component of the green orb.
      */
-    public GreenOrb(final double x, final double y, final double speedX, final double speedY)
+    public GreenOrb(final double x,
+                    final double y,
+                    final double speedX,
+                    final double speedY,
+                    final double speedModifier)
     {
-        super(x, y, MainGame.ORB_SIZE, GREEN_ORB_COLOR, speedX, speedY);
+        super(x, y, MainGame.ORB_SIZE, GREEN_ORB_COLOR, speedX, speedY, speedModifier);
     }
 }

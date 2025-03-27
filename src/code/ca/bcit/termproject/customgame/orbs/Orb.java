@@ -9,8 +9,6 @@ import javafx.scene.shape.Circle;
  */
 public abstract class Orb extends Circle implements Updatable
 {
-    private static final double SPEED_MODIFIER = 1.5; //higher = slower
-
     private final double speedX;
     private final double speedY;
 
@@ -29,11 +27,12 @@ public abstract class Orb extends Circle implements Updatable
                final double radius,
                final Color color,
                final double speedX,
-               final double speedY)
+               final double speedY,
+               final double speedModifier)
     {
         super(x, y, radius, color);
-        this.speedX = speedX / SPEED_MODIFIER;
-        this.speedY = speedY / SPEED_MODIFIER;
+        this.speedX = speedX * speedModifier;
+        this.speedY = speedY * speedModifier;
     }
 
     /**
