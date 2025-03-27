@@ -127,7 +127,7 @@ public class MainGame extends Application
                 player.update();
                 updateOrbs();
                 checkCollisions();
-                checkScore();
+                checkAndUpdateScore();
             }
         };
         gameLoop.start();
@@ -214,7 +214,7 @@ public class MainGame extends Application
                 }
                 iterator.remove();
                 root.getChildren().remove(orb);
-                updateScore();
+                updateScoreLabel();
                 updateSpeedModifier();
             }
         }
@@ -267,8 +267,12 @@ public class MainGame extends Application
             });
         });
     }
-
-    private void checkScore()
+    
+    /**
+     * Checks the users score, and ends the game if it is below 0.
+     * If it is above MINIMUM_SCORE_TO_SURVIVE, calls the updateScore() method.
+     */
+    private void checkAndUpdateScore()
     {
         if (score < MINIMUM_SCORE_TO_SURVIVE)
         {
@@ -278,19 +282,27 @@ public class MainGame extends Application
         }
         else
         {
-            if (getRandomNumber(SCORE_DECREASE_RANDOM_MIN, SCORE_DECREASE_RANDOM_MAX) < SCORE_DECREASE_PROBABILITY)
-            {
-                score--;
-                updateScore();
-                updateSpeedModifier();
-            }
+            updateScore();
+        }
+    }
+    
+    /**
+     * Calculates a random number, and decreases the score if that number is in a given range.
+     */
+    private void updateScore()
+    {
+        if (getRandomNumber(SCORE_DECREASE_RANDOM_MIN, SCORE_DECREASE_RANDOM_MAX) < SCORE_DECREASE_PROBABILITY)
+        {
+            score--;
+            updateScoreLabel();
+            updateSpeedModifier();
         }
     }
 
     /**
      * Updates the score label with the player's
      */
-    private void updateScore()
+    private void updateScoreLabel()
     {
         scoreLabel.setText("Score: " + score);
     }
