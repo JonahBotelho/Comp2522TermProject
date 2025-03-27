@@ -14,6 +14,11 @@ import java.util.Scanner;
  */
 public final class Main
 {
+    private static final String WORD_GAME_LETTER      = "W";
+    private static final String NUMBER_GAME_LETTER    = "N";
+    private static final String CUSTOM_GAME_NUMBER    = "M";
+    private static final String QUIT_LETTER           = "Q";
+    
     private static final int NOTHING = 0;
     
     /**
@@ -30,35 +35,35 @@ public final class Main
 
         do
         {
-            System.out.println("Press W to play the Word game.");
-            System.out.println("Press N to play the Number game.");
-            System.out.println("Press M to play the _____ game");
-            System.out.println("Press Q to quit.");
+            System.out.println("Press " + WORD_GAME_LETTER      + " to play the Word game.");
+            System.out.println("Press " + NUMBER_GAME_LETTER    + " to play the Number game.");
+            System.out.println("Press " + CUSTOM_GAME_NUMBER    + " to play the _____ game");
+            System.out.println("Press " + QUIT_LETTER           + " to quit.");
 
             input = scan.nextLine();
 
-            while (!(input.equalsIgnoreCase("W") ||
-                    input.equalsIgnoreCase("N") ||
-                    input.equalsIgnoreCase("M") ||
-                    input.equalsIgnoreCase("Q")))
+            while (!(input.equalsIgnoreCase(WORD_GAME_LETTER) ||
+                    input.equalsIgnoreCase(NUMBER_GAME_LETTER) ||
+                    input.equalsIgnoreCase(CUSTOM_GAME_NUMBER) ||
+                    input.equalsIgnoreCase(QUIT_LETTER)))
             {
                 System.out.println("Invalid input. Try again.");
                 input = scan.nextLine();
             }
 
-            switch (input)
+            switch (input.toUpperCase())
             {
-                case "W", "w":
+                case WORD_GAME_LETTER:
                     WordGame.main(new String[NOTHING]);
                     break;
-                case "N", "n":
+                case NUMBER_GAME_LETTER:
                     NumberGame.main(new String[NOTHING]);
                     break;
-                case "M", "m":
+                case CUSTOM_GAME_NUMBER:
                     MainGame.main(new String[NOTHING]);
                     break;
             }
 
-        } while (!(input.equalsIgnoreCase("q")));
+        } while (!(input.equalsIgnoreCase(QUIT_LETTER)));
     }
 }
