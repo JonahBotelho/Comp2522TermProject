@@ -48,17 +48,13 @@ public final class MainGame
     private static final double SPEED_MODIFIER_CHANGE_RATE  = 50; // lower = more chance
     private static double speedModifier                     =  BASE_SPEED_MODIFIER;
 
-    // Cannon Configuration
-    private static final int CANNON_X              = WINDOW_WIDTH / 2;
-    private static final int CANNON_Y              = 50;
-
     // Score System
     private static final String POINTS_NAME             = "Score";  // TODO: think of better name
     private static final int START_SCORE                = 100;
     private static final int MINIMUM_SCORE_TO_SURVIVE   = 1;
     private static final int SCORE_DECREASE_RANDOM_MIN  = 1;
     private static final int SCORE_DECREASE_RANDOM_MAX  = 1000;
-    private static final int SCORE_DECREASE_PROBABILITY = 5;  // percent
+    private static final int SCORE_DECREASE_PROBABILITY = 10;  // percent
     private static final int RANDOM_NUMBER_OFFSET       = 1;
 
     // UI Configuration
@@ -103,9 +99,9 @@ public final class MainGame
     private void setupGame()
     {
         player = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
-        cannon = new Cannon(CANNON_X, CANNON_Y);
+        cannon = new Cannon();
         score = START_SCORE;
-
+ 
         scoreLabel = new Label(SCORE_LABEL_INITIAL_TEXT);
         scoreLabel.setFont(new Font(SCORE_LABEL_FONT_NAME, SCORE_LABEL_FONT_SIZE));
         scoreLabel.setLayoutX(SCORE_LABEL_X); // Position in the top-left corner
