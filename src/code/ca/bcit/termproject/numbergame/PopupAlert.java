@@ -9,7 +9,8 @@ import javafx.scene.control.Alert;
  * @author Jonah Botelho
  * @version 1.0
  */
-public class PopupAlert extends Alert
+public class PopupAlert
+        extends Alert
 {
     /**
      * Constructs a PopupAlert with the specified alert type and title.

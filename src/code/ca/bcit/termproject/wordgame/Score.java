@@ -17,7 +17,7 @@ import java.nio.file.Path;
  * Represents a player's score in the word game.
  * Stores statistics and provides methods for file I/O.
  */
-public class Score
+public final class Score
 {
     private static final int NOTHING                            = 0;
     private static final int MIN_YEAR                           = 2000;

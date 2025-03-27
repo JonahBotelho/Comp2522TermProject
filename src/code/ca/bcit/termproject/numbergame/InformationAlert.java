@@ -9,7 +9,8 @@ import javafx.scene.control.Alert;
  * @author Jonah Botelho
  * @version 1.0
  */
-public class InformationAlert extends PopupAlert
+public class InformationAlert
+        extends PopupAlert
 {
 
     /**

@@ -6,7 +6,8 @@ import javafx.scene.paint.Color;
 /**
  * Represents a red orb in the game. Red orbs are dangerous and cause the player to lose the game upon collision.
  */
-public final class RedOrb extends Orb
+public final class RedOrb
+        extends Orb
 {
     /**
      * The color of the red orb.

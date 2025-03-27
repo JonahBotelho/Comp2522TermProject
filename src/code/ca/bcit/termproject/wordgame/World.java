@@ -15,7 +15,7 @@ import java.util.List;
  * @author Jonah Botelho
  * @version 1.0
  */
-public class World
+public final class World
 {
     private static final int FILE_READER_START   = 1;
     private static final int FACTS_LENGTH        = 3;

@@ -17,7 +17,7 @@ import java.util.Scanner;
  * @author Jonah Botelho
  * @version 1.0
  */
-public class WordGame
+public final class WordGame
 {
     private static final Scanner SCANNER         = new Scanner(System.in);
     private static final int QUESTIONS_PER_GAME  = 10;

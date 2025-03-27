@@ -22,7 +22,9 @@ import java.text.DecimalFormat;
  * @author Jonah Botelho
  * @version 1.0
  */
-public final class NumberGame extends Application implements RandomNumberGenerator
+public final class NumberGame
+        extends Application
+        implements RandomNumberGenerator
 {
     // Game Configuration Constants
     private static final int NOTHING              = 0;

@@ -6,7 +6,8 @@ import javafx.scene.paint.Color;
 /**
  * Represents a green orb in the game. Green orbs are harmless and disappear when collided with by the player.
  */
-public final class GreenOrb extends Orb
+public final class GreenOrb
+        extends Orb
 {
     /**
      * The color of the green orb.

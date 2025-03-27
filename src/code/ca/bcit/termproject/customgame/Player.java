@@ -7,7 +7,8 @@ import javafx.scene.shape.Rectangle;
  * Represents the player in the game, which is a rectangular shape.
  * The player can move in four directions: left, right, up, and down.
  */
-public final class Player extends Rectangle
+public final class Player
+        extends Rectangle
 {
     private static final int NOTHING    = 0;  // Boundary check constant
     private static final double speed   = 3;  // Movement speed of the player

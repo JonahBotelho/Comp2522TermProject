@@ -6,7 +6,7 @@ package ca.bcit.termproject.wordgame;
  * @author Jonah Botelho
  * @version 1.0
  */
-public class Country
+public final class Country
 {
     private static final int NOTHING = 0;
 
