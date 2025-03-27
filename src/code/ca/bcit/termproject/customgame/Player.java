@@ -18,7 +18,6 @@ public class Player extends Rectangle
     private boolean movingDown = false;
 
 
-
     /**
      * Constructs a Player object at the specified position with the given size.
      *
@@ -94,5 +93,45 @@ public class Player extends Rectangle
     public void setDown(final boolean movingDown)
     {
         this.movingDown = movingDown;
+    }
+
+    /**
+     * Returns whether the player is moving left.
+     *
+     * @return {@code true} if the player is moving left, {@code false} otherwise
+     */
+    public boolean isMovingLeft()
+    {
+        return movingLeft;
+    }
+
+    /**
+     * Returns whether the player is moving right.
+     *
+     * @return {@code true} if the player is moving right, {@code false} otherwise
+     */
+    public boolean isMovingRight()
+    {
+        return movingRight;
+    }
+
+    /**
+     * Returns whether the player is moving upward.
+     *
+     * @return {@code true} if the player is moving up, {@code false} otherwise
+     */
+    public boolean isMovingUp()
+    {
+        return movingUp;
+    }
+
+    /**
+     * Returns whether the player is moving downward.
+     *
+     * @return {@code true} if the player is moving down, {@code false} otherwise
+     */
+    public boolean isMovingDown()
+    {
+        return movingDown;
     }
 }
