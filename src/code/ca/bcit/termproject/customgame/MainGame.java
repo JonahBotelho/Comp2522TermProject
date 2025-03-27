@@ -42,9 +42,9 @@ public final class MainGame
     public static final int ORB_SIZE                        = 20;
     private static final int BLUE_ORB_POINTS                = 1;
     private static final int GREEN_ORB_POINTS               = 3;
-    private static final double BASE_SPEED_MODIFIER         = 0.75;
+    private static final double BASE_SPEED_MODIFIER         = 1.2;
     private static final double  MAX_SPEED_MODIFIER         = 2.5;
-    private static final double MIN_SPEED_MODIFIER          = 0.5;
+    private static final double MIN_SPEED_MODIFIER          = 1;
     private static final double SPEED_MODIFIER_CHANGE_RATE  = 50; // lower = more chance
     private static double speedModifier                     =  BASE_SPEED_MODIFIER;
 
@@ -54,7 +54,7 @@ public final class MainGame
     private static final int MINIMUM_SCORE_TO_SURVIVE   = 1;
     private static final int SCORE_DECREASE_RANDOM_MIN  = 1;
     private static final int SCORE_DECREASE_RANDOM_MAX  = 1000;
-    private static final int SCORE_DECREASE_PROBABILITY = 10;  // percent
+    private static final int SCORE_DECREASE_PROBABILITY = 20;  // percent
     private static final int RANDOM_NUMBER_OFFSET       = 1;
 
     // UI Configuration

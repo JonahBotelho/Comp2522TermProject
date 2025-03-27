@@ -15,8 +15,9 @@ import java.util.Random;
  */
 public final class Cannon {
     // Orb Shooting Configuration
+    private static final int RANDOM_ORB_GENERATION_MAX = 5;
     private static final int ORB_SHOOT_PROBABILITY_MAX = 100;
-    private static final int ORB_SHOOT_PROBABILITY = 2;
+    private static final int ORB_SHOOT_PROBABILITY = 3;
     private static final double ORB_SPEED = 3;
     
     // Screen edge positions
@@ -100,7 +101,7 @@ public final class Cannon {
     private Orb createRandomOrb(final double x, final double y,
                                 final double speedX, final double speedY,
                                 final double speedModifier) {
-        int orbType = random.nextInt(3);
+        int orbType = random.nextInt(RANDOM_ORB_GENERATION_MAX);
         switch (orbType) {
             case 0: return new RedOrb(x, y, speedX, speedY, speedModifier);
             case 1: return new GreenOrb(x, y, speedX, speedY, speedModifier);
