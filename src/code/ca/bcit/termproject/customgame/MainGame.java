@@ -152,16 +152,16 @@ public class MainGame extends Application
         {
             switch (event.getCode())
             {
-                case LEFT:
+                case LEFT, A:
                     player.setLeft(true);
                     break;
-                case RIGHT:
+                case RIGHT, D:
                     player.setRight(true);
                     break;
-                case UP:
+                case UP, W:
                     player.setUp(true);
                     break;
-                case DOWN:
+                case DOWN, S:
                     player.setDown(true);
                     break;
             }
@@ -171,16 +171,16 @@ public class MainGame extends Application
         {
             switch (event.getCode())
             {
-                case LEFT:
+                case LEFT, A:
                     player.setLeft(false);
                     break;
-                case RIGHT:
+                case RIGHT, D:
                     player.setRight(false);
                     break;
-                case UP:
+                case UP, W:
                     player.setUp(false);
                     break;
-                case DOWN:
+                case DOWN, S:
                     player.setDown(false);
                     break;
             }
@@ -359,7 +359,7 @@ public class MainGame extends Application
         contentTextBuilder.append("Welcome to ")
                 .append(GAME_NAME)
                 .append("!")
-                .append("\n\t1. Use arrow keys for movement")
+                .append("\n\t1. Use arrow or WASD keys for movement")
                 .append("\n\t2. Catching blue orbs gains you 1 point")
                 .append("\n\t3. Catching green orbs gains you 3 points")
                 .append("\n\t4. Catching red orbs will make you lose")
