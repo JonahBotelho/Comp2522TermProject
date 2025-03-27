@@ -9,13 +9,13 @@ import javafx.scene.shape.Rectangle;
  */
 public class Player extends Rectangle
 {
-    private static final int NOTHING = 0;  // Boundary check constant
-    private static final double speed = 3;  // Movement speed of the player
+    private static final int NOTHING    = 0;  // Boundary check constant
+    private static final double speed   = 3;  // Movement speed of the player
 
-    private boolean movingLeft = false;
-    private boolean movingRight = false;
-    private boolean movingUp = false;
-    private boolean movingDown = false;
+    private boolean movingLeft      = false;
+    private boolean movingRight     = false;
+    private boolean movingUp        = false;
+    private boolean movingDown      = false;
 
 
     /**

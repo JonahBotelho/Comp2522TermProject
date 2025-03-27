@@ -16,10 +16,15 @@ import java.util.Random;
  */
 public class Cannon
 {
+    // Orb Shooting Configuration
     private static final int ORB_SHOOT_PROBABILITY = 1;
-    private static final double MIN_ANGLE = -45; // 45 degrees to the left
-    private static final double MAX_ANGLE = 45; // 45 degrees to the right
-    private static final double ORB_SPEED = 3;
+    private static final double ORB_SPEED          = 3;
+
+    // Angle Configuration
+    private static final double MIN_ANGLE          = -45;  // 45 degrees to the left
+    private static final double MAX_ANGLE          = 45;   // 45 degrees to the right
+
+    // Cannon State
     private final double x;
     private final double y;
     private final List<Orb> orbs;

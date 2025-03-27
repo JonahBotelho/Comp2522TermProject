@@ -10,7 +10,7 @@ public class MutableInteger
 
     /**
      * Constructs a MutableInteger object
-     * @param value
+     * @param value int to be stored
      */
     public MutableInteger(int value)
     {
@@ -19,7 +19,7 @@ public class MutableInteger
 
     /**
      * Sets the value stored in the object
-     * @param value to be stored
+     * @param value int to be stored
      */
     public void setValue(final int value)
     {
