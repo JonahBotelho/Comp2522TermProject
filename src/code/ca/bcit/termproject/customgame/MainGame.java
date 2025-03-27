@@ -26,30 +26,41 @@ import java.util.Iterator;
  */
 public class MainGame extends Application
 {
-    private static final int NOTHING = 0;
-    private static final String POINTS_NAME = "Score"; //TODO think of better name
-    private static final String GAME_NAME = "I'll think of something"; //TODO think of name
-    private static final int START_SCORE = 100;
-    public static final int WINDOW_WIDTH = 800;
-    private static final int WINDOW_HEIGHT = 600;
-    private static final int PLAYER_SIZE = 30;
-    public static final int ORB_SIZE = 20;
-    private static final int CANNON_X = WINDOW_WIDTH / 2;
-    private static final int CANNON_Y = 50;
-    private static final int PLAYER_START_X = WINDOW_WIDTH / 2;
-    private static final int PLAYER_START_Y = WINDOW_HEIGHT - 50;
-    private static final int BLUE_ORB_POINTS = 1;
-    private static final int GREEN_ORB_POINTS = 3;
-    private static final int SCORE_LABEL_FONT_SIZE = 20;
-    private static final int SCORE_LABEL_X = 10;
-    private static final int SCORE_LABEL_Y = 10;
-    private static final String SCORE_LABEL_FONT_NAME = "Arial";
-    private static final String SCORE_LABEL_INITIAL_TEXT = POINTS_NAME + ": " + START_SCORE;
-    private static final int SCORE_DECREASE_RANDOM_MIN = 1;
-    private static final int SCORE_DECREASE_RANDOM_MAX = 1000;
-    private static final int SCORE_DECREASE_PROBABILITY = 5; // percent
-    private static final int RANDOM_NUMBER_OFFSET = 1;
-    private static final int MINIMUM_SCORE_TO_SURVIVE = 1;
+    // Game Configuration
+    public static final String GAME_NAME           = "I'll think of something";  // TODO: think of name
+    public static final int WINDOW_WIDTH          = 800;
+    public static final int WINDOW_HEIGHT         = 600;
+    private static final int NOTHING               = 0;
+
+    // Player Configuration
+    public static final int PLAYER_SIZE            = 30;
+    public static final int PLAYER_START_X         = WINDOW_WIDTH / 2;
+    public static final int PLAYER_START_Y         = WINDOW_HEIGHT - 50;
+
+    // Orb Configuration
+    public static final int ORB_SIZE               = 20;
+    private static final int BLUE_ORB_POINTS       = 1;
+    private static final int GREEN_ORB_POINTS      = 3;
+
+    // Cannon Configuration
+    private static final int CANNON_X              = WINDOW_WIDTH / 2;
+    private static final int CANNON_Y              = 50;
+
+    // Score System
+    private static final String POINTS_NAME             = "Score";  // TODO: think of better name
+    private static final int START_SCORE                = 100;
+    private static final int MINIMUM_SCORE_TO_SURVIVE   = 1;
+    private static final int SCORE_DECREASE_RANDOM_MIN  = 1;
+    private static final int SCORE_DECREASE_RANDOM_MAX  = 1000;
+    private static final int SCORE_DECREASE_PROBABILITY = 5;  // percent
+    private static final int RANDOM_NUMBER_OFFSET       = 1;
+
+    // UI Configuration
+    private static final String SCORE_LABEL_FONT_NAME       = "Arial";
+    private static final int SCORE_LABEL_FONT_SIZE          = 20;
+    private static final int SCORE_LABEL_X                  = 10;
+    private static final int SCORE_LABEL_Y                  = 10;
+    private static final String SCORE_LABEL_INITIAL_TEXT    = POINTS_NAME + ": " + START_SCORE;
 
     private final Pane root = new Pane();
     private Player player;
