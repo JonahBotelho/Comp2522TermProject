@@ -49,7 +49,7 @@ public class Cannon
      *
      * @param root The root pane to which the orb will be added.
      */
-    public void shootOrb(final Pane root)
+    public void shootOrb(final Pane root, final double speedModifier)
     {
         if (random.nextInt(100) < ORB_SHOOT_PROBABILITY)
         {
@@ -64,7 +64,7 @@ public class Cannon
             double speedY = ORB_SPEED * Math.cos(angleInRadians);
 
             // Create the orb with the calculated speed components
-            Orb orb = createRandomOrb(speedX, speedY);
+            Orb orb = createRandomOrb(speedX, speedY, speedModifier);
 
             // Add the orb to the list and the scene graph
             orbs.add(orb);
@@ -79,19 +79,19 @@ public class Cannon
      * @param speedY The vertical speed component of the orb.
      * @return A new orb of a random type.
      */
-    private Orb createRandomOrb(final double speedX, final double speedY)
+    private Orb createRandomOrb(final double speedX, final double speedY, final double speedModifier)
     {
         int orbType = random.nextInt(3);
         switch (orbType)
         {
             case 0:
-                return new RedOrb(x, y, speedX, speedY);
+                return new RedOrb(x, y, speedX, speedY, speedModifier);
             case 1:
-                return new GreenOrb(x, y, speedX, speedY);
+                return new GreenOrb(x, y, speedX, speedY, speedModifier);
             case 2:
-                return new BlueOrb(x, y, speedX, speedY);
+                return new BlueOrb(x, y, speedX, speedY, speedModifier);
             default:
-                return new RedOrb(x, y, speedX, speedY);
+                return new RedOrb(x, y, speedX, speedY, speedModifier);
         }
     }
 

@@ -38,9 +38,14 @@ public class MainGame extends Application
     public static final int PLAYER_START_Y         = WINDOW_HEIGHT - 50;
 
     // Orb Configuration
-    public static final int ORB_SIZE               = 20;
-    private static final int BLUE_ORB_POINTS       = 1;
-    private static final int GREEN_ORB_POINTS      = 3;
+    public static final int ORB_SIZE                        = 20;
+    private static final int BLUE_ORB_POINTS                = 1;
+    private static final int GREEN_ORB_POINTS               = 3;
+    private static final double BASE_SPEED_MODIFIER         = 0.75;
+    private static final double  MAX_SPEED_MODIFIER         = 2.5;
+    private static final double MIN_SPEED_MODIFIER          = 0.5;
+    private static final double SPEED_MODIFIER_CHANGE_RATE  = 50; // lower = more chance
+    private static double speedModifier                     =  BASE_SPEED_MODIFIER;
 
     // Cannon Configuration
     private static final int CANNON_X              = WINDOW_WIDTH / 2;
@@ -118,7 +123,7 @@ public class MainGame extends Application
             @Override
             public void handle(final long now)
             {
-                cannon.shootOrb(root);
+                cannon.shootOrb(root, speedModifier);
                 player.update();
                 updateOrbs();
                 checkCollisions();
@@ -210,6 +215,7 @@ public class MainGame extends Application
                 iterator.remove();
                 root.getChildren().remove(orb);
                 updateScore();
+                updateSpeedModifier();
             }
         }
     }
@@ -276,6 +282,7 @@ public class MainGame extends Application
             {
                 score--;
                 updateScore();
+                updateSpeedModifier();
             }
         }
     }
@@ -286,6 +293,23 @@ public class MainGame extends Application
     private void updateScore()
     {
         scoreLabel.setText("Score: " + score);
+    }
+    
+    /**
+     * Adjusts the speed modifier of the orbs, based on the current score value.
+     * Speed Modifier =
+     */
+    private void updateSpeedModifier()
+    {
+        speedModifier = BASE_SPEED_MODIFIER + (score - START_SCORE) / SPEED_MODIFIER_CHANGE_RATE;
+        if (speedModifier > MAX_SPEED_MODIFIER)
+        {
+            speedModifier = MAX_SPEED_MODIFIER;
+        }
+        else if (speedModifier < MIN_SPEED_MODIFIER)
+        {
+            speedModifier = MIN_SPEED_MODIFIER;
+        }
     }
 
     /**
