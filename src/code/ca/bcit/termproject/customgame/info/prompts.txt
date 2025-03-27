@@ -29,5 +29,7 @@
 
 7. Added food calculation by hand
 
+8. Used AI to reformat constant declarations (formatting only, nothing else)
+
 
 
