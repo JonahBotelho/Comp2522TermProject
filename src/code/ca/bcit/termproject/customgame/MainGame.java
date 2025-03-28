@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
 import java.util.Objects;
 import java.util.Random;
@@ -89,7 +91,7 @@ public final class MainGame
         primaryStage.setTitle("Bullet Hell Game");
         primaryStage.setScene(scene);
         primaryStage.show();
-
+        
         showWelcomeMessage();
 
         setupGame();
@@ -255,6 +257,10 @@ public final class MainGame
             dialogPane.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
             dialogPane.getStyleClass().add("dialog-pane");
             
+            final Window window = gameOverAlert.getDialogPane().getScene().getWindow();
+            final Stage stage = (Stage) window;
+            stage.initStyle(StageStyle.UNDECORATED);
+            
             gameOverAlert.setTitle("Game Over");
             gameOverAlert.setContentText(message +
                     "\nFinal Score: " + score +
@@ -369,6 +375,11 @@ public final class MainGame
         dialogPane = welcomeMessage.getDialogPane();
         dialogPane.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
         dialogPane.getStyleClass().add("dialog-pane");
+        
+        // removes the exit button
+        final Window window = welcomeMessage.getDialogPane().getScene().getWindow();
+        final Stage stage = (Stage) window;
+        stage.initStyle(StageStyle.UNDECORATED);
         
         contentTextBuilder.append("Welcome to ")
                 .append(GAME_NAME)
