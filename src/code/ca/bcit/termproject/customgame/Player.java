@@ -54,6 +54,7 @@ public final class Player
         {
             setY(getY() + speed);
         }
+        verifyEdgePosition();
     }
 
     /**
@@ -134,5 +135,28 @@ public final class Player
     public boolean isMovingDown()
     {
         return movingDown;
+    }
+    
+    /**
+     * Ensures that the player has not moved further than the edge of the game.
+     */
+    public void verifyEdgePosition()
+    {
+        if (getX() < NOTHING)
+        {
+            setX(NOTHING);
+        }
+        if (getX() > MainGame.WINDOW_WIDTH - getWidth())
+        {
+            setX(MainGame.WINDOW_WIDTH - getWidth());
+        }
+        if (getY() < NOTHING)
+        {
+            setY(NOTHING);
+        }
+        if (getY() > MainGame.WINDOW_HEIGHT - getHeight())
+        {
+            setY(MainGame.WINDOW_HEIGHT - getHeight());
+        }
     }
 }
