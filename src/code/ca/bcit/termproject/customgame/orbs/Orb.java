@@ -35,6 +35,7 @@ public abstract class Orb
         super(x, y, radius, color);
         this.speedX = speedX * speedModifier;
         this.speedY = speedY * speedModifier;
+       this.getStyleClass().add("orb");
     }
 
     /**

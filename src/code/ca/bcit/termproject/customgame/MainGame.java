@@ -10,11 +10,13 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.Objects;
 import java.util.Random;
 
 import java.io.IOException;
@@ -80,8 +82,10 @@ public final class MainGame
     public void start(final Stage primaryStage)
     {
         final Scene scene;
+        
         scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-
+        scene.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
+        
         primaryStage.setTitle("Bullet Hell Game");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -104,8 +108,11 @@ public final class MainGame
  
         scoreLabel = new Label(SCORE_LABEL_INITIAL_TEXT);
         scoreLabel.setFont(new Font(SCORE_LABEL_FONT_NAME, SCORE_LABEL_FONT_SIZE));
-        scoreLabel.setLayoutX(SCORE_LABEL_X); // Position in the top-left corner
+        scoreLabel.setLayoutX(SCORE_LABEL_X);
         scoreLabel.setLayoutY(SCORE_LABEL_Y);
+        scoreLabel.getStyleClass().add("score-label");
+        
+        player.getStyleClass().add("player");
 
         root.getChildren().addAll(player, scoreLabel);
     }
@@ -242,7 +249,12 @@ public final class MainGame
             final Alert gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
             final ButtonType playAgain = new ButtonType("Play Again");
             final ButtonType quit = new ButtonType("Quit");
-
+            
+            final DialogPane dialogPane;
+            dialogPane = gameOverAlert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane");
+            
             gameOverAlert.setTitle("Game Over");
             gameOverAlert.setContentText(message +
                     "\nFinal Score: " + score +
@@ -348,11 +360,16 @@ public final class MainGame
         final ButtonType playButton;
         final StringBuilder contentTextBuilder;
         final String contextTextString;
-
+        
         welcomeMessage = new Alert(Alert.AlertType.INFORMATION);
         playButton = new ButtonType("Play");
         contentTextBuilder = new StringBuilder();
-
+        
+        final DialogPane dialogPane;
+        dialogPane = welcomeMessage.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
+        
         contentTextBuilder.append("Welcome to ")
                 .append(GAME_NAME)
                 .append("!")

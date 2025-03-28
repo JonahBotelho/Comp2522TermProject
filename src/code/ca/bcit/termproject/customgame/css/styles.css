@@ -1,0 +1,117 @@
+/* --- Main Game Window --- */
+.root {
+    /* A dark blue/grey background provides good contrast for orbs */
+    -fx-background-color: #1a1f2b;
+    -fx-font-family: "Segoe UI", Arial, sans-serif; /* Clean default font */
+}
+
+/* --- Score Label --- */
+.score-label {
+    /* Make score text bright and easy to read */
+    -fx-text-fill: #e8e8e8;
+    -fx-font-size: 22px; /* Slightly larger than default */
+    -fx-font-weight: bold;
+
+    /* Add a subtle shadow to make it pop from the background */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.3, 1, 1);
+
+    /* Optional: Add padding if you want a background */
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 3px;
+}
+
+/* --- Player --- */
+.player {
+    -fx-fill: #cccccc; /* Light grey instead of black for better visibility */
+    -fx-stroke: white; /* Thin white border */
+    -fx-stroke-width: 1px;
+}
+
+/* --- Orbs --- */
+/* Style all circles (Orbs). Color is set in code, but we can add effects */
+.orb {
+    /* Add a subtle outer glow or stroke to make orbs pop slightly */
+    /* Option 1: Stroke */
+    /* -fx-stroke: rgba(255, 255, 255, 0.5);*/
+    /* -fx-stroke-width: 1px;*/
+
+    /* Option 2: Subtle Glow Effect */
+    -fx-effect: dropshadow(gaussian, white, 4, 0.3, 0, 0);
+}
+
+/* --- Dialog Panes (Welcome Message / Game Over Alert) --- */
+.dialog-pane {
+    /* Overall appearance */
+    -fx-background-color: #252a34; /* Dark grey, slightly different from main background */
+    -fx-padding: 25px; /* More internal spacing */
+    -fx-border-color: #4a515f; /* Subtle border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px; /* Rounded corners for the dialog */
+    -fx-background-radius: 8px; /* Match background rounding to border */
+
+    /* Add a shadow to make the dialog 'pop' */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 20, 0, 5, 5);
+}
+
+/* --- Dialog Header Area --- */
+.dialog-pane .header-panel {
+    /* Distinct header background */
+    -fx-background-color: #1a1f2b; /* Matching the main game background can look good here */
+    -fx-padding: 10px 20px; /* Padding inside the header */
+    -fx-background-radius: 8px 8px 0 0; /* Round top corners only */
+    -fx-border-width: 0 0 1px 0; /* Bottom border line */
+    -fx-border-color: #4a515f;
+    -fx-alignment: center-left; /* Align header content */
+}
+
+/* Header Title Text */
+.dialog-pane .header-panel .label {
+    -fx-font-size: 22px; /* Larger header text */
+    -fx-font-weight: bold;
+    -fx-text-fill: #e8e8e8; /* Bright white/grey text */
+    -fx-wrap-text: true; /* Allow text wrapping if needed */
+}
+
+/* --- Dialog Content Area --- */
+/* Styling the main content label */
+.dialog-pane .content.label {
+    -fx-font-size: 15px; /* Slightly larger content text */
+    -fx-text-fill: #cccccc; /* Light grey for readability */
+    -fx-padding: 15px 5px; /* Padding around the content text */
+    -fx-wrap-text: true; /* Ensure content wraps */
+    -fx-line-spacing: 4px; /* Improve readability for multiline text */
+}
+
+/* Optional: Styling for the content area itself if needed (e.g., background) */
+.dialog-pane > .content {
+    -fx-background-color: transparent; /* Ensure no default background overrides */
+}
+
+/* --- Dialog Button Bar --- */
+.dialog-pane .button-bar {
+    -fx-padding: 15px 0 0 0; /* Space above the buttons */
+    -fx-alignment: center-right; /* Align buttons to the right (common pattern) */
+}
+
+/* Individual Buttons within Dialogs */
+.dialog-pane .button {
+    -fx-background-color: #4e5d94; /* A medium blue/purple */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px; /* Slightly rounded button corners */
+    -fx-padding: 8px 20px; /* Button padding (vertical, horizontal) */
+    -fx-min-width: 80px; /* Ensure buttons have a decent minimum size */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 3, 0, 1, 1); /* Subtle shadow */
+    -fx-cursor: hand; /* Hand cursor on hover */
+}
+
+.dialog-pane .button:hover {
+    -fx-background-color: #5f70b3; /* Lighter shade on hover */
+}
+
+.dialog-pane .button:pressed {
+    -fx-background-color: #3e4a7a; /* Darker shade when pressed */
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1); /* Inset shadow when pressed */
+}
