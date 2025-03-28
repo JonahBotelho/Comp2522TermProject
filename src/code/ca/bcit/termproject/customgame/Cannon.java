@@ -13,20 +13,32 @@ import java.util.Random;
 /**
  * Represents a cannon that shoots orbs from all sides of the screen toward the center.
  */
-public final class Cannon {
+public final class Cannon
+{
     // Orb Shooting Configuration
-    private static final int RANDOM_ORB_GENERATION_MAX = 5;
-    private static final int ORB_SHOOT_PROBABILITY_MAX = 100;
-    private static final int ORB_SHOOT_PROBABILITY = 3;
-    private static final double ORB_SPEED = 3;
+    private static final int RANDOM_ORB_GENERATION_MAX  = 5;
+    private static final int ORB_SHOOT_PROBABILITY_MAX  = 100;
+    private static final int ORB_SHOOT_PROBABILITY      = 3;
+    private static final double ORB_SPEED               = 3;
+    
+    // Orb generation probability
+    private static final int GENERATE_RED_ORB           = 0;
+    private static final int GENERATE_GREEN_ORB         = 1;
+    private static final int GENERATE_BLUE_ORB          = 2;
     
     // Screen edge positions
-    private static final double RADIUS_OF_SCREEN_CONSTANT = 2.0;
-    private static final int NUMBER_OF_EDGES = 4;
-    private static final int LEFT_EDGE = 0;
-    private static final int RIGHT_EDGE = MainGame.WINDOW_WIDTH;
-    private static final int TOP_EDGE = 0;
-    private static final int BOTTOM_EDGE = MainGame.WINDOW_HEIGHT;
+    private static final double RADIUS_OF_SCREEN_CONSTANT   = 2.0;
+    private static final int NUMBER_OF_EDGES                = 4;
+    private static final int LEFT_EDGE                      = 0;
+    private static final int RIGHT_EDGE                     = MainGame.WINDOW_WIDTH;
+    private static final int TOP_EDGE                       = 0;
+    private static final int BOTTOM_EDGE                    = MainGame.WINDOW_HEIGHT;
+    
+    // Edge choosing probability
+    private static final int CHOOSE_TOP_EDGE                = 0;
+    private static final int CHOOSE_RIGHT_EDGE              = 1;
+    private static final int CHOOSE_BOTTOM_EDGE             = 2;
+    private static final int CHOOSE_LEFT_EDGE               = 3;
     
     // Cannon State
     private final List<Orb> orbs;
@@ -35,7 +47,8 @@ public final class Cannon {
     /**
      * Constructs a new Cannon.
      */
-    public Cannon() {
+    public Cannon()
+    {
         this.orbs = new ArrayList<>();
         this.random = new Random();
     }
@@ -45,34 +58,45 @@ public final class Cannon {
      *
      * @param root The root pane to which the orb will be added.
      */
-    public void shootOrb(final Pane root, final double speedModifier) {
-        if (random.nextInt(ORB_SHOOT_PROBABILITY_MAX) < ORB_SHOOT_PROBABILITY) {
+    public void shootOrb(final Pane root,
+                         final double speedModifier)
+    {
+        if (random.nextInt(ORB_SHOOT_PROBABILITY_MAX) < ORB_SHOOT_PROBABILITY)
+        {
             // Randomly select which edge to spawn from (0=top, 1=right, 2=bottom, 3=left)
-            int edge = random.nextInt(NUMBER_OF_EDGES);
-            double x, y, speedX, speedY;
-            double centerX = MainGame.WINDOW_WIDTH / RADIUS_OF_SCREEN_CONSTANT;
-            double centerY = MainGame.WINDOW_HEIGHT / RADIUS_OF_SCREEN_CONSTANT;
+            int edge;
+            double x;
+            double y;
+            double speedX;
+            double speedY;
+            double centerX;
+            double centerY;
             
-            switch (edge) {
-                case 0: // Top edge
+            edge = random.nextInt(NUMBER_OF_EDGES);
+            centerX = MainGame.WINDOW_WIDTH / RADIUS_OF_SCREEN_CONSTANT;
+            centerY = MainGame.WINDOW_HEIGHT / RADIUS_OF_SCREEN_CONSTANT;
+            
+            switch (edge)
+            {
+                case CHOOSE_TOP_EDGE: // Top edge
                     x = random.nextInt(MainGame.WINDOW_WIDTH);
                     y = TOP_EDGE;
                     speedX = (centerX - x) * ORB_SPEED / MainGame.WINDOW_WIDTH;
                     speedY = ORB_SPEED;
                     break;
-                case 1: // Right edge
+                case CHOOSE_RIGHT_EDGE: // Right edge
                     x = RIGHT_EDGE;
                     y = random.nextInt(MainGame.WINDOW_HEIGHT);
                     speedX = -ORB_SPEED;
                     speedY = (centerY - y) * ORB_SPEED / MainGame.WINDOW_HEIGHT;
                     break;
-                case 2: // Bottom edge
+                case CHOOSE_BOTTOM_EDGE: // Bottom edge
                     x = random.nextInt(MainGame.WINDOW_WIDTH);
                     y = BOTTOM_EDGE;
                     speedX = (centerX - x) * ORB_SPEED / MainGame.WINDOW_WIDTH;
                     speedY = -ORB_SPEED;
                     break;
-                case 3: // Left edge
+                case CHOOSE_LEFT_EDGE: // Left edge
                     x = LEFT_EDGE;
                     y = random.nextInt(MainGame.WINDOW_HEIGHT);
                     speedX = ORB_SPEED;
@@ -98,22 +122,36 @@ public final class Cannon {
     /**
      * Creates a random orb with the specified position and speed components.
      */
-    private Orb createRandomOrb(final double x, final double y,
-                                final double speedX, final double speedY,
-                                final double speedModifier) {
-        int orbType = random.nextInt(RANDOM_ORB_GENERATION_MAX);
-        switch (orbType) {
-            case 0: return new RedOrb(x, y, speedX, speedY, speedModifier);
-            case 1: return new GreenOrb(x, y, speedX, speedY, speedModifier);
-            case 2: return new BlueOrb(x, y, speedX, speedY, speedModifier);
-            default: return new RedOrb(x, y, speedX, speedY, speedModifier);
-        }
+    private Orb createRandomOrb(final double x,
+                                final double y,
+                                final double speedX,
+                                final double speedY,
+                                final double speedModifier)
+    {
+        int orbType;
+         orbType = random.nextInt(RANDOM_ORB_GENERATION_MAX);
+        
+        return switch (orbType)
+        {
+            case GENERATE_RED_ORB ->
+                    /*
+                     * Red orb is intentionally the same as the default case,
+                     * because more options may be added in the future.
+                     */
+                    new RedOrb(x, y, speedX, speedY, speedModifier);
+            case GENERATE_GREEN_ORB ->
+                    new GreenOrb(x, y, speedX, speedY, speedModifier);
+            case GENERATE_BLUE_ORB ->
+                    new BlueOrb(x, y, speedX, speedY, speedModifier);
+            default -> new RedOrb(x, y, speedX, speedY, speedModifier);
+        };
     }
     
     /**
      * Returns the list of orbs currently in the game.
      */
-    public List<Orb> getOrbs() {
+    public List<Orb> getOrbs()
+    {
         return orbs;
     }
 }
