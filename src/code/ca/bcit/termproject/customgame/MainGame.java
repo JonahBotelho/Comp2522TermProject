@@ -42,16 +42,16 @@ public final class MainGame
     public static final int ORB_SIZE                        = 20;
     private static final int BLUE_ORB_POINTS                = 1;
     private static final int GREEN_ORB_POINTS               = 3;
-    private static final double BASE_SPEED_MODIFIER         = 1.2;
-    private static final double  MAX_SPEED_MODIFIER         = 2.5;
-    private static final double MIN_SPEED_MODIFIER          = 1;
-    private static final double SPEED_MODIFIER_CHANGE_RATE  = 50; // lower = more chance
+    public static final double BASE_SPEED_MODIFIER          = 1.2;
+    public static final double MAX_SPEED_MODIFIER           = 2.5;
+    public static final double MIN_SPEED_MODIFIER           = 1;
+    public static final double SPEED_MODIFIER_CHANGE_RATE   = 50; // lower = more chance
     private static double speedModifier                     =  BASE_SPEED_MODIFIER;
 
     // Score System
-    private static final String POINTS_NAME             = "Score";  // TODO: think of better name
-    private static final int START_SCORE                = 100;
-    private static final int MINIMUM_SCORE_TO_SURVIVE   = 1;
+    public static final String POINTS_NAME              = "Score";  // TODO: think of better name
+    public static final int START_SCORE                 = 100;
+    public static final int MINIMUM_SCORE_TO_SURVIVE    = 1;
     private static final int SCORE_DECREASE_RANDOM_MIN  = 1;
     private static final int SCORE_DECREASE_RANDOM_MAX  = 1000;
     private static final int SCORE_DECREASE_PROBABILITY = 20;  // percent
