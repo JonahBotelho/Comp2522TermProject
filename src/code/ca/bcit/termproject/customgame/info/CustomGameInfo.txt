@@ -15,8 +15,8 @@ Unit requirements
     07. lambda expressions, method references                       ✔
     08. files and paths. NIO. Streaming & filtering                 ✔
     09. JavaFX                                                      ✔
-    10. Unit testing & test-driven development
-    11. Memory, singletons, design patterns
+    10. Unit testing & test-driven development                      ✔
+    11. Memory, singletons, design patterns                         ✔ (updatable and orb abstract classes)
     12. concurrency
 
 TODO
