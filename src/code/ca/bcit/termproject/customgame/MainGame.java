@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
-import java.util.Objects;
 import java.util.Random;
 
 import java.io.IOException;
@@ -248,19 +247,17 @@ public final class MainGame
                 throw new RuntimeException(e);
             }
 
-            final Alert gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
-            final ButtonType playAgain = new ButtonType("Play Again");
-            final ButtonType quit = new ButtonType("Quit");
-            
-            final DialogPane dialogPane;
-            dialogPane = gameOverAlert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
-            dialogPane.getStyleClass().add("dialog-pane");
-            
-            final Window window = gameOverAlert.getDialogPane().getScene().getWindow();
-            final Stage stage = (Stage) window;
-            stage.initStyle(StageStyle.UNDECORATED);
-            
+            final Alert gameOverAlert;
+            final ButtonType playAgain;
+            final ButtonType quit;
+
+            gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
+            playAgain = new ButtonType("Play Again");
+            quit = new ButtonType("Quit");
+
+            // Adds CSS stylesheet, and removes top row from Alert
+            setUpAlert(gameOverAlert);
+
             gameOverAlert.setTitle("Game Over");
             gameOverAlert.setContentText(message +
                     "\nFinal Score: " + score +
@@ -370,16 +367,9 @@ public final class MainGame
         welcomeMessage = new Alert(Alert.AlertType.INFORMATION);
         playButton = new ButtonType("Play");
         contentTextBuilder = new StringBuilder();
-        
-        final DialogPane dialogPane;
-        dialogPane = welcomeMessage.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
-        dialogPane.getStyleClass().add("dialog-pane");
-        
-        // removes the exit button
-        final Window window = welcomeMessage.getDialogPane().getScene().getWindow();
-        final Stage stage = (Stage) window;
-        stage.initStyle(StageStyle.UNDECORATED);
+
+        // Adds styling
+        setUpAlert(welcomeMessage);
         
         contentTextBuilder.append("Welcome to ")
                 .append(GAME_NAME)
@@ -409,6 +399,27 @@ public final class MainGame
     public int getScore()
     {
         return score;
+    }
+
+    /**
+     * Adds styles.css to an Alert, and removes the top row.
+     * TODO fix corners
+     *
+     * @param alert alert to set up
+     */
+    private void setUpAlert(final Alert alert)
+    {
+        final DialogPane dialogPane;
+        final Window window;
+        final Stage stage;
+
+        dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
+
+        window = alert.getDialogPane().getScene().getWindow();
+        stage = (Stage) window;
+        stage.initStyle(StageStyle.UNDECORATED);
     }
 
     /**
