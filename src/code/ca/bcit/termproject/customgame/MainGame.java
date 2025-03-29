@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
+import java.util.Objects;
 import java.util.Random;
 
 import java.io.IOException;
@@ -404,6 +405,7 @@ public final class MainGame
     /**
      * Adds styles.css to an Alert, and removes the top row.
      * TODO fix corners
+     * FIXME duplicate in main game
      *
      * @param alert alert to set up
      */
@@ -413,12 +415,14 @@ public final class MainGame
         final Window window;
         final Stage stage;
 
-        dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
-        dialogPane.getStyleClass().add("dialog-pane");
+        dialogPane  = alert.getDialogPane();
+        window      = dialogPane.getScene().getWindow();
+        stage       = (Stage) window;
 
-        window = alert.getDialogPane().getScene().getWindow();
-        stage = (Stage) window;
+        dialogPane.getStylesheets().add(Objects
+                .requireNonNull(getClass().getResource("css/styles.css"))
+                .toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
         stage.initStyle(StageStyle.UNDECORATED);
     }
 

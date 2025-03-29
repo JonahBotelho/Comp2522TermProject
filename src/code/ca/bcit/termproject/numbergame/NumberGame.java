@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
+import java.util.Objects;
 import java.util.Random;
 import java.text.DecimalFormat;
 
@@ -53,29 +54,29 @@ public final class NumberGame
     private int successfulPlacements             = NOTHING;
     private Label statusLabel;
 
+
+
     @Override
     public void start(final Stage primaryStage)
     {
         final Scene scene;
-        final VBox root;
         final GridPane gridPane;
+        final VBox root;
 
         root = new VBox(VBOX_SPACING);
         root.setPadding(new Insets(ROOT_PADDING));
         root.setAlignment(Pos.CENTER);
 
-        statusLabel = new Label("Next Number: ");
 
         gridPane = new GridPane();
         gridPane.setHgap(GRID_HEIGHT_GAP);
         gridPane.setVgap(GRID_WIDTH_GAP);
         gridPane.setAlignment(Pos.CENTER);
 
-        initializeGrid(gridPane);
+        initializeStatusLabel(root);
+        initializeGrid(root, gridPane);
         generateNextNumber();
 
-        root.getChildren().add(statusLabel);
-        root.getChildren().add(gridPane);
         scene = new Scene(root, WINDOW_HEIGHT, WINDOW_WIDTH);
         scene.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
 
@@ -90,7 +91,8 @@ public final class NumberGame
      *
      * @param gridPane GridPane object to add buttons to
      */
-    private void initializeGrid(final GridPane gridPane)
+    private void initializeGrid(final VBox root,
+                                final GridPane gridPane)
     {
         for (int i = 0; i < NUMBER_OF_SQUARES; i++)
         {
@@ -100,11 +102,14 @@ public final class NumberGame
             buttons[i].setOnAction(e -> handleButtonClick(finalI)); // Handle button clicks
             gridPane.add(buttons[i], i % NUMBER_OF_COLUMNS, i / NUMBER_OF_COLUMNS);
         }
+
+        root.getChildren().add(gridPane);
     }
 
-    private void initializeStatusLabel()
+    private void initializeStatusLabel(final VBox root)
     {
-
+        statusLabel = new Label("Next Number: ");
+        root.getChildren().add(statusLabel);
     }
 
     /**
@@ -197,9 +202,9 @@ public final class NumberGame
         final ButtonType retryButton;
         final ButtonType quitButton;
 
-        alert = new InformationAlert("Game Over");
+        alert       = new InformationAlert("Game Over");
         retryButton = new ButtonType("Try Again");
-        quitButton = new ButtonType("Quit");
+        quitButton  = new ButtonType("Quit");
 
         setUpAlert(alert);
 
@@ -276,8 +281,8 @@ public final class NumberGame
         final StringBuilder messageBuilder;
         final String messageString;
 
-        alert = new InformationAlert("Welcome");
-        messageBuilder = new StringBuilder();
+        alert           = new InformationAlert("Welcome");
+        messageBuilder  = new StringBuilder();
 
         setUpAlert(alert);
 
@@ -305,8 +310,8 @@ public final class NumberGame
     {
         final Random random;
         final int num;
-        random = new Random();
 
+        random = new Random();
         num = random.nextInt((max - min) + RANDOM_NUMBER_OFFSET) + min;
 
         return num;
@@ -324,12 +329,15 @@ public final class NumberGame
         final Window window;
         final Stage stage;
 
-        dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
-        dialogPane.getStyleClass().add("dialog-pane");
+        dialogPane  = alert.getDialogPane();
+        window      = dialogPane.getScene().getWindow();
+        stage       = (Stage) window;
 
-        window = alert.getDialogPane().getScene().getWindow();
-        stage = (Stage) window;
+        dialogPane.getStylesheets()
+                .add(Objects
+                .requireNonNull(getClass().getResource("css/styles.css"))
+                .toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
         stage.initStyle(StageStyle.UNDECORATED);
     }
 
