@@ -4,12 +4,12 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
 import java.util.Random;
 import java.text.DecimalFormat;
@@ -58,30 +58,31 @@ public final class NumberGame
     {
         final Scene scene;
         final VBox root;
+        final GridPane gridPane;
 
         root = new VBox(VBOX_SPACING);
         root.setPadding(new Insets(ROOT_PADDING));
         root.setAlignment(Pos.CENTER);
 
         statusLabel = new Label("Next Number: ");
-        root.getChildren().add(statusLabel);
 
-        final GridPane gridPane = new GridPane();
+        gridPane = new GridPane();
         gridPane.setHgap(GRID_HEIGHT_GAP);
         gridPane.setVgap(GRID_WIDTH_GAP);
         gridPane.setAlignment(Pos.CENTER);
 
         initializeGrid(gridPane);
-
-        root.getChildren().add(gridPane);
-
         generateNextNumber();
 
+        root.getChildren().add(statusLabel);
+        root.getChildren().add(gridPane);
         scene = new Scene(root, WINDOW_HEIGHT, WINDOW_WIDTH);
+        scene.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
 
         primaryStage.setTitle("Number Game");
         primaryStage.setScene(scene);
         primaryStage.show();
+        showWelcomeAlert();
     }
 
     /**
@@ -99,6 +100,11 @@ public final class NumberGame
             buttons[i].setOnAction(e -> handleButtonClick(finalI)); // Handle button clicks
             gridPane.add(buttons[i], i % NUMBER_OF_COLUMNS, i / NUMBER_OF_COLUMNS);
         }
+    }
+
+    private void initializeStatusLabel()
+    {
+
     }
 
     /**
@@ -136,7 +142,7 @@ public final class NumberGame
         if (grid[index] != NOTHING)
         {
             // Slot is already occupied
-            showAlert("Invalid Move", "This slot is already occupied. Try another slot.");
+            showInvalidSpotAlert();
             return;
         }
 
@@ -195,6 +201,8 @@ public final class NumberGame
         retryButton = new ButtonType("Try Again");
         quitButton = new ButtonType("Quit");
 
+        setUpAlert(alert);
+
         alert.setHeaderText("You lost!");
         alert.setContentText("Impossible to place the next number. Try again?");
         alert.getButtonTypes().setAll(retryButton, quitButton);
@@ -239,6 +247,9 @@ public final class NumberGame
         contextTextString = contextText.toString();
 
         alert = new InformationAlert("Final Score");
+
+        setUpAlert(alert);
+
         alert.setHeaderText("Game Over");
         alert.setContentText(contextTextString);
         alert.showAndWait();
@@ -246,29 +257,40 @@ public final class NumberGame
 
     /**
      * Show an alert with a given title and message.
-     *
-     * @param title   The title of the alert.
-     * @param message The message to display.
      */
-    private void showAlert(final String title, final String message)
+    private void showInvalidSpotAlert()
     {
         final WarningAlert alert;
 
-        alert = new WarningAlert(title);
+        alert = new WarningAlert("Invalid Move");
+        setUpAlert(alert);
 
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText("This slot is already occupied. Try another slot.");
         alert.showAndWait();
     }
 
-    /**
-     * Runs the program.
-     *
-     * @param args arguments passed into JavaFX launcher
-     */
-    public static void main(final String[] args)
+    private void showWelcomeAlert()
     {
-        launch(args);
+        final InformationAlert alert;
+        final StringBuilder messageBuilder;
+        final String messageString;
+
+        alert = new InformationAlert("Welcome");
+        messageBuilder = new StringBuilder();
+
+        setUpAlert(alert);
+
+        messageBuilder.append("Welcome to the ")
+                .append(NUMBER_OF_SQUARES)
+                .append(" square number game!")
+                .append("\nClick OK to start!");
+
+
+        messageString = messageBuilder.toString();
+        alert.setHeaderText(null);
+        alert.setContentText(messageString);
+        alert.showAndWait();
     }
 
     /**
@@ -282,8 +304,42 @@ public final class NumberGame
     public int randomNumber(final int min, final int max)
     {
         final Random random;
+        final int num;
         random = new Random();
 
-        return random.nextInt((max - min) + RANDOM_NUMBER_OFFSET) + min;
+        num = random.nextInt((max - min) + RANDOM_NUMBER_OFFSET) + min;
+
+        return num;
+    }
+
+    /**
+     * Adds styles.css to an Alert, and removes the top row.
+     * TODO fix corners
+     *
+     * @param alert alert to set up
+     */
+    private void setUpAlert(final Alert alert)
+    {
+        final DialogPane dialogPane;
+        final Window window;
+        final Stage stage;
+
+        dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
+
+        window = alert.getDialogPane().getScene().getWindow();
+        stage = (Stage) window;
+        stage.initStyle(StageStyle.UNDECORATED);
+    }
+
+    /**
+     * Runs the program.
+     *
+     * @param args arguments passed into JavaFX launcher
+     */
+    public static void main(final String[] args)
+    {
+        launch(args);
     }
 }
