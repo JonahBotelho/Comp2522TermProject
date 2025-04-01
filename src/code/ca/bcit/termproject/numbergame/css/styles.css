@@ -1,4 +1,4 @@
-/* --- General Styles --- */
+/* General Styles */
 .root {
     -fx-background-color: #102A43;
     -fx-font-family: "Segoe UI", Arial, sans-serif;
@@ -11,7 +11,7 @@
     -fx-padding: 5px 0px;
 }
 
-/* --- Grid Button Styles --- */
+/* Grid Button Styles */
 .button {
     -fx-background-color: #334E68;
     -fx-border-color: #486581;
@@ -97,7 +97,7 @@
     -fx-border-color: #486581;
 }
 
-/* specific alert styling */
+/* Specific alert styling */
 .dialog-pane.warning {
     -fx-border-color: #FFB74D;
 }
