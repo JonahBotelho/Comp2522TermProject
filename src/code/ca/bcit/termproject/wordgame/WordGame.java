@@ -19,16 +19,17 @@ import java.util.Scanner;
  */
 public final class WordGame
 {
-    private static final Scanner SCANNER         = new Scanner(System.in);
-    private static final int QUESTIONS_PER_GAME  = 10;
-    private static final int NOTHING             = 0;
-    private static final int QUESTION_TYPE_ONE   = 0;
-    private static final int QUESTION_TYPE_TWO   = 1;
-    private static final int QUESTION_TYPE_THREE = 2;
-    private static final int FACTS_PER_COUNTRY   = 3;
-    private static final int TYPES_OF_QUESTIONS  = 3;
+    private static final Scanner SCANNER            = new Scanner(System.in);
+    private static final int QUESTIONS_PER_GAME     = 10;
+    private static final int NOTHING                = 0;
+    private static final int QUESTION_TYPE_ONE      = 0;
+    private static final int QUESTION_TYPE_TWO      = 1;
+    private static final int QUESTION_TYPE_THREE    = 2;
+    private static final int FACTS_PER_COUNTRY      = 3;
+    private static final int TYPES_OF_QUESTIONS     = 3;
+    private static final String PLAY_AGAIN_TRUE     = "yes";
+    private static final String PLAY_AGAIN_FALSE    = "no";
 
-    private static int gamesPlayed;
     private static int correctOnFirstAttempt;
     private static int correctOnSecondAttempt;
     private static int incorrectOnSecondAttempt;
@@ -40,8 +41,10 @@ public final class WordGame
         final HashMap<String, Country> worldHashMap;
         final List<Map.Entry<String, Country>> worldList;
         final Random ran;
+        final Score userScore;
+
+        int gamesPlayed;
         String choice;
-        Score userScore;
         Score highScore;
 
         file = "score.txt";
@@ -50,14 +53,14 @@ public final class WordGame
         worldList = new ArrayList<>(worldHashMap.entrySet());
         ran = new Random();
         choice = "yes";
-        
+
         gamesPlayed = NOTHING;
         correctOnFirstAttempt = NOTHING;
         correctOnSecondAttempt = NOTHING;
         incorrectOnSecondAttempt = NOTHING;
 
         // Play again loop
-        while (choice.equalsIgnoreCase("yes"))
+        while (choice.equalsIgnoreCase(PLAY_AGAIN_TRUE))
         {
             //Gameplay loop
             for (int i = NOTHING; i < QUESTIONS_PER_GAME; i++)
@@ -80,7 +83,7 @@ public final class WordGame
 
                         evaluateUserInput(currentCountry.getName());
                         break;
-                    //The program will print the country name, and ask the user what is its capital city
+                    // The program will print the country name, and ask the user what is its capital city
                     case QUESTION_TYPE_TWO:
                         System.out.println("\nWhat is the capital of " +
                                 currentCountry.getName() +
@@ -98,31 +101,37 @@ public final class WordGame
 
                         evaluateUserInput(currentCountry.getName());
                         break;
+                    default:
+                        // This should be impossible to reach
+                        throw new IllegalStateException("Unexpected value: " + questionType);
                 }
                 System.out.println("___________________________________________");
             }
-            
+
             gamesPlayed++;
             System.out.print("Do you want to play again? (yes/no): ");
             choice = SCANNER.nextLine();
 
-            while (!(choice.equalsIgnoreCase("yes") ||
-                    choice.equalsIgnoreCase("no")))
+            while (!(choice.equalsIgnoreCase(PLAY_AGAIN_TRUE) ||
+                    choice.equalsIgnoreCase(PLAY_AGAIN_FALSE)))
             {
-                System.out.print("Invalid choice. Please try again (yes/no): ");
+                System.out.print("Invalid choice. Please try again (" +
+                        PLAY_AGAIN_TRUE + "/" +
+                        PLAY_AGAIN_FALSE + "): ");
                 choice = SCANNER.nextLine();
             }
         }
 
         // Save score
         userScore = new Score(LocalDateTime.now(),
-                                gamesPlayed,
-                                correctOnFirstAttempt,
-                                correctOnSecondAttempt,
-                                incorrectOnSecondAttempt);
+                gamesPlayed,
+                correctOnFirstAttempt,
+                correctOnSecondAttempt,
+                incorrectOnSecondAttempt);
         List<Score> scoresList = Score.readScoresFromFile(file);
 
         highScore = new Score(LocalDateTime.now(), Integer.MAX_VALUE, NOTHING, NOTHING, NOTHING);
+
         for (Score currentScore : scoresList)
         {
             if (currentScore.getAverageScore() > highScore.getAverageScore())
@@ -140,16 +149,17 @@ public final class WordGame
                     highScore.getAverageScore() +
                     " points per game.");
         }
-        else {
+        else
+        {
             System.out.println("Your score of " +
                     userScore.getAverageScore() +
                     " points per game was not a high score.");
         }
 
         Score.appendScoreToFile(userScore, file);
-        
+
         System.out.println();
-        System.out.println(userScore.toString());
+        System.out.println(userScore);
         System.out.println();
         System.out.println("\nThank you for playing!");
 

@@ -41,11 +41,6 @@ public final class World
 
         for (char fileIndex = 'a'; fileIndex < ALPHABET_LENGTH; fileIndex++)
         {
-            if (fileIndex == 'w')
-            {
-                fileIndex += SKIP_W;
-            }
-
             final String fileName;
             final Path filePath;
 
