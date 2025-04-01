@@ -54,11 +54,11 @@ public final class MainGame
 
     // Score System
     public static final String POINTS_NAME              = "Score";  // TODO: think of better name
-    public static final int START_SCORE                 = 100;
+    public static final int START_SCORE                 = 10;
     public static final int MINIMUM_SCORE_TO_SURVIVE    = 1;
     private static final int SCORE_DECREASE_RANDOM_MIN  = 1;
     private static final int SCORE_DECREASE_RANDOM_MAX  = 1000;
-    private static final int SCORE_DECREASE_PROBABILITY = 20;  // percent
+    private static final int SCORE_DECREASE_PROBABILITY = 10;  // percent
     private static final int RANDOM_NUMBER_OFFSET       = 1;
 
     // UI Configuration
