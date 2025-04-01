@@ -1,49 +1,72 @@
 package ca.bcit.termproject.customgame.orbs;
 
-import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 /**
- * Represents an orb in the game. This is an abstract class that serves as the base for different types of orbs.
- * Each orb has a position, size, color, and speed components for both horizontal and vertical movement.
+ * Abstract base class for Orbs in the game.
+ * Extends JavaFX Circle and handles basic movement.
  */
-public abstract class Orb
-        extends Circle
-        implements Updatable
+public abstract class Orb extends Circle implements Updatable
 {
-    private final double speedX;
-    private final double speedY;
+
+    protected final double speedX;
+    protected final double speedY;
+
+    private static final double INITIAL_POSITION_X = 0.0;
+    private static final double INITIAL_POSITION_Y = 0.0;
+    private static final double INITIAL_RADIUS = 1.0;
+    private static final double SPEED_MULTIPLIER = 1.0;
 
     /**
-     * Constructs a new Orb at the specified coordinates with the given properties.
+     * Constructs a basic Orb with specified parameters.
      *
-     * @param x      The x-coordinate of the orb's initial position.
-     * @param y      The y-coordinate of the orb's initial position.
-     * @param radius The radius of the orb.
-     * @param color  The color of the orb.
-     * @param speedX The horizontal speed component of the orb.
-     * @param speedY The vertical speed component of the orb.
+     * @param x          initial x-coordinate center
+     * @param y          initial y-coordinate center
+     * @param radius     orb radius
+     * @param fillPaint  the Paint (Color or ImagePattern) for the orb's fill
+     * @param baseSpeedX base horizontal speed
+     * @param baseSpeedY base vertical speed
+     * @param speedMod   multiplier for base speeds
      */
-    public Orb(final double x,
-               final double y,
-               final double radius,
-               final Color color,
-               final double speedX,
-               final double speedY,
-               final double speedModifier)
+    protected Orb(final double x,
+                  final double y,
+                  final double radius,
+                  final Paint fillPaint,
+                  final double baseSpeedX,
+                  final double baseSpeedY,
+                  final double speedMod)
     {
-        super(x, y, radius, color);
-        this.speedX = speedX * speedModifier;
-        this.speedY = speedY * speedModifier;
-       this.getStyleClass().add("orb");
+        super(INITIAL_POSITION_X, INITIAL_POSITION_Y, INITIAL_RADIUS);
+
+        final double calculatedSpeedX;
+        final double calculatedSpeedY;
+
+        setCenterX(x);
+        setCenterY(y);
+        setRadius(radius);
+        setFill(fillPaint);
+
+        calculatedSpeedX = baseSpeedX * speedMod;
+        calculatedSpeedY = baseSpeedY * speedMod;
+
+        this.speedX = calculatedSpeedX;
+        this.speedY = calculatedSpeedY;
     }
 
     /**
-     * Updates the position of the orb based on its speed components.
+     * Updates the orb's position based on its current speed.
      */
-    public void update()
+    @Override
+    public final void update()
     {
-        setCenterX(getCenterX() + speedX);
-        setCenterY(getCenterY() + speedY);
+        final double newCenterX;
+        final double newCenterY;
+
+        newCenterX = getCenterX() + this.speedX;
+        newCenterY = getCenterY() + this.speedY;
+
+        setCenterX(newCenterX);
+        setCenterY(newCenterY);
     }
 }
