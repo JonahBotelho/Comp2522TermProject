@@ -70,7 +70,7 @@ public final class MainGame
 
     private final Pane root = new Pane();
     private Player player;
-    private Cannon cannon;
+    private OrbShooter cannon;
     private Label scoreLabel;
     private int score;
     private AnimationTimer gameLoop;
@@ -105,7 +105,7 @@ public final class MainGame
     private void setupGame()
     {
         player = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
-        cannon = new Cannon();
+        cannon = new OrbShooter();
         score = START_SCORE;
  
         scoreLabel = new Label(SCORE_LABEL_INITIAL_TEXT);

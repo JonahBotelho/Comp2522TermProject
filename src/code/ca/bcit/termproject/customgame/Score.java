@@ -29,36 +29,7 @@ public final class Score
             "data",
             "score.txt"
     );
-    
-    /**
-     * Adds a score to the score file. If the file does not exist, it will be created.
-     *
-     * @param score The score to be added to the file.
-     * @throws IOException If an I/O error occurs while writing to the file.
-     */
-    public static void addScore(final Integer score) throws IOException
-    {
-        if (score == null)
-        {
-            throw new IllegalArgumentException("Score cannot be null");
-        }
-        
-        if (Files.notExists(filePath.getParent()))
-        {
-            Files.createDirectories(filePath.getParent());
-        }
-        
-        if (Files.notExists(filePath))
-        {
-            Files.createFile(filePath);
-        }
-        
-        Files.writeString(filePath,
-                          score + System.lineSeparator(),
-                          StandardOpenOption.CREATE,
-                          StandardOpenOption.APPEND);
-    }
-    
+
     /**
      * Retrieves the highest score from the score file. If the file does not exist or is empty,
      * this method returns 0.
@@ -72,22 +43,51 @@ public final class Score
         {
             return NOTHING;
         }
-        
+
         final List<String> lines;
         lines = Files.readAllLines(filePath);
-        
+
         OptionalInt highScore = lines.stream()
                 .filter(Objects::nonNull)
                 .filter(s -> !s.isBlank())
                 .filter(s -> s.matches("-?\\d+"))
                 .mapToInt(Integer::parseInt)
                 .max();
-        
+
         if (highScore.isPresent())
         {
             return highScore.getAsInt();
         }
-        
+
         return NOTHING;
+    }
+
+    /**
+     * Adds a score to the score file. If the file does not exist, it will be created.
+     *
+     * @param score The score to be added to the file.
+     * @throws IOException If an I/O error occurs while writing to the file.
+     */
+    public static void addScore(final Integer score) throws IOException
+    {
+        if (score == null)
+        {
+            throw new IllegalArgumentException("Score cannot be null");
+        }
+
+        if (Files.notExists(filePath.getParent()))
+        {
+            Files.createDirectories(filePath.getParent());
+        }
+
+        if (Files.notExists(filePath))
+        {
+            Files.createFile(filePath);
+        }
+
+        Files.writeString(filePath,
+                score + System.lineSeparator(),
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND);
     }
 }

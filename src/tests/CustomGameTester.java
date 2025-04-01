@@ -51,7 +51,7 @@ public final class CustomGameTester
 
 
     private Player player;
-    private Cannon cannon;
+    private OrbShooter cannon;
 
     /**
      * Temporary directory for file-based tests (Score).
@@ -83,7 +83,7 @@ public final class CustomGameTester
     void setUp() throws IOException
     {
         player = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
-        cannon = new Cannon();
+        cannon = new OrbShooter();
 
         // Ensure clean state for score file tests
         Files.deleteIfExists(scoreFilePath);
