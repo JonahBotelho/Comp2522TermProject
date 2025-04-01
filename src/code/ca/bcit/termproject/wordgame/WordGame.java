@@ -128,7 +128,7 @@ public final class WordGame
                 correctOnFirstAttempt,
                 correctOnSecondAttempt,
                 incorrectOnSecondAttempt);
-        List<Score> scoresList = Score.readScoresFromFile(file);
+        final List<Score> scoresList = Score.readScoresFromFile(file);
 
         highScore = new Score(LocalDateTime.now(), Integer.MAX_VALUE, NOTHING, NOTHING, NOTHING);
 
