@@ -243,7 +243,8 @@ public final class MainGame
             {
                 Score.addScore(score);
                 highScore.setValue(Score.getHighScore());
-            } catch (IOException e)
+            }
+            catch (IOException e)
             {
                 throw new RuntimeException(e);
             }
