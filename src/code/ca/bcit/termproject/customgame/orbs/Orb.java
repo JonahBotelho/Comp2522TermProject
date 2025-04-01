@@ -6,6 +6,9 @@ import javafx.scene.shape.Circle;
 /**
  * Abstract base class for Orbs in the game.
  * Extends JavaFX Circle and handles basic movement.
+ *
+ * @author Jonah Botelho
+ * @version 1.0
  */
 public abstract class Orb extends Circle implements Updatable
 {

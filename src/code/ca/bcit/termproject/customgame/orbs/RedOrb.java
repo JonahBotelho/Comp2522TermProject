@@ -6,34 +6,33 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 
+import java.util.Objects;
+
 /**
  * Simplified Red Orb implementation using an image.
  * Red Orbs might represent danger or a different scoring mechanism.
+ *
+ * @author Jonah Botelho
+ * @version 1.0
  */
 public final class RedOrb extends Orb
 {
 
-    private static final String IMAGE_PATH;
-    private static final Paint ORB_PAINT;
+    private static final String IMAGE_PATH  = "/res/red_orb_clock.png";
+    private static final Paint ORB_PAINT    = loadOrbPaint();
 
     // Image pattern constants
-    private static final double IMAGE_PATTERN_ANCHOR_X = 0.0;
-    private static final double IMAGE_PATTERN_ANCHOR_Y = 0.0;
-    private static final double IMAGE_PATTERN_WIDTH = 1.0;
-    private static final double IMAGE_PATTERN_HEIGHT = 1.0;
+    private static final double IMAGE_PATTERN_ANCHOR_X      = 0.0;
+    private static final double IMAGE_PATTERN_ANCHOR_Y      = 0.0;
+    private static final double IMAGE_PATTERN_WIDTH         = 1.0;
+    private static final double IMAGE_PATTERN_HEIGHT        = 1.0;
     private static final boolean IMAGE_PATTERN_PROPORTIONAL = true;
 
     // Error message constants
-    private static final String RESOURCE_NOT_FOUND_ERROR = "Error: RedOrb image resource not found: ";
-    private static final String IMAGE_LOAD_WARNING = "Warning: RedOrb image failed to load: ";
-    private static final String IMAGE_LOAD_ERROR = "Error loading RedOrb image resource: ";
-    private static final String FALLBACK_MESSAGE = ". Using fallback color.";
-
-    static
-    {
-        IMAGE_PATH = "/res/red_orb_clock.png";
-        ORB_PAINT = loadOrbPaint();
-    }
+    private static final String RESOURCE_NOT_FOUND_ERROR    = "Error: RedOrb image resource not found: ";
+    private static final String IMAGE_LOAD_WARNING          = "Warning: RedOrb image failed to load: ";
+    private static final String IMAGE_LOAD_ERROR            = "Error loading RedOrb image resource: ";
+    private static final String FALLBACK_MESSAGE            = ". Using fallback color.";
 
     /**
      * Loads the red orb image and creates an ImagePattern, or returns a fallback red color.
@@ -42,14 +41,14 @@ public final class RedOrb extends Orb
      */
     private static Paint loadOrbPaint()
     {
-        Image orbImage;
+        final Image orbImage;
         Paint result;
 
         try
         {
-            orbImage = new Image(RedOrb.class.getResourceAsStream(IMAGE_PATH));
+            orbImage = new Image(Objects.requireNonNull(RedOrb.class.getResourceAsStream(IMAGE_PATH)));
 
-            if (orbImage != null && !orbImage.isError())
+            if (!orbImage.isError())
             {
                 result = new ImagePattern(
                         orbImage,

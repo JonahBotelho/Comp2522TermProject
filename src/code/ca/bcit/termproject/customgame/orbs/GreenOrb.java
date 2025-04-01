@@ -6,14 +6,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 
+import java.util.Objects;
+
 /**
  * Simplified Green Orb implementation using an image.
+ *
+ * @author Jonah Botelho
+ * @version 1.0
  */
 public final class GreenOrb extends Orb
 {
 
-    private static final String IMAGE_PATH;
-    private static final Paint ORB_PAINT;
+    private static final String IMAGE_PATH = "/res/green_orb_clock.png";;
+    private static final Paint ORB_PAINT = loadOrbPaint();;
 
     // Image pattern configuration constants
     private static final double IMAGE_PATTERN_ANCHOR_X = 0.0;
@@ -27,12 +32,6 @@ public final class GreenOrb extends Orb
     private static final String IMAGE_LOAD_ERROR = "Error loading GreenOrb image resource: ";
     private static final String FALLBACK_MESSAGE = ". Using fallback color.";
 
-    static
-    {
-        IMAGE_PATH = "/res/green_orb_clock.png";
-        ORB_PAINT = loadOrbPaint();
-    }
-
     /**
      * Loads the image and creates an ImagePattern, or returns a fallback color.
      *
@@ -40,12 +39,12 @@ public final class GreenOrb extends Orb
      */
     private static Paint loadOrbPaint()
     {
-        Image orbImage;
+        final Image orbImage;
         Paint result;
 
         try
         {
-            orbImage = new Image(GreenOrb.class.getResourceAsStream(IMAGE_PATH));
+            orbImage = new Image(Objects.requireNonNull(GreenOrb.class.getResourceAsStream(IMAGE_PATH)));
 
             if (!orbImage.isError())
             {

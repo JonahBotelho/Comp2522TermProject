@@ -10,12 +10,15 @@ import java.util.Objects;
 
 /**
  * Simplified Blue Orb implementation using an image.
+ *
+ * @author Jonah Botelho
+ * @version 1.0
  */
 public final class BlueOrb extends Orb
 {
 
-    private static final String IMAGE_PATH;
-    private static final Paint ORB_PAINT;
+    private static final String IMAGE_PATH = "/res/blue_orb_clock.png";;
+    private static final Paint ORB_PAINT = loadOrbPaint();;
 
     // Image pattern parameters
     private static final double IMAGE_PATTERN_ANCHOR_X = 0.0;
@@ -24,12 +27,6 @@ public final class BlueOrb extends Orb
     private static final double IMAGE_PATTERN_HEIGHT = 1.0;
     private static final boolean IMAGE_PATTERN_PROPORTIONAL = true;
 
-    static
-    {
-        IMAGE_PATH = "/res/blue_orb_clock.png";
-        ORB_PAINT = loadOrbPaint();
-    }
-
     /**
      * Loads the blue orb image and creates an ImagePattern, or returns a fallback blue color.
      *
@@ -37,7 +34,7 @@ public final class BlueOrb extends Orb
      */
     private static Paint loadOrbPaint()
     {
-        Image orbImage;
+        final Image orbImage;
         Paint result;
 
         try
