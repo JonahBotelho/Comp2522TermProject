@@ -12,7 +12,6 @@ import javafx.scene.control.Alert;
 public class InformationAlert
         extends PopupAlert
 {
-
     /**
      * Constructs an InformationAlert with the specified title.
      *

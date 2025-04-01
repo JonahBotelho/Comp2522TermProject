@@ -54,7 +54,15 @@ public final class NumberGame
     private int successfulPlacements             = NOTHING;
     private Label statusLabel;
 
-
+    /**
+     * Runs the program.
+     *
+     * @param args arguments passed into JavaFX launcher
+     */
+    public static void main(final String[] args)
+    {
+        launch(args);
+    }
 
     @Override
     public void start(final Stage primaryStage)
@@ -66,7 +74,6 @@ public final class NumberGame
         root = new VBox(VBOX_SPACING);
         root.setPadding(new Insets(ROOT_PADDING));
         root.setAlignment(Pos.CENTER);
-
 
         gridPane = new GridPane();
         gridPane.setHgap(GRID_HEIGHT_GAP);
@@ -87,19 +94,37 @@ public final class NumberGame
     }
 
     /**
-     * Initializes the button grid.
+     * Generates a random number within the specified range (inclusive).
      *
-     * @param gridPane GridPane object to add buttons to
+     * @param min The minimum value of the range.
+     * @param max The maximum value of the range.
+     * @return A random number between min and max (inclusive).
      */
+    @Override
+    public int randomNumber(final int min, final int max)
+    {
+        final Random random;
+        final int num;
+
+        random = new Random();
+        num = random.nextInt((max - min) + RANDOM_NUMBER_OFFSET) + min;
+
+        return num;
+    }
+
     private void initializeGrid(final VBox root,
                                 final GridPane gridPane)
     {
-        for (int i = 0; i < NUMBER_OF_SQUARES; i++)
+        for (int i = NOTHING; i < NUMBER_OF_SQUARES; i++)
         {
+            // declaring a final variable to be the value of i, so I can use it in the lambda expression
+            final int finalI;
+            finalI = i;
+
             buttons[i] = new Button();
             buttons[i].setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
-            final int finalI = i;
-            buttons[i].setOnAction(e -> handleButtonClick(finalI)); // Handle button clicks
+            buttons[i].setOnAction(e -> handleButtonClick(finalI));
+
             gridPane.add(buttons[i], i % NUMBER_OF_COLUMNS, i / NUMBER_OF_COLUMNS);
         }
 
@@ -112,9 +137,6 @@ public final class NumberGame
         root.getChildren().add(statusLabel);
     }
 
-    /**
-     * Resets the grid with zeros (empty slots).
-     */
     private void resetGrid()
     {
         for (int i = NOTHING; i < NUMBER_OF_SQUARES; i++)
@@ -123,25 +145,16 @@ public final class NumberGame
             if (buttons[i] != null)
             {
                 buttons[i].setText(""); // Clear button text
-
             }
         }
     }
 
-    /**
-     * Generate the next random number between MIN_RANDOM_NUMBER and MAX_RANDOM_NUMBER and update the status label.
-     */
     private void generateNextNumber()
     {
         currentNumber = randomNumber(MIN_RANDOM_NUM, MAX_RANDOM_NUM);
         statusLabel.setText("Next Number: " + currentNumber);
     }
 
-    /**
-     * Handle button clicks to place the current number in the grid.
-     *
-     * @param index The index of the button clicked.
-     */
     private void handleButtonClick(final int index)
     {
         if (grid[index] != NOTHING)
@@ -156,6 +169,7 @@ public final class NumberGame
         buttons[index].setText(String.valueOf(currentNumber));
         successfulPlacements++;
 
+        // If the grid is no longer in ascending order, the user has lost
         if (!isAscendingOrder())
         {
             gamesPlayed++;
@@ -166,11 +180,6 @@ public final class NumberGame
         generateNextNumber();
     }
 
-    /**
-     * Check if the numbers in the grid are in ascending order.
-     *
-     * @return True if the numbers are in ascending order, false otherwise.
-     */
     private boolean isAscendingOrder()
     {
         int prev;
@@ -193,9 +202,6 @@ public final class NumberGame
         return true;
     }
 
-    /**
-     * Show a game over alert and offer the user the option to retry or quit.
-     */
     private void showGameOverAlert()
     {
         final InformationAlert alert;
@@ -223,15 +229,13 @@ public final class NumberGame
             {
                 showFinalScore();
                 final Stage stage;
+
                 stage = (Stage) statusLabel.getScene().getWindow();
                 stage.close();
             }
         });
     }
 
-    /**
-     * Show the final score when the user quits the game.
-     */
     private void showFinalScore()
     {
         final DecimalFormat averagePlacementsFormat;
@@ -260,9 +264,6 @@ public final class NumberGame
         alert.showAndWait();
     }
 
-    /**
-     * Show an alert with a given title and message.
-     */
     private void showInvalidSpotAlert()
     {
         final WarningAlert alert;
@@ -290,39 +291,12 @@ public final class NumberGame
                 .append(NUMBER_OF_SQUARES)
                 .append(" square number game!")
                 .append("\nClick OK to start!");
-
-
         messageString = messageBuilder.toString();
         alert.setHeaderText(null);
         alert.setContentText(messageString);
         alert.showAndWait();
     }
 
-    /**
-     * Generates a random number within the specified range (inclusive).
-     *
-     * @param min The minimum value of the range.
-     * @param max The maximum value of the range.
-     * @return A random number between min and max (inclusive).
-     */
-    @Override
-    public int randomNumber(final int min, final int max)
-    {
-        final Random random;
-        final int num;
-
-        random = new Random();
-        num = random.nextInt((max - min) + RANDOM_NUMBER_OFFSET) + min;
-
-        return num;
-    }
-
-    /**
-     * Adds styles.css to an Alert, and removes the top row.
-     * TODO fix corners
-     *
-     * @param alert alert to set up
-     */
     private void setUpAlert(final Alert alert)
     {
         final DialogPane dialogPane;
@@ -335,19 +309,9 @@ public final class NumberGame
 
         dialogPane.getStylesheets()
                 .add(Objects
-                .requireNonNull(getClass().getResource("css/styles.css"))
-                .toExternalForm());
+                        .requireNonNull(getClass().getResource("css/styles.css"))
+                        .toExternalForm());
         dialogPane.getStyleClass().add("dialog-pane");
         stage.initStyle(StageStyle.UNDECORATED);
-    }
-
-    /**
-     * Runs the program.
-     *
-     * @param args arguments passed into JavaFX launcher
-     */
-    public static void main(final String[] args)
-    {
-        launch(args);
     }
 }
