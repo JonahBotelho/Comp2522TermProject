@@ -3,6 +3,8 @@ package ca.bcit.termproject.menu;
 import ca.bcit.termproject.numbergame.NumberGame;
 import ca.bcit.termproject.wordgame.WordGame;
 import ca.bcit.termproject.customgame.MainGame;
+import javafx.application.Application;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -55,10 +57,10 @@ public final class MainMenu
                     WordGame.main(new String[NOTHING]);
                     break;
                 case NUMBER_GAME_LETTER:
-                    NumberGame.main(new String[NOTHING]);
+                    new Thread(() -> Application.launch(NumberGame.class)).start();
                     break;
                 case CUSTOM_GAME_NUMBER:
-                    MainGame.main(new String[NOTHING]);
+                    new Thread(() -> Application.launch(MainGame.class)).start();
                     break;
             }
 

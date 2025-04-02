@@ -173,6 +173,8 @@ public final class WordGame
      */
     private static void evaluateUserInput(final String answer)
     {
+        validateAnswer(answer);
+        
         String input;
         input = SCANNER.nextLine();
 
@@ -197,6 +199,14 @@ public final class WordGame
                 System.out.printf("The correct answer is: %s\n", answer);
                 incorrectOnSecondAttempt++;
             }
+        }
+    }
+    
+    private static final void validateAnswer(final String answer)
+    {
+        if (answer == null || answer.isBlank())
+        {
+            throw new IllegalArgumentException("Invalid answer.");
         }
     }
 }

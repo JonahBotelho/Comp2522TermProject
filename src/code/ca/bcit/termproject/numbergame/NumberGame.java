@@ -1,6 +1,7 @@
 package ca.bcit.termproject.numbergame;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -59,14 +60,20 @@ public final class NumberGame
 
     /**
      * Runs the program.
-     *
-     * @param args arguments passed into JavaFX launcher
      */
-    public static void main(final String[] args)
+    public static void launchGame()
     {
-        launch(args);
+        Platform.runLater(() ->{
+            try
+            {
+                new NumberGame().start(new Stage());
+            }
+            catch (final Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
-
+    
     @Override
     public void start(final Stage primaryStage)
     {
@@ -278,7 +285,10 @@ public final class NumberGame
         alert.setContentText("This slot is already occupied. Try another slot.");
         alert.showAndWait();
     }
-
+    
+    /**
+     * Displays the welcome alert, with instructions on how to proceed.
+     */
     private void showWelcomeAlert()
     {
         final InformationAlert alert;

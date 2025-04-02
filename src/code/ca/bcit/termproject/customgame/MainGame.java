@@ -4,6 +4,7 @@ import ca.bcit.termproject.customgame.orbs.BlueOrb;
 import ca.bcit.termproject.customgame.orbs.GreenOrb;
 import ca.bcit.termproject.customgame.orbs.Orb;
 import ca.bcit.termproject.customgame.orbs.RedOrb;
+import ca.bcit.termproject.numbergame.NumberGame;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -433,14 +434,20 @@ public final class MainGame
         dialogPane.getStyleClass().add("dialog-pane");
         stage.initStyle(StageStyle.UNDECORATED);
     }
-
+    
     /**
-     * The main entry point for the application.
-     *
-     * @param args Command-line arguments (unused).
+     * Runs the program.
      */
-    public static void main(final String[] args)
+    public static void launchGame()
     {
-        launch(args);
+        Platform.runLater(() ->{
+            try
+            {
+                new NumberGame().start(new Stage());
+            }
+            catch (final Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

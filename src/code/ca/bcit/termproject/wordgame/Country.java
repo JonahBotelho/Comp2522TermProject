@@ -1,5 +1,7 @@
 package ca.bcit.termproject.wordgame;
 
+import java.util.Arrays;
+
 /**
  * Represents a country with its name, capital city, and some facts about it.
  *
@@ -21,7 +23,9 @@ public final class Country
      * @param capitalCityName The name of the capital city of the country.
      * @param facts           An array of facts about the country.
      */
-    public Country(final String name, final String capitalCityName, final String[] facts)
+    public Country(final String name,
+                   final String capitalCityName,
+                   final String[] facts)
     {
         validateString(name);
         validateString(capitalCityName);
@@ -37,7 +41,7 @@ public final class Country
      *
      * @param s The string to validate.
      */
-    private final void validateString(final String s)
+    public final void validateString(final String s)
     {
         if (s == null || s.isBlank())
         {
@@ -56,6 +60,8 @@ public final class Country
         {
             throw new IllegalArgumentException("Invalid String array");
         }
+        
+        Arrays.stream(s).forEach(this::validateString);
     }
 
     /**
