@@ -1,4 +1,4 @@
-package ca.bcit.termproject;
+package ca.bcit.termproject.menu;
 
 import ca.bcit.termproject.numbergame.NumberGame;
 import ca.bcit.termproject.wordgame.WordGame;
