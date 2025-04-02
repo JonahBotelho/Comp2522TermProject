@@ -54,6 +54,9 @@ public final class NumberGame
     private int successfulPlacements             = NOTHING;
     private Label statusLabel;
 
+    // Styling
+    private static final String STYLESHEET_PATH = "/res/numbergame/css/numberGameStyles.css";
+
     /**
      * Runs the program.
      *
@@ -85,7 +88,7 @@ public final class NumberGame
         generateNextNumber();
 
         scene = new Scene(root, WINDOW_HEIGHT, WINDOW_WIDTH);
-        scene.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource(STYLESHEET_PATH).toExternalForm());
 
         primaryStage.setTitle("Number Game");
         primaryStage.setScene(scene);
@@ -309,7 +312,7 @@ public final class NumberGame
 
         dialogPane.getStylesheets()
                 .add(Objects
-                        .requireNonNull(getClass().getResource("css/styles.css"))
+                        .requireNonNull(getClass().getResource(STYLESHEET_PATH))
                         .toExternalForm());
         dialogPane.getStyleClass().add("dialog-pane");
         stage.initStyle(StageStyle.UNDECORATED);

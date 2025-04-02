@@ -17,7 +17,7 @@ import java.util.Objects;
 public final class BlueOrb extends Orb
 {
 
-    private static final String IMAGE_PATH = "/res/blue_orb_clock.png";;
+    private static final String IMAGE_PATH = "/res/customgame/images/blue_orb_clock.png";;
     private static final Paint ORB_PAINT = loadOrbPaint();;
 
     // Image pattern parameters

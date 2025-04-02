@@ -68,6 +68,9 @@ public final class MainGame
     private static final int SCORE_LABEL_Y                  = 10;
     private static final String SCORE_LABEL_INITIAL_TEXT    = POINTS_NAME + ": " + START_SCORE;
 
+    // Styles
+    private static final String STYLESHEET_PATH = "/res/customgame/css/customGameStyles.css";
+
     private final Pane root = new Pane();
     private Player player;
     private OrbShooter cannon;
@@ -86,7 +89,7 @@ public final class MainGame
         final Scene scene;
         
         scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-        scene.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource(STYLESHEET_PATH).toExternalForm());
         
         primaryStage.setTitle("Bullet Hell Game");
         primaryStage.setScene(scene);
@@ -404,7 +407,7 @@ public final class MainGame
     }
 
     /**
-     * Adds styles.css to an Alert, and removes the top row.
+     * Adds customGameStyles.css to an Alert, and removes the top row.
      * TODO fix corners
      * FIXME duplicate in main game
      *
@@ -421,7 +424,7 @@ public final class MainGame
         stage       = (Stage) window;
 
         dialogPane.getStylesheets().add(Objects
-                .requireNonNull(getClass().getResource("css/styles.css"))
+                .requireNonNull(getClass().getResource(STYLESHEET_PATH))
                 .toExternalForm());
         dialogPane.getStyleClass().add("dialog-pane");
         stage.initStyle(StageStyle.UNDECORATED);

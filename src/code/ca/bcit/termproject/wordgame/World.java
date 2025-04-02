@@ -44,7 +44,7 @@ public final class World
             final String fileName;
             final Path filePath;
 
-            fileName = "src/res/" + fileIndex + ".txt";
+            fileName = "src/res/wordgame/countrydata/" + fileIndex + ".txt";
             filePath = Paths.get(fileName);
 
             if (Files.exists(filePath))
