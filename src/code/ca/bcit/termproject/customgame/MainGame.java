@@ -1,9 +1,6 @@
 package ca.bcit.termproject.customgame;
 
-import ca.bcit.termproject.customgame.orbs.BlueOrb;
-import ca.bcit.termproject.customgame.orbs.GreenOrb;
-import ca.bcit.termproject.customgame.orbs.Orb;
-import ca.bcit.termproject.customgame.orbs.RedOrb;
+import ca.bcit.termproject.customgame.orbs.*;
 import ca.bcit.termproject.numbergame.NumberGame;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -14,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -421,18 +419,23 @@ public final class MainGame
     private void setUpAlert(final Alert alert)
     {
         final DialogPane dialogPane;
+        final Scene scene;
         final Window window;
         final Stage stage;
-
+        
         dialogPane  = alert.getDialogPane();
-        window      = dialogPane.getScene().getWindow();
+        scene       = dialogPane.getScene();
+        window      = scene.getWindow();
         stage       = (Stage) window;
-
-        dialogPane.getStylesheets().add(Objects
-                .requireNonNull(getClass().getResource(STYLESHEET_PATH))
-                .toExternalForm());
+        
+        scene.setFill(Color.TRANSPARENT);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        
+        dialogPane.getStylesheets()
+                .add(Objects
+                             .requireNonNull(getClass().getResource(STYLESHEET_PATH))
+                             .toExternalForm());
         dialogPane.getStyleClass().add("dialog-pane");
-        stage.initStyle(StageStyle.UNDECORATED);
     }
     
     /**

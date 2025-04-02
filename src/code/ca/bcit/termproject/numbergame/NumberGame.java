@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
@@ -313,18 +314,22 @@ public final class NumberGame
     private void setUpAlert(final Alert alert)
     {
         final DialogPane dialogPane;
+        final Scene scene;
         final Window window;
         final Stage stage;
 
         dialogPane  = alert.getDialogPane();
-        window      = dialogPane.getScene().getWindow();
+        scene       = dialogPane.getScene();
+        window      = scene.getWindow();
         stage       = (Stage) window;
-
+        
+        scene.setFill(Color.TRANSPARENT);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        
         dialogPane.getStylesheets()
                 .add(Objects
                         .requireNonNull(getClass().getResource(STYLESHEET_PATH))
                         .toExternalForm());
         dialogPane.getStyleClass().add("dialog-pane");
-        stage.initStyle(StageStyle.UNDECORATED);
     }
 }
