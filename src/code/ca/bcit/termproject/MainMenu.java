@@ -3,8 +3,6 @@ package ca.bcit.termproject;
 import ca.bcit.termproject.numbergame.NumberGame;
 import ca.bcit.termproject.wordgame.WordGame;
 import ca.bcit.termproject.customgame.MainGame;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -12,15 +10,15 @@ import java.util.Scanner;
  * @author Jonah Botelho
  * @version 1.0
  */
-public final class Main
+public final class MainMenu
 {
     private static final String WORD_GAME_LETTER      = "W";
     private static final String NUMBER_GAME_LETTER    = "N";
     private static final String CUSTOM_GAME_NUMBER    = "M";
     private static final String QUIT_LETTER           = "Q";
-    
+
     private static final int NOTHING = 0;
-    
+
     /**
      * Drives the program.
      *
