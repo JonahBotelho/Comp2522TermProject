@@ -134,6 +134,7 @@ public final class MainGame
             {
                 cannon.shootOrb(root, speedModifier);
                 player.update();
+                
                 updateOrbs();
                 checkCollisions();
                 checkAndUpdateScore();
@@ -207,6 +208,7 @@ public final class MainGame
         {
             final Orb orb;
             orb = iterator.next();
+            
             if (player.getBoundsInParent().intersects(orb.getBoundsInParent()))
             {
                 if (orb instanceof RedOrb)
@@ -221,6 +223,7 @@ public final class MainGame
                 {
                     score += BLUE_ORB_POINTS;
                 }
+                
                 iterator.remove();
                 root.getChildren().remove(orb);
                 updateScoreLabel();
@@ -238,6 +241,7 @@ public final class MainGame
     {
         final MutableInteger highScore;
         highScore = new MutableInteger(NOTHING);
+        
         gameLoop.stop();
 
         Platform.runLater(() ->
@@ -256,9 +260,9 @@ public final class MainGame
             final ButtonType playAgain;
             final ButtonType quit;
 
-            gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
-            playAgain = new ButtonType("Play Again");
-            quit = new ButtonType("Quit");
+            gameOverAlert   = new Alert(Alert.AlertType.INFORMATION);
+            playAgain       = new ButtonType("Play Again");
+            quit            = new ButtonType("Quit");
 
             // Adds CSS stylesheet, and removes top row from Alert
             setUpAlert(gameOverAlert);
