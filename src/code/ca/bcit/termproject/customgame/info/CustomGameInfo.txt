@@ -1,26 +1,38 @@
-Ideas:
-    2-player snake
-    Reverse bullet hell
-        Items (food maybe) shoots towards the player.
-        Player needs to collect the good food and avoid the bad food.
-        If the player's score gets too low, they starve.
+Lesson 01.      basic structure, conventions etc:
+                All files follow best practices, using final and private
+                wherever possible, setters and getters, etc
 
-Unit requirements
-    01. basic structure, conventions etc.                           ✔
-    02. inheritance, polymorphism, exception handing, casting       ✔
-    03. overriding, .equals, final & abstract methods/classes       ✔
-    04. interfaces, default methods, comparable                     ✔
-    05. arrays, lists, sets, maps, iterators                        ✔
-    06. generics, wild cards, law of demeter, inner/nested classes  ✔ (animation timer anonymous inner class()
-    07. lambda expressions, method references                       ✔
-    08. files and paths. NIO. Streaming & filtering                 ✔
-    09. JavaFX                                                      ✔
-    10. Unit testing & test-driven development                      ✔
-    11. Memory, singletons, design patterns                         ✔ (updatable and orb abstract classes)
-    12. concurrency
+Lesson 02.      inheritance, polymorphism, exception handing, casting:
+                RedOrb and GreenOrb classes inherit Orb
 
-TODO
-    [75%] Add hunger attrition systems
-    Add levels & win condition
-    [COMPLETE] Add score file
+Lesson 03.      overriding, .equals, final & abstract methods/classes:
+                Orb is an abstract class
 
+Lesson 04.      interfaces, default methods, comparable:
+                Updateable interface, declaring that any class implementing
+                it must implement the update() method
+
+Lesson 05.      arrays, lists, sets, maps, iterators:
+                List of Orbs in the OrbShooter class
+
+Lesson 06.      generics, wild cards, law of demeter, inner/nested classes:
+                Animation timer in MainGame class is an anonymous inner class
+
+Lesson 07.      lambda expressions, method references:
+                Lambda expressions used throughout MainGame for event handling
+                Method reference used in updateOrbs() in MainGame class
+
+Lesson 08.      files and paths. NIO. Streaming & filtering:
+                Score class saves high score in score.txt, using NIO and file paths
+
+Lesson 09.      JavaFX:
+                Game is made in javaFX
+
+Lesson 10.      Unit testing & test-driven development:
+                CustomGameTester class uses JUnit tests to verify different aspects of the program
+
+Lesson 11.      Memory, singletons, design patterns:
+                Orb factor design pattern, using Updatable interface and Orb abstract class
+                to create RedOrb, GreenOrb and BlueOrb concrete products
+
+Lesson 12.      concurrency:
