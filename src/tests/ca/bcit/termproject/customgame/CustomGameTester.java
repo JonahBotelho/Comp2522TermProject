@@ -1,6 +1,7 @@
 package ca.bcit.termproject.customgame;
 
 import ca.bcit.termproject.customgame.orbs.Orb; // Assuming Orb base class exists
+import ca.bcit.termproject.customgame.orbs.OrbShooter;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.io.TempDir;
 
