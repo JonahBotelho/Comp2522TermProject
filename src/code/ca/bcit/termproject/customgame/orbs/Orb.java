@@ -27,7 +27,7 @@ public abstract class Orb extends Circle implements Updatable
     public static final double MAX_BASE_SPEED = 1000.0;
     public static final double MIN_BASE_SPEED = -1000.0;
     public static final double MAX_SPEED_MODIFIER = 1000.0;
-    public static final double MIN_SPEED_MODIFIER = 0.0;
+    public static final double MIN_SPEED_MODIFIER = -1000.0;
     
     /**
      * Constructs a basic Orb with specified parameters.
@@ -95,7 +95,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param x the x-coordinate to validate
      */
-    private final void validateX(final double x)
+    public static final void validateX(final double x)
     {
         if (x < NOTHING || x > MainGame.WINDOW_WIDTH)
         {
@@ -108,7 +108,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param y the y-coordinate to validate
      */
-    private final void validateY(final double y)
+    public static final void validateY(final double y)
     {
         if (y < NOTHING || y > MainGame.WINDOW_WIDTH)
         {
@@ -121,7 +121,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param radius the radius to validate
      */
-    private final void validateRadius(final double radius)
+    public static final void validateRadius(final double radius)
     {
         if (radius < NOTHING)
         {
@@ -134,7 +134,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param fill the Paint object to validate
      */
-    private static void validateFillPaint(final Paint fill)
+    public static final void validateFillPaint(final Paint fill)
     {
         if (fill == null)
         {
@@ -147,7 +147,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param baseSpeed the base speed to validate
      */
-    private static void validateBaseSpeed(final double baseSpeed)
+    public static final void validateBaseSpeed(final double baseSpeed)
     {
         if (baseSpeed > MAX_BASE_SPEED || baseSpeed < MIN_BASE_SPEED)
         {
@@ -160,11 +160,11 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param speedModifier the speed modifier to validate
      */
-    private static void validateSpeedModifier(final double speedModifier)
+    public static final void validateSpeedModifier(final double speedModifier)
     {
         if (speedModifier > MAX_SPEED_MODIFIER || speedModifier < MIN_SPEED_MODIFIER)
         {
-            throw new IllegalArgumentException("speedModifier must be a positive number");
+            throw new IllegalArgumentException("invalid speed modifier");
         }
     }
 }

@@ -1,9 +1,6 @@
-package ca.bcit.termproject.customgame;
+package ca.bcit.termproject.customgame.orbs;
 
-import ca.bcit.termproject.customgame.orbs.BlueOrb;
-import ca.bcit.termproject.customgame.orbs.GreenOrb;
-import ca.bcit.termproject.customgame.orbs.Orb;
-import ca.bcit.termproject.customgame.orbs.RedOrb;
+import ca.bcit.termproject.customgame.MainGame;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -58,8 +55,12 @@ public final class OrbShooter
      *
      * @param root The root pane to which the orb will be added.
      */
-    public final void shootOrb(final Pane root, final double speedModifier)
+    public final void shootOrb(final Pane root,
+                               final double speedModifier)
     {
+        validateRoot(root);
+        Orb.validateSpeedModifier(speedModifier);
+        
         if (random.nextInt(ORB_SHOOT_PROBABILITY_MAX) < ORB_SHOOT_PROBABILITY)
         {
             // Randomly select which edge to spawn from (0=top, 1=right, 2=bottom, 3=left)
@@ -127,6 +128,12 @@ public final class OrbShooter
                                       final double speedY,
                                       final double speedModifier)
     {
+        Orb.validateX(x);
+        Orb.validateY(y);
+        Orb.validateBaseSpeed(x);
+        Orb.validateBaseSpeed(y);
+        Orb.validateSpeedModifier(speedX);
+        
         int orbType;
         orbType = random.nextInt(RANDOM_ORB_GENERATION_MAX);
 
@@ -145,5 +152,13 @@ public final class OrbShooter
     public final List<Orb> getOrbs()
     {
         return orbs;
+    }
+    
+    private static final void validateRoot(final Pane root)
+    {
+        if (root == null)
+        {
+            throw new IllegalArgumentException("Root cannot be null");
+        }
     }
 }
