@@ -70,10 +70,7 @@ public final class Score
      */
     public static void addScore(final Integer score) throws IOException
     {
-        if (score == null)
-        {
-            throw new IllegalArgumentException("Score cannot be null");
-        }
+        validateScore(score);
 
         if (Files.notExists(filePath.getParent()))
         {
@@ -89,5 +86,19 @@ public final class Score
                 score + System.lineSeparator(),
                 StandardOpenOption.CREATE,
                 StandardOpenOption.APPEND);
+    }
+    
+    private static final void validateScore(final Integer score)
+    {
+        if (score == null)
+        {
+            throw new IllegalArgumentException("Score cannot be null");
+        }
+        
+        if (score < NOTHING)
+        {
+            throw new IllegalArgumentException("Score cannot be negative");
+        }
+        
     }
 }

@@ -17,7 +17,6 @@ public final class MutableInteger
         /* MutableInteger is designed to score any integer value,
          * therefore no validation is required
          */
-         */
         this.value = value;
     }
 
