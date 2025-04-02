@@ -24,10 +24,10 @@ public abstract class Orb extends Circle implements Updatable
     private static final double INITIAL_RADIUS = 1.0;
     
     // validation
-    private static final double MAX_BASE_SPEED = 1000.0;
-    private static final double MIN_BASE_SPEED = -1000.0;
-    private static final double MAX_SPEED_MODIFIER = 1000.0;
-    private static final double MIN_SPEED_MODIFIER = 0.0;
+    public static final double MAX_BASE_SPEED = 1000.0;
+    public static final double MIN_BASE_SPEED = -1000.0;
+    public static final double MAX_SPEED_MODIFIER = 1000.0;
+    public static final double MIN_SPEED_MODIFIER = 0.0;
     
     /**
      * Constructs a basic Orb with specified parameters.
