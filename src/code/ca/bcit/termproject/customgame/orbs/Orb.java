@@ -25,7 +25,7 @@ public abstract class Orb extends Circle implements Updatable
     
     // validation
     private static final double MAX_BASE_SPEED = 1000.0;
-    private static final double MIN_BASE_SPEED = 0.0;
+    private static final double MIN_BASE_SPEED = -1000.0;
     private static final double MAX_SPEED_MODIFIER = 1000.0;
     private static final double MIN_SPEED_MODIFIER = 0.0;
     
@@ -151,7 +151,7 @@ public abstract class Orb extends Circle implements Updatable
     {
         if (baseSpeed > MAX_BASE_SPEED || baseSpeed < MIN_BASE_SPEED)
         {
-            throw new IllegalArgumentException("baseSpeed must be a positive number");
+            throw new IllegalArgumentException("base speed out of bounds");
         }
     }
     
