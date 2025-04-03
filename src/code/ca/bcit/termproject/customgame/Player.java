@@ -25,8 +25,14 @@ public final class Player
      * @param y    The y-coordinate of the player.
      * @param size The width and height of the player.
      */
-    public Player(final double x, final double y, final double size)
+    public Player(final double x,
+                  final double y,
+                  final double size)
     {
+        validateDoublePositive(x);
+        validateDoublePositive(y);
+        validateDoublePositive(size);
+
         super(x, y, size, size);
         setFill(Color.BLACK);
     }
@@ -53,6 +59,7 @@ public final class Player
         {
             setY(getY() + speed);
         }
+
         verifyEdgePosition();
     }
 
@@ -158,4 +165,17 @@ public final class Player
     {
         return movingDown;
     }
+
+    /**
+     * Validates that the given double value is positive
+     *
+     */
+    private static final void validateDoublePositive(final double value)
+    {
+        if (value < NOTHING)
+        {
+            throw new IllegalArgumentException("Value cannot be negative");
+        }
+    }
+
 }

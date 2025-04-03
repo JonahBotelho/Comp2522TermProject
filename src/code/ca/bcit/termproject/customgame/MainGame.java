@@ -63,7 +63,7 @@ public final class MainGame
     // UI Configuration
     private static final String SCORE_LABEL_FONT_NAME = "Arial";
     private static final int SCORE_LABEL_FONT_SIZE = 20;
-    private static final int SCORE_LABEL_X = 10;
+    static final int SCORE_LABEL_X = 10;
     private static final int SCORE_LABEL_Y = 10;
     private static final String SCORE_LABEL_INITIAL_TEXT = POINTS_NAME + ": " + START_SCORE;
     
@@ -246,7 +246,7 @@ public final class MainGame
         
         final MutableInteger highScore;
         highScore = new MutableInteger(NOTHING);
-        
+
         gameLoop.stop();
         
         Platform.runLater(() ->
@@ -259,24 +259,24 @@ public final class MainGame
                               {
                                   throw new RuntimeException(e);
                               }
-                              
+
                               final Alert gameOverAlert;
                               final ButtonType playAgain;
                               final ButtonType quit;
-                              
+
                               gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
                               playAgain = new ButtonType("Play Again");
                               quit = new ButtonType("Quit");
-                              
+
                               // Adds CSS stylesheet, and removes top row from Alert
                               setUpAlert(gameOverAlert);
-                              
+
                               gameOverAlert.setTitle("Game Over");
                               gameOverAlert.setContentText(message +
                                                                    "\nFinal Score: " + score +
                                                                    "\nHigh Score: " + highScore.getValue());
                               gameOverAlert.getButtonTypes().setAll(playAgain, quit);
-                              
+
                               gameOverAlert.showAndWait().ifPresent(response ->
                                                                     {
                                                                         if (response == playAgain)
@@ -519,7 +519,7 @@ public final class MainGame
      *
      * @param alert The Alert to validate.
      */
-    private static void validateAlert(final Alert alert)
+    static void validateAlert(final Alert alert)
     {
         if (alert == null)
         {

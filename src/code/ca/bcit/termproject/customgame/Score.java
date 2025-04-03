@@ -69,7 +69,8 @@ public final class Score
      * @param score The score to be added to the file.
      * @throws IOException If an I/O error occurs while writing to the file.
      */
-    public static void addScore(final Integer score) throws IOException
+    public static void addScore(final Integer score)
+            throws IOException
     {
         validateScore(score);
 
@@ -88,8 +89,14 @@ public final class Score
                 StandardOpenOption.CREATE,
                 StandardOpenOption.APPEND);
     }
-    
-    public static final double getAverageScore() throws IOException
+
+    /**
+     * Returns the average of all previous scores
+     *
+     * @return double value of score average
+     */
+    public static final double getAverageScore()
+            throws IOException
     {
         if (Files.notExists(filePath))
         {
@@ -115,6 +122,11 @@ public final class Score
         return NOTHING;
     }
 
+    /**
+     * Validates that the score Integer value is not null, and is greater than 0.
+     *
+     * @param score Integer value to validate.
+     */
     private static final void validateScore(final Integer score)
     {
         if (score == null)

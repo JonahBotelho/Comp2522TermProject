@@ -84,6 +84,12 @@ public final class GreenOrb extends Orb
                     final double speedY,
                     final double speedMod)
     {
+        Orb.validateX(x);
+        Orb.validateY(y);
+        Orb.validateBaseSpeed(speedX);
+        Orb.validateBaseSpeed(speedY);
+        Orb.validateSpeedModifier(speedMod);
+
         super(x, y, MainGame.ORB_SIZE, ORB_PAINT, speedX, speedY, speedMod);
     }
 }
