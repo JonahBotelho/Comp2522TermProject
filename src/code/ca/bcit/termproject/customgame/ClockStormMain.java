@@ -221,32 +221,36 @@ public final class ClockStormMain
     {
         validateGameOverMessage(message);
 
-        final MutableInteger highScore;
-        highScore = new MutableInteger(NOTHING);
-
         gameLoop.stop();
 
         Platform.runLater(() ->
         {
+            final int highScore;
+            final double averageScore;
+            final ButtonType result;
+
             try
             {
                 Score.addScore(score);
-                highScore.setValue(Score.getHighScore());
-            } catch (final IOException e)
+                highScore = Score.getHighScore();
+                averageScore = Score.getAverageScore();
+
+                result = ClockStormUI.showGameOverAlert(message, score, highScore, averageScore);
+
+                if (result.getText().equals("Play Again"))
+                {
+                    root.getChildren().clear();
+                    setupGame();
+                    gameLoop.start();
+                }
+                else
+                {
+                    System.exit(NOTHING);
+                }
+            }
+            catch (final IOException e)
             {
                 throw new RuntimeException(e);
-            }
-
-            final ButtonType result = ClockStormUI.showGameOverAlert(message, score, highScore.getValue());
-            if (result.getText().equals("Play Again"))
-            {
-                root.getChildren().clear();
-                setupGame();
-                gameLoop.start();
-            }
-            else
-            {
-                System.exit(NOTHING);
             }
         });
     }

@@ -99,7 +99,7 @@ public final class ClockStormUI
      * @param highScore The high score
      * @return The button type that was clicked
      */
-    public static final ButtonType showGameOverAlert(final String message, final int score, final int highScore)
+    public static final ButtonType showGameOverAlert(final String message, final int score, final int highScore, final double average)
     {
         final Alert gameOverAlert;
         final ButtonType playAgain;
@@ -115,7 +115,8 @@ public final class ClockStormUI
         gameOverAlert.setTitle("Game Over");
         gameOverAlert.setContentText(message +
                 "\nFinal Score: " + score +
-                "\nHigh Score: " + highScore);
+                "\nHigh Score: " + highScore +
+                "\nAverage Score: " + average);
         gameOverAlert.getButtonTypes().setAll(playAgain, quit);
 
         return gameOverAlert.showAndWait().orElse(quit);
