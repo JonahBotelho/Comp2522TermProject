@@ -9,8 +9,7 @@ import javafx.scene.paint.Paint;
 import java.util.Objects;
 
 /**
- * Simplified Red Orb implementation using an image.
- * Red Orbs might represent danger or a different scoring mechanism.
+ * Red Orb implementation using an image.
  *
  * @author Jonah Botelho
  * @version 1.0

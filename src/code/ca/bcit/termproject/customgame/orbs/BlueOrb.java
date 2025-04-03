@@ -9,7 +9,7 @@ import javafx.scene.paint.Paint;
 import java.util.Objects;
 
 /**
- * Simplified Blue Orb implementation using an image.
+ * Blue Orb implementation using an image.
  *
  * @author Jonah Botelho
  * @version 1.0
