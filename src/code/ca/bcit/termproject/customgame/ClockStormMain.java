@@ -23,7 +23,7 @@ public final class ClockStormMain
         extends Application
 {
     // Game Configuration
-    public static final String GAME_NAME = "I'll think of something";  // TODO: think of name
+    public static final String GAME_NAME = "ClockStorm";
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 600;
     private static final int NOTHING = 0;
