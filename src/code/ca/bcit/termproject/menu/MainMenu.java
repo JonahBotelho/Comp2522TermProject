@@ -75,11 +75,11 @@ public final class MainMenu extends Application
                         }
                         break;
                     case NUMBER_GAME_LETTER:
-                        Platform.runLater(() -> new NumberGame().start(new Stage()));
+                        Platform.runLater(() -> new NumberGame().start(stage));
                         Platform.setImplicitExit(false);
                         break;
                     case CUSTOM_GAME_NUMBER:
-                        Platform.runLater(() -> new ClockStormMain().start(new Stage()));
+                        Platform.runLater(() -> new ClockStormMain().start(stage));
                         Platform.setImplicitExit(false);
                         break;
                 }
