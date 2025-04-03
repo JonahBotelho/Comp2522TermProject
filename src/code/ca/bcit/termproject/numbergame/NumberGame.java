@@ -130,7 +130,7 @@ public final class NumberGame
         
         for (int i = NOTHING; i < NUMBER_OF_SQUARES; i++)
         {
-            // declaring a final variable to be the value of i, so I can use it in the lambda expression
+            // declaring a final variable to be the value of i, so it can use it in the lambda expression
             final int finalI;
             finalI = i;
 
