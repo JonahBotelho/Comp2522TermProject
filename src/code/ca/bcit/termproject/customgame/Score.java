@@ -89,7 +89,7 @@ public final class Score
                 StandardOpenOption.APPEND);
     }
     
-    private static final double getAverageScore() throws IOException
+    public static final double getAverageScore() throws IOException
     {
         if (Files.notExists(filePath))
         {
