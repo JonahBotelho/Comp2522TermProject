@@ -1,7 +1,5 @@
 package ca.bcit.termproject.numbergame;
 
-import javafx.scene.control.Alert;
-
 /**
  * A custom alert for displaying warning messages to the user.
  * Extends PopupAlert and uses Alert.AlertType.WARNING for warning messages.

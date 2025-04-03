@@ -24,7 +24,6 @@ public final class World
     private static final int SECOND_INDEX        = 1;
     private static final int THIRD_INDEX         = 2;
     private static final int OFFSET_AT_START     = 2;
-    private static final int SKIP_W              = 2;
     private static final int FIRST_FACT_OFFSET   = 1;
     private static final int SECOND_FACT_OFFSET  = 2;
     private static final int THIRD_FACT_OFFSET   = 3;
@@ -83,7 +82,7 @@ public final class World
      *
      * @return A HashMap containing all the countries and their data.
      */
-    public final HashMap<String, Country> getWorld()
+    public HashMap<String, Country> getWorld()
     {
         return this.world;
     }

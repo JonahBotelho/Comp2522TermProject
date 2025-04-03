@@ -1,7 +1,6 @@
 package ca.bcit.termproject.numbergame;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -87,7 +86,7 @@ public final class NumberGame
         generateNextNumber();
 
         scene = new Scene(root, WINDOW_HEIGHT, WINDOW_WIDTH);
-        scene.getStylesheets().add(getClass().getResource(STYLESHEET_PATH).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(STYLESHEET_PATH)).toExternalForm());
 
         primaryStage.setTitle("Number Game");
         primaryStage.setScene(scene);
@@ -149,7 +148,7 @@ public final class NumberGame
      *
      * @param gridPane The grid pane to validate.
      */
-    private static final void validateGridPane(final GridPane gridPane)
+    private static void validateGridPane(final GridPane gridPane)
     {
         if (gridPane == null)
         {
@@ -392,7 +391,7 @@ public final class NumberGame
 /**
  * Validates that the alert object is not null.
  */
- private static final void validateAlert(final Alert alert)
+ private static void validateAlert(final Alert alert)
     {
         if (alert == null)
         {

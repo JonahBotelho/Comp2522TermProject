@@ -1,7 +1,6 @@
 package ca.bcit.termproject.customgame;
 
 import ca.bcit.termproject.customgame.orbs.*;
-import ca.bcit.termproject.numbergame.NumberGame;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -26,7 +25,6 @@ public final class ClockStormMain
     public static final String GAME_NAME    = "ClockStorm";
     public static final int WINDOW_WIDTH    = 800;
     public static final int WINDOW_HEIGHT   = 600;
-    private static final int SUCCESS = 0;
 
     // Player Configuration
     public static final int PLAYER_SIZE     = 30;
@@ -65,7 +63,7 @@ public final class ClockStormMain
      * @param primaryStage The primary stage for the application.
      */
     @Override
-    public final void start(final Stage primaryStage)
+    public void start(final Stage primaryStage)
     {
         validatePrimaryStage(primaryStage);
 
@@ -88,7 +86,7 @@ public final class ClockStormMain
     /**
      * Initializes the game by setting up the player, cannon, and score label.
      */
-    private final void setupGame()
+    private void setupGame()
     {
         player  = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
         cannon      = new OrbShooter();
@@ -103,12 +101,12 @@ public final class ClockStormMain
     /**
      * Starts the game loop, which updates the game state continuously.
      */
-    private final void startGameLoop()
+    private void startGameLoop()
     {
         gameLoop = new AnimationTimer()
         {
             @Override
-            public final void handle(final long now)
+            public void handle(final long now)
             {
                 cannon.shootOrb(root, speedModifier);
                 player.update();
@@ -125,7 +123,7 @@ public final class ClockStormMain
     /**
      * Updates the position of all orbs in the game.
      */
-    private final void updateOrbs()
+    private void updateOrbs()
     {
         cannon.getOrbs().forEach(Orb::update);
     }
@@ -135,7 +133,7 @@ public final class ClockStormMain
      *
      * @param scene The scene to which the key handlers are attached.
      */
-    private final void setupKeyHandlers(final Scene scene)
+    private void setupKeyHandlers(final Scene scene)
     {
         validateScene(scene);
 
@@ -181,7 +179,7 @@ public final class ClockStormMain
     /**
      * Checks for collisions between the player and orbs.
      */
-    private final void checkCollisions()
+    private void checkCollisions()
     {
         final Iterator<Orb> iterator;
         iterator = cannon.getOrbs().iterator();
@@ -193,17 +191,13 @@ public final class ClockStormMain
 
             if (player.getBoundsInParent().intersects(orb.getBoundsInParent()))
             {
-                if (orb instanceof RedOrb)
+                switch (orb)
                 {
-                    gameOver("Game over! You hit a red orb!");
-                }
-                else if (orb instanceof GreenOrb)
-                {
-                    score += GREEN_ORB_POINTS;
-                }
-                else if (orb instanceof BlueOrb)
-                {
-                    score += BLUE_ORB_POINTS;
+                    case RedOrb redOrb -> gameOver("Game over! You hit a red orb!");
+                    case GreenOrb greenOrb -> score += GREEN_ORB_POINTS;
+                    case BlueOrb blueOrb -> score += BLUE_ORB_POINTS;
+                    default -> throw new IllegalStateException("Invalid orb type");
+                    
                 }
 
                 iterator.remove();
@@ -219,7 +213,7 @@ public final class ClockStormMain
      *
      * @param message The game-over message to display.
      */
-    private final void gameOver(final String message)
+    private void gameOver(final String message)
     {
         validateGameOverMessage(message);
 
@@ -261,7 +255,7 @@ public final class ClockStormMain
      * Checks the users score, and ends the game if it is below 0.
      * If it is above MINIMUM_SCORE_TO_SURVIVE, calls the updateScore() method.
      */
-    private final void checkAndUpdateScore()
+    private void checkAndUpdateScore()
     {
         if (score < MINIMUM_SCORE_TO_SURVIVE)
         {
@@ -278,7 +272,7 @@ public final class ClockStormMain
     /**
      * Calculates a random number, and decreases the score if that number is in a given range.
      */
-    private final void updateScore()
+    private void updateScore()
     {
         if (getRandomNumber(SCORE_DECREASE_RANDOM_MIN, SCORE_DECREASE_RANDOM_MAX) < SCORE_DECREASE_PROBABILITY)
         {
@@ -291,7 +285,7 @@ public final class ClockStormMain
     /**
      * Updates the score label with the player's
      */
-    private final void updateScoreLabel()
+    private void updateScoreLabel()
     {
         scoreLabel.setText("Score: " + score);
     }
@@ -300,7 +294,7 @@ public final class ClockStormMain
      * Adjusts the speed modifier of the orbs, based on the current score value.
      * Speed Modifier =
      */
-    private final void updateSpeedModifier()
+    private void updateSpeedModifier()
     {
         speedModifier = BASE_SPEED_MODIFIER + (score - START_SCORE) / SPEED_MODIFIER_CHANGE_RATE;
 
@@ -321,8 +315,8 @@ public final class ClockStormMain
      * @param max maximum number to be generated
      * @return generated number
      */
-    private static final int getRandomNumber(final int min,
-                                             final int max)
+    private static int getRandomNumber(final int min,
+                                       final int max)
     {
         validateMinMaxValues(min, max);
 
@@ -340,7 +334,7 @@ public final class ClockStormMain
      *
      * @return current score as an int
      */
-    public final int getScore()
+    public int getScore()
     {
         return score;
     }
@@ -353,7 +347,7 @@ public final class ClockStormMain
      *
      * @param primaryStage The Scene to validate.
      */
-    public static final void validatePrimaryStage(final Stage primaryStage)
+    public static void validatePrimaryStage(final Stage primaryStage)
     {
         if (primaryStage == null)
         {
@@ -367,7 +361,7 @@ public final class ClockStormMain
      *
      * @param scene The Scene to validate.
      */
-    private static final void validateScene(final Scene scene)
+    private static void validateScene(final Scene scene)
     {
         if (scene == null)
         {
@@ -381,7 +375,7 @@ public final class ClockStormMain
      *
      * @param message The String message to validate.
      */
-    private static final void validateGameOverMessage(final String message)
+    private static void validateGameOverMessage(final String message)
     {
         if (message == null)
         {
@@ -400,7 +394,7 @@ public final class ClockStormMain
      * @param min min int value
      * @param max max int value
      */
-    private static final void validateMinMaxValues(final int min, final int max)
+    private static void validateMinMaxValues(final int min, final int max)
     {
         if (min > max)
         {

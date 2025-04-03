@@ -8,7 +8,6 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.classfile.CustomAttribute;
 import java.util.Scanner;
 
 /**
@@ -30,13 +29,13 @@ public final class MainMenu extends Application
      *
      * @param args unused.
      */
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
         launch(args);
     }
     
     @Override
-    public void start(final Stage stage) throws IOException
+    public void start(final Stage stage)
     {
         
         Thread menuThread = new Thread(() ->{

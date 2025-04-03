@@ -1,7 +1,5 @@
 package ca.bcit.termproject.wordgame;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -9,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -144,7 +141,7 @@ public final class Score
             Files.createFile(filePath);
         }
 
-        Files.writeString(filePath, score.toString() + System.lineSeparator(), StandardOpenOption.APPEND);
+        Files.writeString(filePath, score + System.lineSeparator(), StandardOpenOption.APPEND);
     }
 
     /**
@@ -240,7 +237,7 @@ public final class Score
      *
      * @return The number of games played.
      */
-    public final int getGamesPlayed()
+    public int getGamesPlayed()
     {
         return this.gamesPlayed;
     }
@@ -250,7 +247,7 @@ public final class Score
      *
      * @return The count of correct first attempts.
      */
-    public final int getCorrectOnFirstAttempt()
+    public int getCorrectOnFirstAttempt()
     {
         return this.correctOnFirstAttempt;
     }
@@ -260,7 +257,7 @@ public final class Score
      *
      * @return The count of correct second attempts.
      */
-    public final int getCorrectOnSecondAttempt()
+    public int getCorrectOnSecondAttempt()
     {
         return this.correctOnSecondAttempt;
     }
@@ -270,7 +267,7 @@ public final class Score
      *
      * @return The count of incorrect second attempts.
      */
-    public final int getIncorrectOnSecondAttempt()
+    public int getIncorrectOnSecondAttempt()
     {
         return this.incorrectOnSecondAttempt;
     }
@@ -280,7 +277,7 @@ public final class Score
      *
      * @return The total score.
      */
-    public final int getScore()
+    public int getScore()
     {
         return this.score;
     }
@@ -290,7 +287,7 @@ public final class Score
      *
      * @return The average score per game.
      */
-    public final double getAverageScore()
+    public double getAverageScore()
     {
         return (double) this.getScore() / this.getGamesPlayed();
     }

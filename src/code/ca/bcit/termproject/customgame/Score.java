@@ -95,7 +95,7 @@ public final class Score
      *
      * @return double value of score average
      */
-    public static final double getAverageScore()
+    public static double getAverageScore()
             throws IOException
     {
         if (Files.notExists(filePath))
@@ -127,7 +127,7 @@ public final class Score
      *
      * @param score Integer value to validate.
      */
-    private static final void validateScore(final Integer score)
+    private static void validateScore(final Integer score)
     {
         if (score == null)
         {

@@ -36,7 +36,7 @@ public final class ClockStormUI
      *
      * @param scene The scene to style
      */
-    public static final void setupSceneStyles(final Scene scene)
+    public static void setupSceneStyles(final Scene scene)
     {
         scene.getStylesheets().add(Objects.requireNonNull(
                 ClockStormUI.class.getResource(STYLESHEET_PATH)).toExternalForm());
@@ -47,7 +47,7 @@ public final class ClockStormUI
      *
      * @return The configured score label
      */
-    public static final Label createScoreLabel()
+    public static Label createScoreLabel()
     {
         final Label scoreLabel = new Label(SCORE_LABEL_INITIAL_TEXT);
         scoreLabel.setFont(new Font(SCORE_LABEL_FONT_NAME, SCORE_LABEL_FONT_SIZE));
@@ -60,7 +60,7 @@ public final class ClockStormUI
     /**
      * Displays the welcome message with game instructions.
      */
-    public static final void showWelcomeMessage()
+    public static void showWelcomeMessage()
     {
         final Alert welcomeMessage;
         final ButtonType playButton;
@@ -102,10 +102,10 @@ public final class ClockStormUI
      * @param highScore The high score
      * @return The button type that was clicked
      */
-    public static final ButtonType showGameOverAlert(final String message,
-                                                     final int score,
-                                                     final int highScore,
-                                                     final double average)
+    public static ButtonType showGameOverAlert(final String message,
+                                               final int score,
+                                               final int highScore,
+                                               final double average)
     {
         validateMessage(message);
         validateScore(score);
@@ -142,7 +142,7 @@ public final class ClockStormUI
      *
      * @param alert alert to set up
      */
-    static final void setUpAlert(final Alert alert)
+    static void setUpAlert(final Alert alert)
     {
         validateAlert(alert);
 
@@ -171,7 +171,7 @@ public final class ClockStormUI
      *
      * @param alert the alert to validate
      */
-    private static final void validateAlert(final Alert alert)
+    private static void validateAlert(final Alert alert)
     {
         if (alert == null)
         {
@@ -184,7 +184,7 @@ public final class ClockStormUI
      *
      * @param message the message to validate
      */
-    private static final void validateMessage(final String message)
+    private static void validateMessage(final String message)
     {
         if (message == null || message.isBlank())
         {
@@ -197,7 +197,7 @@ public final class ClockStormUI
      *
      * @param score the score to validate
      */
-    public static final void validateScore(final int score)
+    public static void validateScore(final int score)
     {
         if (score < NOTHING)
         {
@@ -210,7 +210,7 @@ public final class ClockStormUI
      *
      * @param highScore the high score to validate
      */
-    public static final void validateHighScore(final int highScore)
+    public static void validateHighScore(final int highScore)
     {
         if (highScore < NOTHING)
         {
@@ -223,7 +223,7 @@ public final class ClockStormUI
      *
      * @param average the average value to validate
      */
-    public static final void validateAverage(final double average)
+    public static void validateAverage(final double average)
     {
         if (average < NOTHING)
         {

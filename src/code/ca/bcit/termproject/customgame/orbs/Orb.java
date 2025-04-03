@@ -86,7 +86,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param x the x-coordinate to validate
      */
-    public static final void validateX(final double x)
+    public static void validateX(final double x)
     {
         if (x < NOTHING || x > ClockStormMain.WINDOW_WIDTH)
         {
@@ -99,7 +99,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param y the y-coordinate to validate
      */
-    public static final void validateY(final double y)
+    public static void validateY(final double y)
     {
         if (y < NOTHING || y > ClockStormMain.WINDOW_WIDTH)
         {
@@ -112,7 +112,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param radius the radius to validate
      */
-    public static final void validateRadius(final double radius)
+    public static void validateRadius(final double radius)
     {
         if (radius < NOTHING)
         {
@@ -125,7 +125,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param fill the Paint object to validate
      */
-    public static final void validateFillPaint(final Paint fill)
+    public static void validateFillPaint(final Paint fill)
     {
         if (fill == null)
         {
@@ -138,7 +138,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param baseSpeed the base speed to validate
      */
-    public static final void validateBaseSpeed(final double baseSpeed)
+    public static void validateBaseSpeed(final double baseSpeed)
     {
         if (baseSpeed > MAX_BASE_SPEED || baseSpeed < MIN_BASE_SPEED)
         {
@@ -151,7 +151,7 @@ public abstract class Orb extends Circle implements Updatable
      *
      * @param speedModifier the speed modifier to validate
      */
-    public static final void validateSpeedModifier(final double speedModifier)
+    public static void validateSpeedModifier(final double speedModifier)
     {
         if (speedModifier > MAX_SPEED_MODIFIER || speedModifier < MIN_SPEED_MODIFIER)
         {

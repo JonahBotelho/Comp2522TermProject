@@ -170,7 +170,7 @@ public final class Player
      * Validates that the given double value is positive
      *
      */
-    private static final void validateDoublePositive(final double value)
+    private static void validateDoublePositive(final double value)
     {
         if (value < NOTHING)
         {

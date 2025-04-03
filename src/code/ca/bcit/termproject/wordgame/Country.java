@@ -41,7 +41,7 @@ public final class Country
      *
      * @param s The string to validate.
      */
-    public final void validateString(final String s)
+    public void validateString(final String s)
     {
         if (s == null || s.isBlank())
         {
@@ -54,7 +54,7 @@ public final class Country
      *
      * @param s The string array to validate.
      */
-    private final void validateStringArray(final String[] s)
+    private void validateStringArray(final String[] s)
     {
         if (s == null || s.length == NOTHING)
         {
@@ -69,7 +69,7 @@ public final class Country
      *
      * @return The name of the country.
      */
-    public final String getName()
+    public String getName()
     {
         return name;
     }
@@ -79,7 +79,7 @@ public final class Country
      *
      * @return The name of the capital city.
      */
-    public final String getCapitalCityName()
+    public String getCapitalCityName()
     {
         return capitalCityName;
     }
@@ -89,7 +89,7 @@ public final class Country
      *
      * @return An array of facts about the country.
      */
-    public final String[] getFacts()
+    public String[] getFacts()
     {
         return facts;
     }

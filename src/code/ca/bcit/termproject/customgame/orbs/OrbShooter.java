@@ -58,7 +58,7 @@ public final class OrbShooter
      *
      * @param root The root pane to which the orb will be added.
      */
-    public final void shootOrb(final Pane root,
+    public void shootOrb(final Pane root,
                                final double speedModifier)
     {
         validateRoot(root);
@@ -125,7 +125,7 @@ public final class OrbShooter
     /**
      * Creates a random orb with the specified position and speed components.
      */
-    private final Orb createRandomOrb(final double x,
+    private Orb createRandomOrb(final double x,
                                       final double y,
                                       final double speedX,
                                       final double speedY)
@@ -141,6 +141,7 @@ public final class OrbShooter
 
         return switch (orbType)
         {
+            // intentional redundancy, making it easier to switch orb probabilities
             case GENERATE_RED_ORB -> new RedOrb(x, y, speedX, speedY);
             case GENERATE_GREEN_ORB -> new GreenOrb(x, y, speedX, speedY);
             case GENERATE_BLUE_ORB -> new BlueOrb(x, y, speedX, speedY);
@@ -151,7 +152,7 @@ public final class OrbShooter
     /**
      * Returns the list of orbs currently in the game.
      */
-    public final List<Orb> getOrbs()
+    public List<Orb> getOrbs()
     {
         return orbs;
     }
@@ -161,7 +162,7 @@ public final class OrbShooter
      *
      * @param root to be validated
      */
-    private static final void validateRoot(final Pane root)
+    private static void validateRoot(final Pane root)
     {
         if (root == null)
         {
