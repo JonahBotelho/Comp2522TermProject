@@ -16,11 +16,11 @@ Lesson 05.      arrays, lists, sets, maps, iterators:
                 List of Orbs in the OrbShooter class
 
 Lesson 06.      generics, wild cards, law of demeter, inner/nested classes:
-                Animation timer in MainGame class is an anonymous inner class
+                Animation timer in ClockStormMain class is an anonymous inner class
 
 Lesson 07.      lambda expressions, method references:
-                Lambda expressions used throughout MainGame for event handling
-                Method reference used in updateOrbs() in MainGame class
+                Lambda expressions used throughout ClockStormMain for event handling
+                Method reference used in updateOrbs() in ClockStormMain class
 
 Lesson 08.      files and paths. NIO. Streaming & filtering:
                 Score class saves high score in score.txt, using NIO and file paths
@@ -36,3 +36,4 @@ Lesson 11.      Memory, singletons, design patterns:
                 to create RedOrb, GreenOrb and BlueOrb concrete products
 
 Lesson 12.      concurrency:
+                Platform.runLater in ClockStormMain class
