@@ -344,24 +344,7 @@ public final class ClockStormMain
     {
         return score;
     }
-
-    /**
-     * Runs the program.
-     */
-    public static final void launchGame()
-    {
-        Platform.runLater(() ->
-        {
-            try
-            {
-                new NumberGame().start(new Stage());
-            } catch (final Exception e)
-            {
-                e.printStackTrace();
-            }
-        });
-    }
-
+    
     // Validation section
 
     /**

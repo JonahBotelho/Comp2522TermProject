@@ -69,7 +69,8 @@ public final class MainMenu extends Application
                         try
                         {
                             WordGame.main(new String[NOTHING]);
-                        } catch (IOException e)
+                        }
+                        catch (IOException e)
                         {
                             throw new RuntimeException(e);
                         }

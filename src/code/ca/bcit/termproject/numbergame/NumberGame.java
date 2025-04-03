@@ -60,22 +60,6 @@ public final class NumberGame
     private static final String STYLESHEET_PATH = "/res/numbergame/css/numberGameStyles.css";
 
     /**
-     * Launches the game in a separate JavaFX thread.
-     */
-    public static void launchGame()
-    {
-        Platform.runLater(() ->{
-            try
-            {
-                new NumberGame().start(new Stage());
-            }
-            catch (final Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    /**
      * Starts the JavaFX application, initializes the UI, and sets up the game window.
      *
      * @param primaryStage The primary stage for the application.
