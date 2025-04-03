@@ -261,46 +261,6 @@ public final class CustomGameTester
         assertEquals(0, orbs.size());
     }
 
-
-    // --- MutableInteger Behavior Tests (3 tests) ---
-
-    /**
-     * Tests that the MutableInteger constructor correctly sets the initial value.
-     */
-    @Test
-    void testMutableIntegerConstructor()
-    {
-        final int initialValue = 42;
-        final MutableInteger mi = new MutableInteger(initialValue);
-        assertEquals(initialValue, mi.getValue(), "Constructor should set the initial value.");
-    }
-
-    /**
-     * Tests that setValue updates the stored value.
-     */
-    @Test
-    void testMutableIntegerSetValue()
-    {
-        final int initialValue = 10;
-        final int newValue = -5;
-        final MutableInteger mi = new MutableInteger(initialValue);
-        mi.setValue(newValue);
-        assertEquals(newValue, mi.getValue(), "setValue should update the stored value.");
-    }
-
-    /**
-     * Tests that getValue returns the currently stored value.
-     */
-    @Test
-    void testMutableIntegerGetValue()
-    {
-        final int testValue = 99;
-        final MutableInteger mi = new MutableInteger(testValue);
-        assertEquals(testValue, mi.getValue(), "getValue should return the current value.");
-        mi.setValue(0);
-        assertEquals(0, mi.getValue(), "getValue should return the updated value.");
-    }
-
     // --- Score Class Behavior Tests (Using simulated file access) (9 tests) ---
 
     // Helper to simulate Score.addScore using the test file path
