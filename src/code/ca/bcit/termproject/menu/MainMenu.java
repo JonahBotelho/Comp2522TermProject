@@ -2,7 +2,7 @@ package ca.bcit.termproject.menu;
 
 import ca.bcit.termproject.numbergame.NumberGame;
 import ca.bcit.termproject.wordgame.WordGame;
-import ca.bcit.termproject.customgame.MainGame;
+import ca.bcit.termproject.customgame.ClockStormMain;
 import javafx.application.Application;
 
 import java.io.IOException;
@@ -60,7 +60,7 @@ public final class MainMenu
                     new Thread(() -> Application.launch(NumberGame.class)).start();
                     break;
                 case CUSTOM_GAME_NUMBER:
-                    new Thread(() -> Application.launch(MainGame.class)).start();
+                    new Thread(() -> Application.launch(ClockStormMain.class)).start();
                     break;
             }
 

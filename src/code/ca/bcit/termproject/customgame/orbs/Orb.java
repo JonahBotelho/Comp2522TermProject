@@ -1,8 +1,10 @@
 package ca.bcit.termproject.customgame.orbs;
 
-import ca.bcit.termproject.customgame.MainGame;
+import ca.bcit.termproject.customgame.ClockStormMain;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+
+import java.time.Clock;
 
 /**
  * Abstract base class for Orbs in the game.
@@ -38,15 +40,13 @@ public abstract class Orb extends Circle implements Updatable
      * @param fillPaint     the Paint (Color or ImagePattern) for the orb's fill
      * @param baseSpeedX    base horizontal speed
      * @param baseSpeedY    base vertical speed
-     * @param speedModifier multiplier for base speeds
      */
     protected Orb(final double x,
                   final double y,
                   final double radius,
                   final Paint fillPaint,
                   final double baseSpeedX,
-                  final double baseSpeedY,
-                  final double speedModifier)
+                  final double baseSpeedY)
     {
         super(INITIAL_POSITION_X, INITIAL_POSITION_Y, INITIAL_RADIUS);
         
@@ -56,22 +56,15 @@ public abstract class Orb extends Circle implements Updatable
         validateFillPaint(fillPaint);
         validateBaseSpeed(baseSpeedX);
         validateBaseSpeed(baseSpeedY);
-        validateSpeedModifier(speedModifier);
-        
-        
-        final double calculatedSpeedX;
-        final double calculatedSpeedY;
-        
+
+
         setCenterX(x);
         setCenterY(y);
         setRadius(radius);
         setFill(fillPaint);
-        
-        calculatedSpeedX = baseSpeedX * speedModifier;
-        calculatedSpeedY = baseSpeedY * speedModifier;
-        
-        this.speedX = calculatedSpeedX;
-        this.speedY = calculatedSpeedY;
+
+        this.speedX = baseSpeedX;
+        this.speedY = baseSpeedY;
     }
     
     /**
@@ -97,7 +90,7 @@ public abstract class Orb extends Circle implements Updatable
      */
     public static final void validateX(final double x)
     {
-        if (x < NOTHING || x > MainGame.WINDOW_WIDTH)
+        if (x < NOTHING || x > ClockStormMain.WINDOW_WIDTH)
         {
             throw new IllegalArgumentException("x out of bounds");
         }
@@ -110,7 +103,7 @@ public abstract class Orb extends Circle implements Updatable
      */
     public static final void validateY(final double y)
     {
-        if (y < NOTHING || y > MainGame.WINDOW_WIDTH)
+        if (y < NOTHING || y > ClockStormMain.WINDOW_WIDTH)
         {
             throw new IllegalArgumentException("y out of bounds");
         }

@@ -29,9 +29,9 @@ public final class CustomGameTester
 {
 
     // Use constants from MainGame for boundary calculations, but don't test their literal values
-    private static final double WINDOW_WIDTH = MainGame.WINDOW_WIDTH;
-    private static final double WINDOW_HEIGHT = MainGame.WINDOW_HEIGHT;
-    private static final double PLAYER_SIZE = MainGame.PLAYER_SIZE;
+    private static final double WINDOW_WIDTH = ClockStormMain.WINDOW_WIDTH;
+    private static final double WINDOW_HEIGHT = ClockStormMain.WINDOW_HEIGHT;
+    private static final double PLAYER_SIZE = ClockStormMain.PLAYER_SIZE;
     // Use placeholder start positions derived from MainGame logic if needed for relative checks
     private static final double PLAYER_START_X = WINDOW_WIDTH / 2.0;
     private static final double PLAYER_START_Y = WINDOW_HEIGHT - 50.0; // Example derivation
@@ -43,8 +43,8 @@ public final class CustomGameTester
     private static final int TEST_SCORE_NEGATIVE = -50;
 
     // Constants for Speed Modifier Testing Logic (relative to MainGame constants)
-    private static final int TEST_START_SCORE = MainGame.START_SCORE; // Use the actual start score
-    private static final double TEST_BASE_MODIFIER = MainGame.BASE_SPEED_MODIFIER; // Use the actual base modifier
+    private static final int TEST_START_SCORE = ClockStormMain.START_SCORE; // Use the actual start score
+    private static final double TEST_BASE_MODIFIER = ClockStormMain.BASE_SPEED_MODIFIER; // Use the actual base modifier
     // We derive thresholds relative to START_SCORE rather than hardcoding scores
     private static final int SCORE_ABOVE_START = TEST_START_SCORE + 50;
     private static final int SCORE_BELOW_START = TEST_START_SCORE - 50;
@@ -432,12 +432,12 @@ public final class CustomGameTester
     // Replicates updateSpeedModifier logic from MainGame for testing its behavior
     private double simulateUpdateSpeedModifier(final int currentScore)
     {
-        // Use constants derived from MainGame for calculation
-        final double baseModifier = MainGame.BASE_SPEED_MODIFIER;
-        final double startScore = MainGame.START_SCORE;
-        final double changeRate = MainGame.SPEED_MODIFIER_CHANGE_RATE;
-        final double maxModifier = MainGame.MAX_SPEED_MODIFIER;
-        final double minModifier = MainGame.MIN_SPEED_MODIFIER;
+        // Use constants derived from ClockStormMain for calculation
+        final double baseModifier = ClockStormMain.BASE_SPEED_MODIFIER;
+        final double startScore = ClockStormMain.START_SCORE;
+        final double changeRate = ClockStormMain.SPEED_MODIFIER_CHANGE_RATE;
+        final double maxModifier = ClockStormMain.MAX_SPEED_MODIFIER;
+        final double minModifier = ClockStormMain.MIN_SPEED_MODIFIER;
 
         double modifier = baseModifier + (currentScore - startScore) / changeRate;
 
@@ -481,7 +481,7 @@ public final class CustomGameTester
 
         // Check it clamps - the value for a very high score shouldn't exceed the value for a moderately high score if max is hit.
         // A better check is against the known MAX_SPEED_MODIFIER if we allow using it relatively.
-        double expectedMax = MainGame.MAX_SPEED_MODIFIER; // Use constant for comparison endpoint
+        double expectedMax = ClockStormMain.MAX_SPEED_MODIFIER; // Use constant for comparison endpoint
         assertEquals(expectedMax, modifierAtMaxThreshold, 0.001, "Modifier should clamp at the max value for very high scores.");
         assertTrue(modifierAtMaxThreshold >= modifierJustAboveStart, "Max clamped value should be >= value for lower score.");
     }
@@ -496,7 +496,7 @@ public final class CustomGameTester
         double modifierJustBelowStart = simulateUpdateSpeedModifier(SCORE_BELOW_START); // Score unlikely to hit min (might clamp anyway)
 
         // Check it clamps against the known MIN_SPEED_MODIFIER.
-        double expectedMin = MainGame.MIN_SPEED_MODIFIER; // Use constant for comparison endpoint
+        double expectedMin = ClockStormMain.MIN_SPEED_MODIFIER; // Use constant for comparison endpoint
         assertEquals(expectedMin, modifierAtMinThreshold, 0.001, "Modifier should clamp at the min value for very low scores.");
         // Ensure clamped min is not higher than value for a slightly higher score (unless that also clamped)
         assertTrue(modifierAtMinThreshold <= modifierJustBelowStart, "Min clamped value should be <= value for higher score (unless also clamped).");

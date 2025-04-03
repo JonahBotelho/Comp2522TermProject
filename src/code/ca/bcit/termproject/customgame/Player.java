@@ -47,7 +47,7 @@ public final class Player
         {
             setX(getX() - speed);
         }
-        if (movingRight && getX() < MainGame.WINDOW_WIDTH - getWidth())
+        if (movingRight && getX() < ClockStormMain.WINDOW_WIDTH - getWidth())
         {
             setX(getX() + speed);
         }
@@ -55,7 +55,7 @@ public final class Player
         {
             setY(getY() - speed);
         }
-        if (movingDown && getY() < MainGame.WINDOW_HEIGHT - getHeight())
+        if (movingDown && getY() < ClockStormMain.WINDOW_HEIGHT - getHeight())
         {
             setY(getY() + speed);
         }
@@ -72,17 +72,17 @@ public final class Player
         {
             setX(NOTHING);
         }
-        if (getX() > MainGame.WINDOW_WIDTH - getWidth())
+        if (getX() > ClockStormMain.WINDOW_WIDTH - getWidth())
         {
-            setX(MainGame.WINDOW_WIDTH - getWidth());
+            setX(ClockStormMain.WINDOW_WIDTH - getWidth());
         }
         if (getY() < NOTHING)
         {
             setY(NOTHING);
         }
-        if (getY() > MainGame.WINDOW_HEIGHT - getHeight())
+        if (getY() > ClockStormMain.WINDOW_HEIGHT - getHeight())
         {
-            setY(MainGame.WINDOW_HEIGHT - getHeight());
+            setY(ClockStormMain.WINDOW_HEIGHT - getHeight());
         }
     }
 

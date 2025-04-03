@@ -1,6 +1,6 @@
 package ca.bcit.termproject.customgame.orbs;
 
-import ca.bcit.termproject.customgame.MainGame;
+import ca.bcit.termproject.customgame.ClockStormMain;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -27,9 +27,9 @@ public final class OrbShooter
     private static final double RADIUS_OF_SCREEN_CONSTANT   = 2.0;
     private static final int NUMBER_OF_EDGES                = 4;
     private static final int LEFT_EDGE                      = 0;
-    private static final int RIGHT_EDGE                     = MainGame.WINDOW_WIDTH;
+    private static final int RIGHT_EDGE                     = ClockStormMain.WINDOW_WIDTH;
     private static final int TOP_EDGE                       = 0;
-    private static final int BOTTOM_EDGE                    = MainGame.WINDOW_HEIGHT;
+    private static final int BOTTOM_EDGE                    = ClockStormMain.WINDOW_HEIGHT;
 
     // Edge choosing probability
     private static final int CHOOSE_TOP_EDGE                = 0;
@@ -73,34 +73,34 @@ public final class OrbShooter
             double centerY;
 
             edge = random.nextInt(NUMBER_OF_EDGES);
-            centerX = MainGame.WINDOW_WIDTH / RADIUS_OF_SCREEN_CONSTANT;
-            centerY = MainGame.WINDOW_HEIGHT / RADIUS_OF_SCREEN_CONSTANT;
+            centerX = ClockStormMain.WINDOW_WIDTH / RADIUS_OF_SCREEN_CONSTANT;
+            centerY = ClockStormMain.WINDOW_HEIGHT / RADIUS_OF_SCREEN_CONSTANT;
 
             switch (edge)
             {
                 case CHOOSE_TOP_EDGE:
-                    x = random.nextInt(MainGame.WINDOW_WIDTH);
+                    x = random.nextInt(ClockStormMain.WINDOW_WIDTH);
                     y = TOP_EDGE;
-                    speedX = (centerX - x) * ORB_SPEED / MainGame.WINDOW_WIDTH;
+                    speedX = (centerX - x) * ORB_SPEED / ClockStormMain.WINDOW_WIDTH;
                     speedY = ORB_SPEED;
                     break;
                 case CHOOSE_RIGHT_EDGE:
                     x = RIGHT_EDGE;
-                    y = random.nextInt(MainGame.WINDOW_HEIGHT);
+                    y = random.nextInt(ClockStormMain.WINDOW_HEIGHT);
                     speedX = -ORB_SPEED;
-                    speedY = (centerY - y) * ORB_SPEED / MainGame.WINDOW_HEIGHT;
+                    speedY = (centerY - y) * ORB_SPEED / ClockStormMain.WINDOW_HEIGHT;
                     break;
                 case CHOOSE_BOTTOM_EDGE:
-                    x = random.nextInt(MainGame.WINDOW_WIDTH);
+                    x = random.nextInt(ClockStormMain.WINDOW_WIDTH);
                     y = BOTTOM_EDGE;
-                    speedX = (centerX - x) * ORB_SPEED / MainGame.WINDOW_WIDTH;
+                    speedX = (centerX - x) * ORB_SPEED / ClockStormMain.WINDOW_WIDTH;
                     speedY = -ORB_SPEED;
                     break;
                 case CHOOSE_LEFT_EDGE:
                     x = LEFT_EDGE;
-                    y = random.nextInt(MainGame.WINDOW_HEIGHT);
+                    y = random.nextInt(ClockStormMain.WINDOW_HEIGHT);
                     speedX = ORB_SPEED;
-                    speedY = (centerY - y) * ORB_SPEED / MainGame.WINDOW_HEIGHT;
+                    speedY = (centerY - y) * ORB_SPEED / ClockStormMain.WINDOW_HEIGHT;
                     break;
                 default:
                     throw new IllegalStateException("Invalid edge selection");
@@ -111,7 +111,7 @@ public final class OrbShooter
             speedY *= speedModifier;
 
             // Create the orb with the calculated position and speed components
-            Orb orb = createRandomOrb(x, y, speedX, speedY, speedModifier);
+            Orb orb = createRandomOrb(x, y, speedX, speedY);
 
             // Add the orb to the list and the scene graph
             orbs.add(orb);
@@ -125,8 +125,7 @@ public final class OrbShooter
     private final Orb createRandomOrb(final double x,
                                       final double y,
                                       final double speedX,
-                                      final double speedY,
-                                      final double speedModifier)
+                                      final double speedY)
     {
         Orb.validateX(x);
         Orb.validateY(y);
@@ -139,10 +138,10 @@ public final class OrbShooter
 
         return switch (orbType)
         {
-            case GENERATE_RED_ORB -> new RedOrb(x, y, speedX, speedY, speedModifier);
-            case GENERATE_GREEN_ORB -> new GreenOrb(x, y, speedX, speedY, speedModifier);
-            case GENERATE_BLUE_ORB -> new BlueOrb(x, y, speedX, speedY, speedModifier);
-            default -> new RedOrb(x, y, speedX, speedY, speedModifier);
+            case GENERATE_RED_ORB -> new RedOrb(x, y, speedX, speedY);
+            case GENERATE_GREEN_ORB -> new GreenOrb(x, y, speedX, speedY);
+            case GENERATE_BLUE_ORB -> new BlueOrb(x, y, speedX, speedY);
+            default -> new RedOrb(x, y, speedX, speedY);
         };
     }
 

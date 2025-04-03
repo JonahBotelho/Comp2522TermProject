@@ -1,6 +1,6 @@
 package ca.bcit.termproject.customgame.orbs;
 
-import ca.bcit.termproject.customgame.MainGame;
+import ca.bcit.termproject.customgame.ClockStormMain;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -73,20 +73,17 @@ public final class BlueOrb extends Orb
      * @param y        initial y-coordinate center
      * @param speedX   base horizontal speed
      * @param speedY   base vertical speed
-     * @param speedMod multiplier for base speeds
      */
     public BlueOrb(final double x,
                    final double y,
                    final double speedX,
-                   final double speedY,
-                   final double speedMod)
+                   final double speedY)
     {
         Orb.validateX(x);
         Orb.validateY(y);
         Orb.validateBaseSpeed(speedX);
         Orb.validateBaseSpeed(speedY);
-        Orb.validateSpeedModifier(speedMod);
 
-        super(x, y, MainGame.ORB_SIZE, ORB_PAINT, speedX, speedY, speedMod);
+        super(x, y, ClockStormMain.ORB_SIZE, ORB_PAINT, speedX, speedY);
     }
 }
