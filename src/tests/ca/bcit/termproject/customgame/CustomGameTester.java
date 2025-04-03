@@ -69,10 +69,7 @@ public final class CustomGameTester
     @BeforeAll
     static void setUpClass()
     {
-        // Construct the expected path within the temp directory
         scoreFilePath = tempDir.resolve("data").resolve("score.txt");
-        // Note: This assumes the Score class can be configured or implicitly uses this path structure relative to execution.
-        // If Score class path is fixed, these file tests might need adaptation or mocking.
     }
 
     /**
@@ -87,9 +84,8 @@ public final class CustomGameTester
         player = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
         cannon = new OrbShooter();
 
-        // Ensure clean state for score file tests
         Files.deleteIfExists(scoreFilePath);
-        // Ensure parent directory exists for file creation
+
         if (scoreFilePath.getParent() != null)
         {
             Files.createDirectories(scoreFilePath.getParent());
@@ -229,9 +225,6 @@ public final class CustomGameTester
         player.setY(bottomBoundary - 1.0); // Position close to boundary
         player.setDown(true);
         player.update();
-        // Player might overshoot slightly due to speed, check it doesn't go past boundary
-        // A more robust test might check multiple updates or use smaller speed for precision.
-        // For this test, we assume update stops it correctly.
         assertEquals(bottomBoundary, player.getY(), 0.001, "Player should stop exactly at bottom boundary.");
     }
 
@@ -254,10 +247,8 @@ public final class CustomGameTester
     @Test
     void testCannonGetOrbsReturnsList()
     {
-        // This mainly checks nullity, assuming the list can be used (e.g., iterated).
         final List<Orb> orbs = cannon.getOrbs();
         assertNotNull(orbs);
-        // Optional: Check if it behaves like a list
         assertEquals(0, orbs.size());
     }
 
@@ -277,14 +268,14 @@ public final class CustomGameTester
     {
         if (Files.notExists(scoreFilePath))
         {
-            return DEFAULT_HIGH_SCORE; // Use the defined default
+            return DEFAULT_HIGH_SCORE;
         }
         final List<String> lines = Files.readAllLines(scoreFilePath);
         return lines.stream()
                 .filter(s -> s != null && !s.isBlank() && s.matches("-?\\d+"))
                 .mapToInt(Integer::parseInt)
                 .max()
-                .orElse(DEFAULT_HIGH_SCORE); // Use the defined default
+                .orElse(DEFAULT_HIGH_SCORE);
     }
 
     /**
@@ -293,7 +284,6 @@ public final class CustomGameTester
     @Test
     void testGetHighScoreNonExistentFileReturnsDefault() throws IOException
     {
-        // Ensure file doesn't exist (handled by @BeforeEach)
         assertEquals(DEFAULT_HIGH_SCORE, simulateGetHighScore(), "Should return default score if file doesn't exist.");
     }
 
@@ -314,7 +304,7 @@ public final class CustomGameTester
     @Test
     void testGetHighScoreEmptyFileReturnsDefault() throws IOException
     {
-        Files.createFile(scoreFilePath); // Create an empty file
+        Files.createFile(scoreFilePath);
         assertTrue(Files.exists(scoreFilePath), "Test requires an empty file to exist.");
         assertEquals(DEFAULT_HIGH_SCORE, simulateGetHighScore(), "Should return default score for an empty file.");
     }
@@ -327,7 +317,7 @@ public final class CustomGameTester
     {
         simulateAddScore(TEST_SCORE_1);
         simulateAddScore(TEST_SCORE_NEGATIVE);
-        simulateAddScore(TEST_SCORE_2); // Highest score
+        simulateAddScore(TEST_SCORE_2);
         assertEquals(TEST_SCORE_2, simulateGetHighScore(), "Should return the maximum score added.");
     }
 
@@ -372,10 +362,9 @@ public final class CustomGameTester
     @Test
     void testScoreAddScoreThrowsForNullInput()
     {
-        // This test directly invokes the static method from the Score class.
         assertThrows(IllegalArgumentException.class, () ->
         {
-            Score.addScore(null); // Pass null explicitly
+            Score.addScore(null);
         }, "Score.addScore(null) should throw IllegalArgumentException.");
     }
 
@@ -409,7 +398,7 @@ public final class CustomGameTester
     {
         final int min = 10;
         final int max = 20;
-        // Run multiple times to increase confidence
+
         IntStream.range(0, 100).forEach(i ->
         {
             int randomNum = simulateGetRandomNumber(min, max);
@@ -442,8 +431,8 @@ public final class CustomGameTester
         double modifier = baseModifier + (currentScore - startScore) / changeRate;
 
         // Apply clamping
-        modifier = Math.max(minModifier, modifier); // Clamp at minimum
-        modifier = Math.min(maxModifier, modifier); // Clamp at maximum
+        modifier = Math.max(minModifier, modifier);
+        modifier = Math.min(maxModifier, modifier);
 
         return modifier;
     }
@@ -476,12 +465,10 @@ public final class CustomGameTester
     @Test
     void testSpeedModifierClampsAtMaximum()
     {
-        double modifierAtMaxThreshold = simulateUpdateSpeedModifier(SCORE_WAY_ABOVE_START); // Score likely to hit max
-        double modifierJustAboveStart = simulateUpdateSpeedModifier(SCORE_ABOVE_START); // Score unlikely to hit max
+        double modifierAtMaxThreshold = simulateUpdateSpeedModifier(SCORE_WAY_ABOVE_START);
+        double modifierJustAboveStart = simulateUpdateSpeedModifier(SCORE_ABOVE_START);
 
-        // Check it clamps - the value for a very high score shouldn't exceed the value for a moderately high score if max is hit.
-        // A better check is against the known MAX_SPEED_MODIFIER if we allow using it relatively.
-        double expectedMax = ClockStormMain.MAX_SPEED_MODIFIER; // Use constant for comparison endpoint
+        double expectedMax = ClockStormMain.MAX_SPEED_MODIFIER;
         assertEquals(expectedMax, modifierAtMaxThreshold, 0.001, "Modifier should clamp at the max value for very high scores.");
         assertTrue(modifierAtMaxThreshold >= modifierJustAboveStart, "Max clamped value should be >= value for lower score.");
     }
@@ -492,13 +479,11 @@ public final class CustomGameTester
     @Test
     void testSpeedModifierClampsAtMinimum()
     {
-        double modifierAtMinThreshold = simulateUpdateSpeedModifier(SCORE_WAY_BELOW_START); // Score likely to hit min
-        double modifierJustBelowStart = simulateUpdateSpeedModifier(SCORE_BELOW_START); // Score unlikely to hit min (might clamp anyway)
+        double modifierAtMinThreshold = simulateUpdateSpeedModifier(SCORE_WAY_BELOW_START);
+        double modifierJustBelowStart = simulateUpdateSpeedModifier(SCORE_BELOW_START);
 
-        // Check it clamps against the known MIN_SPEED_MODIFIER.
-        double expectedMin = ClockStormMain.MIN_SPEED_MODIFIER; // Use constant for comparison endpoint
+        double expectedMin = ClockStormMain.MIN_SPEED_MODIFIER;
         assertEquals(expectedMin, modifierAtMinThreshold, 0.001, "Modifier should clamp at the min value for very low scores.");
-        // Ensure clamped min is not higher than value for a slightly higher score (unless that also clamped)
         assertTrue(modifierAtMinThreshold <= modifierJustBelowStart, "Min clamped value should be <= value for higher score (unless also clamped).");
     }
 
