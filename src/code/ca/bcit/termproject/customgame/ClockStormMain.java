@@ -23,34 +23,34 @@ public final class ClockStormMain
         extends Application
 {
     // Game Configuration
-    public static final String GAME_NAME = "ClockStorm";
-    public static final int WINDOW_WIDTH = 800;
-    public static final int WINDOW_HEIGHT = 600;
-    private static final int NOTHING = 0;
+    public static final String GAME_NAME    = "ClockStorm";
+    public static final int WINDOW_WIDTH    = 800;
+    public static final int WINDOW_HEIGHT   = 600;
+    private static final int NOTHING        = 0;
 
     // Player Configuration
-    public static final int PLAYER_SIZE = 30;
-    public static final int PLAYER_START_X = WINDOW_WIDTH / 2;
-    public static final int PLAYER_START_Y = WINDOW_HEIGHT - 50;
+    public static final int PLAYER_SIZE     = 30;
+    public static final int PLAYER_START_X  = WINDOW_WIDTH / 2;
+    public static final int PLAYER_START_Y  = WINDOW_HEIGHT - 50;
 
     // Orb Configuration
-    public static final int ORB_SIZE = 20;
-    private static final int BLUE_ORB_POINTS = 1;
-    private static final int GREEN_ORB_POINTS = 3;
-    public static final double BASE_SPEED_MODIFIER = 1.2;
-    public static final double MAX_SPEED_MODIFIER = 2.5;
-    public static final double MIN_SPEED_MODIFIER = 1;
-    public static final double SPEED_MODIFIER_CHANGE_RATE = 50; // lower = more chance
-    private static double speedModifier = BASE_SPEED_MODIFIER;
+    public static final int ORB_SIZE                        = 20;
+    private static final int BLUE_ORB_POINTS                = 1;
+    private static final int GREEN_ORB_POINTS               = 3;
+    public static final double BASE_SPEED_MODIFIER          = 1.2;
+    public static final double MAX_SPEED_MODIFIER           = 2.5;
+    public static final double MIN_SPEED_MODIFIER           = 1;
+    public static final double SPEED_MODIFIER_CHANGE_RATE   = 50; // lower = more chance
+    private static double speedModifier                     = BASE_SPEED_MODIFIER;
 
     // Score System
-    public static final String POINTS_NAME = "Score";  // TODO: think of better name
-    public static final int START_SCORE = 10;
-    public static final int MINIMUM_SCORE_TO_SURVIVE = 1;
-    private static final int SCORE_DECREASE_RANDOM_MIN = 1;
-    private static final int SCORE_DECREASE_RANDOM_MAX = 1000;
+    public static final String POINTS_NAME              = "Score";  // TODO: think of better name
+    public static final int START_SCORE                 = 10;
+    public static final int MINIMUM_SCORE_TO_SURVIVE    = 1;
+    private static final int SCORE_DECREASE_RANDOM_MIN  = 1;
+    private static final int SCORE_DECREASE_RANDOM_MAX  = 1000;
     private static final int SCORE_DECREASE_PROBABILITY = 10;  // percent
-    private static final int RANDOM_NUMBER_OFFSET = 1;
+    private static final int RANDOM_NUMBER_OFFSET       = 1;
 
     private final Pane root = new Pane();
     private Player player;
@@ -90,11 +90,11 @@ public final class ClockStormMain
      */
     private final void setupGame()
     {
-        player = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
-        cannon = new OrbShooter();
-        score = START_SCORE;
+        player  = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
+        cannon      = new OrbShooter();
+        score       = START_SCORE;
+        scoreLabel  = ClockStormUI.createScoreLabel();
 
-        scoreLabel = ClockStormUI.createScoreLabel();
         player.getStyleClass().add("player");
 
         root.getChildren().addAll(player, scoreLabel);
@@ -118,6 +118,7 @@ public final class ClockStormMain
                 checkAndUpdateScore();
             }
         };
+
         gameLoop.start();
     }
 
@@ -184,6 +185,7 @@ public final class ClockStormMain
     {
         final Iterator<Orb> iterator;
         iterator = cannon.getOrbs().iterator();
+
         while (iterator.hasNext())
         {
             final Orb orb;
@@ -301,6 +303,7 @@ public final class ClockStormMain
     private final void updateSpeedModifier()
     {
         speedModifier = BASE_SPEED_MODIFIER + (score - START_SCORE) / SPEED_MODIFIER_CHANGE_RATE;
+
         if (speedModifier > MAX_SPEED_MODIFIER)
         {
             speedModifier = MAX_SPEED_MODIFIER;
@@ -322,6 +325,7 @@ public final class ClockStormMain
                                              final int max)
     {
         validateMinMaxValues(min, max);
+
         final Random random;
         final int generatedNumber;
 
