@@ -26,7 +26,7 @@ public final class ClockStormMain
     public static final String GAME_NAME    = "ClockStorm";
     public static final int WINDOW_WIDTH    = 800;
     public static final int WINDOW_HEIGHT   = 600;
-    private static final int NOTHING        = 0;
+    private static final int SUCCESS = 0;
 
     // Player Configuration
     public static final int PLAYER_SIZE     = 30;
@@ -247,7 +247,7 @@ public final class ClockStormMain
                 }
                 else
                 {
-                    System.exit(NOTHING);
+                    System.exit(SUCCESS);
                 }
             }
             catch (final IOException e)
