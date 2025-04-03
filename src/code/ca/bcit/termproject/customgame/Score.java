@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Objects;
+import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
 /**
@@ -88,17 +89,42 @@ public final class Score
                 StandardOpenOption.APPEND);
     }
     
+    private static final double getAverageScore() throws IOException
+    {
+        if (Files.notExists(filePath))
+        {
+            return NOTHING;
+        }
+
+        final List<String> lines;
+        final double average;
+
+        lines = Files.readAllLines(filePath);
+
+        OptionalDouble averageOptionalDouble = lines.stream()
+                .filter(s -> s.matches("-?\\d+"))
+                .mapToInt(Integer::parseInt)
+                .average();
+
+        if (averageOptionalDouble.isPresent())
+        {
+            average = averageOptionalDouble.getAsDouble();
+            return average;
+        }
+
+        return NOTHING;
+    }
+
     private static final void validateScore(final Integer score)
     {
         if (score == null)
         {
             throw new IllegalArgumentException("Score cannot be null");
         }
-        
+
         if (score < NOTHING)
         {
             throw new IllegalArgumentException("Score cannot be negative");
         }
-        
     }
 }
