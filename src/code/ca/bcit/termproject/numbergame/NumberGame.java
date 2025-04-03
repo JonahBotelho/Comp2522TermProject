@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
@@ -83,11 +82,13 @@ public final class NumberGame
         final GridPane gridPane;
         final VBox root;
 
-        root = new VBox(VBOX_SPACING);
+        root        = new VBox(VBOX_SPACING);
+        gridPane    = new GridPane();
+
+
         root.setPadding(new Insets(ROOT_PADDING));
         root.setAlignment(Pos.CENTER);
 
-        gridPane = new GridPane();
         gridPane.setHgap(GRID_HEIGHT_GAP);
         gridPane.setVgap(GRID_WIDTH_GAP);
         gridPane.setAlignment(Pos.CENTER);
@@ -370,7 +371,7 @@ public final class NumberGame
     {
         if (min > max)
         {
-            throw new IllegalArgumentException("Min cannot be greater than Max")
+            throw new IllegalArgumentException("Min cannot be greater than Max");
         }
     }
     
