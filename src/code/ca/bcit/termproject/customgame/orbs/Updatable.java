@@ -7,6 +7,7 @@ package ca.bcit.termproject.customgame.orbs;
  * @author Jonah Botelho
  * @version 1.0
  */
+@FunctionalInterface
 public interface Updatable
 {
     void update();
