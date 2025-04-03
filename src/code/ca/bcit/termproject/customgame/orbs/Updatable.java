@@ -10,5 +10,8 @@ package ca.bcit.termproject.customgame.orbs;
 @FunctionalInterface
 public interface Updatable
 {
+    /**
+     * Update void method that must be implemented.
+     */
     void update();
 }

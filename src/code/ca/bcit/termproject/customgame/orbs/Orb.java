@@ -4,8 +4,6 @@ import ca.bcit.termproject.customgame.ClockStormMain;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-import java.time.Clock;
-
 /**
  * Abstract base class for Orbs in the game.
  * Extends JavaFX Circle and handles basic movement.

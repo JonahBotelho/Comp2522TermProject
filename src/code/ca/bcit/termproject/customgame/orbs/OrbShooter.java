@@ -9,6 +9,9 @@ import java.util.Random;
 
 /**
  * Represents a cannon that shoots orbs from all sides of the screen toward the center.
+ *
+ * @author Jonah Botelho
+ * @version 1.0
  */
 public final class OrbShooter
 {
@@ -152,7 +155,12 @@ public final class OrbShooter
     {
         return orbs;
     }
-    
+
+    /**
+     * validates that the root is not null
+     *
+     * @param root to be validated
+     */
     private static final void validateRoot(final Pane root)
     {
         if (root == null)

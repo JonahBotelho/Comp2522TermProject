@@ -28,7 +28,6 @@ public final class RedOrb extends Orb
     private static final boolean IMAGE_PATTERN_PROPORTIONAL = true;
 
     // Error message constants
-    private static final String RESOURCE_NOT_FOUND_ERROR    = "Error: RedOrb image resource not found: ";
     private static final String IMAGE_LOAD_WARNING          = "Warning: RedOrb image failed to load: ";
     private static final String IMAGE_LOAD_ERROR            = "Error loading RedOrb image resource: ";
     private static final String FALLBACK_MESSAGE            = ". Using fallback color.";
@@ -43,6 +42,7 @@ public final class RedOrb extends Orb
         final Image orbImage;
         Paint result;
 
+        // attempts to load the image, and sets the colour to red if that fails
         try
         {
             orbImage = new Image(Objects.requireNonNull(RedOrb.class.getResourceAsStream(IMAGE_PATH)));
@@ -60,16 +60,10 @@ public final class RedOrb extends Orb
                 return result;
             }
 
-            if (orbImage == null)
-            {
-                System.err.println(RESOURCE_NOT_FOUND_ERROR + IMAGE_PATH + FALLBACK_MESSAGE);
-            }
-            else
-            {
-                System.err.println(IMAGE_LOAD_WARNING + IMAGE_PATH + ". Error: "
-                        + orbImage.getException() + FALLBACK_MESSAGE);
-            }
-        } catch (Exception e)
+            System.err.println(IMAGE_LOAD_WARNING + IMAGE_PATH + ". Error: "
+                    + orbImage.getException() + FALLBACK_MESSAGE);
+        }
+        catch (Exception e)
         {
             System.err.println(IMAGE_LOAD_ERROR + IMAGE_PATH + FALLBACK_MESSAGE);
         }

@@ -17,20 +17,20 @@ import java.util.Objects;
 public final class GreenOrb extends Orb
 {
 
-    private static final String IMAGE_PATH = "/res/customgame/images/green_orb_clock.png";;
-    private static final Paint ORB_PAINT = loadOrbPaint();;
+    private static final String IMAGE_PATH = "/res/customgame/images/green_orb_clock.png";
+    private static final Paint ORB_PAINT = loadOrbPaint();
 
     // Image pattern configuration constants
-    private static final double IMAGE_PATTERN_ANCHOR_X = 0.0;
-    private static final double IMAGE_PATTERN_ANCHOR_Y = 0.0;
-    private static final double IMAGE_PATTERN_WIDTH = 1.0;
-    private static final double IMAGE_PATTERN_HEIGHT = 1.0;
+    private static final double IMAGE_PATTERN_ANCHOR_X      = 0.0;
+    private static final double IMAGE_PATTERN_ANCHOR_Y      = 0.0;
+    private static final double IMAGE_PATTERN_WIDTH         = 1.0;
+    private static final double IMAGE_PATTERN_HEIGHT        = 1.0;
     private static final boolean IMAGE_PATTERN_PROPORTIONAL = true;
 
     // Error message constants
-    private static final String IMAGE_LOAD_WARNING = "Warning: GreenOrb image failed to load: ";
-    private static final String IMAGE_LOAD_ERROR = "Error loading GreenOrb image resource: ";
-    private static final String FALLBACK_MESSAGE = ". Using fallback color.";
+    private static final String IMAGE_LOAD_WARNING  = "Warning: GreenOrb image failed to load: ";
+    private static final String IMAGE_LOAD_ERROR    = "Error loading GreenOrb image resource: ";
+    private static final String FALLBACK_MESSAGE    = ". Using fallback color.";
 
     /**
      * Loads the image and creates an ImagePattern, or returns a fallback color.
@@ -42,6 +42,7 @@ public final class GreenOrb extends Orb
         final Image orbImage;
         Paint result;
 
+        // attempts to load the image, and sets the colour to green if that fails
         try
         {
             orbImage = new Image(Objects.requireNonNull(GreenOrb.class.getResourceAsStream(IMAGE_PATH)));
@@ -60,7 +61,8 @@ public final class GreenOrb extends Orb
             }
 
             System.err.println(IMAGE_LOAD_WARNING + IMAGE_PATH + FALLBACK_MESSAGE);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             System.err.println(IMAGE_LOAD_ERROR + IMAGE_PATH + FALLBACK_MESSAGE);
         }

@@ -17,15 +17,20 @@ import java.util.Objects;
 public final class BlueOrb extends Orb
 {
 
-    private static final String IMAGE_PATH = "/res/customgame/images/blue_orb_clock.png";;
-    private static final Paint ORB_PAINT = loadOrbPaint();;
+    private static final String IMAGE_PATH = "/res/customgame/images/blue_orb_clock.png";
+    private static final Paint ORB_PAINT = loadOrbPaint();
 
     // Image pattern parameters
-    private static final double IMAGE_PATTERN_ANCHOR_X = 0.0;
-    private static final double IMAGE_PATTERN_ANCHOR_Y = 0.0;
-    private static final double IMAGE_PATTERN_WIDTH = 1.0;
-    private static final double IMAGE_PATTERN_HEIGHT = 1.0;
+    private static final double IMAGE_PATTERN_ANCHOR_X      = 0.0;
+    private static final double IMAGE_PATTERN_ANCHOR_Y      = 0.0;
+    private static final double IMAGE_PATTERN_WIDTH         = 1.0;
+    private static final double IMAGE_PATTERN_HEIGHT        = 1.0;
     private static final boolean IMAGE_PATTERN_PROPORTIONAL = true;
+
+    // Error message constants
+    private static final String IMAGE_LOAD_WARNING  = "Warning: BlueOrb image failed to load: ";
+    private static final String IMAGE_LOAD_ERROR    = "Error loading BlueOrb image resource: ";
+    private static final String FALLBACK_MESSAGE    = ". Using fallback color.";
 
     /**
      * Loads the blue orb image and creates an ImagePattern, or returns a fallback blue color.
@@ -37,6 +42,7 @@ public final class BlueOrb extends Orb
         final Image orbImage;
         Paint result;
 
+        // attempts to load the image, and sets the colour to blue if that fails
         try
         {
             orbImage = new Image(Objects.requireNonNull(BlueOrb.class.getResourceAsStream(IMAGE_PATH)));
@@ -54,12 +60,13 @@ public final class BlueOrb extends Orb
                 return result;
             }
 
-            System.err.println("Warning: BlueOrb image failed to load: " + IMAGE_PATH
-                    + ". Error: " + orbImage.getException() + ". Using fallback color.");
-        } catch (Exception e)
+            System.err.println(IMAGE_LOAD_WARNING + IMAGE_PATH
+                    + ". Error: " + orbImage.getException() + FALLBACK_MESSAGE);
+        }
+        catch (Exception e)
         {
-            System.err.println("Error loading BlueOrb image resource: "
-                    + IMAGE_PATH + ". Using fallback color.");
+            System.err.println(IMAGE_LOAD_ERROR
+                    + IMAGE_PATH + FALLBACK_MESSAGE);
         }
 
         result = Color.DEEPSKYBLUE;
