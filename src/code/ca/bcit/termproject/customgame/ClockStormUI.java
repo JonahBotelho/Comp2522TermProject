@@ -12,6 +12,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import java.util.Objects;
+import java.text.DecimalFormat;
 
 /**
  * The ClockStormUI class handles all user interface components for the game.
@@ -111,10 +112,12 @@ public final class ClockStormUI
         validateHighScore(highScore);
         validateAverage(average);
 
+        final DecimalFormat averageScoreFormat;
         final Alert gameOverAlert;
         final ButtonType playAgain;
         final ButtonType quit;
 
+        averageScoreFormat = new DecimalFormat("0.00");
         gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
         playAgain = new ButtonType("Play Again");
         quit = new ButtonType("Quit");
@@ -126,7 +129,7 @@ public final class ClockStormUI
         gameOverAlert.setContentText(message +
                 "\nFinal Score: " + score +
                 "\nHigh Score: " + highScore +
-                "\nAverage Score: " + average);
+                "\nAverage Score: " + averageScoreFormat.format(average));
         gameOverAlert.getButtonTypes().setAll(playAgain, quit);
 
         return gameOverAlert.showAndWait().orElse(quit);

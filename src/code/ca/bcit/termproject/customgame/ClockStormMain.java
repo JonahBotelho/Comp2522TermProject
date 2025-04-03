@@ -31,7 +31,7 @@ public final class ClockStormMain
     // Player Configuration
     public static final int PLAYER_SIZE     = 30;
     public static final int PLAYER_START_X  = WINDOW_WIDTH / 2;
-    public static final int PLAYER_START_Y  = WINDOW_HEIGHT - 50;
+    public static final int PLAYER_START_Y  = WINDOW_HEIGHT /2;
 
     // Orb Configuration
     public static final int ORB_SIZE                        = 20;
