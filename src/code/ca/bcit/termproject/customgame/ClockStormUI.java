@@ -18,6 +18,8 @@ import java.util.Objects;
  */
 public final class ClockStormUI
 {
+    private final static int NOTHING = 0;
+
     // UI Configuration
     private static final String SCORE_LABEL_FONT_NAME = "Arial";
     private static final int SCORE_LABEL_FONT_SIZE = 20;
@@ -99,8 +101,16 @@ public final class ClockStormUI
      * @param highScore The high score
      * @return The button type that was clicked
      */
-    public static final ButtonType showGameOverAlert(final String message, final int score, final int highScore, final double average)
+    public static final ButtonType showGameOverAlert(final String message,
+                                                     final int score,
+                                                     final int highScore,
+                                                     final double average)
     {
+        validateMessage(message);
+        validateScore(score);
+        validateHighScore(highScore);
+        validateAverage(average);
+
         final Alert gameOverAlert;
         final ButtonType playAgain;
         final ButtonType quit;
@@ -153,6 +163,11 @@ public final class ClockStormUI
         dialogPane.getStyleClass().add("dialog-pane");
     }
 
+    /**
+     * Validates that the given {@link Alert} is not null.
+     *
+     * @param alert the alert to validate
+     */
     private static final void validateAlert(final Alert alert)
     {
         if (alert == null)
@@ -160,4 +175,57 @@ public final class ClockStormUI
             throw new NullPointerException("alert cannot be null");
         }
     }
+
+    /**
+     * Validates that the given message is not null or empty.
+     *
+     * @param message the message to validate
+     */
+    private static final void validateMessage(final String message)
+    {
+        if (message == null || message.isBlank())
+        {
+            throw new NullPointerException("message cannot be null or empty");
+        }
+    }
+
+    /**
+     * Validates that the given score is not negative.
+     *
+     * @param score the score to validate
+     */
+    public static final void validateScore(final int score)
+    {
+        if (score < NOTHING)
+        {
+            throw new IllegalArgumentException("score cannot be negative");
+        }
+    }
+
+    /**
+     * Validates that the given high score is not negative.
+     *
+     * @param highScore the high score to validate
+     */
+    public static final void validateHighScore(final int highScore)
+    {
+        if (highScore < NOTHING)
+        {
+            throw new IllegalArgumentException("highScore cannot be negative");
+        }
+    }
+
+    /**
+     * Validates that the given average is not negative.
+     *
+     * @param average the average value to validate
+     */
+    public static final void validateAverage(final double average)
+    {
+        if (average < NOTHING)
+        {
+            throw new IllegalArgumentException("average cannot be negative");
+        }
+    }
+
 }
