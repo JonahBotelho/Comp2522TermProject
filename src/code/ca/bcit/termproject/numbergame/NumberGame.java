@@ -60,7 +60,7 @@ public final class NumberGame
     private static final String STYLESHEET_PATH = "/res/numbergame/css/numberGameStyles.css";
 
     /**
-     * Runs the program.
+     * Launches the game in a separate JavaFX thread.
      */
     public static void launchGame()
     {
@@ -74,7 +74,12 @@ public final class NumberGame
             }
         });
     }
-    
+
+    /**
+     * Starts the JavaFX application, initializes the UI, and sets up the game window.
+     *
+     * @param primaryStage The primary stage for the application.
+     */
     @Override
     public void start(final Stage primaryStage)
     {
@@ -127,6 +132,12 @@ public final class NumberGame
         return num;
     }
 
+    /**
+     * Initializes the grid layout and button components.
+     *
+     * @param root The root container for the UI layout.
+     * @param gridPane The grid pane used to arrange the buttons.
+     */
     private void initializeGrid(final VBox root,
                                 final GridPane gridPane)
     {
@@ -148,12 +159,25 @@ public final class NumberGame
 
         root.getChildren().add(gridPane);
     }
-    
-    private static final void validateGridPane(GridPane gridPane)
+
+    /**
+     * Validates the given grid pane object.
+     *
+     * @param gridPane The grid pane to validate.
+     */
+    private static final void validateGridPane(final GridPane gridPane)
     {
-    
+        if (gridPane == null)
+        {
+            throw new NullPointerException("gridPane is null");
+        }
     }
-    
+
+    /**
+     * Initializes the status label for displaying the next number to be placed.
+     *
+     * @param root The root container for the UI layout.
+     */
     private void initializeStatusLabel(final VBox root)
     {
         validateRoot(root);
@@ -162,6 +186,9 @@ public final class NumberGame
         root.getChildren().add(statusLabel);
     }
 
+    /**
+     * Resets the game grid, clearing all numbers from the buttons.
+     */
     private void resetGrid()
     {
         for (int i = NOTHING; i < NUMBER_OF_SQUARES; i++)
@@ -174,12 +201,20 @@ public final class NumberGame
         }
     }
 
+    /**
+     * Generates the next random number to be placed in the grid.
+     */
     private void generateNextNumber()
     {
         currentNumber = randomNumber(MIN_RANDOM_NUM, MAX_RANDOM_NUM);
         statusLabel.setText("Next Number: " + currentNumber);
     }
 
+    /**
+     * Handles the button click event to place the current number in the grid.
+     *
+     * @param index The index of the button clicked.
+     */
     private void handleButtonClick(final int index)
     {
         validateIndex(index);
@@ -207,6 +242,11 @@ public final class NumberGame
         generateNextNumber();
     }
 
+    /**
+     * Checks whether the numbers in the grid are in ascending order.
+     *
+     * @return True if the numbers are in ascending order, false otherwise.
+     */
     private boolean isAscendingOrder()
     {
         int prev;
@@ -229,6 +269,9 @@ public final class NumberGame
         return true;
     }
 
+    /**
+     * Displays the game-over alert when the player loses.
+     */
     private void showGameOverAlert()
     {
         final InformationAlert alert;
@@ -263,6 +306,9 @@ public final class NumberGame
         });
     }
 
+    /**
+     * Displays the final score summary.
+     */
     private void showFinalScore()
     {
         final DecimalFormat averagePlacementsFormat;
@@ -291,6 +337,9 @@ public final class NumberGame
         alert.showAndWait();
     }
 
+    /**
+     * Displays an alert when the player tries to place a number in an occupied slot.
+     */
     private void showInvalidSpotAlert()
     {
         final WarningAlert alert;
@@ -327,6 +376,11 @@ public final class NumberGame
         alert.showAndWait();
     }
 
+    /**
+     * Applies the necessary styles and configurations to an alert.
+     *
+     * @param alert The alert to be configured.
+     */
     private void setUpAlert(final Alert alert)
     {
         validateAlert(alert);
@@ -350,15 +404,23 @@ public final class NumberGame
                         .toExternalForm());
         dialogPane.getStyleClass().add("dialog-pane");
     }
-    
-    private static final void validateAlert(final Alert alert)
+
+/**
+ * Validates that the alert object is not null.
+ */
+ private static final void validateAlert(final Alert alert)
     {
         if (alert == null)
         {
             throw new IllegalArgumentException("Alert cannot be null");
         }
     }
-    
+
+    /**
+     * Validates the index to ensure it is within the valid range.
+     *
+     * @param index The index to validate.
+     */
     private static void validateIndex(final int index)
     {
         if (index < NOTHING || index > NUMBER_OF_SQUARES)
@@ -366,7 +428,13 @@ public final class NumberGame
             throw new IllegalArgumentException("Invalid index: " + index);
         }
     }
-    
+
+    /**
+     * Validates min and max values, ensuring that the max is greater than the min.
+     *
+     * @param min int value
+     * @param max int value
+     */
     private static void validateMinMax(final int min, final int max)
     {
         if (min > max)
@@ -374,7 +442,12 @@ public final class NumberGame
             throw new IllegalArgumentException("Min cannot be greater than Max");
         }
     }
-    
+
+    /**
+     * Validates the root layout object.
+     *
+     * @param root The root layout to validate.
+     */
     private static void validateRoot(final VBox root)
     {
         if (root == null)
