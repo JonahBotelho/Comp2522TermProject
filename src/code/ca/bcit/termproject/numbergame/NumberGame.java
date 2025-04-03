@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
@@ -114,6 +115,8 @@ public final class NumberGame
     @Override
     public int randomNumber(final int min, final int max)
     {
+        validateMinMax(min, max);
+        
         final Random random;
         final int num;
 
@@ -126,6 +129,9 @@ public final class NumberGame
     private void initializeGrid(final VBox root,
                                 final GridPane gridPane)
     {
+        validateRoot(root);
+        validateGridPane(gridPane);
+        
         for (int i = NOTHING; i < NUMBER_OF_SQUARES; i++)
         {
             // declaring a final variable to be the value of i, so I can use it in the lambda expression
@@ -141,9 +147,16 @@ public final class NumberGame
 
         root.getChildren().add(gridPane);
     }
-
+    
+    private static final void validateGridPane(GridPane gridPane)
+    {
+    
+    }
+    
     private void initializeStatusLabel(final VBox root)
     {
+        validateRoot(root);
+        
         statusLabel = new Label("Next Number: ");
         root.getChildren().add(statusLabel);
     }
@@ -168,6 +181,8 @@ public final class NumberGame
 
     private void handleButtonClick(final int index)
     {
+        validateIndex(index);
+        
         if (grid[index] != NOTHING)
         {
             // Slot is already occupied
@@ -313,6 +328,8 @@ public final class NumberGame
 
     private void setUpAlert(final Alert alert)
     {
+        validateAlert(alert);
+        
         final DialogPane dialogPane;
         final Scene scene;
         final Window window;
@@ -331,5 +348,37 @@ public final class NumberGame
                         .requireNonNull(getClass().getResource(STYLESHEET_PATH))
                         .toExternalForm());
         dialogPane.getStyleClass().add("dialog-pane");
+    }
+    
+    private static final void validateAlert(final Alert alert)
+    {
+        if (alert == null)
+        {
+            throw new IllegalArgumentException("Alert cannot be null");
+        }
+    }
+    
+    private static void validateIndex(final int index)
+    {
+        if (index < NOTHING || index > NUMBER_OF_SQUARES)
+        {
+            throw new IllegalArgumentException("Invalid index: " + index);
+        }
+    }
+    
+    private static void validateMinMax(final int min, final int max)
+    {
+        if (min > max)
+        {
+            throw new IllegalArgumentException("Min cannot be greater than Max")
+        }
+    }
+    
+    private static void validateRoot(final VBox root)
+    {
+        if (root == null)
+        {
+            throw new IllegalArgumentException("Root cannot be null");
+        }
     }
 }

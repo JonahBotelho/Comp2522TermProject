@@ -19,6 +19,8 @@ public class InformationAlert
      */
     public InformationAlert(final String title)
     {
+        PopupAlert.validateTitle(title);
+        
         super(Alert.AlertType.INFORMATION, title);
     }
 }

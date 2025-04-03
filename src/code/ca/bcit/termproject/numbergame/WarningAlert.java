@@ -19,6 +19,10 @@ public class WarningAlert
      */
     public WarningAlert(final String title)
     {
+        PopupAlert.validateTitle(title);
+        
         super(AlertType.WARNING, title);
     }
+    
+    
 }
