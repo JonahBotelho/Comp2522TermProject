@@ -177,5 +177,4 @@ public final class Player
             throw new IllegalArgumentException("Value cannot be negative");
         }
     }
-
 }

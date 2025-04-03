@@ -23,6 +23,4 @@ public class WarningAlert
         
         super(AlertType.WARNING, title);
     }
-    
-    
 }

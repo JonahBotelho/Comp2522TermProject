@@ -227,5 +227,4 @@ public final class ClockStormUI
             throw new IllegalArgumentException("average cannot be negative");
         }
     }
-
 }
