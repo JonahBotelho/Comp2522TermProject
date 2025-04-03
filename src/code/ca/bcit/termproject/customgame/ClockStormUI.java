@@ -22,10 +22,10 @@ public final class ClockStormUI
     private final static int NOTHING = 0;
 
     // UI Configuration
-    private static final String SCORE_LABEL_FONT_NAME = "Arial";
-    private static final int SCORE_LABEL_FONT_SIZE = 20;
-    static final int SCORE_LABEL_X = 10;
-    private static final int SCORE_LABEL_Y = 10;
+    private static final String SCORE_LABEL_FONT_NAME    = "Arial";
+    private static final int SCORE_LABEL_FONT_SIZE       = 20;
+    static final int SCORE_LABEL_X                       = 10;
+    private static final int SCORE_LABEL_Y               = 10;
     private static final String SCORE_LABEL_INITIAL_TEXT = ClockStormMain.POINTS_NAME + ": " + ClockStormMain.START_SCORE;
 
     // Styles
