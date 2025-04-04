@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 /**
  * The WordGame class implements a simple quiz game where the player is asked
@@ -48,6 +49,7 @@ public final class WordGame
         final List<Map.Entry<String, Country>> worldList;
         final Random ran;
         final Score userScore;
+        final DecimalFormat scoreFormat;
         
         int gamesPlayed;
         String choice;
@@ -64,7 +66,8 @@ public final class WordGame
         correctOnFirstAttempt = NOTHING;
         correctOnSecondAttempt = NOTHING;
         incorrectOnSecondAttempt = NOTHING;
-        
+
+        scoreFormat = new DecimalFormat("0.00");
         // Play again loop
         while (choice.equalsIgnoreCase(PLAY_AGAIN_TRUE))
         {
@@ -145,33 +148,36 @@ public final class WordGame
                 highScore = currentScore;
             }
         }
-        
+
+
         if (userScore.getAverageScore() > highScore.getAverageScore())
         {
             System.out.println("You have a new high score of " +
-                                       userScore.getAverageScore() +
-                                       " points per game.");
+                    scoreFormat.format(userScore.getAverageScore()) +
+                    " points per game.");
             System.out.println("The previous high score was " +
-                                       highScore.getAverageScore() +
-                                       " points per game.");
+                    scoreFormat.format(highScore.getAverageScore()) +
+                    " points per game.");
         }
         else
         {
             System.out.println("Your score of " +
-                                       userScore.getAverageScore() +
-                                       " points per game was not a high score.");
+                    scoreFormat.format(userScore.getAverageScore()) +
+                    " points per game was not a high score.");
         }
         
         Score.appendScoreToFile(userScore, file);
-        
+
         System.out.println();
         System.out.println(userScore);
-        System.out.println();
-        System.out.println("\nThank you for playing!");
+        System.out.println("Thank you for playing!");
+        System.out.println("Press enter to return to the main menu.");
+
+        SCANNER.nextLine();
     }
     
     /**
-     * Prompts the user for an answer and evaluates their response.
+     * Prompts the user for an answer and evaluates theisr response.
      * The user has two attempts to answer correctly.
      *
      * @param answer The correct answer for the question.
