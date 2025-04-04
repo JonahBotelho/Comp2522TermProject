@@ -125,7 +125,7 @@ public final class ClockStormUI
         // Adds CSS stylesheet, and removes top row from Alert
         setUpAlert(gameOverAlert);
 
-        gameOverAlert.setTitle("Game Over");
+        gameOverAlert.setHeaderText("Game Over");
         gameOverAlert.setContentText(message +
                 "\nFinal Score: " + score +
                 "\nHigh Score: " + highScore +
