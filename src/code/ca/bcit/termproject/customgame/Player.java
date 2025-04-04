@@ -11,7 +11,7 @@ public final class Player
         extends Rectangle
 {
     private static final int NOTHING    = 0;  // Boundary check constant
-    private static final double speed   = 4;  // Movement speed of the player
+    private static final double speed   = 3;  // Movement speed of the player
 
     private boolean movingLeft      = false;
     private boolean movingRight     = false;

@@ -18,7 +18,7 @@ public final class OrbShooter
     // Orb Shooting Configuration
     private static final int RANDOM_ORB_GENERATION_MAX  = 5;
     private static final int ORB_SHOOT_PROBABILITY_MAX  = 100;
-    private static final int ORB_SHOOT_PROBABILITY      = 3;
+    private static final int ORB_SHOOT_PROBABILITY      = 2;
     private static final double ORB_SPEED               = 3;
 
     // Orb generation probability

@@ -35,19 +35,19 @@ public final class ClockStormMain
     public static final int ORB_SIZE                        = 20;
     private static final int BLUE_ORB_POINTS                = 1;
     private static final int GREEN_ORB_POINTS               = 3;
-    public static final double BASE_SPEED_MODIFIER          = 1.2;
+    public static final double BASE_SPEED_MODIFIER          = 0.7;
     public static final double MAX_SPEED_MODIFIER           = 2.5;
-    public static final double MIN_SPEED_MODIFIER           = 1;
+    public static final double MIN_SPEED_MODIFIER           = 0.5;
     public static final double SPEED_MODIFIER_CHANGE_RATE   = 50; // lower = more chance
     private static double speedModifier                     = BASE_SPEED_MODIFIER;
 
     // Score System
-    public static final String POINTS_NAME              = "Score";  // TODO: think of better name
+    public static final String POINTS_NAME              = "Score";
     public static final int START_SCORE                 = 10;
     public static final int MINIMUM_SCORE_TO_SURVIVE    = 1;
     private static final int SCORE_DECREASE_RANDOM_MIN  = 1;
     private static final int SCORE_DECREASE_RANDOM_MAX  = 1000;
-    private static final int SCORE_DECREASE_PROBABILITY = 10;  // percent
+    private static final int SCORE_DECREASE_PROBABILITY = 5;  // percent
     private static final int RANDOM_NUMBER_OFFSET       = 1;
 
     private final Pane root = new Pane();
