@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * The ClockStormMain class is the entry point for the Bullet Hell game.
+ * The ClockStormMain class is the entry point for the ClockStorm game.
  * It initializes the game window and handles core game logic.
  */
 public final class ClockStormMain
@@ -72,7 +72,7 @@ public final class ClockStormMain
         scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         ClockStormUI.setupSceneStyles(scene);
 
-        primaryStage.setTitle("Bullet Hell Game");
+        primaryStage.setTitle(GAME_NAME);
         primaryStage.setScene(scene);
         primaryStage.show();
 
