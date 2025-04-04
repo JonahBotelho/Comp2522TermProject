@@ -281,10 +281,10 @@ public final class NumberGame
             else
             {
                 showFinalScore();
-                final Stage stage;
-
-                stage = (Stage) statusLabel.getScene().getWindow();
-                stage.close();
+                ((Stage)statusLabel
+                        .getScene()
+                        .getWindow())
+                        .close();
             }
         });
     }

@@ -241,7 +241,10 @@ public final class ClockStormMain
                 }
                 else
                 {
-                    ((javafx.stage.Stage)scoreLabel.getScene().getWindow()).close();
+                    ((Stage)scoreLabel
+                            .getScene()
+                            .getWindow())
+                            .close();
                 }
             }
             catch (final IOException e)
