@@ -55,7 +55,7 @@ public final class WordGame
         String choice;
         Score highScore;
         
-        file = "score.txt";
+        file = "src/data/score.txt";
         world = new World();
         worldHashMap = world.getWorld();
         worldList = new ArrayList<>(worldHashMap.entrySet());
@@ -131,6 +131,7 @@ public final class WordGame
             }
         }
         
+        // Save score
         // Save score
         userScore = new Score(LocalDateTime.now(),
                               gamesPlayed,
