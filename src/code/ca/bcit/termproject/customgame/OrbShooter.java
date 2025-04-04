@@ -1,6 +1,9 @@
-package ca.bcit.termproject.customgame.orbs;
+package ca.bcit.termproject.customgame;
 
-import ca.bcit.termproject.customgame.ClockStormMain;
+import ca.bcit.termproject.customgame.orbs.BlueOrb;
+import ca.bcit.termproject.customgame.orbs.GreenOrb;
+import ca.bcit.termproject.customgame.orbs.Orb;
+import ca.bcit.termproject.customgame.orbs.RedOrb;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
