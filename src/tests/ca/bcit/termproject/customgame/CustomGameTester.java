@@ -68,7 +68,7 @@ public final class CustomGameTester
     @BeforeAll
     static void setUpClass()
     {
-        scoreFilePath = tempDir.resolve("data").resolve("score.txt");
+        scoreFilePath = tempDir.resolve("data").resolve("clockstorm_score.txt");
     }
 
     /**

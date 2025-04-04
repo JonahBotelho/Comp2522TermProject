@@ -22,13 +22,8 @@ public final class Score
     private static final int NOTHING    = 0;
     private final static Path filePath  = Paths.get(
             "src",
-            "code",
-            "ca",
-            "bcit",
-            "termproject",
-            "customgame",
             "data",
-            "score.txt"
+            "clockstorm_score.txt"
     );
 
     /**

@@ -55,7 +55,7 @@ public final class WordGame
         String choice;
         Score highScore;
         
-        file = "src/data/score.txt";
+        file = "src/data/wordgame_score.txt";
         world = new World();
         worldHashMap = world.getWorld();
         worldList = new ArrayList<>(worldHashMap.entrySet());
