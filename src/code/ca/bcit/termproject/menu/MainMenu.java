@@ -38,7 +38,7 @@ public final class MainMenu extends Application
     public void start(final Stage stage)
     {
         
-        Thread menuThread = new Thread(() ->{
+        final Thread menuThread = new Thread(() ->{
             while(true)
             {
                 final Scanner scan;
