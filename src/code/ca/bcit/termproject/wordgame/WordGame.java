@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Optional;
+import java.util.Comparator;
 import java.text.DecimalFormat;
 
 /**
@@ -20,21 +22,21 @@ import java.text.DecimalFormat;
  */
 public final class WordGame
 {
-    private static final Scanner SCANNER            = new Scanner(System.in);
-    private static final int QUESTIONS_PER_GAME     = 10;
-    private static final int NOTHING                = 0;
-    private static final int QUESTION_TYPE_ONE      = 0;
-    private static final int QUESTION_TYPE_TWO      = 1;
-    private static final int QUESTION_TYPE_THREE    = 2;
-    private static final int FACTS_PER_COUNTRY      = 3;
-    private static final int TYPES_OF_QUESTIONS     = 3;
-    private static final String PLAY_AGAIN_TRUE     = "yes";
-    private static final String PLAY_AGAIN_FALSE    = "no";
-    
+    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final int QUESTIONS_PER_GAME = 10;
+    private static final int NOTHING = 0;
+    private static final int QUESTION_TYPE_ONE = 0;
+    private static final int QUESTION_TYPE_TWO = 1;
+    private static final int QUESTION_TYPE_THREE = 2;
+    private static final int FACTS_PER_COUNTRY = 3;
+    private static final int TYPES_OF_QUESTIONS = 3;
+    private static final String PLAY_AGAIN_TRUE = "yes";
+    private static final String PLAY_AGAIN_FALSE = "no";
+
     private static int correctOnFirstAttempt;
     private static int correctOnSecondAttempt;
     private static int incorrectOnSecondAttempt;
-    
+
     /**
      * The main method that runs the game.
      * It initializes the game world, starts the question loop, and handles score storage.
@@ -48,22 +50,24 @@ public final class WordGame
         final HashMap<String, Country> worldHashMap;
         final List<Map.Entry<String, Country>> worldList;
         final Random ran;
-        final Score userScore;
+        final Score userScoreScore;
         final List<Score> scoresList;
         final DecimalFormat scoreFormat;
-        
+
         int gamesPlayed;
         String choice;
-        Score highScore;
 
-        
+        final double highScore;
+        final double userScoreDouble;
+
+
         file = "src/data/wordgame_score.txt";
         world = new World();
         worldHashMap = world.getWorld();
         worldList = new ArrayList<>(worldHashMap.entrySet());
         ran = new Random();
         choice = "yes";
-        
+
         gamesPlayed = NOTHING;
         correctOnFirstAttempt = NOTHING;
         correctOnSecondAttempt = NOTHING;
@@ -79,37 +83,37 @@ public final class WordGame
                 final int questionType;
                 final int countryIndex;
                 final Country currentCountry;
-                
+
                 questionType = ran.nextInt(TYPES_OF_QUESTIONS);
                 countryIndex = ran.nextInt(worldList.size());
                 currentCountry = worldList.get(countryIndex).getValue();
-                
+
                 switch (questionType)
                 {
                     // The program will print a capital city, and ask the user what country it is the capital of
                     case QUESTION_TYPE_ONE:
                         System.out.println("\nWhat country is " +
-                                                   currentCountry.getCapitalCityName() +
-                                                   " the capital of?");
-                        
+                                currentCountry.getCapitalCityName() +
+                                " the capital of?");
+
                         evaluateUserInput(currentCountry.getName());
                         break;
                     // The program will print the country name, and ask the user what is its capital city
                     case QUESTION_TYPE_TWO:
                         System.out.println("\nWhat is the capital of " +
-                                                   currentCountry.getName() +
-                                                   "?");
-                        
+                                currentCountry.getName() +
+                                "?");
+
                         evaluateUserInput(currentCountry.getCapitalCityName());
                         break;
                     // The program will print one of the three facts, and ask the user which country is being described
                     case QUESTION_TYPE_THREE:
                         int factIndex;
                         factIndex = ran.nextInt(FACTS_PER_COUNTRY);
-                        
+
                         System.out.println("\nWhat country is being described?");
                         System.out.println(currentCountry.getFacts()[factIndex]);
-                        
+
                         evaluateUserInput(currentCountry.getName());
                         break;
                     default:
@@ -118,69 +122,80 @@ public final class WordGame
                 }
                 System.out.println("___________________________________________");
             }
-            
+
             gamesPlayed++;
             System.out.print("Do you want to play again? (yes/no): ");
             choice = SCANNER.nextLine();
-            
+
             while (!(choice.equalsIgnoreCase(PLAY_AGAIN_TRUE) ||
                     choice.equalsIgnoreCase(PLAY_AGAIN_FALSE)))
             {
                 System.out.print("Invalid choice. Please try again (" +
-                                         PLAY_AGAIN_TRUE + "/" +
-                                         PLAY_AGAIN_FALSE + "): ");
+                        PLAY_AGAIN_TRUE + "/" +
+                        PLAY_AGAIN_FALSE + "): ");
                 choice = SCANNER.nextLine();
             }
         }
-        
+
         // Save score
-        userScore = new Score(LocalDateTime.now(),
-                              gamesPlayed,
-                              correctOnFirstAttempt,
-                              correctOnSecondAttempt,
-                              incorrectOnSecondAttempt);
-        Score.appendScoreToFile(userScore, file);
+        userScoreScore = new Score(LocalDateTime.now(),
+                gamesPlayed,
+                correctOnFirstAttempt,
+                correctOnSecondAttempt,
+                incorrectOnSecondAttempt);
+        userScoreDouble = userScoreScore.getAverageScore();
 
         scoresList = Score.readScoresFromFile(file);
-        highScore = new Score(LocalDateTime.now(), Integer.MAX_VALUE, NOTHING, NOTHING, NOTHING);
 
-        for (Score currentScore : scoresList)
+        if (scoresList != null)
         {
-            if (currentScore.getAverageScore() > highScore.getAverageScore())
+            final Optional<Score> optionalHighScore = scoresList.stream()
+                    .max(Comparator.comparingDouble(Score::getAverageScore));
+
+            if (optionalHighScore.isPresent())
             {
-                highScore = currentScore;
+                highScore = optionalHighScore.get().getAverageScore();
+            }
+            else
+            {
+                highScore = NOTHING;
             }
         }
+        else
+        {
+            highScore = NOTHING;
+        }
 
-
-        if (userScore.getAverageScore() > highScore.getAverageScore())
+        if (userScoreDouble > highScore)
         {
             System.out.println("You have a new high score of " +
-                    scoreFormat.format(userScore.getAverageScore()) +
+                    scoreFormat.format(userScoreDouble) +
                     " points per game.");
             System.out.println("The previous high score was " +
-                    scoreFormat.format(highScore.getAverageScore()) +
+                    scoreFormat.format(highScore) +
                     " points per game.");
         }
         else
         {
             System.out.println("Your score of " +
-                    scoreFormat.format(userScore.getAverageScore()) +
+                    scoreFormat.format(userScoreDouble) +
                     " points per game was not a high score.");
         }
-        
+
+        Score.appendScoreToFile(userScoreScore, file);
+
         System.out.println();
-        System.out.println(userScore);
+        System.out.println(userScoreScore);
         System.out.println("Thank you for playing!");
         System.out.println("Press enter to return to the main menu.");
 
         SCANNER.nextLine();
     }
-    
+
     /**
      * Prompts the user for an answer and evaluates their response.
      * The user has two attempts to answer correctly.
-     *
+     * <p>
      * Designed to be run through MainMenu. May not work as intended if opened separately.
      *
      * @param answer The correct answer for the question.
@@ -188,10 +203,10 @@ public final class WordGame
     private static void evaluateUserInput(final String answer)
     {
         validateAnswer(answer);
-        
+
         String input;
         input = SCANNER.nextLine();
-        
+
         if (input.equalsIgnoreCase(answer))
         {
             System.out.printf("%s is Correct!\n", input);
@@ -215,7 +230,7 @@ public final class WordGame
             }
         }
     }
-    
+
     /**
      * Validates the given answer to ensure it is not null or blank.
      *
