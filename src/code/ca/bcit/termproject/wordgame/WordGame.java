@@ -177,8 +177,10 @@ public final class WordGame
     }
     
     /**
-     * Prompts the user for an answer and evaluates theisr response.
+     * Prompts the user for an answer and evaluates their response.
      * The user has two attempts to answer correctly.
+     *
+     * Designed to be run through MainMenu. May not work as intended if opened separately.
      *
      * @param answer The correct answer for the question.
      */
