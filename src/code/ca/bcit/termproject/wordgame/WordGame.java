@@ -49,11 +49,13 @@ public final class WordGame
         final List<Map.Entry<String, Country>> worldList;
         final Random ran;
         final Score userScore;
+        final List<Score> scoresList;
         final DecimalFormat scoreFormat;
         
         int gamesPlayed;
         String choice;
         Score highScore;
+
         
         file = "src/data/wordgame_score.txt";
         world = new World();
@@ -132,16 +134,16 @@ public final class WordGame
         }
         
         // Save score
-        // Save score
         userScore = new Score(LocalDateTime.now(),
                               gamesPlayed,
                               correctOnFirstAttempt,
                               correctOnSecondAttempt,
                               incorrectOnSecondAttempt);
-        final List<Score> scoresList = Score.readScoresFromFile(file);
-        
+        Score.appendScoreToFile(userScore, file);
+
+        scoresList = Score.readScoresFromFile(file);
         highScore = new Score(LocalDateTime.now(), Integer.MAX_VALUE, NOTHING, NOTHING, NOTHING);
-        
+
         for (Score currentScore : scoresList)
         {
             if (currentScore.getAverageScore() > highScore.getAverageScore())
@@ -167,8 +169,6 @@ public final class WordGame
                     " points per game was not a high score.");
         }
         
-        Score.appendScoreToFile(userScore, file);
-
         System.out.println();
         System.out.println(userScore);
         System.out.println("Thank you for playing!");

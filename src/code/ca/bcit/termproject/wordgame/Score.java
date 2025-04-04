@@ -136,6 +136,10 @@ public final class Score
         Path filePath;
         filePath = Paths.get(scoreFile);
 
+        if (Files.notExists(filePath.getParent())) {
+            Files.createDirectories(filePath.getParent());
+        }
+
         if (Files.notExists(filePath))
         {
             Files.createFile(filePath);
@@ -159,9 +163,14 @@ public final class Score
         final List<String> lines;
 
         filePath = Path.of(scoreFile);
+
+        if (Files.notExists(filePath.getParent())) {
+            Files.createDirectories(filePath.getParent());
+        }
+
         if (Files.notExists(filePath))
         {
-            Files.createFile(filePath);
+            return null;
         }
 
         lines = Files.readAllLines(filePath);

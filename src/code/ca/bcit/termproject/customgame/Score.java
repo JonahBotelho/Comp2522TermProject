@@ -35,6 +35,10 @@ public final class Score
      */
     public static int getHighScore() throws IOException
     {
+        if (Files.notExists(filePath.getParent())) {
+            Files.createDirectories(filePath.getParent()); // creates parent directories if needed
+        }
+
         if (Files.notExists(filePath))
         {
             return NOTHING;
