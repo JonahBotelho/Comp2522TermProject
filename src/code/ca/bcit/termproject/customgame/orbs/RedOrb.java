@@ -33,6 +33,27 @@ public final class RedOrb extends Orb
     private static final String FALLBACK_MESSAGE            = ". Using fallback color.";
 
     /**
+     * Constructs a new RedOrb with specified position and movement parameters.
+     *
+     * @param x        initial x-coordinate center
+     * @param y        initial y-coordinate center
+     * @param speedX   base horizontal speed
+     * @param speedY   base vertical speed
+     */
+    public RedOrb(final double x,
+                  final double y,
+                  final double speedX,
+                  final double speedY)
+    {
+        Orb.validateX(x);
+        Orb.validateY(y);
+        Orb.validateBaseSpeed(speedX);
+        Orb.validateBaseSpeed(speedY);
+
+        super(x, y, ClockStormMain.ORB_SIZE, ORB_PAINT, speedX, speedY);
+    }
+
+    /**
      * Loads the red orb image and creates an ImagePattern, or returns a fallback red color.
      *
      * @return Paint object for the red orb
@@ -70,26 +91,5 @@ public final class RedOrb extends Orb
 
         result = Color.RED;
         return result;
-    }
-
-    /**
-     * Constructs a new RedOrb with specified position and movement parameters.
-     *
-     * @param x        initial x-coordinate center
-     * @param y        initial y-coordinate center
-     * @param speedX   base horizontal speed
-     * @param speedY   base vertical speed
-     */
-    public RedOrb(final double x,
-                  final double y,
-                  final double speedX,
-                  final double speedY)
-    {
-        Orb.validateX(x);
-        Orb.validateY(y);
-        Orb.validateBaseSpeed(speedX);
-        Orb.validateBaseSpeed(speedY);
-
-        super(x, y, ClockStormMain.ORB_SIZE, ORB_PAINT, speedX, speedY);
     }
 }

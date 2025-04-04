@@ -33,6 +33,27 @@ public final class GreenOrb extends Orb
     private static final String FALLBACK_MESSAGE    = ". Using fallback color.";
 
     /**
+     * Constructs a new GreenOrb with specified position and movement parameters.
+     *
+     * @param x        initial x-coordinate center
+     * @param y        initial y-coordinate center
+     * @param speedX   base horizontal speed
+     * @param speedY   base vertical speed
+     */
+    public GreenOrb(final double x,
+                    final double y,
+                    final double speedX,
+                    final double speedY)
+    {
+        Orb.validateX(x);
+        Orb.validateY(y);
+        Orb.validateBaseSpeed(speedX);
+        Orb.validateBaseSpeed(speedY);
+
+        super(x, y, ClockStormMain.ORB_SIZE, ORB_PAINT, speedX, speedY);
+    }
+
+    /**
      * Loads the image and creates an ImagePattern, or returns a fallback color.
      *
      * @return Paint object for the orb
@@ -69,26 +90,5 @@ public final class GreenOrb extends Orb
 
         result = Color.LIMEGREEN;
         return result;
-    }
-
-    /**
-     * Constructs a new GreenOrb with specified position and movement parameters.
-     *
-     * @param x        initial x-coordinate center
-     * @param y        initial y-coordinate center
-     * @param speedX   base horizontal speed
-     * @param speedY   base vertical speed
-     */
-    public GreenOrb(final double x,
-                    final double y,
-                    final double speedX,
-                    final double speedY)
-    {
-        Orb.validateX(x);
-        Orb.validateY(y);
-        Orb.validateBaseSpeed(speedX);
-        Orb.validateBaseSpeed(speedY);
-
-        super(x, y, ClockStormMain.ORB_SIZE, ORB_PAINT, speedX, speedY);
     }
 }
