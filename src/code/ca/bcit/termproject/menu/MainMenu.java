@@ -18,7 +18,7 @@ public final class MainMenu extends Application
 {
     private static final String WORD_GAME_LETTER = "W";
     private static final String NUMBER_GAME_LETTER = "N";
-    private static final String CUSTOM_GAME_NUMBER = "M";
+    private static final String CLOCK_STORM_LETTER = "C";
     private static final String QUIT_LETTER = "Q";
     
     private static final int NOTHING = 0;
@@ -48,14 +48,14 @@ public final class MainMenu extends Application
                 
                 System.out.println("Press " + WORD_GAME_LETTER + " to play the Word game.");
                 System.out.println("Press " + NUMBER_GAME_LETTER + " to play the Number game.");
-                System.out.println("Press " + CUSTOM_GAME_NUMBER + " to play the _____ game");
+                System.out.println("Press " + CLOCK_STORM_LETTER + " to play the ClockStorm game");
                 System.out.println("Press " + QUIT_LETTER + " to quit.");
                 
                 input = scan.nextLine();
                 
                 while (!(input.equalsIgnoreCase(WORD_GAME_LETTER) ||
                         input.equalsIgnoreCase(NUMBER_GAME_LETTER) ||
-                        input.equalsIgnoreCase(CUSTOM_GAME_NUMBER) ||
+                        input.equalsIgnoreCase(CLOCK_STORM_LETTER) ||
                         input.equalsIgnoreCase(QUIT_LETTER)))
                 {
                     System.out.println("Invalid input. Try again.");
@@ -78,7 +78,7 @@ public final class MainMenu extends Application
                         Platform.runLater(() -> new NumberGame().start(stage));
                         Platform.setImplicitExit(false);
                         break;
-                    case CUSTOM_GAME_NUMBER:
+                    case CLOCK_STORM_LETTER:
                         Platform.runLater(() -> new ClockStormMain().start(stage));
                         Platform.setImplicitExit(false);
                         break;
