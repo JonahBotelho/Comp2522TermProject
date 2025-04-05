@@ -1,35 +1,21 @@
-1.  "write a game in javaFX.
-    Similar to the bullet hell genre.
-    A cannon object at the top shoots balls of different colours (red, green blue) towards the bottom, at random angles
-    The player controls an object, and must use arrow keys to move around and collide with the balls, absorbing them.
-    If the player collides with a red ball, they lose. If a player collides with a green or blue ball, it disappears.
+Best parts
+-   It significantly reduced the time I spent determining the cause of bugs, as
+    it could quickly search through the code and provide a list of potential issues.
 
-    Use as many classes as necessary for this.
-    Include at least:
-    - MainGame.java (game logic)
-    - Orb.java (class representing the orb, and different characteristics. Could be abstract, and have several sub classes for different coloured orbs if you believe it best)
-    - UI components.java (for setting up and adding all UI components)
+-   When given very specific prompt of a feature to implement, it generally got
+    the logic correct, saving me time.
 
-    Use best practices. Declare constants as magic numbers, and split declaration and assignemnts of variables"
+-   It was very helpful at writing documentation, and explaining complex methods
+    more elegantly than I could.
 
-    I used this prompt with deepseek first to strong foundation of my game, then spent time fixing issues that I found,
-    such as Cannon.java not extending any JavaFX object, preventing it from being added to the root.
+-   It was helpful at implementing large numbers of test cases, saving me time.
 
-2.  I was getting a runtime error everytime the player touched a green or blue ball, so I posted it to the AI
-    The issue was related to removing items from a list while it was being iterated over, and I generated code to fix that.
+Worst parts
+-   Often gave an incorrect solution, and didn't understand why it was incorrect.
+    Even after I clarified and explained why it was incorrect, it would still give
+    more solutions with the same flaw.
 
-3.  From fixing that, it caused an issue where each orb would stop moving after being touched by the player, because they were not
-    correctly removed from the root. I prompted it to fix this issue, and after a few attempts, and changes by myself the issue was fixed
+-   It often changed more than I asked it to. I used AI a lot in reformatting code,
+    but even after telling it to keep the logic the same, it often made slight adjustments.
 
-4. Enabled user to move up and down my hand
-
-5. Used AI to add score counter, adjusted myself to fix a few styling errors
-
-6. Used AI to create a "game over" popup, asking the user if they wanted to play again.
-
-7. Added food calculation by hand
-
-8. Used AI to reformat constant declarations (formatting only, nothing else)
-
-
-
+-   Even with explicit instructions on what styles to use, it often did not use best practices.
