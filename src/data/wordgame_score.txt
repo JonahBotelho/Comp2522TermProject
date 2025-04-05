@@ -1,0 +1,14 @@
+Date and Time: 2025-04-04 17:01:18
+Games Played: 1
+Correct First Attempts: 4
+Correct Second Attempts: 0
+Incorrect Attempts: 6
+Score: 8 points
+
+Date and Time: 2025-04-04 17:02:24
+Games Played: 1
+Correct First Attempts: 3
+Correct Second Attempts: 0
+Incorrect Attempts: 7
+Score: 6 points
+

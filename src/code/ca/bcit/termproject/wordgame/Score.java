@@ -6,9 +6,11 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 
 /**
  * Represents a player's score in the word game.
@@ -16,15 +18,15 @@ import java.nio.file.Path;
  */
 public final class Score
 {
-    private static final int NOTHING                            = 0;
-    private static final int MIN_YEAR                           = 2000;
-    private static final int MAX_YEAR                           = 2100;
-    private static final int POINTS_FOR_FIRST_ATTEMPT           = 2;
-    private static final int POINTS_FOR_SECOND_ATTEMPT          = 1;
-    private static final int LINES_PER_SCORE_OBJECT             = 4;
-    private static final int WORDS_PER_SCORE_FIRST_LINE         = 2;
-    private static final int FIRST_INDEX_OF_DATE_IN_SCORE_LINE  = 15;
-    private static final DateTimeFormatter formatter            = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final int NOTHING = 0;
+    private static final int MIN_YEAR = 2000;
+    private static final int MAX_YEAR = 2100;
+    private static final int POINTS_FOR_FIRST_ATTEMPT = 2;
+    private static final int POINTS_FOR_SECOND_ATTEMPT = 1;
+    private static final int LINES_PER_SCORE_OBJECT = 4;
+    private static final int WORDS_PER_SCORE_FIRST_LINE = 2;
+    private static final int FIRST_INDEX_OF_DATE_IN_SCORE_LINE = 15;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private final LocalDateTime currentTime;
     private final int gamesPlayed;
@@ -36,11 +38,11 @@ public final class Score
     /**
      * Constructs a Score object with given game statistics.
      *
-     * @param currentTime               The timestamp when the score was recorded.
-     * @param gamesPlayed               The total number of games played.
-     * @param correctOnFirstAttempt     The number of correct answers on the first attempt.
-     * @param correctOnSecondAttempt    The number of correct answers on the second attempt.
-     * @param incorrectOnSecondAttempt  The number of incorrect answers on the second attempt.
+     * @param currentTime              The timestamp when the score was recorded.
+     * @param gamesPlayed              The total number of games played.
+     * @param correctOnFirstAttempt    The number of correct answers on the first attempt.
+     * @param correctOnSecondAttempt   The number of correct answers on the second attempt.
+     * @param incorrectOnSecondAttempt The number of incorrect answers on the second attempt.
      */
     public Score(final LocalDateTime currentTime,
                  final int gamesPlayed,
@@ -54,14 +56,14 @@ public final class Score
         validateIntegers(correctOnSecondAttempt);
         validateIntegers(incorrectOnSecondAttempt);
 
-        this.currentTime                = currentTime;
-        this.gamesPlayed                = gamesPlayed;
-        this.correctOnFirstAttempt      = correctOnFirstAttempt;
-        this.correctOnSecondAttempt     = correctOnSecondAttempt;
-        this.incorrectOnSecondAttempt   = incorrectOnSecondAttempt;
+        this.currentTime = currentTime;
+        this.gamesPlayed = gamesPlayed;
+        this.correctOnFirstAttempt = correctOnFirstAttempt;
+        this.correctOnSecondAttempt = correctOnSecondAttempt;
+        this.incorrectOnSecondAttempt = incorrectOnSecondAttempt;
 
         this.score = correctOnFirstAttempt * POINTS_FOR_FIRST_ATTEMPT +
-                     correctOnSecondAttempt * POINTS_FOR_SECOND_ATTEMPT;
+                correctOnSecondAttempt * POINTS_FOR_SECOND_ATTEMPT;
     }
 
     /**
@@ -124,7 +126,7 @@ public final class Score
     /**
      * Appends a Score object to a file.
      *
-     * @param score The Score object to append.
+     * @param score     The Score object to append.
      * @param scoreFile The file path where the score will be stored.
      */
     public static void appendScoreToFile(final Score score,
@@ -136,7 +138,8 @@ public final class Score
         Path filePath;
         filePath = Paths.get(scoreFile);
 
-        if (Files.notExists(filePath.getParent())) {
+        if (Files.notExists(filePath.getParent()))
+        {
             Files.createDirectories(filePath.getParent());
         }
 
@@ -164,7 +167,8 @@ public final class Score
 
         filePath = Path.of(scoreFile);
 
-        if (Files.notExists(filePath.getParent())) {
+        if (Files.notExists(filePath.getParent()))
+        {
             Files.createDirectories(filePath.getParent());
         }
 
@@ -195,7 +199,7 @@ public final class Score
                 scoreValues[j] = Integer.parseInt(scoreLines[j][1].trim());
             }
 
-            scores.add(new Score(currentTime,scoreValues[0], scoreValues[1], scoreValues[2], scoreValues[3]));
+            scores.add(new Score(currentTime, scoreValues[0], scoreValues[1], scoreValues[2], scoreValues[3]));
         }
 
         return scores;
@@ -229,6 +233,37 @@ public final class Score
 
         returnString = result.toString();
         return returnString;
+    }
+
+    /**
+     * Returns the highest average score value from a list of Score objects.
+     *
+     * @param scores Score object list.
+     * @return highest average score as a double
+     */
+    public static double getHighScore(final List<Score> scores)
+    {
+        if (scores == null)
+        {
+            return NOTHING;
+        }
+
+        final double highScore;
+        final Optional<Score> optionalHighScore;
+
+        optionalHighScore = scores.stream()
+                .max(Comparator.comparingDouble(Score::getAverageScore));
+
+        if (optionalHighScore.isPresent())
+        {
+            highScore = optionalHighScore.get().getAverageScore();
+        }
+        else
+        {
+            highScore = NOTHING;
+        }
+
+        return highScore;
     }
 
     /**

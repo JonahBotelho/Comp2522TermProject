@@ -137,34 +137,15 @@ public final class WordGame
             }
         }
 
-        // Save score
         userScoreScore = new Score(LocalDateTime.now(),
                 gamesPlayed,
                 correctOnFirstAttempt,
                 correctOnSecondAttempt,
                 incorrectOnSecondAttempt);
+
         userScoreDouble = userScoreScore.getAverageScore();
-
-        scoresList = Score.readScoresFromFile(file);
-
-        if (scoresList != null)
-        {
-            final Optional<Score> optionalHighScore = scoresList.stream()
-                    .max(Comparator.comparingDouble(Score::getAverageScore));
-
-            if (optionalHighScore.isPresent())
-            {
-                highScore = optionalHighScore.get().getAverageScore();
-            }
-            else
-            {
-                highScore = NOTHING;
-            }
-        }
-        else
-        {
-            highScore = NOTHING;
-        }
+        scoresList      = Score.readScoresFromFile(file);
+        highScore       = Score.getHighScore(scoresList);
 
         if (userScoreDouble > highScore)
         {
