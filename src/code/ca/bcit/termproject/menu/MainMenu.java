@@ -27,7 +27,6 @@ public final class MainMenu extends Application
     
     private static final int NOTHING = 0;
     
-    
     /**
      * Entry point of the program.
      *
