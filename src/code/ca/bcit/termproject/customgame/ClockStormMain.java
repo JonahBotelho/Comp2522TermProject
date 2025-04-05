@@ -329,7 +329,7 @@ public final class ClockStormMain
         final Random random;
         final int generatedNumber;
 
-        random = new Random();
+        random          = new Random();
         generatedNumber = random.nextInt((max - min) + RANDOM_NUMBER_OFFSET) + min;
 
         return generatedNumber;
