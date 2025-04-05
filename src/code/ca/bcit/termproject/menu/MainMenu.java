@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
+ * Launches a menu interface for choosing between multiple games.
+ * Provides options to play Word Game, Number Game, or ClockStorm Game.
+ * Runs as a JavaFX application.
+ *
  * @author Jonah Botelho
  * @version 1.0
  */
@@ -25,7 +29,7 @@ public final class MainMenu extends Application
     
     
     /**
-     * Drives the program.
+     * Entry point of the program.
      *
      * @param args unused.
      */
@@ -33,12 +37,19 @@ public final class MainMenu extends Application
     {
         launch(args);
     }
-    
+
+    /**
+     * Starts the JavaFX application by launching the game selection menu
+     * in a separate thread. Handles user input and starts the selected game.
+     *
+     * @param stage the primary JavaFX stage
+     */
     @Override
     public void start(final Stage stage)
     {
-        
-        final Thread menuThread = new Thread(() ->{
+        final Thread menuThread;
+
+        menuThread = new Thread(() ->{
             while(true)
             {
                 final Scanner scan;
