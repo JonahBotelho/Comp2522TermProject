@@ -12,14 +12,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-// Using specific imports for clarity
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
 
 /**
  * Unit tests for the Custom Game logic, focusing on behavior rather than constant values.
