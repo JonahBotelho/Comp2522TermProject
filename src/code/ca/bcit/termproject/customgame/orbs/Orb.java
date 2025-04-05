@@ -13,7 +13,6 @@ import javafx.scene.shape.Circle;
  */
 public abstract class Orb extends Circle implements Updatable
 {
-    
     protected final double speedX;
     protected final double speedY;
     
