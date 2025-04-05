@@ -20,10 +20,10 @@ import java.util.Scanner;
  */
 public final class MainMenu extends Application
 {
-    private static final String WORD_GAME_LETTER = "W";
-    private static final String NUMBER_GAME_LETTER = "N";
-    private static final String CLOCK_STORM_LETTER = "C";
-    private static final String QUIT_LETTER = "Q";
+    private static final String WORD_GAME_LETTER    = "W";
+    private static final String NUMBER_GAME_LETTER  = "N";
+    private static final String CLOCK_STORM_LETTER  = "C";
+    private static final String QUIT_LETTER         = "Q";
     
     private static final int NOTHING = 0;
     
