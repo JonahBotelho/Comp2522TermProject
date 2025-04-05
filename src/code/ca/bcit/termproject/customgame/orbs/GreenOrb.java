@@ -83,7 +83,7 @@ public final class GreenOrb extends Orb
 
             System.err.println(IMAGE_LOAD_WARNING + IMAGE_PATH + FALLBACK_MESSAGE);
         }
-        catch (Exception e)
+        catch (final Exception e)
         {
             System.err.println(IMAGE_LOAD_ERROR + IMAGE_PATH + FALLBACK_MESSAGE);
         }

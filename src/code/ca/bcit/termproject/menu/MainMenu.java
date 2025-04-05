@@ -79,7 +79,7 @@ public final class MainMenu extends Application
                         {
                             WordGame.main(new String[NOTHING]);
                         }
-                        catch (IOException e)
+                        catch (final IOException e)
                         {
                             throw new RuntimeException(e);
                         }
