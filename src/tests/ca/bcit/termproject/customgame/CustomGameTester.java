@@ -264,7 +264,9 @@ public final class CustomGameTester
 
     // --- Score Class Behavior Tests (Using simulated file access) (9 tests) ---
 
-    // Helper to simulate Score.addScore using the test file path
+    /*
+     * Helper to simulate Score.addScore using the test file path
+     */
     private void simulateAddScore(final int score) throws IOException
     {
         Files.writeString(scoreFilePath,
@@ -273,7 +275,9 @@ public final class CustomGameTester
                 StandardOpenOption.APPEND);
     }
 
-    // Helper to simulate Score.getHighScore using the test file path
+    /*
+     * Helper to simulate Score.getHighScore using the test file path
+     */
     private int simulateGetHighScore() throws IOException
     {
         if (Files.notExists(scoreFilePath))
@@ -401,7 +405,9 @@ public final class CustomGameTester
 
     // --- MainGame Logic Behavior Tests (Simulated/Replicated) (6 tests) ---
 
-    // Replicates getRandomNumber logic from MainGame for testing its behavior
+    /*
+     * Replicates getRandomNumber logic from MainGame for testing its behavior
+     */
     private static int simulateGetRandomNumber(final int min, final int max)
     {
         final Random random;
