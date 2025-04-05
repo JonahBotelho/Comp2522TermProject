@@ -27,35 +27,32 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 public final class CustomGameTester
 {
 
-    // Use constants from MainGame for boundary calculations, but don't test their literal values
     private static final double WINDOW_WIDTH = ClockStormMain.WINDOW_WIDTH;
     private static final double WINDOW_HEIGHT = ClockStormMain.WINDOW_HEIGHT;
     private static final double PLAYER_SIZE = ClockStormMain.PLAYER_SIZE;
-    // Use placeholder start positions derived from MainGame logic if needed for relative checks
     private static final double PLAYER_START_X = WINDOW_WIDTH / 2.0;
-    private static final double PLAYER_START_Y = WINDOW_HEIGHT - 50.0; // Example derivation
+    private static final double PLAYER_START_Y = WINDOW_HEIGHT - 50.0;
 
-    // Constants for Score Testing Logic
-    private static final int DEFAULT_HIGH_SCORE = 0; // Assuming 0 is the default/nothing value
+
+    private static final int DEFAULT_HIGH_SCORE = 0;
     private static final int TEST_SCORE_1 = 100;
     private static final int TEST_SCORE_2 = 200;
     private static final int TEST_SCORE_NEGATIVE = -50;
 
-    // Constants for Speed Modifier Testing Logic (relative to MainGame constants)
-    private static final int TEST_START_SCORE = ClockStormMain.START_SCORE; // Use the actual start score
-    private static final double TEST_BASE_MODIFIER = ClockStormMain.BASE_SPEED_MODIFIER; // Use the actual base modifier
-    // We derive thresholds relative to START_SCORE rather than hardcoding scores
+    private static final int TEST_START_SCORE = ClockStormMain.START_SCORE;
+    private static final double TEST_BASE_MODIFIER = ClockStormMain.BASE_SPEED_MODIFIER;
+
     private static final int SCORE_ABOVE_START = TEST_START_SCORE + 50;
     private static final int SCORE_BELOW_START = TEST_START_SCORE - 50;
-    private static final int SCORE_WAY_ABOVE_START = TEST_START_SCORE + 5000; // Score likely to hit max clamp
-    private static final int SCORE_WAY_BELOW_START = TEST_START_SCORE - 5000; // Score likely to hit min clamp
+    private static final int SCORE_WAY_ABOVE_START = TEST_START_SCORE + 5000;
+    private static final int SCORE_WAY_BELOW_START = TEST_START_SCORE - 5000;
 
 
     private Player player;
     private OrbShooter cannon;
 
     /**
-     * Temporary directory for file-based tests (Score).
+     * Temporary directory for file-based tests.
      */
     @TempDir
     static Path tempDir;
@@ -148,6 +145,7 @@ public final class CustomGameTester
     {
         player.setDown(true);
         assertTrue(player.isMovingDown(), "Player should be flagged as moving down.");
+
         player.setDown(false);
         assertFalse(player.isMovingDown(), "Player should not be flagged as moving down.");
     }
@@ -158,9 +156,12 @@ public final class CustomGameTester
     @Test
     void testPlayerMovesLeftWhenFlagged()
     {
-        final double initialX = player.getX();
+        final double initialX;
+        initialX = player.getX();
+
         player.setLeft(true);
         player.update();
+
         assertTrue(player.getX() < initialX, "Player X should decrease when moving left.");
     }
 
@@ -170,9 +171,12 @@ public final class CustomGameTester
     @Test
     void testPlayerMovesRightWhenFlagged()
     {
-        final double initialX = player.getX();
+        final double initialX;
+        initialX = player.getX();
+
         player.setRight(true);
         player.update();
+
         assertTrue(player.getX() > initialX, "Player X should increase when moving right.");
     }
 
@@ -182,9 +186,12 @@ public final class CustomGameTester
     @Test
     void testPlayerMovesUpWhenFlagged()
     {
-        final double initialY = player.getY();
+        final double initialY;
+        initialY = player.getY();
+
         player.setUp(true);
         player.update();
+
         assertTrue(player.getY() < initialY, "Player Y should decrease when moving up.");
     }
 
@@ -194,11 +201,14 @@ public final class CustomGameTester
     @Test
     void testPlayerMovesDownWhenFlagged()
     {
-        // Ensure player is not already at bottom boundary for this test
         assumeTrue(player.getY() < WINDOW_HEIGHT - player.getHeight(), "Player must not start at bottom boundary");
-        final double initialY = player.getY();
+
+        final double initialY;
+        initialY = player.getY();
+
         player.setDown(true);
         player.update();
+
         assertTrue(player.getY() > initialY, "Player Y should increase when moving down.");
     }
 
@@ -211,6 +221,7 @@ public final class CustomGameTester
         player.setX(1.0); // Position close to boundary
         player.setLeft(true);
         player.update();
+
         assertEquals(0.0, player.getX(), 0.001, "Player should stop exactly at left boundary (X=0).");
     }
 
@@ -220,10 +231,13 @@ public final class CustomGameTester
     @Test
     void testPlayerStopsAtBottomBoundary()
     {
-        final double bottomBoundary = WINDOW_HEIGHT - player.getHeight();
+        final double bottomBoundary;
+        bottomBoundary = WINDOW_HEIGHT - player.getHeight();
+
         player.setY(bottomBoundary - 1.0); // Position close to boundary
         player.setDown(true);
         player.update();
+
         assertEquals(bottomBoundary, player.getY(), 0.001, "Player should stop exactly at bottom boundary.");
     }
 
@@ -246,7 +260,9 @@ public final class CustomGameTester
     @Test
     void testCannonGetOrbsReturnsList()
     {
-        final List<Orb> orbs = cannon.getOrbs();
+        final List<Orb> orbs;
+        orbs = cannon.getOrbs();
+
         assertNotNull(orbs);
         assertEquals(0, orbs.size());
     }
@@ -269,6 +285,7 @@ public final class CustomGameTester
         {
             return DEFAULT_HIGH_SCORE;
         }
+
         final List<String> lines = Files.readAllLines(scoreFilePath);
         return lines.stream()
                 .filter(s -> s != null && !s.isBlank() && s.matches("-?\\d+"))
@@ -294,6 +311,7 @@ public final class CustomGameTester
     {
         assertFalse(Files.exists(scoreFilePath), "Score file should not exist initially.");
         simulateAddScore(TEST_SCORE_1);
+
         assertTrue(Files.exists(scoreFilePath), "addScore should create the file if it's missing.");
     }
 
@@ -304,6 +322,7 @@ public final class CustomGameTester
     void testGetHighScoreEmptyFileReturnsDefault() throws IOException
     {
         Files.createFile(scoreFilePath);
+
         assertTrue(Files.exists(scoreFilePath), "Test requires an empty file to exist.");
         assertEquals(DEFAULT_HIGH_SCORE, simulateGetHighScore(), "Should return default score for an empty file.");
     }
@@ -317,6 +336,7 @@ public final class CustomGameTester
         simulateAddScore(TEST_SCORE_1);
         simulateAddScore(TEST_SCORE_NEGATIVE);
         simulateAddScore(TEST_SCORE_2);
+
         assertEquals(TEST_SCORE_2, simulateGetHighScore(), "Should return the maximum score added.");
     }
 
@@ -327,6 +347,7 @@ public final class CustomGameTester
     void testGetHighScoreIgnoresInvalidLines() throws IOException
     {
         Files.writeString(scoreFilePath, TEST_SCORE_1 + "\nInvalidText\n" + TEST_SCORE_2, StandardOpenOption.CREATE);
+
         assertEquals(TEST_SCORE_2, simulateGetHighScore(), "Should ignore non-numeric lines and return the max valid score.");
     }
 
@@ -337,6 +358,7 @@ public final class CustomGameTester
     void testGetHighScoreIgnoresBlankLines() throws IOException
     {
         Files.writeString(scoreFilePath, TEST_SCORE_1 + "\n\n" + TEST_SCORE_2 + "\n  \n", StandardOpenOption.CREATE);
+
         assertEquals(TEST_SCORE_2, simulateGetHighScore(), "Should ignore blank lines and return the max valid score.");
     }
 
@@ -348,7 +370,10 @@ public final class CustomGameTester
     {
         simulateAddScore(TEST_SCORE_1);
         simulateAddScore(TEST_SCORE_2);
-        final List<String> lines = Files.readAllLines(scoreFilePath);
+
+        final List<String> lines;
+        lines = Files.readAllLines(scoreFilePath);
+
         assertEquals(2, lines.size(), "Should have two lines after adding two scores.");
         assertEquals(String.valueOf(TEST_SCORE_1), lines.get(0));
         assertEquals(String.valueOf(TEST_SCORE_2), lines.get(1));
@@ -374,6 +399,7 @@ public final class CustomGameTester
     void testGetHighScoreReturnsDefaultForOnlyInvalidData() throws IOException
     {
         Files.writeString(scoreFilePath, "abc\ndef\n  ", StandardOpenOption.CREATE);
+
         assertEquals(DEFAULT_HIGH_SCORE, simulateGetHighScore(), "Should return default score if only invalid data exists.");
     }
 
@@ -383,9 +409,12 @@ public final class CustomGameTester
     // Replicates getRandomNumber logic from MainGame for testing its behavior
     private static int simulateGetRandomNumber(final int min, final int max)
     {
-        final Random random = new Random();
-        // Assuming RANDOM_NUMBER_OFFSET is 1 as in the original code
-        final int offset = 1;
+        final Random random;
+        final int offset;
+
+        random = new Random();
+        offset = 1;
+
         return random.nextInt((max - min) + offset) + min;
     }
 
@@ -417,10 +446,14 @@ public final class CustomGameTester
         assertEquals(value, randomNum, "Should return the exact value when min equals max.");
     }
 
-    // Replicates updateSpeedModifier logic from MainGame for testing its behavior
+    /**
+     * Simulates speedModifier adjustment logic
+     *
+     * @param currentScore current player score
+     * @return modifier
+     */
     private double simulateUpdateSpeedModifier(final int currentScore)
     {
-        // Use constants derived from ClockStormMain for calculation
         final double baseModifier = ClockStormMain.BASE_SPEED_MODIFIER;
         final double startScore = ClockStormMain.START_SCORE;
         final double changeRate = ClockStormMain.SPEED_MODIFIER_CHANGE_RATE;
@@ -443,6 +476,7 @@ public final class CustomGameTester
     void testSpeedModifierIncreasesAboveStartScore()
     {
         double modifier = simulateUpdateSpeedModifier(SCORE_ABOVE_START);
+
         assertTrue(modifier > TEST_BASE_MODIFIER, "Modifier should be greater than base when score is above start.");
     }
 
@@ -454,7 +488,7 @@ public final class CustomGameTester
     void testSpeedModifierDecreasesOrClampsBelowStartScore()
     {
         double modifier = simulateUpdateSpeedModifier(SCORE_BELOW_START);
-        // It could decrease below base, or clamp at MIN_SPEED_MODIFIER
+
         assertTrue(modifier <= TEST_BASE_MODIFIER, "Modifier should be less than or equal to base when score is below start.");
     }
 
@@ -464,10 +498,14 @@ public final class CustomGameTester
     @Test
     void testSpeedModifierClampsAtMaximum()
     {
-        double modifierAtMaxThreshold = simulateUpdateSpeedModifier(SCORE_WAY_ABOVE_START);
-        double modifierJustAboveStart = simulateUpdateSpeedModifier(SCORE_ABOVE_START);
+        double modifierAtMaxThreshold;
+        double modifierJustAboveStart;
+        double expectedMax;
 
-        double expectedMax = ClockStormMain.MAX_SPEED_MODIFIER;
+        modifierAtMaxThreshold = simulateUpdateSpeedModifier(SCORE_WAY_ABOVE_START);
+        modifierJustAboveStart = simulateUpdateSpeedModifier(SCORE_ABOVE_START);
+        expectedMax = ClockStormMain.MAX_SPEED_MODIFIER;
+
         assertEquals(expectedMax, modifierAtMaxThreshold, 0.001, "Modifier should clamp at the max value for very high scores.");
         assertTrue(modifierAtMaxThreshold >= modifierJustAboveStart, "Max clamped value should be >= value for lower score.");
     }
@@ -478,13 +516,16 @@ public final class CustomGameTester
     @Test
     void testSpeedModifierClampsAtMinimum()
     {
-        double modifierAtMinThreshold = simulateUpdateSpeedModifier(SCORE_WAY_BELOW_START);
-        double modifierJustBelowStart = simulateUpdateSpeedModifier(SCORE_BELOW_START);
+        double modifierAtMinThreshold;
+        double modifierJustBelowStart;
+        double expectedMin;
 
-        double expectedMin = ClockStormMain.MIN_SPEED_MODIFIER;
+        modifierAtMinThreshold = simulateUpdateSpeedModifier(SCORE_WAY_BELOW_START);
+        modifierJustBelowStart = simulateUpdateSpeedModifier(SCORE_BELOW_START);
+        expectedMin = ClockStormMain.MIN_SPEED_MODIFIER;
+
         assertEquals(expectedMin, modifierAtMinThreshold, 0.001, "Modifier should clamp at the min value for very low scores.");
         assertTrue(modifierAtMinThreshold <= modifierJustBelowStart, "Min clamped value should be <= value for higher score (unless also clamped).");
     }
 
-    // Total Tests: 10 (Player) + 2 (Cannon) + 3 (MutableInt) + 9 (Score) + 6 (MainGame Logic) = 30 Tests
 }
