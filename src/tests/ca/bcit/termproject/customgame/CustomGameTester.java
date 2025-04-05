@@ -24,24 +24,24 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
  */
 public final class CustomGameTester
 {
-    private static final double WINDOW_WIDTH = ClockStormMain.WINDOW_WIDTH;
-    private static final double WINDOW_HEIGHT = ClockStormMain.WINDOW_HEIGHT;
-    private static final double PLAYER_SIZE = ClockStormMain.PLAYER_SIZE;
-    private static final double PLAYER_START_X = WINDOW_WIDTH / 2.0;
-    private static final double PLAYER_START_Y = WINDOW_HEIGHT - 50.0;
+    private static final double WINDOW_WIDTH    = ClockStormMain.WINDOW_WIDTH;
+    private static final double WINDOW_HEIGHT   = ClockStormMain.WINDOW_HEIGHT;
+    private static final double PLAYER_SIZE     = ClockStormMain.PLAYER_SIZE;
+    private static final double PLAYER_START_X  = WINDOW_WIDTH / 2.0;
+    private static final double PLAYER_START_Y  = WINDOW_HEIGHT - 50.0;
 
-    private static final int DEFAULT_HIGH_SCORE = 0;
-    private static final int TEST_SCORE_1 = 100;
-    private static final int TEST_SCORE_2 = 200;
-    private static final int TEST_SCORE_NEGATIVE = -50;
+    private static final int DEFAULT_HIGH_SCORE     = 0;
+    private static final int TEST_SCORE_1           = 100;
+    private static final int TEST_SCORE_2           = 200;
+    private static final int TEST_SCORE_NEGATIVE    = -50;
 
-    private static final int TEST_START_SCORE = ClockStormMain.START_SCORE;
-    private static final double TEST_BASE_MODIFIER = ClockStormMain.BASE_SPEED_MODIFIER;
+    private static final int TEST_START_SCORE       = ClockStormMain.START_SCORE;
+    private static final double TEST_BASE_MODIFIER  = ClockStormMain.BASE_SPEED_MODIFIER;
 
-    private static final int SCORE_ABOVE_START = TEST_START_SCORE + 50;
-    private static final int SCORE_BELOW_START = TEST_START_SCORE - 50;
-    private static final int SCORE_WAY_ABOVE_START = TEST_START_SCORE + 5000;
-    private static final int SCORE_WAY_BELOW_START = TEST_START_SCORE - 5000;
+    private static final int SCORE_ABOVE_START      = TEST_START_SCORE + 50;
+    private static final int SCORE_BELOW_START      = TEST_START_SCORE - 50;
+    private static final int SCORE_WAY_ABOVE_START  = TEST_START_SCORE + 5000;
+    private static final int SCORE_WAY_BELOW_START  = TEST_START_SCORE - 5000;
 
     private Player player;
     private OrbShooter cannon;
