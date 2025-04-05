@@ -67,9 +67,9 @@ public final class ClockStormUI
         final StringBuilder contentTextBuilder;
         final String contextTextString;
 
-        welcomeMessage = new Alert(Alert.AlertType.INFORMATION);
-        playButton = new ButtonType("Play");
-        contentTextBuilder = new StringBuilder();
+        welcomeMessage      = new Alert(Alert.AlertType.INFORMATION);
+        playButton          = new ButtonType("Play");
+        contentTextBuilder  = new StringBuilder();
 
         // Adds styling
         setUpAlert(welcomeMessage);
@@ -117,10 +117,10 @@ public final class ClockStormUI
         final ButtonType playAgain;
         final ButtonType quit;
 
-        averageScoreFormat = new DecimalFormat("0.00");
-        gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
-        playAgain = new ButtonType("Play Again");
-        quit = new ButtonType("Quit");
+        averageScoreFormat  = new DecimalFormat("0.00");
+        gameOverAlert       = new Alert(Alert.AlertType.INFORMATION);
+        playAgain           = new ButtonType("Play Again");
+        quit                = new ButtonType("Quit");
 
         // Adds CSS stylesheet, and removes top row from Alert
         setUpAlert(gameOverAlert);

@@ -52,7 +52,7 @@ public final class OrbShooter
      */
     public OrbShooter()
     {
-        this.orbs = new ArrayList<>();
+        this.orbs   = new ArrayList<>();
         this.random = new Random();
     }
 
