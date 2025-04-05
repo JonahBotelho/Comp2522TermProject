@@ -20,16 +20,16 @@ import java.text.DecimalFormat;
  */
 public final class WordGame
 {
-    private static final Scanner SCANNER = new Scanner(System.in);
-    private static final int QUESTIONS_PER_GAME = 10;
-    private static final int NOTHING = 0;
-    private static final int QUESTION_TYPE_ONE = 0;
-    private static final int QUESTION_TYPE_TWO = 1;
-    private static final int QUESTION_TYPE_THREE = 2;
-    private static final int FACTS_PER_COUNTRY = 3;
-    private static final int TYPES_OF_QUESTIONS = 3;
-    private static final String PLAY_AGAIN_TRUE = "yes";
-    private static final String PLAY_AGAIN_FALSE = "no";
+    private static final Scanner SCANNER            = new Scanner(System.in);
+    private static final int QUESTIONS_PER_GAME     = 10;
+    private static final int NOTHING                = 0;
+    private static final int QUESTION_TYPE_ONE      = 0;
+    private static final int QUESTION_TYPE_TWO      = 1;
+    private static final int QUESTION_TYPE_THREE    = 2;
+    private static final int FACTS_PER_COUNTRY      = 3;
+    private static final int TYPES_OF_QUESTIONS     = 3;
+    private static final String PLAY_AGAIN_TRUE     = "yes";
+    private static final String PLAY_AGAIN_FALSE    = "no";
 
     private static int correctOnFirstAttempt;
     private static int correctOnSecondAttempt;
