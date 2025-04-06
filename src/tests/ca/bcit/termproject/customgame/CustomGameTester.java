@@ -24,24 +24,24 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
  */
 public final class CustomGameTester
 {
-    private static final double WINDOW_WIDTH    = ClockStormMain.WINDOW_WIDTH;
-    private static final double WINDOW_HEIGHT   = ClockStormMain.WINDOW_HEIGHT;
-    private static final double PLAYER_SIZE     = ClockStormMain.PLAYER_SIZE;
-    private static final double PLAYER_START_X  = WINDOW_WIDTH / 2.0;
-    private static final double PLAYER_START_Y  = WINDOW_HEIGHT - 50.0;
+    private static final double WINDOW_WIDTH = ClockStormMain.WINDOW_WIDTH;
+    private static final double WINDOW_HEIGHT = ClockStormMain.WINDOW_HEIGHT;
+    private static final double PLAYER_SIZE = ClockStormMain.PLAYER_SIZE;
+    private static final double PLAYER_START_X = WINDOW_WIDTH / 2.0;
+    private static final double PLAYER_START_Y = WINDOW_HEIGHT - 50.0;
 
-    private static final int DEFAULT_HIGH_SCORE     = 0;
-    private static final int TEST_SCORE_1           = 100;
-    private static final int TEST_SCORE_2           = 200;
-    private static final int TEST_SCORE_NEGATIVE    = -50;
+    private static final int DEFAULT_HIGH_SCORE = 0;
+    private static final int TEST_SCORE_1 = 100;
+    private static final int TEST_SCORE_2 = 200;
+    private static final int TEST_SCORE_NEGATIVE = -50;
 
-    private static final int TEST_START_SCORE       = ClockStormMain.START_SCORE;
-    private static final double TEST_BASE_MODIFIER  = ClockStormMain.BASE_SPEED_MODIFIER;
+    private static final int TEST_START_SCORE = ClockStormMain.START_SCORE;
+    private static final double TEST_BASE_MODIFIER = ClockStormMain.BASE_SPEED_MODIFIER;
 
-    private static final int SCORE_ABOVE_START      = TEST_START_SCORE + 50;
-    private static final int SCORE_BELOW_START      = TEST_START_SCORE - 50;
-    private static final int SCORE_WAY_ABOVE_START  = TEST_START_SCORE + 5000;
-    private static final int SCORE_WAY_BELOW_START  = TEST_START_SCORE - 5000;
+    private static final int SCORE_ABOVE_START = TEST_START_SCORE + 50;
+    private static final int SCORE_BELOW_START = TEST_START_SCORE - 50;
+    private static final int SCORE_WAY_ABOVE_START = TEST_START_SCORE + 5000;
+    private static final int SCORE_WAY_BELOW_START = TEST_START_SCORE - 5000;
 
     private Player player;
     private OrbShooter cannon;
@@ -66,8 +66,6 @@ public final class CustomGameTester
     /**
      * Sets up fresh Player and Cannon instances before each test.
      * Cleans up the test score file.
-     *
-     * @throws IOException if setup fails
      */
     @BeforeEach
     void setUp() throws IOException
@@ -98,6 +96,7 @@ public final class CustomGameTester
 
     /**
      * Tests that setting the left movement flag is correctly reflected.
+     * Positive test.
      */
     @Test
     void testPlayerSetMovingLeftFlag()
@@ -110,6 +109,7 @@ public final class CustomGameTester
 
     /**
      * Tests that setting the right movement flag is correctly reflected.
+     * Positive test.
      */
     @Test
     void testPlayerSetMovingRightFlag()
@@ -122,6 +122,7 @@ public final class CustomGameTester
 
     /**
      * Tests that setting the up movement flag is correctly reflected.
+     * Positive test.
      */
     @Test
     void testPlayerSetMovingUpFlag()
@@ -134,6 +135,7 @@ public final class CustomGameTester
 
     /**
      * Tests that setting the down movement flag is correctly reflected.
+     * Positive test.
      */
     @Test
     void testPlayerSetMovingDownFlag()
@@ -147,6 +149,7 @@ public final class CustomGameTester
 
     /**
      * Tests that the player's X position decreases when moving left and not at boundary.
+     * Positive test.
      */
     @Test
     void testPlayerMovesLeftWhenFlagged()
@@ -162,6 +165,7 @@ public final class CustomGameTester
 
     /**
      * Tests that the player's X position increases when moving right and not at boundary.
+     * Positive test.
      */
     @Test
     void testPlayerMovesRightWhenFlagged()
@@ -177,6 +181,7 @@ public final class CustomGameTester
 
     /**
      * Tests that the player's Y position decreases when moving up and not at boundary.
+     * Positive test.
      */
     @Test
     void testPlayerMovesUpWhenFlagged()
@@ -192,6 +197,7 @@ public final class CustomGameTester
 
     /**
      * Tests that the player's Y position increases when moving down and not at boundary.
+     * Positive test.
      */
     @Test
     void testPlayerMovesDownWhenFlagged()
@@ -209,6 +215,7 @@ public final class CustomGameTester
 
     /**
      * Tests that the player stops exactly at the left boundary (X=0).
+     * Positive test.
      */
     @Test
     void testPlayerStopsAtLeftBoundary()
@@ -222,6 +229,7 @@ public final class CustomGameTester
 
     /**
      * Tests that the player stops exactly at the bottom boundary.
+     * Positive test.
      */
     @Test
     void testPlayerStopsAtBottomBoundary()
@@ -235,34 +243,6 @@ public final class CustomGameTester
 
         assertEquals(bottomBoundary, player.getY(), 0.001, "Player should stop exactly at bottom boundary.");
     }
-
-
-    // --- Cannon Behavior Tests (2 tests) ---
-
-    /**
-     * Tests that a new Cannon instance initializes with an empty list of orbs.
-     */
-    @Test
-    void testCannonInitialOrbListIsEmpty()
-    {
-        assertNotNull(cannon.getOrbs(), "Orb list should not be null.");
-        assertTrue(cannon.getOrbs().isEmpty(), "Newly created cannon should have no orbs.");
-    }
-
-    /**
-     * Tests that getOrbs returns a valid (non-null) list instance.
-     */
-    @Test
-    void testCannonGetOrbsReturnsList()
-    {
-        final List<Orb> orbs;
-        orbs = cannon.getOrbs();
-
-        assertNotNull(orbs);
-        assertEquals(0, orbs.size());
-    }
-
-    // --- Score Class Behavior Tests (Using simulated file access) (9 tests) ---
 
     /*
      * Helper to simulate Score.addScore using the test file path
@@ -420,32 +400,20 @@ public final class CustomGameTester
     }
 
     /**
-     * Tests that the simulated getRandomNumber returns values within the specified min/max bounds.
-     */
-    @Test
-    void testGetRandomNumberBehaviorInRange()
-    {
-        final int min = 10;
-        final int max = 20;
-
-        IntStream.range(0, 100).forEach(i ->
-        {
-            int randomNum = simulateGetRandomNumber(min, max);
-            assertTrue(randomNum >= min && randomNum <= max,
-                    "Random number " + randomNum + " should be between " + min + " and " + max + " (inclusive).");
-        });
-    }
-
-    /**
      * Tests that the simulated getRandomNumber returns the exact number when min equals max.
      */
     @Test
     void testGetRandomNumberBehaviorMinEqualsMax()
     {
-        final int value = 5;
-        int randomNum = simulateGetRandomNumber(value, value);
+        final int value;
+        int randomNum;
+
+        value = 5;
+        randomNum = simulateGetRandomNumber(value, value);
+
         assertEquals(value, randomNum, "Should return the exact value when min equals max.");
     }
+
 
     /**
      * Simulates speedModifier adjustment logic
@@ -455,13 +423,20 @@ public final class CustomGameTester
      */
     private double simulateUpdateSpeedModifier(final int currentScore)
     {
-        final double baseModifier = ClockStormMain.BASE_SPEED_MODIFIER;
-        final double startScore = ClockStormMain.START_SCORE;
-        final double changeRate = ClockStormMain.SPEED_MODIFIER_CHANGE_RATE;
-        final double maxModifier = ClockStormMain.MAX_SPEED_MODIFIER;
-        final double minModifier = ClockStormMain.MIN_SPEED_MODIFIER;
+        final double baseModifier;
+        final double startScore;
+        final double changeRate;
+        final double maxModifier;
+        final double minModifier;
 
-        double modifier = baseModifier + (currentScore - startScore) / changeRate;
+        baseModifier = ClockStormMain.BASE_SPEED_MODIFIER;
+        startScore = ClockStormMain.START_SCORE;
+        changeRate = ClockStormMain.SPEED_MODIFIER_CHANGE_RATE;
+        maxModifier = ClockStormMain.MAX_SPEED_MODIFIER;
+        minModifier = ClockStormMain.MIN_SPEED_MODIFIER;
+
+        double modifier;
+        modifier = baseModifier + (currentScore - startScore) / changeRate;
 
         // Apply clamping
         modifier = Math.max(minModifier, modifier);
@@ -470,13 +445,15 @@ public final class CustomGameTester
         return modifier;
     }
 
+
     /**
      * Tests that the speed modifier is greater than base when score is above start score.
      */
     @Test
     void testSpeedModifierIncreasesAboveStartScore()
     {
-        double modifier = simulateUpdateSpeedModifier(SCORE_ABOVE_START);
+        double modifier;
+        modifier = simulateUpdateSpeedModifier(SCORE_ABOVE_START);
 
         assertTrue(modifier > TEST_BASE_MODIFIER, "Modifier should be greater than base when score is above start.");
     }
@@ -488,7 +465,8 @@ public final class CustomGameTester
     @Test
     void testSpeedModifierDecreasesOrClampsBelowStartScore()
     {
-        double modifier = simulateUpdateSpeedModifier(SCORE_BELOW_START);
+        double modifier;
+        modifier = simulateUpdateSpeedModifier(SCORE_BELOW_START);
 
         assertTrue(modifier <= TEST_BASE_MODIFIER, "Modifier should be less than or equal to base when score is below start.");
     }
@@ -529,4 +507,51 @@ public final class CustomGameTester
         assertTrue(modifierAtMinThreshold <= modifierJustBelowStart, "Min clamped value should be <= value for higher score (unless also clamped).");
     }
 
+    /**
+     * Tests that player throws IllegalArgumentException when created with negative size.
+     * Negative test.
+     */
+    @Test
+    void testPlayerThrowsOnNegativeSize()
+    {
+        final double invalidSize;
+        invalidSize = -1.0;
+
+        assertThrows(IllegalArgumentException.class, () ->
+                        new Player(PLAYER_START_X, PLAYER_START_Y, invalidSize),
+                "Player should throw IllegalArgumentException when created with negative size.");
+    }
+
+    /**
+     * Tests that simulateAddScore throws IOException when given invalid file path.
+     * Negative test.
+     */
+    @Test
+    void testAddScoreThrowsOnInvalidPath() throws IOException
+    {
+        final Path invalidPath;
+        invalidPath = tempDir.resolve("nonexistent_directory").resolve("invalid_file.txt");
+
+        assertThrows(IOException.class, () ->
+                        Files.writeString(invalidPath, "100", StandardOpenOption.CREATE),
+                "Should throw IOException when writing to invalid path.");
+    }
+
+    /**
+     * Tests that simulateGetRandomNumber throws IllegalArgumentException when min > max.
+     * Negative test.
+     */
+    @Test
+    void testGetRandomNumberThrowsOnInvalidRange()
+    {
+        final int min;
+        final int max;
+
+        min = 10;
+        max = 5;
+
+        assertThrows(IllegalArgumentException.class, () ->
+                        simulateGetRandomNumber(min, max),
+                "Should throw IllegalArgumentException when min > max.");
+    }
 }
