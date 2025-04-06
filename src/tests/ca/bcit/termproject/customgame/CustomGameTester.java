@@ -1,6 +1,5 @@
 package ca.bcit.termproject.customgame;
 
-import ca.bcit.termproject.customgame.orbs.Orb; // Assuming Orb base class exists
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -10,11 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
@@ -44,7 +41,6 @@ public final class CustomGameTester
     private static final int SCORE_WAY_BELOW_START = TEST_START_SCORE - 5000;
 
     private Player player;
-    private OrbShooter cannon;
 
     /**
      * Temporary directory for file-based tests.
@@ -71,7 +67,6 @@ public final class CustomGameTester
     void setUp() throws IOException
     {
         player = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
-        cannon = new OrbShooter();
 
         Files.deleteIfExists(scoreFilePath);
 
@@ -83,8 +78,6 @@ public final class CustomGameTester
 
     /**
      * Cleans up the test score file after each test.
-     *
-     * @throws IOException if cleanup fails
      */
     @AfterEach
     void tearDown() throws IOException
@@ -540,7 +533,7 @@ public final class CustomGameTester
      * Negative test.
      */
     @Test
-    void testAddScoreThrowsOnInvalidPath() throws IOException
+    void testAddScoreThrowsOnInvalidPath()
     {
         final Path invalidPath;
         invalidPath = tempDir.resolve("nonexistent_directory").resolve("invalid_file.txt");
