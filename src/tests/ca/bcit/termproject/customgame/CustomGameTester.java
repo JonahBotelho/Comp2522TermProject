@@ -275,6 +275,7 @@ public final class CustomGameTester
 
     /**
      * Tests that getHighScore returns the default value when the score file does not exist.
+     * Positive test.
      */
     @Test
     void testGetHighScoreNonExistentFileReturnsDefault() throws IOException
@@ -284,6 +285,7 @@ public final class CustomGameTester
 
     /**
      * Tests that addScore creates the score file if it doesn't exist.
+     * Positive test.
      */
     @Test
     void testAddScoreCreatesFile() throws IOException
@@ -296,6 +298,7 @@ public final class CustomGameTester
 
     /**
      * Tests that getHighScore returns the default value for an empty score file.
+     * Positive test.
      */
     @Test
     void testGetHighScoreEmptyFileReturnsDefault() throws IOException
@@ -308,6 +311,7 @@ public final class CustomGameTester
 
     /**
      * Tests that adding multiple scores results in the highest one being retrieved.
+     * Positive test.
      */
     @Test
     void testGetHighScoreReturnsMaxScore() throws IOException
@@ -321,6 +325,7 @@ public final class CustomGameTester
 
     /**
      * Tests that getHighScore ignores non-numeric lines in the score file.
+     * Positive test.
      */
     @Test
     void testGetHighScoreIgnoresInvalidLines() throws IOException
@@ -332,6 +337,7 @@ public final class CustomGameTester
 
     /**
      * Tests that getHighScore ignores blank lines in the score file.
+     * Positive test.
      */
     @Test
     void testGetHighScoreIgnoresBlankLines() throws IOException
@@ -343,6 +349,7 @@ public final class CustomGameTester
 
     /**
      * Tests that addScore appends new scores to the file, not overwriting.
+     * Positive test.
      */
     @Test
     void testAddScoreAppendsScores() throws IOException
@@ -361,6 +368,7 @@ public final class CustomGameTester
     /**
      * Tests that Score.addScore throws IllegalArgumentException if passed a null score.
      * This test requires calling the actual static method from the Score class.
+     * Negative test.
      */
     @Test
     void testScoreAddScoreThrowsForNullInput()
@@ -373,6 +381,7 @@ public final class CustomGameTester
 
     /**
      * Tests that getHighScore returns the default if the file contains only invalid data.
+     * Positive test.
      */
     @Test
     void testGetHighScoreReturnsDefaultForOnlyInvalidData() throws IOException
@@ -382,11 +391,9 @@ public final class CustomGameTester
         assertEquals(DEFAULT_HIGH_SCORE, simulateGetHighScore(), "Should return default score if only invalid data exists.");
     }
 
-
-    // --- MainGame Logic Behavior Tests (Simulated/Replicated) (6 tests) ---
-
     /*
      * Replicates getRandomNumber logic from MainGame for testing its behavior
+     * Positive test.
      */
     private static int simulateGetRandomNumber(final int min, final int max)
     {
@@ -401,6 +408,7 @@ public final class CustomGameTester
 
     /**
      * Tests that the simulated getRandomNumber returns the exact number when min equals max.
+     * Positive test.
      */
     @Test
     void testGetRandomNumberBehaviorMinEqualsMax()
@@ -417,6 +425,7 @@ public final class CustomGameTester
 
     /**
      * Simulates speedModifier adjustment logic
+     * Positive test.
      *
      * @param currentScore current player score
      * @return modifier
@@ -448,6 +457,7 @@ public final class CustomGameTester
 
     /**
      * Tests that the speed modifier is greater than base when score is above start score.
+     * Positive test.
      */
     @Test
     void testSpeedModifierIncreasesAboveStartScore()
@@ -461,6 +471,7 @@ public final class CustomGameTester
     /**
      * Tests that the speed modifier is less than or equal to base when score is below start score.
      * It might clamp at the minimum, which could be equal to or less than base.
+     * Positive test.
      */
     @Test
     void testSpeedModifierDecreasesOrClampsBelowStartScore()
@@ -473,6 +484,7 @@ public final class CustomGameTester
 
     /**
      * Tests that the speed modifier does not exceed the maximum value, even for very high scores.
+     * Positive test.
      */
     @Test
     void testSpeedModifierClampsAtMaximum()
@@ -491,6 +503,7 @@ public final class CustomGameTester
 
     /**
      * Tests that the speed modifier does not go below the minimum value, even for very low scores.
+     * Positive test.
      */
     @Test
     void testSpeedModifierClampsAtMinimum()
