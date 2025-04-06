@@ -1,21 +1,59 @@
-Best parts
--   It significantly reduced the time I spent determining the cause of bugs, as
-    it could quickly search through the code and provide a list of potential issues.
 
--   When given very specific prompt of a feature to implement, it generally got
-    the logic correct, saving me time.
+– Intro –
+I used AI throughout the development of my custom game, and found it extremely helpful, albeit with a few downsides.
 
--   It was very helpful at writing documentation, and explaining complex methods
-    more elegantly than I could.
+– Positives –
 
--   It was helpful at implementing large numbers of test cases, saving me time.
+Debugging:
+    The main benefit was the significant reduction in the time required to discover bugs and issues with my code. AI was
+    able to quickly search through multiple classes, and provide a list of possible issues, as well as solutions. I
+    generally needed to make adjustments to its solution, but it was always able to alert me of the bug quickly, saving
+    me a lot of time.
 
-Worst parts
--   Often gave an incorrect solution, and didn't understand why it was incorrect.
-    Even after I clarified and explained why it was incorrect, it would still give
-    more solutions with the same flaw.
+Specific features:
+    When I had a very specific feature to implement, I was able to give it explicit instructions, and it would generally
+    correctly implement the feature. A good example of this was when I wanted to change how my game’s projectiles
+    spawned, requiring me to change and refactor the existing system. With detailed instructions, it was able to do this
+    quite well, though I did need to do some optimizations and styling fixes.
 
--   It often changed more than I asked it to. I used AI a lot in reformatting code,
-    but even after telling it to keep the logic the same, it often made slight adjustments.
+Documentation:
+    I found AI very helpful at reading my code, and providing Java docs for each method. It both saved me time, and
+    often explained the method’s purpose in a more elegant way than I could have.
 
--   Even with explicit instructions on what styles to use, it often did not use best practices.
+Test cases:
+    AI was helpful for my custom game’s test class, where I used to help brainstorm and implement many unit tests. I ran
+    this test file often throughout development, to ensure I caught any issues early on.
+
+– Negatives –
+
+Was often unaware it was incorrect:
+    Several times, I asked it for information or a solution to a problem, and it would provide an incorrect answer.
+    Occasionally, even after I explained the issue with the problem, it was not able to understand and provide a correct
+    solution. An example of this was when I was adding CSS to my game, but was having an issue applying the styles to
+    the alerts. The AI model I was using could not understand that linking the stylesheet to the scene did not correctly
+    add it to the alerts, even after I inquired about it further.
+
+Changed more than I asked for:
+    Several times in the project I used AI to refactor my code, attempting to make it more modular. I would define
+    exactly how I wanted it divided, and specified that it should use the same styling, formatting, conventions and
+    logic as I did. However, it would often make slight adjustments, such as declaring and initializing variables on the
+    same line (even after being told explicitly not to). While overall, it did save me time, I had to go through the
+    code line by line, reverting any negative changes that it made.
+
+Best practices:
+    Surprisingly, I found that some AI had a lot of difficulty following best practices properly, even after I
+    explicitly explained what styles I wanted it to follow. It especially struggled with splitting variable declaration
+    and assignment. After using it to generate code, I always needed to go through it line by line to ensure it met your
+    standards.
+
+Concurrency:
+    AI struggled to help with some of the more complex parts of my project, such as concurrency and allowing the
+    launcher to run multiple JavaFX games after another. For this issue specifically, it suggested a variety of
+    solutions, but after implementation, none of them worked as intended. I ended up working with a few other members of
+    my set to implement this feature, as AI was little help.
+
+– Conclusion –
+
+AI definitely sped up development of my application, especially in the early stages. However, I still needed to
+understand all the code that it generated, and double check its work.
+
