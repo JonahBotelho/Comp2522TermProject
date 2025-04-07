@@ -36,4 +36,4 @@ Lesson 11.      Memory, singletons, design patterns:
                 to create RedOrb, GreenOrb and BlueOrb concrete products
 
 Lesson 12.      concurrency:
-                Platform.runLater in ClockStormMain class
+                Platform.runLater in ClockStormMain class, and new thread in MainMenu
