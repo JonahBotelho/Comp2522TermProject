@@ -368,7 +368,7 @@ public final class CustomGameTester
     {
         assertThrows(IllegalArgumentException.class, () ->
         {
-            Score.addScore(null);
+            ClockStormScore.addScore(null);
         }, "Score.addScore(null) should throw IllegalArgumentException.");
     }
 

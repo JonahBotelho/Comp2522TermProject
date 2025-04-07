@@ -17,7 +17,7 @@ import java.util.OptionalInt;
  * @author Jonah Botelho
  * @version 1.0
  */
-public final class Score
+public final class ClockStormScore
 {
     private static final int NOTHING    = 0;
     private final static Path filePath  = Paths.get(

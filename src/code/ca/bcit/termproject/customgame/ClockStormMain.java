@@ -230,9 +230,9 @@ public final class ClockStormMain
 
             try
             {
-                Score.addScore(score);
-                highScore = Score.getHighScore();
-                averageScore = Score.getAverageScore();
+                ClockStormScore.addScore(score);
+                highScore = ClockStormScore.getHighScore();
+                averageScore = ClockStormScore.getAverageScore();
 
                 result = ClockStormUI.showGameOverAlert(message, score, highScore, averageScore);
 
