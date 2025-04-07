@@ -1,6 +1,8 @@
 
 – Intro –
+
 I used AI throughout the development of my custom game, and found it extremely helpful, albeit with a few downsides.
+
 
 – Positives –
 
@@ -51,6 +53,7 @@ Concurrency:
     launcher to run multiple JavaFX games after another. For this issue specifically, it suggested a variety of
     solutions, but after implementation, none of them worked as intended. I ended up working with a few other members of
     my set to implement this feature, as AI was little help.
+
 
 – Conclusion –
 
