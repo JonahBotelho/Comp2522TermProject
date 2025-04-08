@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
  * - Move down: The player can move down within the window boundaries.
  * <p>
  * The class also validates the player’s position to ensure it stays within the boundaries of the game window.
- * The player is initialized with a size and starting position, and the movement speed can be controlled.
+ * The player is initialized with a size and starting position, and the movement speed_px can be controlled.
  * </p>
  *
  * @author Jonah Botelho
@@ -24,13 +24,13 @@ import javafx.scene.shape.Rectangle;
 public final class Player
         extends Rectangle
 {
-    private static final int NOTHING = 0;  // Boundary check constant
-    private static final double speed = 3;  // Movement speed of the player
+    private static final int NOTHING     = 0;  // Boundary check constant
+    private static final double speed_px = 3;  // Movement speed_px of the player
 
-    private boolean movingLeft = false;
+    private boolean movingLeft  = false;
     private boolean movingRight = false;
-    private boolean movingUp = false;
-    private boolean movingDown = false;
+    private boolean movingUp    = false;
+    private boolean movingDown  = false;
 
     /**
      * Constructs a Player object at the specified position with the given size.
@@ -60,19 +60,19 @@ public final class Player
     {
         if (movingLeft && getX() > NOTHING)
         {
-            setX(getX() - speed);
+            setX(getX() - speed_px);
         }
-        if (movingRight && getX() < ClockStormMain.WINDOW_WIDTH - getWidth())
+        if (movingRight && getX() < ClockStormMain.WINDOW_WIDTH_PX - getWidth())
         {
-            setX(getX() + speed);
+            setX(getX() + speed_px);
         }
         if (movingUp && getY() > NOTHING)
         {
-            setY(getY() - speed);
+            setY(getY() - speed_px);
         }
-        if (movingDown && getY() < ClockStormMain.WINDOW_HEIGHT - getHeight())
+        if (movingDown && getY() < ClockStormMain.WINDOW_HEIGHT_PX - getHeight())
         {
-            setY(getY() + speed);
+            setY(getY() + speed_px);
         }
 
         verifyEdgePosition();
@@ -88,17 +88,20 @@ public final class Player
         {
             setX(NOTHING);
         }
-        if (getX() > ClockStormMain.WINDOW_WIDTH - getWidth())
+
+        if (getX() > ClockStormMain.WINDOW_WIDTH_PX - getWidth())
         {
-            setX(ClockStormMain.WINDOW_WIDTH - getWidth());
+            setX(ClockStormMain.WINDOW_WIDTH_PX - getWidth());
         }
+
         if (getY() < NOTHING)
         {
             setY(NOTHING);
         }
-        if (getY() > ClockStormMain.WINDOW_HEIGHT - getHeight())
+
+        if (getY() > ClockStormMain.WINDOW_HEIGHT_PX - getHeight())
         {
-            setY(ClockStormMain.WINDOW_HEIGHT - getHeight());
+            setY(ClockStormMain.WINDOW_HEIGHT_PX - getHeight());
         }
     }
 

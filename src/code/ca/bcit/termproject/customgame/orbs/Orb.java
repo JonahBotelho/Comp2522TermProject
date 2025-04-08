@@ -91,7 +91,7 @@ public abstract class Orb extends Circle implements Updatable
      */
     public static void validateX(final double x)
     {
-        if (x < NOTHING || x > ClockStormMain.WINDOW_WIDTH)
+        if (x < NOTHING || x > ClockStormMain.WINDOW_WIDTH_PX)
         {
             throw new IllegalArgumentException("x out of bounds");
         }
@@ -104,7 +104,7 @@ public abstract class Orb extends Circle implements Updatable
      */
     public static void validateY(final double y)
     {
-        if (y < NOTHING || y > ClockStormMain.WINDOW_WIDTH)
+        if (y < NOTHING || y > ClockStormMain.WINDOW_WIDTH_PX)
         {
             throw new IllegalArgumentException("y out of bounds");
         }

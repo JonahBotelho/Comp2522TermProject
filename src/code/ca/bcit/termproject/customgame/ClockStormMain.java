@@ -47,19 +47,19 @@ public final class ClockStormMain
 {
     // Game Configuration
     /** The name of the game. */
-    public static final String GAME_NAME    = "ClockStorm";
+    public static final String GAME_NAME     = "ClockStorm";
     /** The width of the game window. */
-    public static final int WINDOW_WIDTH    = 800;
+    public static final int WINDOW_WIDTH_PX  = 800;
     /** The height of the game window. */
-    public static final int WINDOW_HEIGHT   = 600;
+    public static final int WINDOW_HEIGHT_PX = 600;
 
     // Player Configuration
     /** The size of the player character. */
     public static final int PLAYER_SIZE     = 30;
     /** The starting X position of the player. */
-    public static final int PLAYER_START_X  = WINDOW_WIDTH / 2;
+    public static final int PLAYER_START_X  = WINDOW_WIDTH_PX / 2;
     /** The starting Y position of the player. */
-    public static final int PLAYER_START_Y  = WINDOW_HEIGHT / 2;
+    public static final int PLAYER_START_Y  = WINDOW_HEIGHT_PX / 2;
 
     // Orb Configuration
     /** The size of the orbs in the game. */
@@ -110,7 +110,7 @@ public final class ClockStormMain
 
         final Scene scene;
 
-        scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+        scene = new Scene(root, WINDOW_WIDTH_PX, WINDOW_HEIGHT_PX);
         ClockStormUI.setupSceneStyles(scene);
 
         primaryStage.setTitle(GAME_NAME);
@@ -129,7 +129,7 @@ public final class ClockStormMain
      */
     private void setupGame()
     {
-        player  = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
+        player      = new Player(PLAYER_START_X, PLAYER_START_Y, PLAYER_SIZE);
         cannon      = new OrbShooter();
         score       = START_SCORE;
         scoreLabel  = ClockStormUI.createScoreLabel();
@@ -200,16 +200,16 @@ public final class ClockStormMain
             switch (event.getCode())
             {
                 case LEFT, A: // When the LEFT arrow or A key is pressed
-                    player.setLeft(true); // Start moving the player left
+                    player.setLeft(true);
                     break;
                 case RIGHT, D: // When the RIGHT arrow or D key is pressed
-                    player.setRight(true); // Start moving the player right
+                    player.setRight(true);
                     break;
                 case UP, W: // When the UP arrow or W key is pressed
-                    player.setUp(true); // Start moving the player up
+                    player.setUp(true);
                     break;
                 case DOWN, S: // When the DOWN arrow or S key is pressed
-                    player.setDown(true); // Start moving the player down
+                    player.setDown(true);
                     break;
             }
         });
@@ -220,16 +220,16 @@ public final class ClockStormMain
             switch (event.getCode())
             {
                 case LEFT, A: // When the LEFT arrow or A key is released
-                    player.setLeft(false); // Stop moving the player left
+                    player.setLeft(false);
                     break;
                 case RIGHT, D: // When the RIGHT arrow or D key is released
-                    player.setRight(false); // Stop moving the player right
+                    player.setRight(false);
                     break;
                 case UP, W: // When the UP arrow or W key is released
-                    player.setUp(false); // Stop moving the player up
+                    player.setUp(false);
                     break;
                 case DOWN, S: // When the DOWN arrow or S key is released
-                    player.setDown(false); // Stop moving the player down
+                    player.setDown(false);
                     break;
             }
         });

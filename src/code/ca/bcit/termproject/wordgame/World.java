@@ -81,6 +81,7 @@ public final class World
                 final List<String> lines;
                 lines = Files.readAllLines(filePath);
 
+                // iterate through lines
                 for (int i = FILE_READER_START; i < lines.size(); i += FACTS_LENGTH + OFFSET_AT_START)
                 {
                     final String[] countryAndCapitalString;
@@ -89,10 +90,12 @@ public final class World
                     final String[] facts;
                     final Country currentCountry;
 
+                    // retrieve country/capital name
                     countryAndCapitalString = lines.get(i).split(":");
                     name = countryAndCapitalString[FIRST_INDEX];
                     capitalCityName = countryAndCapitalString[SECOND_INDEX];
 
+                    // retrieve facts
                     facts = new String[FACTS_LENGTH];
                     facts[FIRST_INDEX] = lines.get(i + FIRST_FACT_OFFSET);
                     facts[SECOND_INDEX] = lines.get(i + SECOND_FACT_OFFSET);

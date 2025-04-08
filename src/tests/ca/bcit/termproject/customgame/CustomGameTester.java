@@ -24,8 +24,8 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
  */
 public final class CustomGameTester
 {
-    private static final double WINDOW_WIDTH = ClockStormMain.WINDOW_WIDTH;
-    private static final double WINDOW_HEIGHT = ClockStormMain.WINDOW_HEIGHT;
+    private static final double WINDOW_WIDTH = ClockStormMain.WINDOW_WIDTH_PX;
+    private static final double WINDOW_HEIGHT = ClockStormMain.WINDOW_HEIGHT_PX;
     private static final double PLAYER_SIZE = ClockStormMain.PLAYER_SIZE;
     private static final double PLAYER_START_X = WINDOW_WIDTH / 2.0;
     private static final double PLAYER_START_Y = WINDOW_HEIGHT - 50.0;

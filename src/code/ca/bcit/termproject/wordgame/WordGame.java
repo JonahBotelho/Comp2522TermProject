@@ -73,11 +73,11 @@ public final class WordGame
     {
         String choice;
 
-        choice = "yes";
-        gamesPlayed = NOTHING;
-        correctOnFirstAttempt = NOTHING;
-        correctOnSecondAttempt = NOTHING;
-        incorrectOnSecondAttempt = NOTHING;
+        choice                      = "yes";
+        gamesPlayed                 = NOTHING;
+        correctOnFirstAttempt       = NOTHING;
+        correctOnSecondAttempt      = NOTHING;
+        incorrectOnSecondAttempt    = NOTHING;
 
         // Play again loop
         while (choice.equalsIgnoreCase(PLAY_AGAIN_TRUE))
@@ -92,6 +92,7 @@ public final class WordGame
             System.out.print("Do you want to play again? (yes/no): ");
             choice = SCANNER.nextLine();
 
+            // invalid user input handling
             while (!(choice.equalsIgnoreCase(PLAY_AGAIN_TRUE) ||
                     choice.equalsIgnoreCase(PLAY_AGAIN_FALSE)))
             {
@@ -131,13 +132,13 @@ public final class WordGame
         final int countryIndex;
         final Country currentCountry;
 
-        world = new World();
-        worldHashMap = world.getWorld();
-        worldList = new ArrayList<>(worldHashMap.entrySet());
-        ran = new Random();
-        questionType = ran.nextInt(TYPES_OF_QUESTIONS);
-        countryIndex = ran.nextInt(worldList.size());
-        currentCountry = worldList.get(countryIndex).getValue();
+        world           = new World();
+        worldHashMap    = world.getWorld();
+        worldList       = new ArrayList<>(worldHashMap.entrySet());
+        ran             = new Random();
+        questionType    = ran.nextInt(TYPES_OF_QUESTIONS);
+        countryIndex    = ran.nextInt(worldList.size());
+        currentCountry  = worldList.get(countryIndex).getValue();
 
         switch (questionType)
         {
@@ -177,7 +178,7 @@ public final class WordGame
      * and then appended to the file regardless of outcome.
      * <p>
      * The score is formatted to two decimal places for display. The method also prints
-     * the final score summary and thanks the player for participating.
+     * the final score summary, and thanks the player for participating.
      * <p>
      * The player is prompted to press Enter to return to the main menu.
      */
@@ -193,6 +194,7 @@ public final class WordGame
         scoreFormat = new DecimalFormat("0.00");
         file = "src/data/wordgame_score.txt";
 
+        // creates score object with user score
         userScoreScore = new Score(LocalDateTime.now(),
                 gamesPlayed,
                 correctOnFirstAttempt,
@@ -200,10 +202,11 @@ public final class WordGame
                 incorrectOnSecondAttempt);
 
         userScoreDouble = userScoreScore.getAverageScore();
-        scoresList = Score.readScoresFromFile(file);
-        highScore = Score.getHighScore(scoresList);
+        scoresList      = Score.readScoresFromFile(file);
+        highScore       = Score.getHighScore(scoresList);
 
-        if (userScoreDouble > highScore)
+        // handles high score printing
+        if (userScoreDouble > highScore) // user has new high score
         {
             System.out.println("You have a new high score of " +
                     scoreFormat.format(userScoreDouble) +
@@ -212,7 +215,7 @@ public final class WordGame
                     scoreFormat.format(highScore) +
                     " points per game.");
         }
-        else
+        else // user does not have new high score
         {
             System.out.println("Your score of " +
                     scoreFormat.format(userScoreDouble) +
@@ -221,6 +224,7 @@ public final class WordGame
 
         Score.appendScoreToFile(userScoreScore, file);
 
+        // prints score report
         System.out.println();
         System.out.println(userScoreScore);
         System.out.println("Thank you for playing!");
@@ -257,22 +261,22 @@ public final class WordGame
         String input;
         input = SCANNER.nextLine();
 
-        if (input.equalsIgnoreCase(answer))
+        if (input.equalsIgnoreCase(answer)) // if answer is correct on first attempt
         {
             System.out.printf("%s is Correct!\n", input);
             correctOnFirstAttempt++;
         }
-        else
+        else // if answer is incorrect on first attempt
         {
             System.out.println("Incorrect!");
             System.out.print("Try again: ");
             input = SCANNER.nextLine();
-            if (input.equalsIgnoreCase(answer))
+            if (input.equalsIgnoreCase(answer)) // is answer is correct on second attempt
             {
                 System.out.printf("%s is Correct!\n", input);
                 correctOnSecondAttempt++;
             }
-            else
+            else // if answer is incorrect on second attempt
             {
                 System.out.println("Incorrect!");
                 System.out.printf("The correct answer is: %s\n", answer);

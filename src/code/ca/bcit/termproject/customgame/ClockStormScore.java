@@ -132,6 +132,7 @@ public final class ClockStormScore
 
         lines = Files.readAllLines(filePath);
 
+        // retrieves the average score as an optional double
         OptionalDouble averageOptionalDouble = lines.stream()
                 .filter(s -> s.matches("-?\\d+"))
                 .mapToInt(Integer::parseInt)

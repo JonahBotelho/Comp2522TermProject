@@ -62,6 +62,7 @@ public final class MainMenu extends Application
     {
         final Thread menuThread;
 
+        // allows multiple JavaFX games to be run during one session
         menuThread = new Thread(() ->{
             while(true)
             {
@@ -70,13 +71,14 @@ public final class MainMenu extends Application
                 
                 scan = new Scanner(System.in);
                 
-                System.out.println("Press " + WORD_GAME_LETTER + " to play the Word game.");
+                System.out.println("Press " + WORD_GAME_LETTER   + " to play the Word game.");
                 System.out.println("Press " + NUMBER_GAME_LETTER + " to play the Number game.");
                 System.out.println("Press " + CLOCK_STORM_LETTER + " to play the ClockStorm game.");
-                System.out.println("Press " + QUIT_LETTER + " to quit.");
+                System.out.println("Press " + QUIT_LETTER        + " to quit.");
                 
                 input = scan.nextLine();
-                
+
+                // validates input
                 while (!(input.equalsIgnoreCase(WORD_GAME_LETTER) ||
                         input.equalsIgnoreCase(NUMBER_GAME_LETTER) ||
                         input.equalsIgnoreCase(CLOCK_STORM_LETTER) ||
@@ -107,12 +109,15 @@ public final class MainMenu extends Application
                         Platform.setImplicitExit(false);
                         break;
                 }
+
+                // exits loop if user chooses QUIT_LETTER
                 if (input.equalsIgnoreCase(QUIT_LETTER))
                 {
                     return;
                 }
             }
         });
+
         menuThread.start();
     }
 }

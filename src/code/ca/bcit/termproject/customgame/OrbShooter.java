@@ -40,9 +40,9 @@ public final class OrbShooter
     private static final double RADIUS_OF_SCREEN_CONSTANT   = 2.0;
     private static final int NUMBER_OF_EDGES                = 4;
     private static final int LEFT_EDGE                      = 0;
-    private static final int RIGHT_EDGE                     = ClockStormMain.WINDOW_WIDTH;
+    private static final int RIGHT_EDGE                     = ClockStormMain.WINDOW_WIDTH_PX;
     private static final int TOP_EDGE                       = 0;
-    private static final int BOTTOM_EDGE                    = ClockStormMain.WINDOW_HEIGHT;
+    private static final int BOTTOM_EDGE                    = ClockStormMain.WINDOW_HEIGHT_PX;
 
     // Edge choosing probability
     private static final int CHOOSE_TOP_EDGE                = 0;
@@ -88,35 +88,35 @@ public final class OrbShooter
             double centerX;
             double centerY;
 
-            edge = random.nextInt(NUMBER_OF_EDGES);
-            centerX = ClockStormMain.WINDOW_WIDTH / RADIUS_OF_SCREEN_CONSTANT;
-            centerY = ClockStormMain.WINDOW_HEIGHT / RADIUS_OF_SCREEN_CONSTANT;
+            edge    = random.nextInt(NUMBER_OF_EDGES);
+            centerX = ClockStormMain.WINDOW_WIDTH_PX / RADIUS_OF_SCREEN_CONSTANT;
+            centerY = ClockStormMain.WINDOW_HEIGHT_PX / RADIUS_OF_SCREEN_CONSTANT;
 
             switch (edge)
             {
                 case CHOOSE_TOP_EDGE:
-                    x = random.nextInt(ClockStormMain.WINDOW_WIDTH);
+                    x = random.nextInt(ClockStormMain.WINDOW_WIDTH_PX);
                     y = TOP_EDGE;
-                    speedX = (centerX - x) * ORB_SPEED / ClockStormMain.WINDOW_WIDTH;
+                    speedX = (centerX - x) * ORB_SPEED / ClockStormMain.WINDOW_WIDTH_PX;
                     speedY = ORB_SPEED;
                     break;
                 case CHOOSE_RIGHT_EDGE:
                     x = RIGHT_EDGE;
-                    y = random.nextInt(ClockStormMain.WINDOW_HEIGHT);
+                    y = random.nextInt(ClockStormMain.WINDOW_HEIGHT_PX);
                     speedX = -ORB_SPEED;
-                    speedY = (centerY - y) * ORB_SPEED / ClockStormMain.WINDOW_HEIGHT;
+                    speedY = (centerY - y) * ORB_SPEED / ClockStormMain.WINDOW_HEIGHT_PX;
                     break;
                 case CHOOSE_BOTTOM_EDGE:
-                    x = random.nextInt(ClockStormMain.WINDOW_WIDTH);
+                    x = random.nextInt(ClockStormMain.WINDOW_WIDTH_PX);
                     y = BOTTOM_EDGE;
-                    speedX = (centerX - x) * ORB_SPEED / ClockStormMain.WINDOW_WIDTH;
+                    speedX = (centerX - x) * ORB_SPEED / ClockStormMain.WINDOW_WIDTH_PX;
                     speedY = -ORB_SPEED;
                     break;
                 case CHOOSE_LEFT_EDGE:
                     x = LEFT_EDGE;
-                    y = random.nextInt(ClockStormMain.WINDOW_HEIGHT);
+                    y = random.nextInt(ClockStormMain.WINDOW_HEIGHT_PX);
                     speedX = ORB_SPEED;
-                    speedY = (centerY - y) * ORB_SPEED / ClockStormMain.WINDOW_HEIGHT;
+                    speedY = (centerY - y) * ORB_SPEED / ClockStormMain.WINDOW_HEIGHT_PX;
                     break;
                 default:
                     throw new IllegalStateException("Invalid edge selection");

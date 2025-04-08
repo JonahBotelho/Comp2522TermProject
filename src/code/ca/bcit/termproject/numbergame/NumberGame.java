@@ -52,28 +52,28 @@ public final class NumberGame
     private static final int NOTHING = 0;
     private static final int NUMBER_OF_SQUARES = 20;
     private static final int NUMBER_OF_COLUMNS = 5;
-    private static final int WINDOW_WIDTH = 400;
-    private static final int WINDOW_HEIGHT = 400;
+    private static final int WINDOW_WIDTH_PX   = 400;
+    private static final int WINDOW_HEIGHT_PX  = 400;
 
     // Random Number Generation Constants
-    private static final int MIN_RANDOM_NUM = 1;
-    private static final int MAX_RANDOM_NUM = 1000;
-    private static final int RANDOM_NUMBER_OFFSET = 1;
+    private static final int MIN_RANDOM_NUM         = 1;
+    private static final int MAX_RANDOM_NUM         = 1000;
+    private static final int RANDOM_NUMBER_OFFSET   = 1;
 
     // UI Layout Constants
-    private static final int BUTTON_SIZE = 60;
-    private static final int GRID_WIDTH_GAP = 10;
-    private static final int GRID_HEIGHT_GAP = 10;
-    private static final int ROOT_PADDING = 20;
-    private static final int VBOX_SPACING = 10;
+    private static final int BUTTON_SIZE        = 60;
+    private static final int GRID_WIDTH_GAP_PX  = 10;
+    private static final int GRID_HEIGHT_GAP_PX = 10;
+    private static final int ROOT_PADDING_PX    = 20;
+    private static final int VBOX_SPACING_PX    = 10;
 
     // Game State Fields
-    private final int[] grid = new int[NUMBER_OF_SQUARES];
-    private final Button[] buttons = new Button[NUMBER_OF_SQUARES];
-    private int currentNumber;
-    private int gamesPlayed = NOTHING;
-    private int successfulPlacements = NOTHING;
+    private final int[] grid            = new int[NUMBER_OF_SQUARES];
+    private final Button[] buttons      = new Button[NUMBER_OF_SQUARES];
+    private int gamesPlayed             = NOTHING;
+    private int successfulPlacements    = NOTHING;
     private Label statusLabel;
+    private int currentNumber;
 
     // Styling
     private static final String STYLESHEET_PATH = "/res/numbergame/css/numberGameStyles.css";
@@ -96,16 +96,16 @@ public final class NumberGame
         final GridPane gridPane;
         final VBox root;
 
-        root = new VBox(VBOX_SPACING);
+        root = new VBox(VBOX_SPACING_PX);
         gridPane = new GridPane();
 
         // Set padding and alignment for the root VBox
-        root.setPadding(new Insets(ROOT_PADDING));
+        root.setPadding(new Insets(ROOT_PADDING_PX));
         root.setAlignment(Pos.CENTER);
 
         // Configure the grid pane for the number grid
-        gridPane.setHgap(GRID_HEIGHT_GAP);
-        gridPane.setVgap(GRID_WIDTH_GAP);
+        gridPane.setHgap(GRID_HEIGHT_GAP_PX);
+        gridPane.setVgap(GRID_WIDTH_GAP_PX);
         gridPane.setAlignment(Pos.CENTER);
 
         // Initialize status label and grid
@@ -116,7 +116,7 @@ public final class NumberGame
         generateNextNumber();
 
         // Create the scene and apply the stylesheet
-        scene = new Scene(root, WINDOW_HEIGHT, WINDOW_WIDTH);
+        scene = new Scene(root, WINDOW_HEIGHT_PX, WINDOW_WIDTH_PX);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(STYLESHEET_PATH)).toExternalForm());
 
         // Set up the stage with the scene and display it

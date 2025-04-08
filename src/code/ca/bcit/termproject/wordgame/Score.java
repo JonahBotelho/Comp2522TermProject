@@ -37,6 +37,11 @@ import java.util.Optional;
 public final class Score
 {
     private static final int NOTHING                            = 0;
+    public static final int FIRST_INDEX                         = 0;
+    public static final int SECOND_INDEX                        = 1;
+    public static final int THIRD_INDEX                         = 2;
+    public static final int FOURTH_INDEX                        = 3;
+
     private static final int MIN_YEAR                           = 2000;
     private static final int MAX_YEAR                           = 2100;
     private static final int POINTS_FOR_FIRST_ATTEMPT           = 2;
@@ -156,11 +161,13 @@ public final class Score
         Path filePath;
         filePath = Paths.get(scoreFile);
 
+        // handles score file not existing
         if (Files.notExists(filePath))
         {
             Files.createFile(filePath);
         }
 
+        // appends score to file
         Files.writeString(filePath, score + System.lineSeparator(), StandardOpenOption.APPEND);
     }
 
@@ -185,6 +192,7 @@ public final class Score
 
         filePath = Path.of(scoreFile);
 
+        // handles score file not existing
         if (Files.notExists(filePath))
         {
             return null;
@@ -194,6 +202,7 @@ public final class Score
 
         scores = new ArrayList<>();
 
+        // iterates through score file
         for (int i = 0; i < lines.size(); i += 7)
         {
             final String currentTimeLine;
@@ -204,15 +213,22 @@ public final class Score
             scoreLines = new String[LINES_PER_SCORE_OBJECT][WORDS_PER_SCORE_FIRST_LINE];
             scoreValues = new int[LINES_PER_SCORE_OBJECT];
 
+            // retrieve time
             currentTimeLine = lines.get(i).substring(FIRST_INDEX_OF_DATE_IN_SCORE_LINE);
             currentTime = LocalDateTime.parse(currentTimeLine, formatter);
-            for (int j = 0; j < LINES_PER_SCORE_OBJECT; j++)
+
+            // retrieve the remaining score info
+            for (int j = NOTHING; j < LINES_PER_SCORE_OBJECT; j++)
             {
-                scoreLines[j] = lines.get(i + j + 1).split(":");
+                scoreLines[j] = lines.get(i + j + SECOND_INDEX).split(":");
                 scoreValues[j] = Integer.parseInt(scoreLines[j][1].trim());
             }
 
-            scores.add(new Score(currentTime, scoreValues[0], scoreValues[1], scoreValues[2], scoreValues[3]));
+            scores.add(new Score(currentTime,
+                                 scoreValues[FIRST_INDEX],
+                                 scoreValues[SECOND_INDEX],
+                                 scoreValues[THIRD_INDEX],
+                                 scoreValues[FOURTH_INDEX]));
         }
 
         return scores;
@@ -284,6 +300,7 @@ public final class Score
         final double highScore;
         final Optional<Score> optionalHighScore;
 
+        // retrieve high score as optional double
         optionalHighScore = scores.stream()
                 .max(Comparator.comparingDouble(Score::getAverageScore));
 
