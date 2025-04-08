@@ -39,119 +39,53 @@ import java.text.DecimalFormat;
  */
 public final class WordGame
 {
-    private static final Scanner SCANNER            = new Scanner(System.in);
-    private static final int QUESTIONS_PER_GAME     = 10;
-    private static final int NOTHING                = 0;
-    private static final int QUESTION_TYPE_ONE      = 0;
-    private static final int QUESTION_TYPE_TWO      = 1;
-    private static final int QUESTION_TYPE_THREE    = 2;
-    private static final int FACTS_PER_COUNTRY      = 3;
-    private static final int TYPES_OF_QUESTIONS     = 3;
-    private static final String PLAY_AGAIN_TRUE     = "yes";
-    private static final String PLAY_AGAIN_FALSE    = "no";
+    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final int QUESTIONS_PER_GAME = 10;
+    private static final int NOTHING = 0;
+    private static final int QUESTION_TYPE_ONE = 0;
+    private static final int QUESTION_TYPE_TWO = 1;
+    private static final int QUESTION_TYPE_THREE = 2;
+    private static final int FACTS_PER_COUNTRY = 3;
+    private static final int TYPES_OF_QUESTIONS = 3;
+    private static final String PLAY_AGAIN_TRUE = "yes";
+    private static final String PLAY_AGAIN_FALSE = "no";
 
+    private static int gamesPlayed;
     private static int correctOnFirstAttempt;
     private static int correctOnSecondAttempt;
     private static int incorrectOnSecondAttempt;
 
     /**
-     * The main method for running the word game application.
+     * Entry point for the capital cities word game application.
+     * Initializes tracking variables and starts the main gameplay loop, where the user answers
+     * a series of randomly selected questions about countries and their capital cities.
      * <p>
-     * This method serves as the entry point for the game, initializing key components such as the game world, the list
-     * of countries, and the random number generator. It also controls the game flow, presenting the user with a series of
-     * questions and collecting their answers. The user can choose to play multiple rounds, and after the game ends, the
-     * method compares the user's average score to the highest score recorded in a score file. If the user's score exceeds
-     * the high score, the file is updated, and a new high score is announced. The method also includes a play-again loop,
-     * input validation for user choices, and displays relevant game information and statistics.
+     * After each round of {@value QUESTIONS_PER_GAME} questions, the user is prompted to decide
+     * whether to play another round. Input is validated to accept only "yes" or "no" (case-insensitive).
      * <p>
-     * Key steps in the method:
-     * 1. Initializes required variables such as the file path, world data, and game settings.
-     * 2. Starts a loop for the gameplay, where a series of questions are asked based on random selection.
-     * 3. Handles the user's responses to questions about countries, capitals, and facts.
-     * 4. Tracks the user's performance during the game and evaluates the score at the end.
-     * 5. Compares the user's score to the high score, displaying whether the user achieved a new high score.
-     * 6. Provides the option to play again, and if the user chooses not to, the final score is saved to a file.
-     * 7. Ends the game and prompts the user to return to the main menu.
+     * Once the user chooses not to continue, the game ends and a summary is displayed, including
+     * whether a new high score was achieved.
+     * <p>
      *
-     * @param args The command-line arguments passed to the application (not used).
+     * @param args command-line arguments (not used)
      */
     public static void main(final String[] args) throws IOException
     {
-        final String file;
-        final World world;
-        final HashMap<String, Country> worldHashMap;
-        final List<Map.Entry<String, Country>> worldList;
-        final Random ran;
-        final Score userScoreScore;
-        final List<Score> scoresList;
-        final DecimalFormat scoreFormat;
-
-        int gamesPlayed;
         String choice;
 
-        final double highScore;
-        final double userScoreDouble;
+        choice = "yes";
+        gamesPlayed = NOTHING;
+        correctOnFirstAttempt = NOTHING;
+        correctOnSecondAttempt = NOTHING;
+        incorrectOnSecondAttempt = NOTHING;
 
-        file            = "src/data/wordgame_score.txt";
-        world           = new World();
-        worldHashMap    = world.getWorld();
-        worldList       = new ArrayList<>(worldHashMap.entrySet());
-        ran             = new Random();
-        choice          = "yes";
-
-        gamesPlayed                 = NOTHING;
-        correctOnFirstAttempt       = NOTHING;
-        correctOnSecondAttempt      = NOTHING;
-        incorrectOnSecondAttempt    = NOTHING;
-
-        scoreFormat = new DecimalFormat("0.00");
         // Play again loop
         while (choice.equalsIgnoreCase(PLAY_AGAIN_TRUE))
         {
             // Gameplay loop
             for (int i = NOTHING; i < QUESTIONS_PER_GAME; i++)
             {
-                final int questionType;
-                final int countryIndex;
-                final Country currentCountry;
-
-                questionType = ran.nextInt(TYPES_OF_QUESTIONS);
-                countryIndex = ran.nextInt(worldList.size());
-                currentCountry = worldList.get(countryIndex).getValue();
-
-                switch (questionType)
-                {
-                    // The program will print a capital city, and ask the user what country it is the capital of
-                    case QUESTION_TYPE_ONE:
-                        System.out.println("\nWhat country is " +
-                                currentCountry.getCapitalCityName() +
-                                " the capital of?");
-
-                        evaluateUserInput(currentCountry.getName());
-                        break;
-                    // The program will print the country name, and ask the user what is its capital city
-                    case QUESTION_TYPE_TWO:
-                        System.out.println("\nWhat is the capital of " +
-                                currentCountry.getName() +
-                                "?");
-
-                        evaluateUserInput(currentCountry.getCapitalCityName());
-                        break;
-                    // The program will print one of the three facts, and ask the user which country is being described
-                    case QUESTION_TYPE_THREE:
-                        int factIndex;
-                        factIndex = ran.nextInt(FACTS_PER_COUNTRY);
-
-                        System.out.println("\nWhat country is being described?");
-                        System.out.println(currentCountry.getFacts()[factIndex]);
-
-                        evaluateUserInput(currentCountry.getName());
-                        break;
-                    default:
-                        // This should be impossible to reach
-                        throw new IllegalStateException("Unexpected value: " + questionType);
-                }
-                System.out.println("___________________________________________");
+                askQuestion();
             }
 
             gamesPlayed++;
@@ -168,6 +102,97 @@ public final class WordGame
             }
         }
 
+        gameOver();
+    }
+
+    /**
+     * Prompts the user with a random trivia question about countries and evaluates their input.
+     * The type of question is selected randomly from three options:
+     * - Given a capital city, identify the country.
+     * - Given a country, identify the capital city.
+     * - Given a fact, identify the country.
+     * <p>
+     * This method initializes a new World object to access country data,
+     * randomly selects a question type and a country from the data,
+     * then uses the relevant fields to generate the question. The user's input
+     * is evaluated using the evaluateUserInput method.
+     * <p>
+     * If an unknown question type is somehow generated, an IllegalStateException
+     * will be thrown. After each question, a visual divider is printed to separate
+     * the output from the next round.
+     */
+    private static void askQuestion() throws IOException
+    {
+        final World world;
+        final HashMap<String, Country> worldHashMap;
+        final List<Map.Entry<String, Country>> worldList;
+        final Random ran;
+        final int questionType;
+        final int countryIndex;
+        final Country currentCountry;
+
+        world = new World();
+        worldHashMap = world.getWorld();
+        worldList = new ArrayList<>(worldHashMap.entrySet());
+        ran = new Random();
+        questionType = ran.nextInt(TYPES_OF_QUESTIONS);
+        countryIndex = ran.nextInt(worldList.size());
+        currentCountry = worldList.get(countryIndex).getValue();
+
+        switch (questionType)
+        {
+            // The program will print a capital city, and ask the user what country it is the capital of
+            case QUESTION_TYPE_ONE:
+                System.out.println("\nWhat country is " +
+                        currentCountry.getCapitalCityName() +
+                        " the capital of?");
+                evaluateUserInput(currentCountry.getName());
+                break;
+            // The program will print the country name, and ask the user what is its capital city
+            case QUESTION_TYPE_TWO:
+                System.out.println("\nWhat is the capital of " +
+                        currentCountry.getName() +
+                        "?");
+                evaluateUserInput(currentCountry.getCapitalCityName());
+                break;
+            // The program will print one of the three facts, and ask the user which country is being described
+            case QUESTION_TYPE_THREE:
+                int factIndex;
+                factIndex = ran.nextInt(FACTS_PER_COUNTRY);
+                System.out.println("\nWhat country is being described?");
+                System.out.println(currentCountry.getFacts()[factIndex]);
+                evaluateUserInput(currentCountry.getName());
+                break;
+            default:
+                // This should be impossible to reach
+                throw new IllegalStateException("Unexpected value: " + questionType);
+        }
+        System.out.println("___________________________________________");
+    }
+
+    /**
+     * Ends the game session and calculates the player's performance.
+     * Displays whether the player has achieved a new high score based on average points per game.
+     * The player's score is calculated, compared against the existing high score from a file,
+     * and then appended to the file regardless of outcome.
+     * <p>
+     * The score is formatted to two decimal places for display. The method also prints
+     * the final score summary and thanks the player for participating.
+     * <p>
+     * The player is prompted to press Enter to return to the main menu.
+     */
+    private static void gameOver() throws IOException
+    {
+        final DecimalFormat scoreFormat;
+        final String file;
+        final Score userScoreScore;
+        final List<Score> scoresList;
+        final double highScore;
+        final double userScoreDouble;
+
+        scoreFormat = new DecimalFormat("0.00");
+        file = "src/data/wordgame_score.txt";
+
         userScoreScore = new Score(LocalDateTime.now(),
                 gamesPlayed,
                 correctOnFirstAttempt,
@@ -175,8 +200,8 @@ public final class WordGame
                 incorrectOnSecondAttempt);
 
         userScoreDouble = userScoreScore.getAverageScore();
-        scoresList      = Score.readScoresFromFile(file);
-        highScore       = Score.getHighScore(scoresList);
+        scoresList = Score.readScoresFromFile(file);
+        highScore = Score.getHighScore(scoresList);
 
         if (userScoreDouble > highScore)
         {
