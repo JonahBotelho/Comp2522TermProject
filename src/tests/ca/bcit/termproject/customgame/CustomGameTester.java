@@ -17,7 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /**
- * Unit tests for the Custom Game logic, focusing on behavior rather than constant values.
+ * Unit tests for the Custom Game logic.
+ *
+ * @author Jonah Botelho
+ * @version 1.0
  */
 public final class CustomGameTester
 {
@@ -409,7 +412,7 @@ public final class CustomGameTester
         final int value;
         int randomNum;
 
-        value = 5;
+        value     = 5;
         randomNum = simulateGetRandomNumber(value, value);
 
         assertEquals(value, randomNum, "Should return the exact value when min equals max.");
@@ -432,10 +435,10 @@ public final class CustomGameTester
         final double minModifier;
 
         baseModifier = ClockStormMain.BASE_SPEED_MODIFIER;
-        startScore = ClockStormMain.START_SCORE;
-        changeRate = ClockStormMain.SPEED_MODIFIER_CHANGE_RATE;
-        maxModifier = ClockStormMain.MAX_SPEED_MODIFIER;
-        minModifier = ClockStormMain.MIN_SPEED_MODIFIER;
+        startScore   = ClockStormMain.START_SCORE;
+        changeRate   = ClockStormMain.SPEED_MODIFIER_CHANGE_RATE;
+        maxModifier  = ClockStormMain.MAX_SPEED_MODIFIER;
+        minModifier  = ClockStormMain.MIN_SPEED_MODIFIER;
 
         double modifier;
         modifier = baseModifier + (currentScore - startScore) / changeRate;
