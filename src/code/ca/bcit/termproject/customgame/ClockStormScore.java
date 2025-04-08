@@ -16,16 +16,16 @@ import java.util.OptionalInt;
  * Scores are stored in a text file located at {@code "src/data/clockstorm_score.txt"}.
  * The class handles reading from and writing to this file, ensuring the file is created if it doesn't exist.
  * It also provides validation to ensure that scores added are non-null and non-negative.
- *
+ * <p>
  * Key Features:
  * - Retrieve the highest score from the score file.
  * - Add a new score to the score file, appending it without overwriting existing scores.
  * - Calculate the average of all previous scores stored in the file.
  * - Validate that the score being added is a non-null, non-negative integer.
- *
+ * <p>
  * The class ensures the creation of necessary directories and the score file if they do not already exist.
  * If any issues arise (e.g., the file is empty or does not exist), it will return default values such as 0.
- *
+ * <p>
  * This class is essential for tracking the game's scores and provides an interface for managing player scores.
  *
  * @author Jonah Botelho
@@ -43,7 +43,7 @@ public final class ClockStormScore
     /**
      * Retrieves the highest score from the score file. If the file does not exist, is empty,
      * or contains no valid scores, this method returns 0.
-     *
+     * <p>
      * This method reads the score file, processes the lines, and attempts to extract the highest
      * score. If any issues occur (e.g., file does not exist, file is empty, or no valid integers
      * are found), it will return a default value of 0.
@@ -83,7 +83,7 @@ public final class ClockStormScore
 
     /**
      * Adds a score to the score file. If the file does not exist, it will be created.
-     *
+     * <p>
      * This method writes a given score to a file. If the file or its parent directory does not exist,
      * it will be created. The score is appended to the file, ensuring that previous scores are not overwritten.
      *
@@ -113,7 +113,7 @@ public final class ClockStormScore
 
     /**
      * Returns the average of all previous scores.
-     *
+     * <p>
      * This method reads the scores from the score file and calculates the average.
      * If the file does not exist or no valid scores are found, it returns a predefined constant value.
      *
@@ -149,7 +149,7 @@ public final class ClockStormScore
 
     /**
      * Validates that the score Integer value is not null and is greater than or equal to 0.
-     *
+     * <p>
      * This method checks if the provided score is null or negative. If either condition is true, an
      * IllegalArgumentException is thrown with an appropriate error message.
      *

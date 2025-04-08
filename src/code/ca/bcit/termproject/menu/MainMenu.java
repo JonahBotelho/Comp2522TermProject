@@ -43,13 +43,13 @@ public final class MainMenu extends Application
      * This method displays a console menu asking the user which game they would
      * like to play. Based on the user's input, it launches the appropriate game
      * in a new thread. If the user selects "Quit", the method will stop the menu thread.
-     *
+     * <p>
      * The game options are:
      * - Word game (WORD_GAME_LETTER)
      * - Number game (NUMBER_GAME_LETTER)
      * - ClockStorm game (CLOCK_STORM_LETTER)
      * - Quit the application (QUIT_LETTER)
-     *
+     * <p>
      * The user is prompted to select a game, and input is validated to ensure
      * it is one of the valid choices. Once a valid choice is made, the corresponding
      * game is launched in a new thread. The menu continues to prompt the user until

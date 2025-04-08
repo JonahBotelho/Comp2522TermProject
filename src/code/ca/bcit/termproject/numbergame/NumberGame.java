@@ -28,12 +28,12 @@ import java.text.DecimalFormat;
  * Upon losing, the player can choose to either retry the game or quit. The game tracks statistics
  * such as the number of games played, successful placements, and calculates the average placements
  * per game.
- *
+ * <p>
  * This class extends {@link javafx.application.Application} and implements the {@link RandomNumberGenerator}
  * interface to provide the game's functionality. It utilizes JavaFX components for the user interface,
  * including buttons for placing numbers and alert dialogs for game interaction. The game also generates
  * random numbers within a specified range for placement in the grid.
- *
+ * <p>
  * The game flow is as follows:
  * 1. Player starts the game by clicking "OK" in a welcome message.
  * 2. Player places numbers on the grid, trying to maintain ascending order.

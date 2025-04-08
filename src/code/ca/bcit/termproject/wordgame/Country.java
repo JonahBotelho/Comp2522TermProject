@@ -6,15 +6,15 @@ import java.util.Arrays;
  * The {@code Country} class represents a country with its name, capital city, and a collection of facts
  * about it. This class provides functionality to retrieve the country name, capital city name, and facts
  * about the country.
- *
+ * <p>
  * The class validates that the country name, capital city name, and facts are not null or empty. It ensures
  * that the facts are stored in a valid array and performs validation for each individual fact.
- *
+ * <p>
  * The class offers methods to access the country’s name, capital city name, and facts through getters.
- *
+ * <p>
  * The class is immutable, meaning once a {@code Country} object is created, its attributes cannot be changed.
  * It is designed to enforce strong validation for its input data during construction to prevent invalid values.
- *
+ * <p>
  * This class also includes validation methods to ensure strings are non-null and non-blank, as well as to
  * confirm that the array of facts is neither null nor empty.
  *

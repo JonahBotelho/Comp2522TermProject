@@ -11,17 +11,17 @@ import java.util.List;
  * The World class represents a collection of countries, each stored in a HashMap with the country's name as the key
  * and a corresponding Country object as the value. The class is responsible for loading country data from text files,
  * parsing the data, and organizing it into a structured format for use in the WordGame.
- *
+ * <p>
  * Key Features:
  * 1. Loads country information from alphabetically organized text files (a.txt, b.txt, etc.).
  * 2. Each file contains country records in a specific format: country name and capital, followed by three facts.
  * 3. Validates file existence and reads data line by line to extract relevant country details.
  * 4. Creates Country objects based on the parsed data and stores them in a HashMap for efficient access during gameplay.
- *
+ * <p>
  * The constructor of the class iterates over files named after each letter of the alphabet (a.txt, b.txt, etc.) and processes
  * each file to extract the country's name, capital city, and three interesting facts. This data is used to create instances
  * of the Country class and stored in the `world` HashMap, which can later be accessed for the game.
- *
+ * <p>
  * The class also provides a method to retrieve the `world` HashMap, which contains all countries' data, for use in the WordGame.
  *
  * @author Jonah Botelho
@@ -44,20 +44,20 @@ public final class World
 
     /**
      * Constructs a World object by loading and parsing country data from text files.
-     *
+     * <p>
      * Initializes the world HashMap by reading country information from alphabetically organized
      * data files (a.txt, b.txt, etc.). Each file contains country records in a specific format:
-     *
+     * <p>
      * For each country:
      * - First line: "CountryName:CapitalCity"
      * - Next 3 lines: Interesting facts about the country
-     *
+     * <p>
      * The constructor:
      * - Processes files for each letter of the alphabet (a-z)
      * - Validates file existence before reading
      * - Parses each country's name, capital, and facts
      * - Creates Country objects and stores them in the world HashMap
-     *
+     * <p>
      * Expected file structure example:
      * "Canada:Ottawa
      *  Fact 1 about Canada

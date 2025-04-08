@@ -17,15 +17,15 @@ import java.util.Optional;
  * such as the number of games played, the number of correct answers on the first and second attempts,
  * and the number of incorrect answers on the second attempt. It calculates the total score based on
  * correct answers and provides functionality for file input/output operations related to the player's scores.
- *
+ * <p>
  * This class offers validation for all input data, including checking that the current time is within
  * a valid range (2000-2100), ensuring that integers are non-negative, and validating strings. It also
  * provides methods to append scores to a file, read scores from a file, and generate a formatted string
  * representation of the score.
- *
+ * <p>
  * In addition, the class includes a method to determine the highest average score from a list of scores.
  * It calculates the average score per game based on the total score and the number of games played.
- *
+ * <p>
  * The class is designed to store immutable score data and is suitable for file-based persistence of game
  * statistics. All methods related to file I/O ensure that scores are correctly appended to or read from files
  * with appropriate validation.
@@ -166,7 +166,7 @@ public final class Score
 
     /**
      * Reads scores from a specified file and parses them into a list of {@link Score} objects.
-     *
+     * <p>
      * This method reads the contents of a file, where each score entry is assumed to consist of
      * 7 lines. The first line contains a timestamp, and the following 6 lines contain score-related
      * data. Each score entry is parsed and stored as a {@link Score} object, which is added to a list
@@ -220,7 +220,7 @@ public final class Score
 
     /**
      * Generates a formatted string representation of the {@link Score} object.
-     *
+     * <p>
      * The string includes all score metrics in a human-readable format with labels:
      * - Date and Time (formatted using the class's DateTimeFormatter)
      * - Games Played
@@ -228,7 +228,7 @@ public final class Score
      * - Correct Second Attempts
      * - Incorrect Attempts
      * - Total Score (with "points" suffix)
-     *
+     * <p>
      * Each metric appears on its own line with proper labeling. The format is consistent
      * and suitable for display to users or logging purposes.
      *
@@ -261,13 +261,13 @@ public final class Score
 
     /**
      * Determines the highest average score from a list of Score objects.
-     *
+     * <p>
      * Processes the input list to find the maximum average score value:
      * - Returns {@code NOTHING} constant (typically 0.0) if input list is null or empty
      * - Uses Java Streams to efficiently find the maximum average score
      * - Compares scores using {@code Score::getAverageScore} as the sorting key
      * - Safely handles empty Optional results from the stream operation
-     *
+     * <p>
      * The method is null-safe and will not throw exceptions for null input,
      * making it suitable for use with potentially uninitialized score lists.
      *

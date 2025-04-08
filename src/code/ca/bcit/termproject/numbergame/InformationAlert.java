@@ -5,7 +5,7 @@ import javafx.scene.control.Alert;
 /**
  * A custom alert for displaying informational messages to the user.
  * Extends PopupAlert and uses Alert.AlertType.INFORMATION for non-critical messages.
- *
+ * <p>
  * This class provides an easy-to-use alert dialog that can be used to show
  * informational messages to the user within the NumberGame. It extends the
  * PopupAlert class, ensuring that the alert inherits the common behavior

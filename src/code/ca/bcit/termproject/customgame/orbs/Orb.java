@@ -9,7 +9,7 @@ import javafx.scene.shape.Circle;
  * Extends JavaFX Circle and handles basic movement.
  * Provides validation for coordinates, radius, paint, and speed.
  * All orbs move based on a constant speed set at construction.
- *
+ * <p>
  * Subclasses determine the orb's visual appearance and behavior.
  * Implements the Updatable interface for use in game loops.
  *

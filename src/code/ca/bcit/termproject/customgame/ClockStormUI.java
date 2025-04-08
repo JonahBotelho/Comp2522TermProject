@@ -20,18 +20,18 @@ import java.text.DecimalFormat;
  * It is designed to facilitate the display of key game information, including the player's score,
  * game instructions, and the final game over statistics. Additionally, the class sets up the overall styling
  * of the UI by loading a custom stylesheet for consistent design throughout the game.
- *
+ * <p>
  * This class provides methods to:
  * - Set up scene styles using an external CSS file
  * - Create and configure the score label displayed during gameplay
  * - Show a welcome message with game instructions
  * - Display a game over alert with the player's final score, high score, and average score
  * - Perform validation on inputs such as score, message, and averages to ensure correctness
- *
+ * <p>
  * Note: This class is meant to be used as a utility for managing the UI elements of the game. It relies
  * on the ClockStormMain class for certain constants (e.g., game name and starting score) and assumes that
  * the necessary resources (e.g., CSS file) are available on the classpath.
- *
+ * <p>
  * Methods in this class interact with JavaFX UI elements and display important information to the player
  * during the game. It also facilitates the player's experience by offering options such as retrying or quitting
  * the game upon its completion.

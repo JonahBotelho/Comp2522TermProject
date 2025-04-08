@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
  * to play multiple rounds. It also stores high scores in a file and compares the user's
  * current score to the highest recorded score. The game is designed to be played with
  * a series of questions, with feedback provided to the user on correct or incorrect answers.
- *
+ * <p>
  * Key Features:
  * 1. Presents random questions about countries, capitals, and facts related to countries.
  * 2. Tracks user performance, including correct answers on the first and second attempts.
@@ -24,14 +24,14 @@ import java.text.DecimalFormat;
  * 4. Allows the user to play multiple rounds, with the option to play again after each round.
  * 5. Saves and compares the user's score to the high score stored in a file.
  * 6. Uses `DecimalFormat` to display scores with two decimal places.
- *
+ * <p>
  * The game flow is controlled by a main game loop, which generates questions based on random
  * selections and evaluates user input. The user can play multiple rounds, and after each round,
  * their performance is recorded. The highest score is saved to a text file, and the user is notified
  * if they have achieved a new high score.
- *
+ * <p>
  * After the game, the user is prompted to return to the main menu by pressing enter.
- *
+ * <p>
  * This class is the entry point for running the word game application.
  *
  * @author Jonah Botelho
@@ -56,14 +56,14 @@ public final class WordGame
 
     /**
      * The main method for running the word game application.
-     *
+     * <p>
      * This method serves as the entry point for the game, initializing key components such as the game world, the list
      * of countries, and the random number generator. It also controls the game flow, presenting the user with a series of
      * questions and collecting their answers. The user can choose to play multiple rounds, and after the game ends, the
      * method compares the user's average score to the highest score recorded in a score file. If the user's score exceeds
      * the high score, the file is updated, and a new high score is announced. The method also includes a play-again loop,
      * input validation for user choices, and displays relevant game information and statistics.
-     *
+     * <p>
      * Key steps in the method:
      * 1. Initializes required variables such as the file path, world data, and game settings.
      * 2. Starts a loop for the gameplay, where a series of questions are asked based on random selection.
@@ -206,21 +206,21 @@ public final class WordGame
 
     /**
      * Evaluates user input against the correct answer with two attempts.
-     *
+     * <p>
      * Compares user input (case-insensitive) to the expected answer:
      * - On first correct attempt: increments correctOnFirstAttempt counter
      * - On first incorrect attempt: gives one retry opportunity
      * - On second correct attempt: increments correctOnSecondAttempt counter
      * - On second incorrect attempt: reveals answer and increments incorrectOnSecondAttempt counter
-     *
+     * <p>
      * Provides real-time feedback for each attempt:
      * - "Correct!" messages for successful attempts
      * - "Incorrect!" messages for failed attempts
      * - Displays correct answer after second failure
-     *
+     * <p>
      * Uses standard input (System.in) via SCANNER for user interaction.
      * Validates the answer parameter before processing.
-     *
+     * <p>
      * Designed to be run through MainMenu. Program may perform unexpectedly if ran separately.
      *
      * @param answer The correct answer string to compare against user input

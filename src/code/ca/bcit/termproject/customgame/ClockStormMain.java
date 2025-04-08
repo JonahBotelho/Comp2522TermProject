@@ -22,11 +22,11 @@ import java.util.Random;
  * player interaction, collision detection, scoring, and game-over conditions. It manages the initialization of
  * the game environment, including the setup of the game window, player, and orb shooter, as well as the
  * continuous updates in the game loop.
- *
+ * <p>
  * The game follows the player's interaction with falling orbs, and the goal is to avoid red orbs while
  * collecting green and blue orbs to increase the score. The player controls the character using the arrow
  * keys or WASD, and orbs are shot at random intervals with varying speeds.
- *
+ * <p>
  * Key features include:
  * - **Orb Collision Handling**: Orbs of various types (red, green, blue) affect the game differently, either
  *   ending the game or adding points to the score.
@@ -35,7 +35,7 @@ import java.util.Random;
  * - **Speed Modifier**: As the score increases, orbs move faster, adding difficulty over time.
  * - **Score System**: A dynamic scoring system penalizes players randomly, decreasing their score occasionally.
  * - **Player Movement**: The player is controlled through both the arrow keys and WASD for flexibility.
- *
+ * <p>
  * This class extends `javafx.application.Application` and utilizes JavaFX's `AnimationTimer` to create the
  * game loop, continuously updating the game state and checking for collisions and score updates.
  */
@@ -171,11 +171,11 @@ public final class ClockStormMain
      * Sets up key handlers for player movement. This method listens for key press and release events
      * to control the movement of the player character. It handles both arrow keys and WASD keys for
      * moving the player in all four directions (left, right, up, and down).
-     *
+     * <p>
      * When a key is pressed, the corresponding movement flag for the player is set to `true`, allowing
      * the player to move in the specified direction. When the key is released, the movement flag is set to
      * `false`, stopping the player from moving further in that direction.
-     *
+     * <p>
      * The supported keys for movement are:
      *     Left Arrow or 'A' key - moves the player left
      *     Right Arrow or 'D' key - moves the player right
@@ -236,16 +236,16 @@ public final class ClockStormMain
     /**
      * Checks for collisions between the player and orbs in the game. This method iterates through all the orbs
      * in the cannon's collection and checks whether any of them intersect with the player's boundaries.
-     *
+     * <p>
      * If a collision is detected, the following actions occur:
      * - If the orb is a RedOrb, the game ends with a "Game Over" message.
      * - If the orb is a GreenOrb, the score is incremented by a predefined amount (GREEN_ORB_POINTS).
      * - If the orb is a BlueOrb, the score is incremented by another predefined amount (BLUE_ORB_POINTS).
      * - Regardless of the orb type, the orb is removed from the game, and the score is updated accordingly.
-     *
+     * <p>
      * After handling a collision, the game checks if the player's speed modifier needs updating and reflects
      * that in the game state.
-     *
+     * <p>
      * The method also updates the display of the player's score after each interaction.
      */
     private void checkCollisions()
@@ -265,9 +265,9 @@ public final class ClockStormMain
                 // Handle the collision based on the type of orb
                 switch (orb)
                 {
-                    case RedOrb redOrb -> gameOver("Game over! You hit a red orb!");
-                    case GreenOrb greenOrb -> score += GREEN_ORB_POINTS;
-                    case BlueOrb blueOrb -> score += BLUE_ORB_POINTS;
+                    case RedOrb _ -> gameOver("Game over! You hit a red orb!");
+                    case GreenOrb _ -> score += GREEN_ORB_POINTS;
+                    case BlueOrb _ -> score += BLUE_ORB_POINTS;
                     default -> throw new IllegalStateException("Invalid orb type");
                 }
 
@@ -286,7 +286,7 @@ public final class ClockStormMain
     /**
      * Handles the game-over logic by stopping the game loop, displaying a game-over alert with the final score,
      * high score, and average score, and allowing the player to either restart the game or exit.
-     *
+     * <p>
      * This method performs the following actions:
      * - Stops the game loop to halt the game progress.
      * - Displays a game-over alert with the provided message, along with the current score, high score,
@@ -347,7 +347,7 @@ public final class ClockStormMain
      *   the game ends with a message indicating that the player has run out of points.
      * - If the score is above or equal to the minimum threshold,
      *   the method updates the score.
-     *
+     * <p>
      * This method is used to manage the player's score during gameplay, ensuring
      * that if the score reaches a critical point (below the minimum), the game
      * will be over. Otherwise, it allows the score to be updated for further gameplay.
@@ -369,11 +369,11 @@ public final class ClockStormMain
 
     /**
      * Calculates a random number and decreases the player's score if that number falls within a specified range.
-     *
+     * <p>
      * This method generates a random number between a defined minimum and maximum range, and if the number is
      * below a certain probability threshold, the score is decreased by 1. After decreasing the score,
      * it updates the score label and adjusts the game's speed modifier accordingly.
-     *
+     * <p>
      * The method is typically used to penalize the player based on random chance, adding an element of unpredictability
      * to the game. The score will only decrease under specific conditions determined by the random number generation.
      */
@@ -390,7 +390,7 @@ public final class ClockStormMain
 
     /**
      * Updates the score label to reflect the current score of the player.
-     *
+     * <p>
      * This method updates the text of the `scoreLabel` UI element to display the player's current score.
      * The score is shown in the format "Score: X", where X is the current value of the `score` variable.
      * The score label is typically used to provide real-time feedback to the player regarding their progress in the game.
@@ -403,7 +403,7 @@ public final class ClockStormMain
 
     /**
      * Adjusts the speed modifier for orbs based on the current score value.
-     *
+     * <p>
      * The speed modifier is calculated by using the formula:
      * <pre>
      *     Speed Modifier = BASE_SPEED_MODIFIER + (score - START_SCORE) / SPEED_MODIFIER_CHANGE_RATE
@@ -412,7 +412,7 @@ public final class ClockStormMain
      * The method ensures that the calculated speed modifier stays within predefined limits:
      * - The speed modifier is capped at a maximum value, defined by {@link #MAX_SPEED_MODIFIER}.
      * - If the calculated speed modifier falls below a minimum threshold, defined by {@link #MIN_SPEED_MODIFIER}, it will be adjusted to that minimum.
-     *
+     * <p>
      * This method is called after updating the score to ensure that the game difficulty increases as the player's score rises.
      */
     private void updateSpeedModifier()
@@ -431,7 +431,7 @@ public final class ClockStormMain
 
     /**
      * Generates a random integer between two specified values (inclusive).
-     *
+     * <p>
      * The method uses the {@link Random} class to generate a random number in the range from {@code min} to {@code max},
      * including both boundary values. The formula used is:
      * <pre>
