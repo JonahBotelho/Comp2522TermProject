@@ -162,11 +162,20 @@ public final class OrbShooter
         return switch (orbType)
         {
             // intentional redundancy, making it easier to switch orb probabilities
-            case GENERATE_RED_ORB -> new RedOrb(x, y, speedX, speedY);
-            case GENERATE_GREEN_ORB -> new GreenOrb(x, y, speedX, speedY);
-            case GENERATE_BLUE_ORB -> new BlueOrb(x, y, speedX, speedY);
-            default -> new RedOrb(x, y, speedX, speedY);
+            case GENERATE_RED_ORB -> {
+                yield new RedOrb(x, y, speedX, speedY);
+            }
+            case GENERATE_GREEN_ORB -> {
+                yield new GreenOrb(x, y, speedX, speedY);
+            }
+            case GENERATE_BLUE_ORB -> {
+                yield new BlueOrb(x, y, speedX, speedY);
+            }
+            default -> {
+                yield new RedOrb(x, y, speedX, speedY);
+            }
         };
+
     }
 
     /**
