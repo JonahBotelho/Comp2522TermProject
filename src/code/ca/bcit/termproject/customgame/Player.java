@@ -4,19 +4,33 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Represents the player in the game, which is a rectangular shape.
- * The player can move in four directions: left, right, up, and down.
+ * Represents the player in the game as a rectangular shape that can move in four directions: left, right, up, and down.
+ * The player is represented by a {@link javafx.scene.shape.Rectangle} and is controlled using movement flags.
+ * The player is constrained to stay within the game window boundaries.
+ * <p>
+ * The player has the following movement capabilities:
+ * - Move left: The player can move left within the window boundaries.
+ * - Move right: The player can move right within the window boundaries.
+ * - Move up: The player can move up within the window boundaries.
+ * - Move down: The player can move down within the window boundaries.
+ * <p>
+ * The class also validates the player’s position to ensure it stays within the boundaries of the game window.
+ * The player is initialized with a size and starting position, and the movement speed can be controlled.
+ * </p>
+ *
+ * @author Jonah Botelho
+ * @version 1.0
  */
 public final class Player
         extends Rectangle
 {
-    private static final int NOTHING    = 0;  // Boundary check constant
-    private static final double speed   = 3;  // Movement speed of the player
+    private static final int NOTHING = 0;  // Boundary check constant
+    private static final double speed = 3;  // Movement speed of the player
 
-    private boolean movingLeft      = false;
-    private boolean movingRight     = false;
-    private boolean movingUp        = false;
-    private boolean movingDown      = false;
+    private boolean movingLeft = false;
+    private boolean movingRight = false;
+    private boolean movingUp = false;
+    private boolean movingDown = false;
 
     /**
      * Constructs a Player object at the specified position with the given size.
@@ -170,7 +184,6 @@ public final class Player
 
     /**
      * Validates that the given double value is positive
-     *
      */
     private static void validateDoublePositive(final double value)
     {

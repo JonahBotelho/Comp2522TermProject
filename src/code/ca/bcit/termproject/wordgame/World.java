@@ -8,9 +8,21 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Represents a collection of countries, where each country is stored in a
- * HashMap with its name as the key and the Country object as the value. The class
- * loads country data from text files and stores it for use in the word game.
+ * The World class represents a collection of countries, each stored in a HashMap with the country's name as the key
+ * and a corresponding Country object as the value. The class is responsible for loading country data from text files,
+ * parsing the data, and organizing it into a structured format for use in the WordGame.
+ *
+ * Key Features:
+ * 1. Loads country information from alphabetically organized text files (a.txt, b.txt, etc.).
+ * 2. Each file contains country records in a specific format: country name and capital, followed by three facts.
+ * 3. Validates file existence and reads data line by line to extract relevant country details.
+ * 4. Creates Country objects based on the parsed data and stores them in a HashMap for efficient access during gameplay.
+ *
+ * The constructor of the class iterates over files named after each letter of the alphabet (a.txt, b.txt, etc.) and processes
+ * each file to extract the country's name, capital city, and three interesting facts. This data is used to create instances
+ * of the Country class and stored in the `world` HashMap, which can later be accessed for the game.
+ *
+ * The class also provides a method to retrieve the `world` HashMap, which contains all countries' data, for use in the WordGame.
  *
  * @author Jonah Botelho
  * @version 1.0

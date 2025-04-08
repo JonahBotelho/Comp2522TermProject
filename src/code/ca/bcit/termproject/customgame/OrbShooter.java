@@ -12,6 +12,13 @@ import java.util.Random;
 
 /**
  * Represents a cannon that shoots orbs from all sides of the screen toward the center.
+ * The orbs are created randomly and move toward the center of the game window. The cannon
+ * controls the generation and shooting of these orbs based on probability and speed.
+ * <p>
+ * Orbs can be generated from any of the four edges of the screen (top, right, bottom, or left).
+ * The speed of the orbs can be adjusted using a speed modifier. The cannon shoots orbs based on a
+ * predefined probability, and the orbs can be of different types, such as red, green, or blue.
+ * </p>
  *
  * @author Jonah Botelho
  * @version 1.0

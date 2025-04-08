@@ -21,13 +21,29 @@ import java.util.Random;
 import java.text.DecimalFormat;
 
 /**
- * A number placement game where the player must place randomly generated numbers
- * in a grid in ascending order. The game ends when the player cannot place a number
- * without breaking the ascending order. The player can retry or quit after losing.
+ * The {@code NumberGame} class represents a number placement game in which the player must
+ * place randomly generated numbers in a grid in ascending order. The game consists of a 5x4 grid
+ * where the player places a number, and the objective is to keep the numbers in strictly increasing
+ * order. The game ends when the player can no longer place a number without disrupting the order.
+ * Upon losing, the player can choose to either retry the game or quit. The game tracks statistics
+ * such as the number of games played, successful placements, and calculates the average placements
+ * per game.
+ *
+ * This class extends {@link javafx.application.Application} and implements the {@link RandomNumberGenerator}
+ * interface to provide the game's functionality. It utilizes JavaFX components for the user interface,
+ * including buttons for placing numbers and alert dialogs for game interaction. The game also generates
+ * random numbers within a specified range for placement in the grid.
+ *
+ * The game flow is as follows:
+ * 1. Player starts the game by clicking "OK" in a welcome message.
+ * 2. Player places numbers on the grid, trying to maintain ascending order.
+ * 3. If the order is violated, the game ends and the player is prompted with options to retry or quit.
+ * 4. The game tracks the total number of successful placements and games played.
  *
  * @author Jonah Botelho
  * @version 1.0
  */
+
 public final class NumberGame
         extends Application
         implements RandomNumberGenerator
@@ -64,7 +80,7 @@ public final class NumberGame
 
     /**
      * Starts the JavaFX application, initializes the UI, and sets up the game window.
-     * 
+     * <p>
      * This method is responsible for configuring and displaying the initial user interface
      * of the Number Game. It creates and configures a {@link Scene} and {@link VBox} layout
      * with appropriate padding and spacing. The method also initializes UI elements like labels
@@ -115,7 +131,7 @@ public final class NumberGame
 
     /**
      * Generates a random number within the specified range (inclusive).
-     *
+     * <p>
      * This method generates a random integer between the provided minimum and maximum values,
      * including both the min and max values in the range. It uses the {@link Random} class to
      * produce the random number and ensures the validity of the range before generating the number.
@@ -146,7 +162,7 @@ public final class NumberGame
 
     /**
      * Initializes the grid layout and button components.
-     *
+     * <p>
      * This method sets up the grid layout by arranging buttons within a {@link GridPane} and adding them
      * to the provided root container. Each button is configured with a preferred size and an action listener
      * that responds to user clicks. The grid is populated with the buttons, placed in a specific number of
@@ -240,7 +256,7 @@ public final class NumberGame
 
     /**
      * Generates the next random number to be placed in the grid.
-     *  
+     * <p>
      * This method generates a random number within the specified range, using
      * the {@link #randomNumber(int, int)} method, and updates the status label
      * to display the next number that will be placed in the grid.
@@ -255,7 +271,7 @@ public final class NumberGame
 
     /**
      * Handles the button click event to place the current number in the grid.
-     *  
+     * <p>
      * This method processes the click event for a button in the grid. It checks if
      * the selected grid slot is empty, and if so, it places the current number in that
      * spot. The button's label is updated to display the number, and the count of
@@ -298,11 +314,11 @@ public final class NumberGame
      * Checks if all non-empty numbers in the grid are in strictly increasing order.
      * Empty cells (represented by NOTHING) are skipped during comparison.
      * The comparison starts from the first non-empty number found in the grid.
-     *  
+     * <p>
      * Returns true if either:
      * - All non-empty numbers are in increasing order (each number > previous number)
      * - The grid contains zero or one non-empty numbers
-     *  
+     * <p>
      * Returns false if any non-empty number is smaller than or equal to a previous non-empty number.
      */
     private boolean isAscendingOrder()
@@ -329,21 +345,21 @@ public final class NumberGame
 
     /**
      * Displays and handles the game-over alert when the player can no longer place numbers.
-     *  
+     * <p>
      * The alert includes:
      * - "Game Over" title
      * - "You lost!" header
      * - Explanation message about being unable to place the next number
      * - Two action buttons: "Try Again" and "Quit"
-     *  
+     * <p>
      * If "Try Again" is selected:
      * - Resets the game grid to initial state
      * - Generates a new starting number
-     *  
+     * <p>
      * If "Quit" is selected:
      * - Displays the final score
      * - Closes the game window
-     *  
+     * <p>
      * The alert is modal and must be dismissed before continuing.
      */
     private void showGameOverAlert()
@@ -382,22 +398,22 @@ public final class NumberGame
 
     /**
      * Displays the player's final statistics in a modal dialog when the game ends.
-     *  
+     * <p>
      * The dialog shows:
      * - Total number of games played
      * - Total successful number placements across all games
      * - Average successful placements per game (formatted to 2 decimal places)
-     *  
+     * <p>
      * The statistics are formatted as:
      * "Games Played: X
      * Successful Placements: Y
      * Average Placements per Game: Z.ZZ"
-     *  
+     * <p>
      * The dialog has:
      * - "Final Score" as the window title
      * - "Game Over" as the header text
      * - A single OK button to dismiss the dialog
-     *  
+     * <p>
      * The dialog is modal and must be acknowledged before continuing.
      */
     private void showFinalScore()
@@ -430,16 +446,16 @@ public final class NumberGame
 
     /**
      * Displays a warning alert when the player attempts to place a number in an occupied slot.
-     *  
+     * <p>
      * The alert includes:
      * - "Invalid Move" as the title
      * - No header text (set to null)
      * - A clear message indicating the slot is already occupied
      * - A suggestion to try another slot
-     *  
+     * <p>
      * The alert contains a single OK button to acknowledge the warning.
      * It is modal and must be dismissed before the player can continue.
-     *  
+     * <p>
      * Example displayed message:
      * "This slot is already occupied. Try another slot."
      */
@@ -457,17 +473,17 @@ public final class NumberGame
 
     /**
      * Displays the welcome message when the game first launches.
-     *  
+     * <p>
      * Shows a modal dialog containing:
      * - "Welcome" as the title
      * - A greeting message that dynamically includes the number of squares (using NUMBER_OF_SQUARES)
      * - Instructions to click OK to begin the game
      * - No header text (set to null)
-     *  
+     * <p>
      * The message format is:
      * "Welcome to the X square number game!
      * Click OK to start!"
-     *  
+     * <p>
      * The alert contains a single OK button and must be dismissed before gameplay begins.
      * This
      */
@@ -494,19 +510,19 @@ public final class NumberGame
 
     /**
      * Configures the visual appearance and behavior of game alert dialogs.
-     *  
+     * <p>
      * Performs the following setup operations:
      * - Validates the alert parameter is not null
      * - Makes the alert background transparent
      * - Removes default window decorations (title bar, borders)
      * - Applies the game's custom stylesheet to the dialog
      * - Adds the "dialog-pane" style class for CSS targeting
-     *  
+     * <p>
      * The method expects an initialized Alert object and modifies its:
      * - Scene background (transparent)
      * - Window style (undecorated)
      * - Stylesheet reference
-     *  
+     * <p>
      * This ensures all game alerts maintain consistent visual styling.
      *
      * @param alert Alert object to be configured

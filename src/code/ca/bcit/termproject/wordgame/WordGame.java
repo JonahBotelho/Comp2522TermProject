@@ -11,9 +11,28 @@ import java.util.Scanner;
 import java.text.DecimalFormat;
 
 /**
- * The WordGame class implements a simple quiz game where the player is asked
- * questions about world capitals and facts related to different countries.
- * The game keeps track of scores and stores them in a file.
+ * The WordGame class implements a quiz game focused on world capitals and countries.
+ * The game presents questions to the user, tracks their performance, and allows them
+ * to play multiple rounds. It also stores high scores in a file and compares the user's
+ * current score to the highest recorded score. The game is designed to be played with
+ * a series of questions, with feedback provided to the user on correct or incorrect answers.
+ *
+ * Key Features:
+ * 1. Presents random questions about countries, capitals, and facts related to countries.
+ * 2. Tracks user performance, including correct answers on the first and second attempts.
+ * 3. Provides feedback after each attempt and shows the correct answer if the user fails twice.
+ * 4. Allows the user to play multiple rounds, with the option to play again after each round.
+ * 5. Saves and compares the user's score to the high score stored in a file.
+ * 6. Uses `DecimalFormat` to display scores with two decimal places.
+ *
+ * The game flow is controlled by a main game loop, which generates questions based on random
+ * selections and evaluates user input. The user can play multiple rounds, and after each round,
+ * their performance is recorded. The highest score is saved to a text file, and the user is notified
+ * if they have achieved a new high score.
+ *
+ * After the game, the user is prompted to return to the main menu by pressing enter.
+ *
+ * This class is the entry point for running the word game application.
  *
  * @author Jonah Botelho
  * @version 1.0

@@ -20,7 +20,7 @@ public class InformationAlert
 {
     /**
      * Constructs an InformationAlert with the specified title.
-     *
+     * <p>
      * This constructor validates the provided title and passes it along
      * with the alert type to the superclass constructor. The alert type
      * is set to {@link Alert.AlertType#INFORMATION} to indicate the non-critical

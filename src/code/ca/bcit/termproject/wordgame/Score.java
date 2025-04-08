@@ -13,9 +13,27 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 /**
- * Represents a player's score in the word game.
- * Stores statistics and provides methods for file I/O.
+ * The {@code Score} class represents a player's score in the word game, storing various statistics
+ * such as the number of games played, the number of correct answers on the first and second attempts,
+ * and the number of incorrect answers on the second attempt. It calculates the total score based on
+ * correct answers and provides functionality for file input/output operations related to the player's scores.
+ *
+ * This class offers validation for all input data, including checking that the current time is within
+ * a valid range (2000-2100), ensuring that integers are non-negative, and validating strings. It also
+ * provides methods to append scores to a file, read scores from a file, and generate a formatted string
+ * representation of the score.
+ *
+ * In addition, the class includes a method to determine the highest average score from a list of scores.
+ * It calculates the average score per game based on the total score and the number of games played.
+ *
+ * The class is designed to store immutable score data and is suitable for file-based persistence of game
+ * statistics. All methods related to file I/O ensure that scores are correctly appended to or read from files
+ * with appropriate validation.
+ *
+ * @author Jonah Botelho
+ * @version 1.0
  */
+
 public final class Score
 {
     private static final int NOTHING                            = 0;

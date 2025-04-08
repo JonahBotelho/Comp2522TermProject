@@ -11,8 +11,22 @@ import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
 /**
- * The Score class provides functionality to manage and retrieve high scores for the game.
- * Scores are stored in a text file, and this class handles reading and writing scores.
+ * The {@code ClockStormScore} class provides functionality for managing and retrieving high scores in the game.
+ * It allows adding new scores, retrieving the highest score, and calculating the average score.
+ * Scores are stored in a text file located at {@code "src/data/clockstorm_score.txt"}.
+ * The class handles reading from and writing to this file, ensuring the file is created if it doesn't exist.
+ * It also provides validation to ensure that scores added are non-null and non-negative.
+ *
+ * Key Features:
+ * - Retrieve the highest score from the score file.
+ * - Add a new score to the score file, appending it without overwriting existing scores.
+ * - Calculate the average of all previous scores stored in the file.
+ * - Validate that the score being added is a non-null, non-negative integer.
+ *
+ * The class ensures the creation of necessary directories and the score file if they do not already exist.
+ * If any issues arise (e.g., the file is empty or does not exist), it will return default values such as 0.
+ *
+ * This class is essential for tracking the game's scores and provides an interface for managing player scores.
  *
  * @author Jonah Botelho
  * @version 1.0

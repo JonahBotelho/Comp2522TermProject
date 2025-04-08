@@ -18,8 +18,26 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * The ClockStormMain class is the entry point for the ClockStorm game.
- * It initializes the game window and handles core game logic.
+ * The ClockStormMain class serves as the entry point for the ClockStorm game, handling the core game logic,
+ * player interaction, collision detection, scoring, and game-over conditions. It manages the initialization of
+ * the game environment, including the setup of the game window, player, and orb shooter, as well as the
+ * continuous updates in the game loop.
+ *
+ * The game follows the player's interaction with falling orbs, and the goal is to avoid red orbs while
+ * collecting green and blue orbs to increase the score. The player controls the character using the arrow
+ * keys or WASD, and orbs are shot at random intervals with varying speeds.
+ *
+ * Key features include:
+ * - **Orb Collision Handling**: Orbs of various types (red, green, blue) affect the game differently, either
+ *   ending the game or adding points to the score.
+ * - **Game Over Logic**: If the score falls below a minimum threshold, the game ends, showing the final score
+ *   and allowing the player to restart or exit.
+ * - **Speed Modifier**: As the score increases, orbs move faster, adding difficulty over time.
+ * - **Score System**: A dynamic scoring system penalizes players randomly, decreasing their score occasionally.
+ * - **Player Movement**: The player is controlled through both the arrow keys and WASD for flexibility.
+ *
+ * This class extends `javafx.application.Application` and utilizes JavaFX's `AnimationTimer` to create the
+ * game loop, continuously updating the game state and checking for collisions and score updates.
  */
 public final class ClockStormMain
         extends Application
