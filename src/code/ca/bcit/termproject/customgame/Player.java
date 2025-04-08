@@ -20,6 +20,7 @@ public final class Player
 
     /**
      * Constructs a Player object at the specified position with the given size.
+     * Initializes the player with the specified position and size, setting its fill color to black.
      *
      * @param x    The x-coordinate of the player.
      * @param y    The y-coordinate of the player.
@@ -64,7 +65,8 @@ public final class Player
     }
 
     /**
-     * Ensures that the player has not moved further than the edge of the game.
+     * Ensures that the player has not moved further than the edge of the game window.
+     * This method corrects the player's position if it exceeds the boundaries.
      */
     public void verifyEdgePosition()
     {

@@ -9,36 +9,38 @@ import javafx.scene.paint.Paint;
 import java.util.Objects;
 
 /**
- * Green Orb implementation using an image.
+ * Represents a Green Orb in the game, which uses an image for its visual appearance.
+ * If the image fails to load, it falls back to a default green color.
+ * This orb adheres to the movement and collision rules defined in the parent Orb class.
+ *
+ * A GreenOrb is initialized with a specific (x, y) position and velocity.
+ * The image pattern is loaded from disk, or falls back to a green color if unavailable.
+ * All inputs are validated using static utility methods provided by the Orb superclass.
  *
  * @author Jonah Botelho
  * @version 1.0
  */
 public final class GreenOrb extends Orb
 {
+    private static final String IMAGE_PATH          = "/res/customgame/images/green_orb_clock.png";
+    private static final Paint  ORB_PAINT           = loadOrbPaint();
 
-    private static final String IMAGE_PATH = "/res/customgame/images/green_orb_clock.png";
-    private static final Paint ORB_PAINT = loadOrbPaint();
-
-    // Image pattern configuration constants
-    private static final double IMAGE_PATTERN_ANCHOR_X      = 0.0;
-    private static final double IMAGE_PATTERN_ANCHOR_Y      = 0.0;
-    private static final double IMAGE_PATTERN_WIDTH         = 1.0;
-    private static final double IMAGE_PATTERN_HEIGHT        = 1.0;
-    private static final boolean IMAGE_PATTERN_PROPORTIONAL = true;
-
-    // Error message constants
-    private static final String IMAGE_LOAD_WARNING  = "Warning: GreenOrb image failed to load: ";
-    private static final String IMAGE_LOAD_ERROR    = "Error loading GreenOrb image resource: ";
-    private static final String FALLBACK_MESSAGE    = ". Using fallback color.";
+    // Image pattern parameters
+    private static final double IMAGE_PATTERN_ANCHOR_HORIZONTAL = 0.0;
+    private static final double IMAGE_PATTERN_ANCHOR_VERTICAL   = 0.0;
+    private static final double IMAGE_PATTERN_WIDTH_RATIO       = 1.0;
+    private static final double IMAGE_PATTERN_HEIGHT_RATIO      = 1.0;
+    private static final boolean IMAGE_PATTERN_PROPORTIONAL     = true;
 
     /**
-     * Constructs a new GreenOrb with specified position and movement parameters.
+     * Constructs a new GreenOrb with the specified position and movement parameters.
+     * Validates all parameters using Orb's validation methods before initialization.
+     * The orb's appearance is determined by the loaded image or fallback color.
      *
-     * @param x        initial x-coordinate center
-     * @param y        initial y-coordinate center
-     * @param speedX   base horizontal speed
-     * @param speedY   base vertical speed
+     * @param x      the initial x-coordinate of the orb's center in pixels
+     * @param y      the initial y-coordinate of the orb's center in pixels
+     * @param speedX the base horizontal speed of the orb in pixels per frame
+     * @param speedY the base vertical speed of the orb in pixels per frame
      */
     public GreenOrb(final double x,
                     final double y,
@@ -54,16 +56,18 @@ public final class GreenOrb extends Orb
     }
 
     /**
-     * Loads the image and creates an ImagePattern, or returns a fallback color.
+     * Loads and prepares the paint object for the green orb's appearance.
+     * Attempts to load the image from the specified path. If successful, creates an ImagePattern
+     * with the configured anchor points and scaling. If loading fails, silently returns a
+     * fallback lime green color.
      *
-     * @return Paint object for the orb
+     * @return a Paint object representing either the loaded image pattern or fallback color
      */
     private static Paint loadOrbPaint()
     {
         final Image orbImage;
         Paint result;
 
-        // attempts to load the image, and sets the colour to green if that fails
         try
         {
             orbImage = new Image(Objects.requireNonNull(GreenOrb.class.getResourceAsStream(IMAGE_PATH)));
@@ -72,23 +76,23 @@ public final class GreenOrb extends Orb
             {
                 result = new ImagePattern(
                         orbImage,
-                        IMAGE_PATTERN_ANCHOR_X,
-                        IMAGE_PATTERN_ANCHOR_Y,
-                        IMAGE_PATTERN_WIDTH,
-                        IMAGE_PATTERN_HEIGHT,
+                        IMAGE_PATTERN_ANCHOR_HORIZONTAL,
+                        IMAGE_PATTERN_ANCHOR_VERTICAL,
+                        IMAGE_PATTERN_WIDTH_RATIO,
+                        IMAGE_PATTERN_HEIGHT_RATIO,
                         IMAGE_PATTERN_PROPORTIONAL
                 );
                 return result;
             }
-
-            System.err.println(IMAGE_LOAD_WARNING + IMAGE_PATH + FALLBACK_MESSAGE);
         }
-        catch (final Exception e)
+        catch (final Exception ignored)
         {
-            System.err.println(IMAGE_LOAD_ERROR + IMAGE_PATH + FALLBACK_MESSAGE);
+            // Silently fall through to return default color
         }
 
-        result = Color.LIMEGREEN;
-        return result;
+        return Color.LIMEGREEN;
     }
+
+    /** The shared paint used by all green orbs, either a loaded image or lime green fallback. */
+    public static final Paint DEFAULT_GREEN_ORB_PAINT = ORB_PAINT;
 }

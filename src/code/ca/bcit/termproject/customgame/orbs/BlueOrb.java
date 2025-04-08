@@ -9,36 +9,34 @@ import javafx.scene.paint.Paint;
 import java.util.Objects;
 
 /**
- * Blue Orb implementation using an image.
+ * Represents a Blue Orb in the game, which uses an image for its visual appearance.
+ * If the image fails to load, it falls back to a default blue color.
+ * This orb adheres to the movement and collision rules defined in the parent Orb class.
  *
  * @author Jonah Botelho
  * @version 1.0
  */
 public final class BlueOrb extends Orb
 {
-
-    private static final String IMAGE_PATH = "/res/customgame/images/blue_orb_clock.png";
-    private static final Paint ORB_PAINT = loadOrbPaint();
+    private static final String IMAGE_PATH          = "/res/customgame/images/blue_orb_clock.png";
+    private static final Paint  ORB_PAINT           = loadOrbPaint();
 
     // Image pattern parameters
-    private static final double IMAGE_PATTERN_ANCHOR_X      = 0.0;
-    private static final double IMAGE_PATTERN_ANCHOR_Y      = 0.0;
-    private static final double IMAGE_PATTERN_WIDTH         = 1.0;
-    private static final double IMAGE_PATTERN_HEIGHT        = 1.0;
-    private static final boolean IMAGE_PATTERN_PROPORTIONAL = true;
-
-    // Error message constants
-    private static final String IMAGE_LOAD_WARNING  = "Warning: BlueOrb image failed to load: ";
-    private static final String IMAGE_LOAD_ERROR    = "Error loading BlueOrb image resource: ";
-    private static final String FALLBACK_MESSAGE    = ". Using fallback color.";
+    private static final double IMAGE_PATTERN_ANCHOR_HORIZONTAL = 0.0;
+    private static final double IMAGE_PATTERN_ANCHOR_VERTICAL   = 0.0;
+    private static final double IMAGE_PATTERN_WIDTH_RATIO       = 1.0;
+    private static final double IMAGE_PATTERN_HEIGHT_RATIO      = 1.0;
+    private static final boolean IMAGE_PATTERN_PROPORTIONAL     = true;
 
     /**
-     * Constructs a new BlueOrb with specified position and movement parameters.
+     * Constructs a new BlueOrb with the specified position and movement parameters.
+     * Validates all parameters using Orb's validation methods before initialization.
+     * The orb's appearance is determined by the loaded image or fallback color.
      *
-     * @param x        initial x-coordinate center
-     * @param y        initial y-coordinate center
-     * @param speedX   base horizontal speed
-     * @param speedY   base vertical speed
+     * @param x      the initial x-coordinate of the orb's center in pixels
+     * @param y      the initial y-coordinate of the orb's center in pixels
+     * @param speedX the base horizontal speed of the orb in pixels per frame
+     * @param speedY the base vertical speed of the orb in pixels per frame
      */
     public BlueOrb(final double x,
                    final double y,
@@ -54,16 +52,18 @@ public final class BlueOrb extends Orb
     }
 
     /**
-     * Loads the blue orb image and creates an ImagePattern, or returns a fallback blue color.
+     * Loads and prepares the paint object for the blue orb's appearance.
+     * Attempts to load the image from the specified path. If successful, creates an ImagePattern
+     * with the configured anchor points and scaling. If loading fails, silently returns a
+     * fallback deep sky blue color.
      *
-     * @return Paint object for the blue orb
+     * @return a Paint object representing either the loaded image pattern or fallback color
      */
     private static Paint loadOrbPaint()
     {
         final Image orbImage;
-        Paint result;
+        Paint       result;
 
-        // attempts to load the image, and sets the colour to blue if that fails
         try
         {
             orbImage = new Image(Objects.requireNonNull(BlueOrb.class.getResourceAsStream(IMAGE_PATH)));
@@ -72,25 +72,20 @@ public final class BlueOrb extends Orb
             {
                 result = new ImagePattern(
                         orbImage,
-                        IMAGE_PATTERN_ANCHOR_X,
-                        IMAGE_PATTERN_ANCHOR_Y,
-                        IMAGE_PATTERN_WIDTH,
-                        IMAGE_PATTERN_HEIGHT,
+                        IMAGE_PATTERN_ANCHOR_HORIZONTAL,
+                        IMAGE_PATTERN_ANCHOR_VERTICAL,
+                        IMAGE_PATTERN_WIDTH_RATIO,
+                        IMAGE_PATTERN_HEIGHT_RATIO,
                         IMAGE_PATTERN_PROPORTIONAL
                 );
                 return result;
             }
-
-            System.err.println(IMAGE_LOAD_WARNING + IMAGE_PATH
-                    + ". Error: " + orbImage.getException() + FALLBACK_MESSAGE);
         }
-        catch (final Exception e)
+        catch (final Exception ignored)
         {
-            System.err.println(IMAGE_LOAD_ERROR
-                    + IMAGE_PATH + FALLBACK_MESSAGE);
+            // Silently fall through to return default color
         }
 
-        result = Color.DEEPSKYBLUE;
-        return result;
+        return Color.DEEPSKYBLUE;
     }
 }

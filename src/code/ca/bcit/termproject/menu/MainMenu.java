@@ -39,9 +39,23 @@ public final class MainMenu extends Application
 
     /**
      * Starts the JavaFX application by launching the game selection menu
-     * in a separate thread. Handles user input and starts the selected game.
+     * in a separate thread, handling user input, and starting the selected game.
+     * This method displays a console menu asking the user which game they would
+     * like to play. Based on the user's input, it launches the appropriate game
+     * in a new thread. If the user selects "Quit", the method will stop the menu thread.
      *
-     * @param stage the primary JavaFX stage
+     * The game options are:
+     * - Word game (WORD_GAME_LETTER)
+     * - Number game (NUMBER_GAME_LETTER)
+     * - ClockStorm game (CLOCK_STORM_LETTER)
+     * - Quit the application (QUIT_LETTER)
+     *
+     * The user is prompted to select a game, and input is validated to ensure
+     * it is one of the valid choices. Once a valid choice is made, the corresponding
+     * game is launched in a new thread. The menu continues to prompt the user until
+     * they choose to quit the application.
+     *
+     * @param stage the primary JavaFX stage used to launch the application
      */
     @Override
     public void start(final Stage stage)
@@ -58,7 +72,7 @@ public final class MainMenu extends Application
                 
                 System.out.println("Press " + WORD_GAME_LETTER + " to play the Word game.");
                 System.out.println("Press " + NUMBER_GAME_LETTER + " to play the Number game.");
-                System.out.println("Press " + CLOCK_STORM_LETTER + " to play the ClockStorm game");
+                System.out.println("Press " + CLOCK_STORM_LETTER + " to play the ClockStorm game.");
                 System.out.println("Press " + QUIT_LETTER + " to quit.");
                 
                 input = scan.nextLine();

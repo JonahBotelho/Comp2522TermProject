@@ -18,15 +18,15 @@ import java.util.Optional;
  */
 public final class Score
 {
-    private static final int NOTHING = 0;
-    private static final int MIN_YEAR = 2000;
-    private static final int MAX_YEAR = 2100;
-    private static final int POINTS_FOR_FIRST_ATTEMPT = 2;
-    private static final int POINTS_FOR_SECOND_ATTEMPT = 1;
-    private static final int LINES_PER_SCORE_OBJECT = 4;
-    private static final int WORDS_PER_SCORE_FIRST_LINE = 2;
-    private static final int FIRST_INDEX_OF_DATE_IN_SCORE_LINE = 15;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final int NOTHING                            = 0;
+    private static final int MIN_YEAR                           = 2000;
+    private static final int MAX_YEAR                           = 2100;
+    private static final int POINTS_FOR_FIRST_ATTEMPT           = 2;
+    private static final int POINTS_FOR_SECOND_ATTEMPT          = 1;
+    private static final int LINES_PER_SCORE_OBJECT             = 4;
+    private static final int WORDS_PER_SCORE_FIRST_LINE         = 2;
+    private static final int FIRST_INDEX_OF_DATE_IN_SCORE_LINE  = 15;
+    private static final DateTimeFormatter formatter            = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private final LocalDateTime currentTime;
     private final int gamesPlayed;
@@ -56,18 +56,18 @@ public final class Score
         validateIntegers(correctOnSecondAttempt);
         validateIntegers(incorrectOnSecondAttempt);
 
-        this.currentTime = currentTime;
-        this.gamesPlayed = gamesPlayed;
-        this.correctOnFirstAttempt = correctOnFirstAttempt;
-        this.correctOnSecondAttempt = correctOnSecondAttempt;
-        this.incorrectOnSecondAttempt = incorrectOnSecondAttempt;
+        this.currentTime                = currentTime;
+        this.gamesPlayed                = gamesPlayed;
+        this.correctOnFirstAttempt      = correctOnFirstAttempt;
+        this.correctOnSecondAttempt     = correctOnSecondAttempt;
+        this.incorrectOnSecondAttempt   = incorrectOnSecondAttempt;
 
         this.score = correctOnFirstAttempt * POINTS_FOR_FIRST_ATTEMPT +
-                correctOnSecondAttempt * POINTS_FOR_SECOND_ATTEMPT;
+                    correctOnSecondAttempt * POINTS_FOR_SECOND_ATTEMPT;
     }
 
     /**
-     * Validates that the current date is between 2000 and 2025, and that it is not null.
+     * Validates that the current date is between MIN_YEAR and MAX_YEAR, and that it is not null.
      *
      * @param currentTime the LocalDateTime to validate.
      */
@@ -147,10 +147,15 @@ public final class Score
     }
 
     /**
-     * Reads scores from a file and returns a list of Score objects.
+     * Reads scores from a specified file and parses them into a list of {@link Score} objects.
      *
-     * @param scoreFile The file path from which scores will be read.
-     * @return A list of Score objects.
+     * This method reads the contents of a file, where each score entry is assumed to consist of
+     * 7 lines. The first line contains a timestamp, and the following 6 lines contain score-related
+     * data. Each score entry is parsed and stored as a {@link Score} object, which is added to a list
+     * that is returned at the end. If the file does not exist, the method returns {@code null}.
+     *
+     * @param scoreFile The path to the score file to read.
+     * @return A list of {@link Score} objects parsed from the file, or {@code null} if the file does not exist.
      */
     public static List<Score> readScoresFromFile(final String scoreFile) throws IOException
     {
@@ -196,9 +201,20 @@ public final class Score
     }
 
     /**
-     * Returns a string representation of the Score object.
+     * Generates a formatted string representation of the {@link Score} object.
      *
-     * @return A formatted string representing the score details.
+     * The string includes all score metrics in a human-readable format with labels:
+     * - Date and Time (formatted using the class's DateTimeFormatter)
+     * - Games Played
+     * - Correct First Attempts
+     * - Correct Second Attempts
+     * - Incorrect Attempts
+     * - Total Score (with "points" suffix)
+     *
+     * Each metric appears on its own line with proper labeling. The format is consistent
+     * and suitable for display to users or logging purposes.
+     *
+     * @return Formatted string containing all score information
      */
     @Override
     public String toString()
@@ -226,10 +242,19 @@ public final class Score
     }
 
     /**
-     * Returns the highest average score value from a list of Score objects.
+     * Determines the highest average score from a list of Score objects.
      *
-     * @param scores Score object list.
-     * @return highest average score as a double
+     * Processes the input list to find the maximum average score value:
+     * - Returns {@code NOTHING} constant (typically 0.0) if input list is null or empty
+     * - Uses Java Streams to efficiently find the maximum average score
+     * - Compares scores using {@code Score::getAverageScore} as the sorting key
+     * - Safely handles empty Optional results from the stream operation
+     *
+     * The method is null-safe and will not throw exceptions for null input,
+     * making it suitable for use with potentially uninitialized score lists.
+     *
+     * @param scores List of Score objects to evaluate (may be null or empty)
+     * @return The highest average score found, or {@code NOTHING} if no valid scores exist
      */
     public static double getHighScore(final List<Score> scores)
     {
@@ -257,7 +282,7 @@ public final class Score
     }
 
     /**
-     * Returns the timestamp when the score was recorded.
+     * Returns the timestamp when the score was recorded as a LocalDateTime.
      *
      * @return The timestamp of the score.
      */
@@ -267,7 +292,7 @@ public final class Score
     }
 
     /**
-     * Returns the total number of games played.
+     * Returns the total number of games played as an int.
      *
      * @return The number of games played.
      */
@@ -277,7 +302,7 @@ public final class Score
     }
 
     /**
-     * Returns the number of correct answers on the first attempt.
+     * Returns the number of correct answers on the first attempt as an int.
      *
      * @return The count of correct first attempts.
      */
@@ -287,7 +312,7 @@ public final class Score
     }
 
     /**
-     * Returns the number of correct answers on the second attempt.
+     * Returns the number of correct answers on the second attempt as an int.
      *
      * @return The count of correct second attempts.
      */
@@ -297,7 +322,7 @@ public final class Score
     }
 
     /**
-     * Returns the number of incorrect answers on the second attempt.
+     * Returns the number of incorrect answers on the second attempt as an int.
      *
      * @return The count of incorrect second attempts.
      */
@@ -307,7 +332,7 @@ public final class Score
     }
 
     /**
-     * Returns the total score based on correct answers.
+     * Returns the total score based on correct answers as an int.
      *
      * @return The total score.
      */
@@ -317,7 +342,7 @@ public final class Score
     }
 
     /**
-     * Calculates the average score per game.
+     * Calculates the average score per game as a double.
      *
      * @return The average score per game.
      */

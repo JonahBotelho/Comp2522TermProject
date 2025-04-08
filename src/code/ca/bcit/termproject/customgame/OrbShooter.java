@@ -49,6 +49,7 @@ public final class OrbShooter
 
     /**
      * Constructs a new Cannon.
+     * Initializes the list of orbs and the random number generator for shooting orbs.
      */
     public OrbShooter()
     {
@@ -58,15 +59,17 @@ public final class OrbShooter
 
     /**
      * Shoots an orb from a random edge if the probability condition is met.
+     * The orb is added to the provided root pane, and its speed is adjusted by the provided modifier.
      *
      * @param root The root pane to which the orb will be added.
+     * @param speedModifier The modifier that scales the speed of the orb.
      */
     public void shootOrb(final Pane root,
-                               final double speedModifier)
+                         final double speedModifier)
     {
         validateRoot(root);
         Orb.validateSpeedModifier(speedModifier);
-        
+
         if (random.nextInt(ORB_SHOOT_PROBABILITY_MAX) < ORB_SHOOT_PROBABILITY)
         {
             // Randomly select which edge to spawn from (0=top, 1=right, 2=bottom, 3=left)
@@ -127,18 +130,25 @@ public final class OrbShooter
 
     /**
      * Creates a random orb with the specified position and speed components.
+     * The orb's type is randomly selected from a set of predefined types.
+     *
+     * @param x The x-coordinate of the orb's position.
+     * @param y The y-coordinate of the orb's position.
+     * @param speedX The x-component of the orb's speed.
+     * @param speedY The y-component of the orb's speed.
+     * @return The created orb, which can be of different types (red, green, blue).
      */
     private Orb createRandomOrb(final double x,
-                                      final double y,
-                                      final double speedX,
-                                      final double speedY)
+                                final double y,
+                                final double speedX,
+                                final double speedY)
     {
         Orb.validateX(x);
         Orb.validateY(y);
         Orb.validateBaseSpeed(x);
         Orb.validateBaseSpeed(y);
         Orb.validateSpeedModifier(speedX);
-        
+
         int orbType;
         orbType = random.nextInt(RANDOM_ORB_GENERATION_MAX);
 
@@ -154,6 +164,8 @@ public final class OrbShooter
 
     /**
      * Returns the list of orbs currently in the game.
+     *
+     * @return The list of orbs that are currently in the game.
      */
     public List<Orb> getOrbs()
     {
@@ -161,9 +173,9 @@ public final class OrbShooter
     }
 
     /**
-     * validates that the root is not null
+     * Validates that the root pane is not null.
      *
-     * @param root to be validated
+     * @param root The root pane to validate.
      */
     private static void validateRoot(final Pane root)
     {
@@ -172,4 +184,5 @@ public final class OrbShooter
             throw new IllegalArgumentException("Root cannot be null");
         }
     }
+
 }

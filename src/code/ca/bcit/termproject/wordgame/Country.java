@@ -65,7 +65,7 @@ public final class Country
     }
 
     /**
-     * Gets the name of the country.
+     * Gets the name of the country as a String.
      *
      * @return The name of the country.
      */
@@ -75,7 +75,7 @@ public final class Country
     }
 
     /**
-     * Gets the name of the capital city.
+     * Gets the name of the capital city as a String.
      *
      * @return The name of the capital city.
      */
@@ -85,7 +85,7 @@ public final class Country
     }
 
     /**
-     * Gets the facts about the country.
+     * Gets the facts about the country as a String array.
      *
      * @return An array of facts about the country.
      */

@@ -24,7 +24,7 @@ public final class ClockStormUI
     // UI Configuration
     private static final String SCORE_LABEL_FONT_NAME    = "Arial";
     private static final int SCORE_LABEL_FONT_SIZE       = 20;
-    static final int SCORE_LABEL_X                       = 10;
+    private static final int SCORE_LABEL_X               = 10;
     private static final int SCORE_LABEL_Y               = 10;
     private static final String SCORE_LABEL_INITIAL_TEXT = ClockStormMain.POINTS_NAME + ": " + ClockStormMain.START_SCORE;
 
@@ -33,8 +33,9 @@ public final class ClockStormUI
 
     /**
      * Sets up the scene styles by adding the stylesheet.
+     * This method retrieves the stylesheet file from the classpath and applies it to the given scene.
      *
-     * @param scene The scene to style
+     * @param scene The scene to style. The scene's stylesheet is modified by adding the classpath stylesheet.
      */
     public static void setupSceneStyles(final Scene scene)
     {
@@ -44,12 +45,16 @@ public final class ClockStormUI
 
     /**
      * Creates and configures the score label.
+     * This method creates a new Label object for the score, sets the font properties, layout position,
+     * and applies the "score-label" CSS class for styling.
      *
-     * @return The configured score label
+     * @return The configured score label. A Label is returned that can be added to the scene.
      */
     public static Label createScoreLabel()
     {
-        final Label scoreLabel = new Label(SCORE_LABEL_INITIAL_TEXT);
+        final Label scoreLabel;
+        scoreLabel = new Label(SCORE_LABEL_INITIAL_TEXT);
+
         scoreLabel.setFont(new Font(SCORE_LABEL_FONT_NAME, SCORE_LABEL_FONT_SIZE));
         scoreLabel.setLayoutX(SCORE_LABEL_X);
         scoreLabel.setLayoutY(SCORE_LABEL_Y);
@@ -59,6 +64,8 @@ public final class ClockStormUI
 
     /**
      * Displays the welcome message with game instructions.
+     * This method shows an informational alert with details on how to play the game, including controls
+     * and mechanics such as gaining and losing points.
      */
     public static void showWelcomeMessage()
     {
@@ -96,11 +103,14 @@ public final class ClockStormUI
 
     /**
      * Shows the game over alert with final score and high score.
+     * This method displays a game over alert with the final score, the high score, and the average score.
+     * The user is given the option to play again or quit the game.
      *
-     * @param message   The game over message
-     * @param score     The final score
-     * @param highScore The high score
-     * @return The button type that was clicked
+     * @param message   The game over message to display.
+     * @param score     The final score to display.
+     * @param highScore The highest score to display.
+     * @param average   The average score to display.
+     * @return The button type that was clicked by the user (either "Play Again" or "Quit").
      */
     public static ButtonType showGameOverAlert(final String message,
                                                final int score,
@@ -137,10 +147,10 @@ public final class ClockStormUI
 
     /**
      * Adds customGameStyles.css to an Alert, and removes the top row.
-     * TODO fix corners
-     * FIXME duplicate in main game
+     * This method customizes the alert dialog by adding a stylesheet and removing the top row of the alert.
+     * It also adjusts the window to a transparent style.
      *
-     * @param alert alert to set up
+     * @param alert alert to set up. The alert is styled by adding a CSS file and modifying its window properties.
      */
     static void setUpAlert(final Alert alert)
     {
@@ -168,8 +178,9 @@ public final class ClockStormUI
 
     /**
      * Validates that the given {@link Alert} is not null.
+     * This method checks that the provided alert is not null and throws a NullPointerException if it is.
      *
-     * @param alert the alert to validate
+     * @param alert the alert to validate. The alert must not be null.
      */
     private static void validateAlert(final Alert alert)
     {
@@ -181,8 +192,9 @@ public final class ClockStormUI
 
     /**
      * Validates that the given message is not null or empty.
+     * This method checks that the provided message is not null or empty and throws an exception if it is.
      *
-     * @param message the message to validate
+     * @param message the message to validate. The message must not be null or empty.
      */
     private static void validateMessage(final String message)
     {
@@ -194,8 +206,9 @@ public final class ClockStormUI
 
     /**
      * Validates that the given score is not negative.
+     * This method checks that the provided score is not negative and throws an IllegalArgumentException if it is.
      *
-     * @param score the score to validate
+     * @param score the score to validate. The score must be greater than or equal to 0.
      */
     public static void validateScore(final int score)
     {
@@ -207,8 +220,9 @@ public final class ClockStormUI
 
     /**
      * Validates that the given high score is not negative.
+     * This method checks that the provided high score is not negative and throws an IllegalArgumentException if it is.
      *
-     * @param highScore the high score to validate
+     * @param highScore the high score to validate. The high score must be greater than or equal to 0.
      */
     public static void validateHighScore(final int highScore)
     {
@@ -220,8 +234,9 @@ public final class ClockStormUI
 
     /**
      * Validates that the given average is not negative.
+     * This method checks that the provided average score is not negative and throws an IllegalArgumentException if it is.
      *
-     * @param average the average value to validate
+     * @param average the average score to validate. The average score must be greater than or equal to 0.
      */
     public static void validateAverage(final double average)
     {
@@ -230,4 +245,5 @@ public final class ClockStormUI
             throw new IllegalArgumentException("average cannot be negative");
         }
     }
+
 }

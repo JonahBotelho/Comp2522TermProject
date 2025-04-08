@@ -36,10 +36,25 @@ public final class WordGame
     private static int incorrectOnSecondAttempt;
 
     /**
-     * The main method that runs the game.
-     * It initializes the game world, starts the question loop, and handles score storage.
+     * The main method for running the word game application.
      *
-     * @param args unused
+     * This method serves as the entry point for the game, initializing key components such as the game world, the list
+     * of countries, and the random number generator. It also controls the game flow, presenting the user with a series of
+     * questions and collecting their answers. The user can choose to play multiple rounds, and after the game ends, the
+     * method compares the user's average score to the highest score recorded in a score file. If the user's score exceeds
+     * the high score, the file is updated, and a new high score is announced. The method also includes a play-again loop,
+     * input validation for user choices, and displays relevant game information and statistics.
+     *
+     * Key steps in the method:
+     * 1. Initializes required variables such as the file path, world data, and game settings.
+     * 2. Starts a loop for the gameplay, where a series of questions are asked based on random selection.
+     * 3. Handles the user's responses to questions about countries, capitals, and facts.
+     * 4. Tracks the user's performance during the game and evaluates the score at the end.
+     * 5. Compares the user's score to the high score, displaying whether the user achieved a new high score.
+     * 6. Provides the option to play again, and if the user chooses not to, the final score is saved to a file.
+     * 7. Ends the game and prompts the user to return to the main menu.
+     *
+     * @param args The command-line arguments passed to the application (not used).
      */
     public static void main(final String[] args) throws IOException
     {
@@ -58,18 +73,17 @@ public final class WordGame
         final double highScore;
         final double userScoreDouble;
 
+        file            = "src/data/wordgame_score.txt";
+        world           = new World();
+        worldHashMap    = world.getWorld();
+        worldList       = new ArrayList<>(worldHashMap.entrySet());
+        ran             = new Random();
+        choice          = "yes";
 
-        file = "src/data/wordgame_score.txt";
-        world = new World();
-        worldHashMap = world.getWorld();
-        worldList = new ArrayList<>(worldHashMap.entrySet());
-        ran = new Random();
-        choice = "yes";
-
-        gamesPlayed = NOTHING;
-        correctOnFirstAttempt = NOTHING;
-        correctOnSecondAttempt = NOTHING;
-        incorrectOnSecondAttempt = NOTHING;
+        gamesPlayed                 = NOTHING;
+        correctOnFirstAttempt       = NOTHING;
+        correctOnSecondAttempt      = NOTHING;
+        incorrectOnSecondAttempt    = NOTHING;
 
         scoreFormat = new DecimalFormat("0.00");
         // Play again loop
@@ -172,12 +186,25 @@ public final class WordGame
     }
 
     /**
-     * Prompts the user for an answer and evaluates their response.
-     * The user has two attempts to answer correctly.
-     * <p>
-     * Designed to be run through MainMenu. May not work as intended if opened separately.
+     * Evaluates user input against the correct answer with two attempts.
      *
-     * @param answer The correct answer for the question.
+     * Compares user input (case-insensitive) to the expected answer:
+     * - On first correct attempt: increments correctOnFirstAttempt counter
+     * - On first incorrect attempt: gives one retry opportunity
+     * - On second correct attempt: increments correctOnSecondAttempt counter
+     * - On second incorrect attempt: reveals answer and increments incorrectOnSecondAttempt counter
+     *
+     * Provides real-time feedback for each attempt:
+     * - "Correct!" messages for successful attempts
+     * - "Incorrect!" messages for failed attempts
+     * - Displays correct answer after second failure
+     *
+     * Uses standard input (System.in) via SCANNER for user interaction.
+     * Validates the answer parameter before processing.
+     *
+     * Designed to be run through MainMenu. Program may perform unexpectedly if ran separately.
+     *
+     * @param answer The correct answer string to compare against user input
      */
     private static void evaluateUserInput(final String answer)
     {
@@ -212,9 +239,9 @@ public final class WordGame
 
     /**
      * Validates the given answer to ensure it is not null or blank.
+     * Throws IllegalArgumentException if answer is null or blank.
      *
-     * @param answer The answer to validate.
-     * @throws IllegalArgumentException If the answer is null or blank.
+     * @param answer The answer to validate as a String.
      */
     private static void validateAnswer(final String answer)
     {

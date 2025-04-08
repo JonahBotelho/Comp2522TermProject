@@ -1,5 +1,8 @@
-
 – Intro –
+
+Important Note: I recorded the first video before your style guide was posted, and after having read it, decided to add
+                more comments to my code. Therefore, the code and styling shown in my video is not as polished as the
+                code submitted in my files.
 
 I used AI throughout the development of my custom game, and found it extremely helpful, albeit with a few downsides.
 

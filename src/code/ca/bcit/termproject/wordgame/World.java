@@ -31,8 +31,26 @@ public final class World
     private final HashMap<String, Country> world;
 
     /**
-     * Constructs a World object by reading country data from text files and
-     * storing it in a HashMap.
+     * Constructs a World object by loading and parsing country data from text files.
+     *
+     * Initializes the world HashMap by reading country information from alphabetically organized
+     * data files (a.txt, b.txt, etc.). Each file contains country records in a specific format:
+     *
+     * For each country:
+     * - First line: "CountryName:CapitalCity"
+     * - Next 3 lines: Interesting facts about the country
+     *
+     * The constructor:
+     * - Processes files for each letter of the alphabet (a-z)
+     * - Validates file existence before reading
+     * - Parses each country's name, capital, and facts
+     * - Creates Country objects and stores them in the world HashMap
+     *
+     * Expected file structure example:
+     * "Canada:Ottawa
+     *  Fact 1 about Canada
+     *  Fact 2 about Canada
+     *  Fact 3 about Canada"
      */
     public World() throws IOException
     {

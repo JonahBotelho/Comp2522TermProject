@@ -27,11 +27,14 @@ public final class ClockStormScore
     );
 
     /**
-     * Retrieves the highest score from the score file. If the file does not exist or is empty,
-     * this method returns 0.
+     * Retrieves the highest score from the score file. If the file does not exist, is empty,
+     * or contains no valid scores, this method returns 0.
+     *
+     * This method reads the score file, processes the lines, and attempts to extract the highest
+     * score. If any issues occur (e.g., file does not exist, file is empty, or no valid integers
+     * are found), it will return a default value of 0.
      *
      * @return The highest score stored in the file, or 0 if no valid scores are found.
-     * @throws IOException If an I/O error occurs while reading the file.
      */
     public static int getHighScore() throws IOException
     {
@@ -47,6 +50,7 @@ public final class ClockStormScore
         final List<String> lines;
         lines = Files.readAllLines(filePath);
 
+        // removes any lines that are not integer values
         OptionalInt highScore = lines.stream()
                 .filter(Objects::nonNull)
                 .filter(s -> !s.isBlank())
@@ -62,11 +66,14 @@ public final class ClockStormScore
         return NOTHING;
     }
 
+
     /**
      * Adds a score to the score file. If the file does not exist, it will be created.
      *
+     * This method writes a given score to a file. If the file or its parent directory does not exist,
+     * it will be created. The score is appended to the file, ensuring that previous scores are not overwritten.
+     *
      * @param score The score to be added to the file.
-     * @throws IOException If an I/O error occurs while writing to the file.
      */
     public static void addScore(final Integer score)
             throws IOException
@@ -89,10 +96,14 @@ public final class ClockStormScore
                 StandardOpenOption.APPEND);
     }
 
+
     /**
-     * Returns the average of all previous scores
+     * Returns the average of all previous scores.
      *
-     * @return double value of score average
+     * This method reads the scores from the score file and calculates the average.
+     * If the file does not exist or no valid scores are found, it returns a predefined constant value.
+     *
+     * @return The average of all previous scores as a double. If no valid scores are found, returns the predefined constant value.
      */
     public static double getAverageScore()
             throws IOException
@@ -121,10 +132,14 @@ public final class ClockStormScore
         return NOTHING;
     }
 
+
     /**
-     * Validates that the score Integer value is not null, and is greater than 0.
+     * Validates that the score Integer value is not null and is greater than or equal to 0.
      *
-     * @param score Integer value to validate.
+     * This method checks if the provided score is null or negative. If either condition is true, an
+     * IllegalArgumentException is thrown with an appropriate error message.
+     *
+     * @param score The Integer value to validate.
      */
     private static void validateScore(final Integer score)
     {
@@ -138,4 +153,5 @@ public final class ClockStormScore
             throw new IllegalArgumentException("Score cannot be negative");
         }
     }
+
 }
