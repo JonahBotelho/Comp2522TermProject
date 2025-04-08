@@ -38,6 +38,9 @@ import java.util.Random;
  * <p>
  * This class extends `javafx.application.Application` and utilizes JavaFX's `AnimationTimer` to create the
  * game loop, continuously updating the game state and checking for collisions and score updates.
+ *
+ * @author Jonah Botelho
+ * @version 1.0
  */
 public final class ClockStormMain
         extends Application

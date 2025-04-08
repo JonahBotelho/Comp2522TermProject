@@ -35,6 +35,9 @@ import java.text.DecimalFormat;
  * Methods in this class interact with JavaFX UI elements and display important information to the player
  * during the game. It also facilitates the player's experience by offering options such as retrying or quitting
  * the game upon its completion.
+ *
+ * @author Jonah Botelho
+ * @version 1.0
  */
 public final class ClockStormUI
 {
